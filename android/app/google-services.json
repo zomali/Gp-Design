@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1035230041950",
+    "firebase_url": "https://graduation-project-a9cdf-default-rtdb.firebaseio.com",
+    "project_id": "graduation-project-a9cdf",
+    "storage_bucket": "graduation-project-a9cdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035230041950:android:84ab4a0f642ccc876c61cf",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035230041950-h9j9g55mas5hho2p07cbqpq9mbblmbq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGk_3VVlqYAjoHIhDPXOQO07_gw0fux38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035230041950-h9j9g55mas5hho2p07cbqpq9mbblmbq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
