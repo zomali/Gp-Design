@@ -20,236 +20,226 @@ class types extends StatefulWidget {
 }
 
 class _typesState extends State<types> {
-  int _selectedIndex = 2;
+//bool _video_1st=true;
+  bool _video_1st=false;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
+  bool _audio_1st=false;
+//  bool _audio_1st=true;
 
-
-      //   print("index = ${widget.ind} ");
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context)=>moveToPage(index)));
+ bool _text_1st=false;
+ // bool _text_1st=true;
 
 
+  //bool _image_1st=false;
+ bool _image_1st=true;
 
-    },
-    );
-  }
 
-  Widget moveToPage(int index){
-
-    return types._pages.elementAt(_selectedIndex);
-  }
-
-  @override
+ @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
 
-        selectedItemColor: Colors.blue,
-        selectedFontSize:16.5 ,
+      body: Center(
+            child: Container(
+              color: Colors.blue[200],
+             // height: double.infinity,
+            //  height: 620,
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(top: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () => {print("'Clicked'")},
+                    child: Container(
+                      width: 250,
+                      decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Image(
 
-
-        unselectedItemColor: Colors.grey ,
-        unselectedFontSize: 11,
-        //    currentIndex: 0,
-        items:const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-         //   backgroundColor: Colors.blue,
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            //  icon: Icon(Icons.up),
-            label: 'Levels',
-
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.merge_type),
-              label: 'Types',
-
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded),
-              label: 'Profile',
-
-          )
-        ],
-        // onTap: (index){
-        //   print("index = ${widget.ind} ");
-        //   Navigator.push(context,
-        //       MaterialPageRoute(builder: (context)=>moveToPage(index)));
-        //
-        //
-        //
-        // },
-        currentIndex: _selectedIndex, //New
-        onTap: _onItemTapped,
-
-      ),
-      body: SingleChildScrollView(
-          child: Container(
-            color: Colors.blue[200],
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(top: 10.0),
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () => {print("'Clicked'")},
-                  child: Container(
-                    width: 250,
-                    decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Image(
-                          image: NetworkImage(
-                            'https://buffer.com/resources/content/images/resources/wp-content/uploads/2017/02/video-stats@2x.png',
+                            image: _video_1st?AssetImage('proj_images/video.png'):_audio_1st?AssetImage('proj_images/audio.png'):_image_1st?AssetImage('proj_images/image.png'):AssetImage('proj_images/Text.png'),
+                            height: 250,
+                            width: 250,
+                            fit: BoxFit.cover,
                           ),
-                          height: 250,
-                          width: 250,
-                          fit: BoxFit.cover,
-                        ),
-                        Container(
-                          color: Colors.black.withOpacity(.7),
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text(
-                            'VIDEO',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
+                          Container(
+                            color: Colors.black.withOpacity(.7),
+                            width: double.infinity,
+                            padding: EdgeInsets.symmetric(vertical: 10.0),
+
+                            child: Text(
+                               _video_1st?"Video":
+                               _audio_1st?'Audio':
+                               _image_1st?'Image':
+                               'Text',
+
+
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  ////////////////////////////////////////////////////////////////
+        //        SingleChildScrollView(
+             //       scrollDirection: Axis.horizontal,
+                //    child:
+                    Padding(
+                      padding: const EdgeInsets.symmetric( vertical: 30),
+                      child: Row(children: [
+                        SizedBox(width: 15,),
+                        GestureDetector(
+                          onTap: () => {print("'Clicked'")},
+                          child: Container(
+                         //   height: 100,
+
+                            width: 120,
+                            decoration:
+                            BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            child: Stack(
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                Image(
+
+                                  image:
+                                  _video_1st?AssetImage('proj_images/audio.png'):
+                                  _audio_1st?AssetImage('proj_images/video.png'):
+                                  _image_1st?AssetImage('proj_images/video.png'):
+                                  AssetImage('proj_images/video.png'),
+                                  height: 110,
+
+
+                                  fit: BoxFit.cover,
+                                ),
+                                Container(
+                                  color: Colors.black.withOpacity(.7),
+                                  width: double.infinity,
+                                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                                  child: Text(
+                                    _video_1st?"Audio":
+                                    _audio_1st?'Video':
+                                    _image_1st?'Video':
+                                    'Video',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                ////////////////////////////////////////////////////////////////
-                GestureDetector(
-                  onTap: () => {print("'Clicked'")},
-                  child: Container(
-                    padding: EdgeInsets.only(top: 30.0),
-                    width: 250,
-                    decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Image(
-                          image: NetworkImage(
-                            'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Text-txt.svg/822px-Text-txt.svg.png',
-                          ),
-                          height: 250,
-                          width: 250,
-                          fit: BoxFit.cover,
-                        ),
-                        Container(
-                          color: Colors.black.withOpacity(.7),
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text(
-                            'TEXT',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
+                        SizedBox(width: 15,),
+                        //////////////////////////////////////////////////////////////////////
+                        GestureDetector(
+                          onTap: () => {print("'Clicked'")},
+                          child: Container(
+                          //  padding: EdgeInsets.only(top: 10.0),
+                            width: 120,
+                            decoration:
+                            BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            child: Stack(
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                Image(
+                                  image:
+                                  _video_1st?AssetImage('proj_images/image.png'):
+                                  _audio_1st?AssetImage('proj_images/image.png'):
+                                  _image_1st?AssetImage('proj_images/audio.png'):
+                                  AssetImage('proj_images/audio.png'),
+                               //   height: 250,
+                                //  width: 250,
+                                  height: 110,
+                                  fit: BoxFit.cover,
+                                ),
+                                Container(
+                                  color: Colors.black.withOpacity(.7),
+                                  width: double.infinity,
+                                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                                  child: Text(
+                                    _video_1st?"Image":
+                                    _audio_1st?'Image':
+                                    _image_1st?'Audio':
+                                    'Audio',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                //////////////////////////////////////////////////////////////////////
-                GestureDetector(
-                  onTap: () => {print("'Clicked'")},
-                  child: Container(
-                    padding: EdgeInsets.only(top: 10.0),
-                    width: 250,
-                    decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Image(
-                          image: NetworkImage(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjXppM2woENC9HihQvYLMSWZ0r9vzaNEnjkj_moLa2kKQJKSG0a0oaQsQu1TUoESSF_XM&usqp=CAU',
-                          ),
-                          height: 250,
-                          width: 250,
-                          fit: BoxFit.cover,
-                        ),
-                        Container(
-                          color: Colors.black.withOpacity(.7),
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text(
-                            'AUDIO',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                        SizedBox(width: 15,),
 
-                ///////////////////////////////////////////////////////
-                GestureDetector(
-                  onTap: () => {print("'Clicked'")},
-                  child: Container(
-                    padding: EdgeInsets.only(top: 10.0),
-                    width: 250,
-                    decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Image(
-                          image: NetworkImage(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX48JYpPPow8zQXp34oKHyqRbECSs1dUpOdw&usqp=CAU',
-                          ),
-                          height: 250,
-                          width: 250,
-                          fit: BoxFit.cover,
-                        ),
-                        Container(
-                          color: Colors.black.withOpacity(.7),
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text(
-                            'IMAGE',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
+                        ///////////////////////////////////////////////////////
+                        GestureDetector(
+                          onTap: () => {print("'Clicked'")},
+                          child: Container(
+                          //  padding: EdgeInsets.only(top: 10.0),
+                            width: 120,
+                            decoration:
+                            BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            child: Stack(
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                Image(
+                                  image:
+                                  _video_1st?AssetImage('proj_images/Text.png'):
+                                  _audio_1st?AssetImage('proj_images/Text.png'):
+                                  _image_1st?AssetImage('proj_images/Text.png'):
+                                  AssetImage('proj_images/image.png'),
+                                  height: 110,
+                                  // height: 250,
+                              //    width: 250,
+                                  fit: BoxFit.cover,
+                                ),
+                                Container(
+                                  color: Colors.black.withOpacity(.7),
+                                  width: double.infinity,
+                                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                                  child: Text(
+                                    _video_1st?"Text":
+                                    _audio_1st?'Text':
+                                    _image_1st?'Text':
+                                    'Image',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ],
+                      ],),
                     ),
-                  ),
-                ),
-              ],
+                  //),
+
+                ],
+              ),
             ),
-          )),
+          )
+      //),
     );
   }
 }

@@ -27,7 +27,7 @@ class HomeLevel extends StatefulWidget {
 }
 
 class _HomeLevelState extends State<HomeLevel> {
-  int _selectedIndex = 1;
+  //int _selectedIndex = 1;
   List<String> levels=[];
 
   List<bool> know=[];
@@ -60,38 +60,38 @@ class _HomeLevelState extends State<HomeLevel> {
     }
 
   }
-  static  List<Widget> _pages = <Widget>[
-    Home(0),
-    Levels(1),
-
-
-    types(),
-    MyProfileScreen(),
-
-
-  ];
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-
-
-      //   print("index = ${widget.ind} ");
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context)=>moveToPage(index)));
-
-
-
-    },
-    );
-  }
-  Widget moveToPage(int index){
-    // if(index==0){
-    //   return Home(widget.ind);
-    // }else {
-    //   return Levels(widget.ind);
-    // }
-    return _pages.elementAt(_selectedIndex);
-  }
+  // static  List<Widget> _pages = <Widget>[
+  //   Home(0),
+  //   Levels(1),
+  //
+  //
+  //   types(),
+  //   MyProfileScreen(),
+  //
+  //
+  // ];
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //
+  //
+  //     //   print("index = ${widget.ind} ");
+  //     Navigator.push(context,
+  //         MaterialPageRoute(builder: (context)=>moveToPage(index)));
+  //
+  //
+  //
+  //   },
+  //   );
+  // }
+  // Widget moveToPage(int index){
+  //   // if(index==0){
+  //   //   return Home(widget.ind);
+  //   // }else {
+  //   //   return Levels(widget.ind);
+  //   // }
+  //   return _pages.elementAt(_selectedIndex);
+  // }_selectedIndex
 
   @override
   Widget build(BuildContext context) {
@@ -111,41 +111,7 @@ class _HomeLevelState extends State<HomeLevel> {
             title:const Text("Levels page"),
             leading:const Icon(Icons.read_more),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            showUnselectedLabels: true,
 
-            selectedItemColor: Colors.blue,
-            selectedFontSize:16.5 ,
-
-
-            unselectedItemColor: Colors.grey ,
-            unselectedFontSize: 11,
-           // currentIndex: 1,
-            items:const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-            //      backgroundColor: Colors.blue
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.list),
-                  label: 'Levels',
-             //     backgroundColor: Colors.blue
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.merge_type),
-                  label: 'Types',
-           //       backgroundColor: Colors.blue
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person_rounded),
-                  label: 'Profile',
-             //     backgroundColor: Colors.blue
-              )
-            ],
-            currentIndex: _selectedIndex, //New
-            onTap: _onItemTapped,
-          ),
           body:
           ListView.builder(itemCount : levels.length,
             itemBuilder: (cxt,index){

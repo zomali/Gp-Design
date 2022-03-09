@@ -8,7 +8,9 @@ class signup_screen extends StatefulWidget {
   @override
   _signup_screenState createState() => _signup_screenState();
 }
+class Student{
 
+}
 class _signup_screenState extends State<signup_screen> {
   DateTime _date=DateTime.now();
 
@@ -24,6 +26,7 @@ class _signup_screenState extends State<signup_screen> {
   var passwordController=TextEditingController();
   var confirmpasswordController=TextEditingController();
   var level;
+  bool _passwordVisible=false;
   String dropdownValue = 'One';
   @override
   Widget build(BuildContext context) {
@@ -203,7 +206,7 @@ class _signup_screenState extends State<signup_screen> {
                 child: TextFormField(
                   controller: passwordController,
                   keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
+                  obscureText: !_passwordVisible,
 
                   onFieldSubmitted: (String pass){
 
@@ -214,9 +217,16 @@ class _signup_screenState extends State<signup_screen> {
                       Icons.lock_outlined,
                       color: Colors.blue[400],
                     ),
-                    suffixIcon:Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.blue[400],
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _passwordVisible?Icons.visibility:Icons.visibility_off,
+                        color: Colors.blue,
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          _passwordVisible=!_passwordVisible;
+                        });
+                      },
                     ),
                     border: OutlineInputBorder(),
 
@@ -246,7 +256,7 @@ class _signup_screenState extends State<signup_screen> {
                 child: TextFormField(
                   controller: confirmpasswordController,
                   keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
+                  obscureText: !_passwordVisible,
 
                   onFieldSubmitted: (String pass){
 

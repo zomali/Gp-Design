@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gp/Courses_evaluations_Screen.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/Learning%20types%20screen.dart';
+import 'package:gp/Learning_analytics_screen.dart';
 import 'package:gp/Levels.dart';
 import 'package:gp/edit_profile%20screen.dart';
 //import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
@@ -19,12 +21,13 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   int _selectedIndex = 3;
+ // int _selectedIndex = 2;
   static  List<Widget> _pages = <Widget>[
     Home(0),
-    Levels(1),
+    Learning_analytics_screen(),
 
 
-    types(),
+    Courses_evaluations_Screen(),
     MyProfileScreen(),
 
   ];
@@ -61,38 +64,44 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-       // backgroundColor: Colors.red,
-        //    currentIndex: 0,
         showUnselectedLabels: true,
 
         selectedItemColor: Colors.blue,
-        selectedFontSize:16.5 ,
+        selectedFontSize:16 ,
 
 
         unselectedItemColor: Colors.grey ,
-        unselectedFontSize: 11,
+        // unselectedFontSize: 11,
+        unselectedFontSize: 16,
+
+        //    currentIndex: 0,
         items:const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-           // backgroundColor: Colors.blue,
+            //backgroundColor: Colors.blue,
+            //   backgroundColor: Colors.blue,
 
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.analytics_outlined),
             //  icon: Icon(Icons.up),
-            label: 'Levels',
-         //   backgroundColor: Colors.blue,
+            label: 'Analytics',
+
+            // backgroundColor: Colors.blue,
+            //     backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.merge_type),
-              label: 'Types',
-          //    backgroundColor: Colors.blue
+            icon: Icon(Icons.equalizer_outlined),
+            label: 'Evaluation',
+            //  backgroundColor: Colors.blue
+            //    backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded),
-              label: 'Profile',
-         //     backgroundColor: Colors.blue
+            icon: Icon(Icons.person_rounded),
+            label: 'Dashboard',
+            //   backgroundColor: Colors.blue
+            //     backgroundColor: Colors.blue,
           )
         ],
         // onTap: (index){
@@ -125,7 +134,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     alignment: AlignmentDirectional.bottomEnd,
                     children: [
                       CircleAvatar(
-                        backgroundImage:AssetImage('proj_images/stud_image.jpg'),
+                        backgroundImage:AssetImage('proj_images/me.jpg'),
                         //  backgroundImage: NetworkImage('https://png.pngtree.com/element_our/png_detail/20181208/male-student-icon-png_265268.jpg'),
                         radius: 55,
 
@@ -195,131 +204,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ],
               ),//Edit && Info
 
-              SizedBox(
-                height: 30,
-              ),
 
-              // Row(
-              //   children: [
-              //     // SizedBox(
-              //     //   width: 25,
-              //     // ),
-              //     Padding(
-              //       padding: const EdgeInsets.only(left:25),
-              //       child: Container(
-              //         height: 120,
-              //         width:150,
-              //
-              //         decoration: BoxDecoration(
-              //           color: Colors.lime[100],
-              //           borderRadius: BorderRadius.all(
-              //               Radius.circular(20)
-              //           ),
-              //         ),
-              //
-              //         child: Column(
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           children: [
-              //             Text(
-              //               "Total Course",
-              //               style: TextStyle(
-              //                 fontSize: 15,
-              //                 //   color : Colors.blue[600],
-              //                 fontWeight: FontWeight.bold,
-              //                // fontStyle: FontStyle.italic,
-              //               ),
-              //             ),
-              //             SizedBox(
-              //               height: 15,
-              //             ),
-              //             Text(
-              //               "25",
-              //               style: TextStyle(
-              //                 fontSize: 30,
-              //                  color : Colors.deepOrange,
-              //                  fontWeight: FontWeight.bold,
-              //                 // fontStyle: FontStyle.italic,
-              //               ),
-              //             ),
-              //
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //     Padding(
-              //       padding: const EdgeInsets.only(right:25,left: 60),
-              //       child: Container(
-              //         height: 120,
-              //         width:150,
-              //
-              //         decoration: BoxDecoration(
-              //           color: Colors.cyan[100],
-              //           borderRadius: BorderRadius.all(
-              //               Radius.circular(20)
-              //           ),
-              //         ),
-              //
-              //         child: Column(
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           children: [
-              //             Text(
-              //               "Complete Course",
-              //               style: TextStyle(
-              //                 fontSize: 15,
-              //                 //   color : Colors.blue[600],
-              //                   fontWeight: FontWeight.bold,
-              //                 // fontStyle: FontStyle.italic,
-              //               ),
-              //             ),
-              //             SizedBox(
-              //               height: 15,
-              //             ),
-              //             Text(
-              //               "18",
-              //               style: TextStyle(
-              //                 fontSize: 30,
-              //                 color : Colors.green,
-              //                  fontWeight: FontWeight.bold,
-              //                 // fontStyle: FontStyle.italic,
-              //               ),
-              //             ),
-              //
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),//Course progress
-              Text(
-                "Completed Levels ",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              CircularPercentIndicator(
-               radius: 180.0,
-               lineWidth: 20.0,
-               animation: true,
-               percent: 0.7,
-              // backgroundColor: Colors.white,
-               progressColor:Colors.blue ,
-               center:  Text(
-                 "70.0%",
-                 style: TextStyle(
-                     fontWeight: FontWeight.bold,
-                     fontSize: 20.0,
-                 ),
-
-               ),
-
-
-               circularStrokeCap: CircularStrokeCap.round,
-              // progressColor: Colors.deepOrange,
-             ),
 
 
 
@@ -493,7 +378,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       // fontStyle: FontStyle.italic,
                     ),
                     //alignLabelWithHint: ,
-                    hintText: "4",
+                    hintText: "1",
                     //alignLabelWithHint:true,
 
                   ),

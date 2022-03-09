@@ -1,6 +1,9 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:gp/Courses_evaluations_Screen.dart';
+import 'package:gp/Learning_analytics_screen.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -9,6 +12,7 @@ import 'Learning types screen.dart';
 import 'Levels.dart';
 import 'Types.dart';
 //import 'package:flutter_application_1/levels.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Home extends StatefulWidget {
 
@@ -42,10 +46,10 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static  List<Widget> _pages = <Widget>[
     Home(0),
-    Levels(1),
+    Learning_analytics_screen(),
 
 
-    types(),
+    Courses_evaluations_Screen(),
     MyProfileScreen(),
 
   ];
@@ -156,11 +160,12 @@ class _HomePageState extends State<HomePage> {
             showUnselectedLabels: true,
 
         selectedItemColor: Colors.blue,
-        selectedFontSize:16.5 ,
+        selectedFontSize:16 ,
 
 
         unselectedItemColor: Colors.grey ,
-        unselectedFontSize: 11,
+       // unselectedFontSize: 11,
+            unselectedFontSize: 16,
 
         //    currentIndex: 0,
             items:const [
@@ -172,21 +177,22 @@ class _HomePageState extends State<HomePage> {
 
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.list),
+                icon: Icon(Icons.analytics_outlined),
               //  icon: Icon(Icons.up),
-                  label: 'Levels',
+                  label: 'Analytics',
+
                  // backgroundColor: Colors.blue,
            //     backgroundColor: Colors.blue,
               ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.merge_type),
-                  label: 'Types',
+                  icon: Icon(Icons.equalizer_outlined),
+                  label: 'Evaluation',
                 //  backgroundColor: Colors.blue
             //    backgroundColor: Colors.blue,
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person_rounded),
-                  label: 'Profile',
+                  label: 'Dashboard',
                //   backgroundColor: Colors.blue
            //     backgroundColor: Colors.blue,
               )
@@ -215,89 +221,590 @@ class _HomePageState extends State<HomePage> {
               ),
               child: ListView(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 30,top: 30),
-                    child: Text("Progress",
-                      style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.w700,
-                      ) ,),
-                  ),
 
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child:Padding(padding:const EdgeInsets.only(left: 30,top: 30,
-                  //   ),
-                  //     child: Row(
-                  //       children: [
-                  //         _selectedCleaning(
-                  //             Theme.of(context).colorScheme.secondary,
-                  //             'Current Level',
-                  //             '${widget.ind}'
-                  //         ),
-                  //         _selectedCleaning(
-                  //             Theme.of(context).colorScheme.secondary,
-                  //             'Number of Levels',
-                  //             '30'
-                  //         )
-                  //       ],
-                  //     ),
-                  //   ) ,
-                  // ),//progress
+                 SingleChildScrollView(
+                   scrollDirection: Axis.horizontal,
+                   child: Padding(
+                     padding: const EdgeInsets.only(bottom: 10,left: 10,top: 10),
+                     child: Row(
+                       children: [
+                         CircleAvatar(
+                           radius: 40,
+
+                            backgroundImage: AssetImage('proj_images/me.jpg'),
+
+                         ),//image
+                         SizedBox(
+                           width: 10,
+                         ),
+                         Column(
+                           children: [
+                             Text(
+                               "Hi,Hazem",
+
+                               style: TextStyle(
+                                 letterSpacing: 2,
+
+                                 fontSize: 25,
+                                 //   color : Colors.blue[600],
+                                 fontWeight: FontWeight.bold,
+                                 fontStyle: FontStyle.italic,
+                               ),
+                             ),
+
+                             SizedBox(
+                               height: 5,
+                             ),
+                             Text(
+                               "Welcome Back",
+                               style: TextStyle(
+                                 fontSize: 14,
+                                  color : Colors.blueGrey,
+                                 // fontWeight: FontWeight.bold,
+                                 fontStyle: FontStyle.italic,
+                               ),
+                             ),
+
+                           ],
+                         ),
+                         SizedBox(
+                           width:60
+                         ),
+                         // CircleAvatar(
+                         //   radius: 40,
+                         //   backgroundColor: Colors.grey,
+                         //
+                         //   backgroundImage: AssetImage('proj_images/Ain_Shams_logo.png'),
+                         //
+                         // ),//image
+                         Container(
+                           width:125,
+                           height: 60,
+                           decoration: BoxDecoration(
+                             image: DecorationImage(
+                               image:AssetImage('proj_images/fcis.png'),
+                               fit: BoxFit.fill,
+                             ),
+                           ),
+
+                         ),//image
+                       ],
+                     ),//info
+                   ),//info
+                 ),//info
+              SizedBox(
+                height: 10,
+              ),
+
+
+                  Padding(
+                padding: const EdgeInsets.only(left :10.0,bottom: 20),
+                child: Text('Courses',
+                          style: TextStyle(
+                            fontSize:30,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontStyle:  FontStyle.italic,
+                          ),),
+              ),//courses word
 
                   SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: LinearPercentIndicator(
-                        width: MediaQuery.of(context).size.width - 50,
-                        animation: true,
-                        lineHeight: 30.0,
-                        animationDuration: 2000,
-                        percent: 0.7,
-                        center: Text("70.0%"),
-                        linearStrokeCap: LinearStrokeCap.roundAll,
-                        progressColor: Colors.blue,
-                      ),
-                    ),
-                  ),
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                      //  height: 130,
+                        margin:EdgeInsets.all(20),
+                        child: Row(
+                          children: [
 
-                  Container(
-                    padding:const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 30,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:  [
-                        Padding(
-                          padding: EdgeInsets.only(left: 20),
-                          child: const Text('Structured Programming',
-                            style: TextStyle(
-                              fontSize: 19,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w700,
-                            ),),
-                        ),
-                        Padding(
-                          padding:const EdgeInsets.only(
-                              top: 10
-                          ),
-                          child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child:Padding(padding:const EdgeInsets.only(left: 5,top: 15,
+                            GestureDetector(
+                              onTap: () => {
+                              Navigator.push(context,
+                              MaterialPageRoute(
+                              builder: (context)=>Levels(1)
+                              )
                               ),
-                                child: Row(
+
+                              },
+                              child: Container(
+                                width: 130,
+                               // height: 160,
+                                decoration: BoxDecoration(
+                                  color: Colors.white70,
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 2.0,
+                                    style: BorderStyle.solid,
+                                  ),
+                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 5.0,
+                                      spreadRadius: 5.0,
+                                    ),
+                                  ],
+                                  // gradient: const LinearGradient(
+                                  //   begin: Alignment.centerLeft,
+                                  //   end: Alignment.centerRight,
+                                  //   colors: [
+                                  //     Colors.grey,
+                                  //     Colors.white,
+                                  //   ],
+                                  // ),
+                                ),
+                               //  height:150,
+                                //  width: 100,
+                                child: Column(
+
                                   children: [
-                                    _selectedSPImage()
+
+
+                                    CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.white,
+
+                                      backgroundImage:AssetImage('proj_images/cc.png'),
+
+
+                                    ),//sp image
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                      child: Text('SP',
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                        ),),
+                                    ),//sp word
+
                                   ],
                                 ),
-                              )
-                          ),
-                        )
-                      ],),
+                              ),
+
+                            ),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            GestureDetector(
+                              onTap: () => {
+                              Fluttertoast.showToast(
+                              msg: "The Course Will Be Added Soon",
+                              toastLength: Toast.LENGTH_SHORT,
+                          //    gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                             // backgroundColor: Colors.blue[300],
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                              ),
+                              },
+                              child: Container(
+                                width: 130,
+                                // height: 160,
+                                decoration: BoxDecoration(
+                                  //color: Colors.white70,
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 2.0,
+                                    style: BorderStyle.solid,
+                                  ),
+                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 5.0,
+                                      spreadRadius: 5.0,
+                                    ),
+                                  ],
+                                  // gradient: const LinearGradient(
+                                  //   begin: Alignment.centerLeft,
+                                  //   end: Alignment.centerRight,
+                                  //   colors: [
+                                  //     Colors.grey,
+                                  //     Colors.white,
+                                  //   ],
+                                  // ),
+                                ),
+                                //  height:150,
+                                //  width: 100,
+                                child: Column(
+
+                                  children: [
+
+
+                                    CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.white,
+
+                                      backgroundImage:AssetImage('proj_images/m.jpg'),
+
+
+                                    ),//sp image
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                      child: Text('Math 2',
+                                        style: TextStyle(
+                                          fontSize: 27,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                        ),),
+                                    ),//sp word
+
+                                  ],
+                                ),
+                              ),
+
+                            ),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            GestureDetector(
+                              onTap: () => {
+                                Fluttertoast.showToast(
+                                    msg: "The Course Will Be Added Soon",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    //    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    // backgroundColor: Colors.blue[300],
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                ),
+                              },
+                              child: Container(
+                                width: 130,
+                                // height: 160,
+                                decoration: BoxDecoration(
+                              //    color: Colors.white70,
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 2.0,
+                                    style: BorderStyle.solid,
+                                  ),
+                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 5.0,
+                                      spreadRadius: 5.0,
+                                    ),
+                                  ],
+                                  // gradient: const LinearGradient(
+                                  //   begin: Alignment.centerLeft,
+                                  //   end: Alignment.centerRight,
+                                  //   colors: [
+                                  //     Colors.grey,
+                                  //     Colors.white,
+                                  //   ],
+                                  // ),
+                                ),
+                                //  height:150,
+                                //  width: 100,
+                                child: Column(
+
+                                  children: [
+
+
+                                    CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.white,
+
+                                      backgroundImage:AssetImage('proj_images/p.png'),
+
+
+                                    ),//sp image
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                      child: Text('Physics 2',
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                        ),),
+                                    ),//sp word
+
+                                  ],
+                                ),
+                              ),
+
+                            ),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            GestureDetector(
+                              onTap: () => {
+                                Fluttertoast.showToast(
+                                    msg: "The Course Will Be Added Soon",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    //    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    // backgroundColor: Colors.blue[300],
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                ),
+                              },
+                              child: Container(
+                                width: 130,
+                                // height: 160,
+                                decoration: BoxDecoration(
+                               //   color: Colors.white70,
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 2.0,
+                                    style: BorderStyle.solid,
+                                  ),
+                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 5.0,
+                                      spreadRadius: 5.0,
+                                    ),
+                                  ],
+                                  // gradient: const LinearGradient(
+                                  //   begin: Alignment.centerLeft,
+                                  //   end: Alignment.centerRight,
+                                  //   colors: [
+                                  //     Colors.grey,
+                                  //     Colors.white,
+                                  //   ],
+                                  // ),
+                                ),
+                                //  height:150,
+                                //  width: 100,
+                                child: Column(
+
+                                  children: [
+
+
+                                    CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.white,
+
+                                      backgroundImage:AssetImage('proj_images/en.jpg'),
+
+
+                                    ),//sp image
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                      child: Text('English 2',
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                        ),),
+                                    ),//sp word
+
+                                  ],
+                                ),
+                              ),
+
+                            ),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            GestureDetector(
+                              onTap: () => {
+                                Fluttertoast.showToast(
+                                    msg: "The Course Will Be Added Soon",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    //    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    // backgroundColor: Colors.blue[300],
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                ),
+                              },
+                              child: Container(
+                                width: 130,
+                                // height: 160,
+                                decoration: BoxDecoration(
+                                //  color: Colors.white70,
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 2.0,
+                                    style: BorderStyle.solid,
+                                  ),
+                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 5.0,
+                                      spreadRadius: 5.0,
+                                    ),
+                                  ],
+                                  // gradient: const LinearGradient(
+                                  //   begin: Alignment.centerLeft,
+                                  //   end: Alignment.centerRight,
+                                  //   colors: [
+                                  //     Colors.grey,
+                                  //     Colors.white,
+                                  //   ],
+                                  // ),
+                                ),
+                                //  height:150,
+                                //  width: 100,
+                                child: Column(
+
+                                  children: [
+
+
+                                    CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.white,
+
+                                      backgroundImage:AssetImage('proj_images/electronics.png'),
+
+
+                                    ),//sp image
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:5.2,bottom: 8),
+                                      child: Text('Electronics',
+                                        style: TextStyle(
+                                          fontSize: 23.8,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                        ),),
+                                    ),//sp word
+
+                                  ],
+                                ),
+                              ),
+
+                            ),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            GestureDetector(
+                              onTap: () => {
+                                Fluttertoast.showToast(
+                                    msg: "The Course Will Be Added Soon",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    //    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    // backgroundColor: Colors.blue[300],
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                ),
+                              },
+                              child: Container(
+                                width: 130,
+                                // height: 160,
+                                decoration: BoxDecoration(
+                           //       color: Colors.white70,
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 2.0,
+                                    style: BorderStyle.solid,
+                                  ),
+                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 5.0,
+                                      spreadRadius: 5.0,
+                                    ),
+                                  ],
+
+                                ),
+
+                                child: Column(
+
+                                  children: [
+
+
+                                    CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.white,
+
+                                      backgroundImage:AssetImage('proj_images/business.jpg'),
+
+
+                                    ),//sp image
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:6.0,bottom: 8),
+                                      child: Text('Business M',
+                                        style: TextStyle(
+                                          fontSize: 22,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                        ),),
+                                    ),//sp word
+
+                                  ],
+                                ),
+                              ),
+
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ),
+
+
+
+
+
+                  SizedBox(
+                    height: 30,
                   ),
+
+
+                  // Container(
+                  //   padding:const EdgeInsets.symmetric(
+                  //     horizontal: 20,
+                  //     vertical: 30,
+                  //   ),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children:  [
+                  //       Padding(
+                  //         padding: EdgeInsets.only(left: 20),
+                  //         child: const Text('Structured Programming',
+                  //           style: TextStyle(
+                  //             fontSize: 19,
+                  //             color: Colors.black87,
+                  //             fontWeight: FontWeight.w700,
+                  //           ),),
+                  //       ),
+                  //       Padding(
+                  //         padding:const EdgeInsets.only(
+                  //             top: 10
+                  //         ),
+                  //         child: SingleChildScrollView(
+                  //             scrollDirection: Axis.horizontal,
+                  //             child:Padding(padding:const EdgeInsets.only(left: 5,top: 15,
+                  //             ),
+                  //               child: Row(
+                  //                 children: [
+                  //                   _selectedSPImage()
+                  //                 ],
+                  //               ),
+                  //             )
+                  //         ),
+                  //       )
+                  //     ],),
+                  // ),
+
+
+
 
                   const Padding(
                     padding: EdgeInsets.only(left: 30,top: 10),
