@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:form_validator/form_validator.dart';
+
 
 
 class signup_screen extends StatefulWidget {
@@ -26,6 +29,46 @@ class _signup_screenState extends State<signup_screen> {
   var passwordController=TextEditingController();
   var confirmpasswordController=TextEditingController();
   var level;
+
+  var _username_text = '';
+  var _id_text="";
+  bool _submitted = false;
+  final requiredValidator = RequiredValidator(errorText: 'this field is required');
+  String? get _error_username_Text {
+
+    final text = usernameController.value.text;
+    if (text.isEmpty) {
+      return 'Can\'t be empty';
+    }
+    if (text.length < 4) {
+      return 'Too short';
+    }
+    // return null if the text is valid
+    return null;
+  }
+  String? get _error_id_Text {
+
+    final text = studentidController.value.text;
+    if (text.isEmpty) {
+      return 'Can\'t be empty';
+    }
+    if (text.length < 10||text.length > 10) {
+      return 'The ID Length Must Be 10';
+    }
+    // return null if the text is valid
+    return null;
+  }
+
+  // bool get isValidEmail {
+  //   final emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  //   return emailRegExp.hasMatch(this);
+  // }
+  //
+  // bool get isValidName{
+  //   final nameRegExp = new RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
+  //   return nameRegExp.hasMatch(this);
+  // }
+
   bool _passwordVisible=false;
   String dropdownValue = 'One';
   @override
@@ -42,26 +85,7 @@ class _signup_screenState extends State<signup_screen> {
             //mainAxisAlignment: MainAxisAlignment.center,
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.only(
-              //     top: 10,
-              //     bottom: 10,
-              //
-              //   ),
-              //   child: Text(
-              //
-              //     "Sign up",
-              //     style: TextStyle(
-              //       fontSize: 32,
-              //       color : Colors.blue[600],
-              //       fontWeight: FontWeight.bold,
-              //       fontStyle: FontStyle.italic,
-              //
-              //
-              //     ),
-              //
-              //   ),
-              // ),//signup word
+
               SizedBox(
                 height: 20,
               ),
@@ -96,14 +120,21 @@ class _signup_screenState extends State<signup_screen> {
                   left: 20,
                   right: 20,
                 ),
+
                 child: TextFormField(
                   controller: usernameController,
                   keyboardType: TextInputType.text,
-                  onFieldSubmitted: (String email){
+
+
+
+
+                  onChanged: (text) => setState(() => _username_text),
+                    onFieldSubmitted: (String email){
 
                   },
                   decoration: InputDecoration(
                     labelText: 'User Name',
+                    errorText: _error_username_Text,
 
                     prefixIcon: Icon(
                       Icons.drive_file_rename_outline,
@@ -138,8 +169,10 @@ class _signup_screenState extends State<signup_screen> {
                   onFieldSubmitted: (String email){
 
                   },
+                  onChanged: (text) => setState(() => _id_text),
                   decoration: InputDecoration(
                     labelText: 'Student ID',
+                    errorText: _error_id_Text,
 
                     prefixIcon: Icon(
                       Icons.perm_identity,

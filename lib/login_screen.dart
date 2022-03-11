@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/signup%20screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+
 
 
 class Login_screen extends StatefulWidget {
@@ -19,6 +22,7 @@ class _login_screenState extends State<Login_screen> {
   final _auth=FirebaseAuth.instance;
   bool _passwordVisible=false;
   bool _remembercheck=false;
+  final _formKey = GlobalKey<FormState>();
 
 
   @override
@@ -47,99 +51,82 @@ class _login_screenState extends State<Login_screen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // Container(
-              //   width: double.infinity,
-              //   height: 100,
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //       image:AssetImage('proj_images/login_image.jpeg'),
-              //       fit: BoxFit.fill,
-              //     ),
-              //   ),
-              //
-              // ),//image
-              // SingleChildScrollView(
-              //   scrollDirection: Axis.horizontal,
-              //   child: Padding(
-              //
-              //     padding: const EdgeInsets.all(20),
-              //     child: Row(
-              //       children: [
-              //         Container(
-              //           width: 70,
-              //           height: 70,
-              //           decoration: BoxDecoration(
-              //             image: DecorationImage(
-              //               image:AssetImage('proj_images/Ain_Shams_logo.png'),
-              //               fit: BoxFit.fill,
-              //             ),
-              //           ),
-              //
-              //         ),//image
-              //         SizedBox(
-              //           width: 20,
-              //         ),
-              //         Text(
-              //           "Welcome To FCIS \n"
-              //               "AinShams University",
-              //           style: TextStyle(
-              //             fontSize: 17,
-              //             fontWeight: FontWeight.bold,
-              //           ),
-              //
-              //         ),
-              //
-              //       ],
-              //     ),
-              //   ),
-              // ),
+
               SizedBox(
                 height: 20,
               ),
-              Container(
 
-
-                width: 90,
-                height: 90,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image:AssetImage('proj_images/Ain_Shams_logo.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-
-              ),//image
-              Text(
-                "Welcome To FCIS AinShams University",
-                style: TextStyle(
-
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                ),
-
-              ),
-              // SizedBox(
-              //   height: 20,
-              // ),
               // Text(
-              //   "Welcome To FCIS \n"
-              //       "AinShams University",
+              //   "Welcome To FCIS AinShams University",
               //   style: TextStyle(
+              //
               //     fontSize: 17,
               //     fontWeight: FontWeight.bold,
               //   ),
               //
-              // ),
-             //  CircleAvatar(
-             //    backgroundImage:AssetImage('proj_images/stud_image.jpg'),
-             //  //  backgroundImage: NetworkImage('https://png.pngtree.com/element_our/png_detail/20181208/male-student-icon-png_265268.jpg'),
-             // radius: 50,
-             //
-             //  ),
-             //
+              // ),//welcome sentence
+
+              Padding(
+                padding: const EdgeInsets.only(left: 50,right: 20),
+                child: Row(
+                  children: [
+                    // SizedBox(
+                    //   width: 50,
+                    // ),
+                    CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Colors.white,
+                      child: Container(
+
+
+                        width: 90,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image:AssetImage('proj_images/Ain_Shams_logo.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+
+                      ),
+                    ),//image
+                    SizedBox(
+                      width: 140,
+                    ),
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.white,
+                      child: Container(
+
+
+                        width: 90,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image:AssetImage('proj_images/fcis.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+
+                      ),
+                    ),//image
+                  ],
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
+
+
+
+
+
+              SizedBox(
+                height: 20,
+              ),
+
+
+
 
               Padding(
                 padding: const EdgeInsets.only(
@@ -155,6 +142,7 @@ class _login_screenState extends State<Login_screen> {
                   onFieldSubmitted: (String email){
 
                   },
+                  validator:  EmailValidator(errorText: 'enter a valid email address'),
                   decoration: InputDecoration(
                     labelText: 'E-mail Address',
                     prefixIcon: Icon(
@@ -192,6 +180,16 @@ class _login_screenState extends State<Login_screen> {
 
                   onChanged: (value){
                     password=value;
+                  },
+                  validator: (value){
+                   if(value==""||value==null){
+                     return "Please Enter Valid Password ";
+                   }
+                   else if(value.length<6){
+                     return"The Password Length must Be 6 At Least";
+
+                   }
+                   return null;
                   },
 
                   onFieldSubmitted: (String pass){
@@ -232,9 +230,7 @@ class _login_screenState extends State<Login_screen> {
                 ),
               ),//pass text
 
-              // SizedBox(
-              //   height: 20,
-              // ),
+
               Padding(
                 padding: const EdgeInsets.only(
                   left: 20,
@@ -292,6 +288,7 @@ class _login_screenState extends State<Login_screen> {
                     width: double.infinity,
 
                     child: MaterialButton(onPressed: () async{
+
                       try{
 
                      //   await _auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -303,17 +300,28 @@ class _login_screenState extends State<Login_screen> {
                             )
                         );
                       }
+
                       on FirebaseAuthException catch (e) {
-                        showDialog(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                            title: Text("Ops! Login Failed"),
-                            content: Text('${e.message}'),
-                               )
+                        Fluttertoast.showToast(
+                            msg: "Ops! Login Failed, ${e.message} ",
+                            toastLength: Toast.LENGTH_LONG,
+                            //    gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                             backgroundColor: Colors.black87,
+                            textColor: Colors.white,
+                            fontSize: 16.0
                         );
+                        // showDialog(
+                        //     context: context,
+                        //     builder: (ctx) => AlertDialog(
+                        //     title: Text("Ops! Login Failed"),
+                        //     content: Text('${e.message}'),
+                        //        )
+                        // );
 
 
                       }
+
                     },
                     child: Text(
                       "LOGIN",
@@ -322,6 +330,7 @@ class _login_screenState extends State<Login_screen> {
                       ),
 
                     ),
+
                     ),
                     decoration: BoxDecoration(
                         color: Colors.blue[500],
@@ -351,7 +360,11 @@ class _login_screenState extends State<Login_screen> {
                   ),
                   ),
                 ],
-              )//register now
+              ),//register now
+              SizedBox(
+                height: 30,
+              ),
+
 
 
             ],

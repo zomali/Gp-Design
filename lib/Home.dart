@@ -209,675 +209,603 @@ class _HomePageState extends State<HomePage> {
             onTap: _onItemTapped,
 
           ),
-          body:  Container(
-              height: 800,
-              width: double.infinity,
-              decoration:const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30)
-                  )
-              ),
-              child: ListView(
-                children: [
 
-                 SingleChildScrollView(
-                   scrollDirection: Axis.horizontal,
-                   child: Padding(
-                     padding: const EdgeInsets.only(bottom: 10,left: 10,top: 10),
-                     child: Row(
-                       children: [
-                         CircleAvatar(
-                           radius: 40,
 
-                            backgroundImage: AssetImage('proj_images/me.jpg'),
+          body:  SingleChildScrollView(
+            child: Container(
+                height: 800,
+                width: double.infinity,
+                decoration:const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30)
+                    )
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
 
-                         ),//image
-                         SizedBox(
-                           width: 10,
-                         ),
-                         Column(
-                           children: [
-                             Text(
-                               "Hi,Hazem",
+                   SingleChildScrollView(
+                     scrollDirection: Axis.horizontal,
+                     child: Padding(
+                       padding: const EdgeInsets.only(bottom: 10,left: 10,top: 10),
+                       child: Row(
+                         children: [
+                           CircleAvatar(
+                             radius: 40,
 
-                               style: TextStyle(
-                                 letterSpacing: 2,
+                              backgroundImage: AssetImage('proj_images/me.jpg'),
 
-                                 fontSize: 25,
-                                 //   color : Colors.blue[600],
-                                 fontWeight: FontWeight.bold,
-                                 fontStyle: FontStyle.italic,
-                               ),
-                             ),
-
-                             SizedBox(
-                               height: 5,
-                             ),
-                             Text(
-                               "Welcome Back",
-                               style: TextStyle(
-                                 fontSize: 14,
-                                  color : Colors.blueGrey,
-                                 // fontWeight: FontWeight.bold,
-                                 fontStyle: FontStyle.italic,
-                               ),
-                             ),
-
-                           ],
-                         ),
-                         SizedBox(
-                           width:60
-                         ),
-                         // CircleAvatar(
-                         //   radius: 40,
-                         //   backgroundColor: Colors.grey,
-                         //
-                         //   backgroundImage: AssetImage('proj_images/Ain_Shams_logo.png'),
-                         //
-                         // ),//image
-                         Container(
-                           width:125,
-                           height: 60,
-                           decoration: BoxDecoration(
-                             image: DecorationImage(
-                               image:AssetImage('proj_images/fcis.png'),
-                               fit: BoxFit.fill,
-                             ),
+                           ),//image
+                           SizedBox(
+                             width: 10,
                            ),
+                           Column(
+                             children: [
+                               Text(
+                                 "Hi,Hazem",
 
-                         ),//image
-                       ],
+                                 style: TextStyle(
+                                   letterSpacing: 2,
+
+                                   fontSize: 25,
+                                   //   color : Colors.blue[600],
+                                   fontWeight: FontWeight.bold,
+                                   fontStyle: FontStyle.italic,
+                                 ),
+                               ),
+
+                               SizedBox(
+                                 height: 3,
+                               ),
+
+                               Text(
+                                 "Welcome Back",
+                                 style: TextStyle(
+                                   fontSize: 14,
+                                    color : Colors.blueGrey,
+                                   // fontWeight: FontWeight.bold,
+                                   fontStyle: FontStyle.italic,
+                                 ),
+                               ),
+                               SizedBox(
+                                 height: 3,
+                               ),
+                               Text(
+                                 "Level:- 1",
+                                 style: TextStyle(
+                                   fontSize: 13,
+                            //       color : Colors.blueGrey,
+                                    fontWeight: FontWeight.bold,
+                                   fontStyle: FontStyle.italic,
+                                 ),
+                               ),
+
+                             ],
+                           ),
+                           SizedBox(
+                             width:60
+                           ),
+                           // CircleAvatar(
+                           //   radius: 40,
+                           //   backgroundColor: Colors.grey,
+                           //
+                           //   backgroundImage: AssetImage('proj_images/Ain_Shams_logo.png'),
+                           //
+                           // ),//image
+                           Container(
+                             width:125,
+                             height: 60,
+                             decoration: BoxDecoration(
+                               image: DecorationImage(
+                                 image:AssetImage('proj_images/fcis.png'),
+                                 fit: BoxFit.fill,
+                               ),
+                             ),
+
+                           ),//image
+                         ],
+                       ),//info
                      ),//info
                    ),//info
-                 ),//info
-              SizedBox(
-                height: 10,
-              ),
+                SizedBox(
+                  height: 10,
+                ),
 
 
-                  Padding(
-                padding: const EdgeInsets.only(left :10.0,bottom: 20),
-                child: Text('Courses',
-                          style: TextStyle(
-                            fontSize:30,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontStyle:  FontStyle.italic,
-                          ),),
-              ),//courses word
+                    Padding(
+                  padding: const EdgeInsets.only(left :10.0,bottom: 20),
+                  child: Text('Course',
+                            style: TextStyle(
+                              fontSize:30,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                              fontStyle:  FontStyle.italic,
+                            ),),
+                ),//course word
 
-                  SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                      //  height: 130,
-                        margin:EdgeInsets.all(20),
-                        child: Row(
-                          children: [
+                    Container(
+                        //  height: 130,
+                          margin:EdgeInsets.all(20),
+                          child: Row(
+                            children: [
 
-                            GestureDetector(
-                              onTap: () => {
-                              Navigator.push(context,
-                              MaterialPageRoute(
-                              builder: (context)=>Levels(1)
-                              )
-                              ),
+                              GestureDetector(
+                                onTap: () => {
+                                Navigator.push(context,
+                                MaterialPageRoute(
+                                builder: (context)=>Levels(1)
+                                )
+                                ),
 
-                              },
-                              child: Container(
-                                width: 130,
-                               // height: 160,
-                                decoration: BoxDecoration(
-                                  color: Colors.white70,
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 2.0,
-                                    style: BorderStyle.solid,
+                                },
+                                child: Container(
+                                  margin:EdgeInsets.symmetric(horizontal: 25),
+                                  width: 130,
+                                 // height: 160,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white70,
+                                    border: Border.all(
+                                      color: Colors.black12,
+                                      width: 2.0,
+                                      style: BorderStyle.solid,
+                                    ),
+                                    borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 5.0,
+                                        spreadRadius: 5.0,
+                                      ),
+                                    ],
+                                    // gradient: const LinearGradient(
+                                    //   begin: Alignment.centerLeft,
+                                    //   end: Alignment.centerRight,
+                                    //   colors: [
+                                    //     Colors.grey,
+                                    //     Colors.white,
+                                    //   ],
+                                    // ),
                                   ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5.0,
-                                      spreadRadius: 5.0,
-                                    ),
-                                  ],
-                                  // gradient: const LinearGradient(
-                                  //   begin: Alignment.centerLeft,
-                                  //   end: Alignment.centerRight,
-                                  //   colors: [
-                                  //     Colors.grey,
-                                  //     Colors.white,
-                                  //   ],
-                                  // ),
-                                ),
-                               //  height:150,
-                                //  width: 100,
-                                child: Column(
+                                 //  height:150,
+                                  //  width: 100,
+                                  child: Column(
 
-                                  children: [
+                                    children: [
 
 
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
+                                      CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: Colors.white,
 
-                                      backgroundImage:AssetImage('proj_images/cc.png'),
+                                        backgroundImage:AssetImage('proj_images/cc.png'),
 
 
-                                    ),//sp image
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
-                                      child: Text('SP',
-                                        style: TextStyle(
-                                          fontSize: 30,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                        ),),
-                                    ),//sp word
+                                      ),//sp image
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                        child: Text('SP',
+                                          style: TextStyle(
+                                            fontSize: 30,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w700,
+                                          ),),
+                                      ),//sp word
 
-                                  ],
-                                ),
-                              ),
-
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            GestureDetector(
-                              onTap: () => {
-                              Fluttertoast.showToast(
-                              msg: "The Course Will Be Added Soon",
-                              toastLength: Toast.LENGTH_SHORT,
-                          //    gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                             // backgroundColor: Colors.blue[300],
-                              textColor: Colors.white,
-                              fontSize: 16.0
-                              ),
-                              },
-                              child: Container(
-                                width: 130,
-                                // height: 160,
-                                decoration: BoxDecoration(
-                                  //color: Colors.white70,
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 2.0,
-                                    style: BorderStyle.solid,
+                                    ],
                                   ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5.0,
-                                      spreadRadius: 5.0,
-                                    ),
-                                  ],
-                                  // gradient: const LinearGradient(
-                                  //   begin: Alignment.centerLeft,
-                                  //   end: Alignment.centerRight,
-                                  //   colors: [
-                                  //     Colors.grey,
-                                  //     Colors.white,
-                                  //   ],
-                                  // ),
                                 ),
-                                //  height:150,
-                                //  width: 100,
-                                child: Column(
 
-                                  children: [
-
-
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
-
-                                      backgroundImage:AssetImage('proj_images/m.jpg'),
-
-
-                                    ),//sp image
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
-                                      child: Text('Math 2',
-                                        style: TextStyle(
-                                          fontSize: 27,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                        ),),
-                                    ),//sp word
-
-                                  ],
-                                ),
                               ),
-
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            GestureDetector(
-                              onTap: () => {
+                              SizedBox(
+                                width: 30,
+                              ),
+                              GestureDetector(
+                                onTap: () => {
                                 Fluttertoast.showToast(
-                                    msg: "The Course Will Be Added Soon",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    //    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    // backgroundColor: Colors.blue[300],
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
+                                msg: "The Course Will Be Added Soon",
+                                toastLength: Toast.LENGTH_SHORT,
+                            //    gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                               // backgroundColor: Colors.blue[300],
+                                textColor: Colors.white,
+                                fontSize: 16.0
                                 ),
-                              },
-                              child: Container(
-                                width: 130,
-                                // height: 160,
-                                decoration: BoxDecoration(
-                              //    color: Colors.white70,
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 2.0,
-                                    style: BorderStyle.solid,
+                                },
+                                child: Container(
+                                  width: 130,
+                                  // height: 160,
+                                  decoration: BoxDecoration(
+                                    //color: Colors.white70,
+                                    border: Border.all(
+                                      color: Colors.black12,
+                                      width: 2.0,
+                                      style: BorderStyle.solid,
+                                    ),
+                                    borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 5.0,
+                                        spreadRadius: 5.0,
+                                      ),
+                                    ],
+                                    // gradient: const LinearGradient(
+                                    //   begin: Alignment.centerLeft,
+                                    //   end: Alignment.centerRight,
+                                    //   colors: [
+                                    //     Colors.grey,
+                                    //     Colors.white,
+                                    //   ],
+                                    // ),
                                   ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5.0,
-                                      spreadRadius: 5.0,
-                                    ),
-                                  ],
-                                  // gradient: const LinearGradient(
-                                  //   begin: Alignment.centerLeft,
-                                  //   end: Alignment.centerRight,
-                                  //   colors: [
-                                  //     Colors.grey,
-                                  //     Colors.white,
-                                  //   ],
-                                  // ),
+                                  //  height:150,
+                                  //  width: 100,
+                                  child: Column(
+
+                                    children: [
+
+
+                                      CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: Colors.white,
+
+                                        backgroundImage:AssetImage('proj_images/m.jpg'),
+
+
+                                      ),//sp image
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                        child: Text('Math 2',
+                                          style: TextStyle(
+                                            fontSize: 27,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w700,
+                                          ),),
+                                      ),//sp word
+
+                                    ],
+                                  ),
                                 ),
-                                //  height:150,
-                                //  width: 100,
-                                child: Column(
 
-                                  children: [
-
-
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
-
-                                      backgroundImage:AssetImage('proj_images/p.png'),
-
-
-                                    ),//sp image
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
-                                      child: Text('Physics 2',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                        ),),
-                                    ),//sp word
-
-                                  ],
-                                ),
+                              ),
+                              SizedBox(
+                                width: 30,
                               ),
 
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            GestureDetector(
-                              onTap: () => {
-                                Fluttertoast.showToast(
-                                    msg: "The Course Will Be Added Soon",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    //    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    // backgroundColor: Colors.blue[300],
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                ),
-                              },
-                              child: Container(
-                                width: 130,
-                                // height: 160,
-                                decoration: BoxDecoration(
-                               //   color: Colors.white70,
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 2.0,
-                                    style: BorderStyle.solid,
-                                  ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5.0,
-                                      spreadRadius: 5.0,
-                                    ),
-                                  ],
-                                  // gradient: const LinearGradient(
-                                  //   begin: Alignment.centerLeft,
-                                  //   end: Alignment.centerRight,
-                                  //   colors: [
-                                  //     Colors.grey,
-                                  //     Colors.white,
-                                  //   ],
-                                  // ),
-                                ),
-                                //  height:150,
-                                //  width: 100,
-                                child: Column(
 
-                                  children: [
+                            ],
+                          ),
 
-
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
-
-                                      backgroundImage:AssetImage('proj_images/en.jpg'),
-
-
-                                    ),//sp image
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
-                                      child: Text('English 2',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                        ),),
-                                    ),//sp word
-
-                                  ],
-                                ),
-                              ),
-
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            GestureDetector(
-                              onTap: () => {
-                                Fluttertoast.showToast(
-                                    msg: "The Course Will Be Added Soon",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    //    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    // backgroundColor: Colors.blue[300],
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                ),
-                              },
-                              child: Container(
-                                width: 130,
-                                // height: 160,
-                                decoration: BoxDecoration(
-                                //  color: Colors.white70,
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 2.0,
-                                    style: BorderStyle.solid,
-                                  ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5.0,
-                                      spreadRadius: 5.0,
-                                    ),
-                                  ],
-                                  // gradient: const LinearGradient(
-                                  //   begin: Alignment.centerLeft,
-                                  //   end: Alignment.centerRight,
-                                  //   colors: [
-                                  //     Colors.grey,
-                                  //     Colors.white,
-                                  //   ],
-                                  // ),
-                                ),
-                                //  height:150,
-                                //  width: 100,
-                                child: Column(
-
-                                  children: [
-
-
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
-
-                                      backgroundImage:AssetImage('proj_images/electronics.png'),
-
-
-                                    ),//sp image
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:5.2,bottom: 8),
-                                      child: Text('Electronics',
-                                        style: TextStyle(
-                                          fontSize: 23.8,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                        ),),
-                                    ),//sp word
-
-                                  ],
-                                ),
-                              ),
-
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            GestureDetector(
-                              onTap: () => {
-                                Fluttertoast.showToast(
-                                    msg: "The Course Will Be Added Soon",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    //    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    // backgroundColor: Colors.blue[300],
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                ),
-                              },
-                              child: Container(
-                                width: 130,
-                                // height: 160,
-                                decoration: BoxDecoration(
-                           //       color: Colors.white70,
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 2.0,
-                                    style: BorderStyle.solid,
-                                  ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5.0,
-                                      spreadRadius: 5.0,
-                                    ),
-                                  ],
-
-                                ),
-
-                                child: Column(
-
-                                  children: [
-
-
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
-
-                                      backgroundImage:AssetImage('proj_images/business.jpg'),
-
-
-                                    ),//sp image
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:6.0,bottom: 8),
-                                      child: Text('Business M',
-                                        style: TextStyle(
-                                          fontSize: 22,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                        ),),
-                                    ),//sp word
-
-                                  ],
-                                ),
-                              ),
-
-                            ),
-
-                          ],
                         ),
-                      ),
-                    ),
-
-
-
-
-
-                  SizedBox(
-                    height: 30,
-                  ),
-
-
-                  // Container(
-                  //   padding:const EdgeInsets.symmetric(
-                  //     horizontal: 20,
-                  //     vertical: 30,
-                  //   ),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children:  [
-                  //       Padding(
-                  //         padding: EdgeInsets.only(left: 20),
-                  //         child: const Text('Structured Programming',
-                  //           style: TextStyle(
-                  //             fontSize: 19,
-                  //             color: Colors.black87,
-                  //             fontWeight: FontWeight.w700,
-                  //           ),),
-                  //       ),
-                  //       Padding(
-                  //         padding:const EdgeInsets.only(
-                  //             top: 10
-                  //         ),
-                  //         child: SingleChildScrollView(
-                  //             scrollDirection: Axis.horizontal,
-                  //             child:Padding(padding:const EdgeInsets.only(left: 5,top: 15,
-                  //             ),
-                  //               child: Row(
-                  //                 children: [
-                  //                   _selectedSPImage()
-                  //                 ],
-                  //               ),
-                  //             )
-                  //         ),
-                  //       )
-                  //     ],),
-                  // ),
-
-
-
-
-                  const Padding(
-                    padding: EdgeInsets.only(left: 30,top: 10),
-                    child: Text("Learning Outcomes",
-                      style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.w700,
-                      ) ,),
-                  ),
-
-                 Padding(padding:const EdgeInsets.only(left: 18,top: 20,right: 10,
-                    ), //outcomes
-                      child: Column(
-
-                        children: [
-                          _outcomes(
-                              Theme.of(context).colorScheme.secondary,
-                              'Learn from the beginning'
-                          ),
-                          const Padding(padding: EdgeInsets.only(bottom: 10,),),
-                          _outcomes(
-                              Theme.of(context).colorScheme.secondary,
-                              'Many types of Learning'
-                          ),
-                          const Padding(padding: EdgeInsets.only(bottom: 10,),),
-                          _outcomes(
-                              Theme.of(context).colorScheme.secondary,
-                              'Quiz after each level'
-                          ),
-                        ],
-                      ),//outcomes
-                    ),
-
-                  const Padding(
-                    padding: EdgeInsets.only(left: 30,top: 30),
-                    child: Text("Instructors",
-                      style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.w700,
-                      ) ,),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child:Padding(padding:const EdgeInsets.only(left: 18,top: 30,
-                    ),
+                    Container(
+                      //  height: 130,
+                      margin:EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          _selectedCleaning(
-                              Theme.of(context).colorScheme.secondary,
-                              'Dr.Sally',
-                              'Sally@gmail.com'
-                          ),
-                          _selectedCleaning(
-                              Theme.of(context).colorScheme.secondary,
-                              'Dr.Yasmin',
-                              'Yasmin@gmail.com'
-                          ),
-                          _selectedCleaning(
-                              Theme.of(context).colorScheme.secondary,
-                              'Dr.Yasmin',
-                              'Yasmin@gmail.com'
-                          )
-                        ],
 
+
+                          GestureDetector(
+                            onTap: () => {
+                              Fluttertoast.showToast(
+                                  msg: "The Course Will Be Added Soon",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  //    gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  // backgroundColor: Colors.blue[300],
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              ),
+                            },
+                            child: Container(
+                              width: 130,
+                              margin:EdgeInsets.symmetric(horizontal: 25),
+                              // height: 160,
+                              decoration: BoxDecoration(
+                                //    color: Colors.white70,
+                                border: Border.all(
+                                  color: Colors.black12,
+                                  width: 2.0,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 5.0,
+                                    spreadRadius: 5.0,
+                                  ),
+                                ],
+                                // gradient: const LinearGradient(
+                                //   begin: Alignment.centerLeft,
+                                //   end: Alignment.centerRight,
+                                //   colors: [
+                                //     Colors.grey,
+                                //     Colors.white,
+                                //   ],
+                                // ),
+                              ),
+                              //  height:150,
+                              //  width: 100,
+                              child: Column(
+
+                                children: [
+
+
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.white,
+
+                                    backgroundImage:AssetImage('proj_images/p.png'),
+
+
+                                  ),//sp image
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                    child: Text('Physics 2',
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),),
+                                  ),//sp word
+
+                                ],
+                              ),
+                            ),
+
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          GestureDetector(
+                            onTap: () => {
+                              Fluttertoast.showToast(
+                                  msg: "The Course Will Be Added Soon",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  //    gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  // backgroundColor: Colors.blue[300],
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              ),
+                            },
+                            child: Container(
+                              width: 130,
+                              // height: 160,
+                              decoration: BoxDecoration(
+                                //   color: Colors.white70,
+                                border: Border.all(
+                                  color: Colors.black12,
+                                  width: 2.0,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 5.0,
+                                    spreadRadius: 5.0,
+                                  ),
+                                ],
+
+                              ),
+
+                              child: Column(
+
+                                children: [
+
+
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.white,
+
+                                    backgroundImage:AssetImage('proj_images/en.jpg'),
+
+
+                                  ),//sp image
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                    child: Text('English 2',
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),),
+                                  ),//sp word
+
+                                ],
+                              ),
+                            ),
+
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+
+
+                        ],
                       ),
-                    ) ,
-                  ),//instructors
-                  const Padding(padding: EdgeInsets.only(bottom: 10,),),
-                ],
+
+                    ),
+                    Container(
+                      //  height: 130,
+                      margin:EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+
+
+
+                          GestureDetector(
+                            onTap: () => {
+                              Fluttertoast.showToast(
+                                  msg: "The Course Will Be Added Soon",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  //    gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  // backgroundColor: Colors.blue[300],
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              ),
+                            },
+                            child: Container(
+                              width: 130,
+                              // height: 160,
+                              margin:EdgeInsets.symmetric(horizontal: 25),
+                              decoration: BoxDecoration(
+                                //  color: Colors.white70,
+                                border: Border.all(
+                                  color: Colors.black12,
+                                  width: 2.0,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 5.0,
+                                    spreadRadius: 5.0,
+                                  ),
+                                ],
+                                // gradient: const LinearGradient(
+                                //   begin: Alignment.centerLeft,
+                                //   end: Alignment.centerRight,
+                                //   colors: [
+                                //     Colors.grey,
+                                //     Colors.white,
+                                //   ],
+                                // ),
+                              ),
+                              //  height:150,
+                              //  width: 100,
+                              child: Column(
+
+                                children: [
+
+
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.white,
+
+                                    backgroundImage:AssetImage('proj_images/electronics.png'),
+
+
+                                  ),//sp image
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:5.2,bottom: 8),
+                                    child: Text('Electronics',
+                                      style: TextStyle(
+                                        fontSize: 23.8,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),),
+                                  ),//sp word
+
+                                ],
+                              ),
+                            ),
+
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          GestureDetector(
+                            onTap: () => {
+                              Fluttertoast.showToast(
+                                  msg: "The Course Will Be Added Soon",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  //    gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  // backgroundColor: Colors.blue[300],
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              ),
+                            },
+                            child: Container(
+                              width: 130,
+                              // height: 160,
+                              decoration: BoxDecoration(
+                                //       color: Colors.white70,
+                                border: Border.all(
+                                  color: Colors.black12,
+                                  width: 2.0,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 5.0,
+                                    spreadRadius: 5.0,
+                                  ),
+                                ],
+
+                              ),
+
+                              child: Column(
+
+                                children: [
+
+
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.white,
+
+                                    backgroundImage:AssetImage('proj_images/business.jpg'),
+
+
+                                  ),//sp image
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:6.0,bottom: 8),
+                                    child: Text('Business M',
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),),
+                                  ),//sp word
+
+                                ],
+                              ),
+                            ),
+
+                          ),
+
+                        ],
+                      ),
+
+                    ),
+
+
+
+
+
+
+
+
+                  ],
+                ),
               ),
-            ),
+          ),
           ),
         );
   }

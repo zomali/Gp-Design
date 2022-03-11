@@ -20,8 +20,8 @@ class types extends StatefulWidget {
 }
 
 class _typesState extends State<types> {
-//bool _video_1st=true;
-  bool _video_1st=false;
+bool _video_1st=true;
+  //bool _video_1st=false;
 
   bool _audio_1st=false;
 //  bool _audio_1st=true;
@@ -30,15 +30,23 @@ class _typesState extends State<types> {
  // bool _text_1st=true;
 
 
-  //bool _image_1st=false;
- bool _image_1st=true;
+  bool _image_1st=false;
+// bool _image_1st=true;
 
 
  @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.blue[400],
+          elevation: 30,
+          title: Text(
+
+              "Personalized E-learning System"
+          ),
+
+        ),
 
       body: Center(
             child: Container(

@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
      debugShowCheckedModeBanner: false,
       //home: Edit_Proile_Screen(),
      // home: MyProfileScreen(),
-     // home: Login_screen(),
+      home: Login_screen(),
      // home: Home(0),
-      home: types(),
+     // home: types(),
       //home: signup_screen(),
     );
   }

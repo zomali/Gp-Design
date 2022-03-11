@@ -36,7 +36,7 @@ class _HomeLevelState extends State<HomeLevel> {
     if(widget.ind==1){
       levels.add("Level 1");
       know.add(true);
-      for(int i=2;i<31;i++){
+      for(int i=2;i<6;i++){
         levels.add("Level $i");
         know.add(false);
       }
@@ -45,7 +45,7 @@ class _HomeLevelState extends State<HomeLevel> {
         levels.add("Level $i");
         know.add(true);
       }
-      for(int i=widget.ind+1;i<31;i++){
+      for(int i=widget.ind+1;i<6;i++){
         levels.add("Level $i");
         know.add(false);
       }
