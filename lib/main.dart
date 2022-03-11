@@ -6,7 +6,7 @@ import 'package:gp/edit_profile%20screen.dart';
 import 'package:gp/login_screen.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:gp/signup%20screen.dart';
-
+import 'package:gp/audio_player.dart';
 import 'Home.dart';
 
 void main() async{
@@ -23,10 +23,11 @@ class MyApp extends StatelessWidget {
      debugShowCheckedModeBanner: false,
       //home: Edit_Proile_Screen(),
      // home: MyProfileScreen(),
-      home: Login_screen(),
+     // home: Login_screen(),
      // home: Home(0),
      // home: types(),
       //home: signup_screen(),
+      home: audio_player(),
     );
   }
 }
