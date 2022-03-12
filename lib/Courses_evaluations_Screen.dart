@@ -48,6 +48,13 @@ class _Courses_evaluations_ScreenState extends State<Courses_evaluations_Screen>
     return Scaffold(
       appBar:AppBar (
         title:const Text("Courses Evaluation"),
+        leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=> Home(0)));
+            _selectedIndex-=2;
+
+          },),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,

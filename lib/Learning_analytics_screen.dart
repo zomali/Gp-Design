@@ -34,6 +34,7 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
 
 
 
+
     },
     );
   }
@@ -46,10 +47,11 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
     return Scaffold(
       appBar:AppBar (
         title:const Text("Learning Analytics"),
-        leading: IconButton(icon:Icon(Icons.arrow_back),
+        leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context)=> Home(0)));
+            _selectedIndex-=1;
 
           },),
       ),

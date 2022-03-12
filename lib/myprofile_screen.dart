@@ -62,6 +62,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         title: Text(
             "My Profile"
         ),
+        leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=> Home(0)));
+            _selectedIndex-=3;
+
+          },),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
