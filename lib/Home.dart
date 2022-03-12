@@ -297,7 +297,7 @@ class _HomePageState extends State<HomePage> {
                            // ),//image
                            Container(
                              width:125,
-                             height: 60,
+                             height: 80,
                              decoration: BoxDecoration(
                                image: DecorationImage(
                                  image:AssetImage('proj_images/fcis.png'),

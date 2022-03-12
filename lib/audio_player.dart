@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gp/Levels.dart';
 import 'package:gp/audio_player.dart';
 
 class audio_player extends StatefulWidget{
@@ -55,6 +56,21 @@ class _audio_player_state extends State<audio_player>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 1,
+
+       backgroundColor: Color.fromARGB(255, 3, 60, 126),
+        leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+         //   _player.pause();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=> Levels(1)));
+            _player.pause();
+            // _selectedIndex-=2;
+
+          },),
+
+      ),
 
       body: Container(
         width: double.infinity,

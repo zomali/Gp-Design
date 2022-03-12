@@ -5,7 +5,7 @@ import 'Levels.dart';
 
 class Types extends StatelessWidget {
   final int index;
-  final List<bool>know;
+  final  List<bool>know;
   Types(this.index,this.know);
   change(){
     know[index+1]=true;
@@ -14,7 +14,15 @@ class Types extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text("types"),),
+        title:const Text("Types"),
+        leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=> Levels(index)));
+           // _selectedIndex-=2;
+
+          },),
+      ),
       body:Center(
 
           child:Column(children: [
