@@ -125,11 +125,12 @@ class _Courses_evaluations_ScreenState extends State<Courses_evaluations_Screen>
               radius: 180.0,
               lineWidth: 20.0,
               animation: true,
-              percent: 0.7,
+              percent: 0.4,
               // backgroundColor: Colors.white,
+              animationDuration: 3000,
               progressColor:Colors.blue ,
               center:  Text(
-                "70.0%",
+                "40%",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,

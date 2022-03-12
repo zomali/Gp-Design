@@ -78,10 +78,11 @@ class _audio_player_state extends State<audio_player>{
                   Padding(
                     padding: const EdgeInsets.only(left: 12.0),
                     child: Text(
-                     "Revision, Varriables & Constants", 
+                     "Revision, Variables & Constants",
                      style: TextStyle(
                      color: Colors.white,
                      fontSize: 32.0,
+                     fontStyle: FontStyle.italic,
                      fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -142,7 +143,8 @@ class _audio_player_state extends State<audio_player>{
 
                               },//restart audio
                               icon: Icon(
-                                Icons.restart_alt,
+                              //  Icons.restart_alt,
+                                Icons.reset_tv,
                               ),
                            ),
                            IconButton(

@@ -109,8 +109,13 @@ class _HomeLevelState extends State<HomeLevel> {
           backgroundColor: Colors.blue[600],
           appBar: AppBar(
             title:const Text("Levels page"),
-            leading:const Icon(Icons.read_more),
-          ),
+           leading: IconButton(icon:Icon(Icons.arrow_back),
+             onPressed: () {
+               Navigator.push(context,
+                   MaterialPageRoute(builder: (context)=> Home(0)));
+             },),
+           ),
+          //),
 
           body:
           ListView.builder(itemCount : levels.length,

@@ -46,6 +46,12 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
     return Scaffold(
       appBar:AppBar (
         title:const Text("Learning Analytics"),
+        leading: IconButton(icon:Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=> Home(0)));
+
+          },),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,

@@ -1,6 +1,5 @@
 import 'dart:ffi';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gp/Courses_evaluations_Screen.dart';
@@ -329,322 +328,316 @@ class _HomePageState extends State<HomePage> {
                     Container(
                         //  height: 130,
                           margin:EdgeInsets.all(20),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
+                          child: Row(
+                            children: [
 
-                                GestureDetector(
-                                  onTap: () => {
-                                  Navigator.push(context,
-                                  MaterialPageRoute(
-                                  builder: (context)=>Levels(1)
-                                  )
-                                  ),
+                              GestureDetector(
+                                onTap: () => {
+                                Navigator.push(context,
+                                MaterialPageRoute(
+                                builder: (context)=>Levels(1)
+                                )
+                                ),
 
-                                  },
-                                  child: Container(
-                                    margin:EdgeInsets.symmetric(horizontal: 25),
-                                    width: 130,
-                                   // height: 160,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white70,
-                                      border: Border.all(
-                                        color: Colors.black12,
-                                        width: 2.0,
-                                        style: BorderStyle.solid,
+                                },
+                                child: Container(
+                                  margin:EdgeInsets.symmetric(horizontal: 25),
+                                  width: 130,
+                                 // height: 160,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white70,
+                                    border: Border.all(
+                                      color: Colors.black12,
+                                      width: 2.0,
+                                      style: BorderStyle.solid,
+                                    ),
+                                    borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 5.0,
+                                        spreadRadius: 5.0,
                                       ),
-                                      borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.grey,
-                                          blurRadius: 5.0,
-                                          spreadRadius: 5.0,
-                                        ),
-                                      ],
-                                      // gradient: const LinearGradient(
-                                      //   begin: Alignment.centerLeft,
-                                      //   end: Alignment.centerRight,
-                                      //   colors: [
-                                      //     Colors.grey,
-                                      //     Colors.white,
-                                      //   ],
-                                      // ),
-                                    ),
-                                   //  height:150,
-                                    //  width: 100,
-                                    child: Column(
-
-                                      children: [
-
-
-                                        CircleAvatar(
-                                          radius: 40,
-                                          backgroundColor: Colors.white,
-
-                                          backgroundImage:AssetImage('proj_images/cc.png'),
-
-
-                                        ),//sp image
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left:8.0,bottom: 8),
-                                          child: Text('SP',
-                                            style: TextStyle(
-                                              fontSize: 30,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w700,
-                                            ),),
-                                        ),//sp word
-
-                                      ],
-                                    ),
+                                    ],
+                                    // gradient: const LinearGradient(
+                                    //   begin: Alignment.centerLeft,
+                                    //   end: Alignment.centerRight,
+                                    //   colors: [
+                                    //     Colors.grey,
+                                    //     Colors.white,
+                                    //   ],
+                                    // ),
                                   ),
+                                 //  height:150,
+                                  //  width: 100,
+                                  child: Column(
 
-                                ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                GestureDetector(
-                                  onTap: () => {
-                                  Fluttertoast.showToast(
-                                  msg: "The Course Will Be Added Soon",
-                                  toastLength: Toast.LENGTH_SHORT,
-                              //    gravity: ToastGravity.CENTER,
-                                  timeInSecForIosWeb: 1,
-                                 // backgroundColor: Colors.blue[300],
-                                  textColor: Colors.white,
-                                  fontSize: 16.0
-                                  ),
-                                  },
-                                  child: Container(
-                                    width: 130,
-                                    // height: 160,
-                                    decoration: BoxDecoration(
-                                      //color: Colors.white70,
-                                      border: Border.all(
-                                        color: Colors.black12,
-                                        width: 2.0,
-                                        style: BorderStyle.solid,
+                                    children: [
+
+
+                                      CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: Colors.white,
+
+                                        backgroundImage:AssetImage('proj_images/cc.png'),
+
+
+                                      ),//sp image
+                                      SizedBox(
+                                        height: 10,
                                       ),
-                                      borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.grey,
-                                          blurRadius: 5.0,
-                                          spreadRadius: 5.0,
-                                        ),
-                                      ],
-                                      // gradient: const LinearGradient(
-                                      //   begin: Alignment.centerLeft,
-                                      //   end: Alignment.centerRight,
-                                      //   colors: [
-                                      //     Colors.grey,
-                                      //     Colors.white,
-                                      //   ],
-                                      // ),
-                                    ),
-                                    //  height:150,
-                                    //  width: 100,
-                                    child: Column(
+                                      Padding(
+                                        padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                        child: Text('SP',
+                                          style: TextStyle(
+                                            fontSize: 30,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w700,
+                                          ),),
+                                      ),//sp word
 
-                                      children: [
-
-
-                                        CircleAvatar(
-                                          radius: 40,
-                                          backgroundColor: Colors.white,
-
-                                          backgroundImage:AssetImage('proj_images/m.jpg'),
-
-
-                                        ),//sp image
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left:8.0,bottom: 8),
-                                          child: Text('Math 2',
-                                            style: TextStyle(
-                                              fontSize: 27,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w700,
-                                            ),),
-                                        ),//sp word
-
-                                      ],
-                                    ),
+                                    ],
                                   ),
-
-                                ),
-                                SizedBox(
-                                  width: 30,
                                 ),
 
+                              ),
+                              SizedBox(
+                                width: 30,
+                              ),
+                              GestureDetector(
+                                onTap: () => {
+                                Fluttertoast.showToast(
+                                msg: "The Course Will Be Added Soon",
+                                toastLength: Toast.LENGTH_SHORT,
+                            //    gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                               // backgroundColor: Colors.blue[300],
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                                ),
+                                },
+                                child: Container(
+                                  width: 130,
+                                  // height: 160,
+                                  decoration: BoxDecoration(
+                                    //color: Colors.white70,
+                                    border: Border.all(
+                                      color: Colors.black12,
+                                      width: 2.0,
+                                      style: BorderStyle.solid,
+                                    ),
+                                    borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 5.0,
+                                        spreadRadius: 5.0,
+                                      ),
+                                    ],
+                                    // gradient: const LinearGradient(
+                                    //   begin: Alignment.centerLeft,
+                                    //   end: Alignment.centerRight,
+                                    //   colors: [
+                                    //     Colors.grey,
+                                    //     Colors.white,
+                                    //   ],
+                                    // ),
+                                  ),
+                                  //  height:150,
+                                  //  width: 100,
+                                  child: Column(
 
-                              ],
-                            ),
+                                    children: [
+
+
+                                      CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: Colors.white,
+
+                                        backgroundImage:AssetImage('proj_images/m.jpg'),
+
+
+                                      ),//sp image
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                        child: Text('Math 2',
+                                          style: TextStyle(
+                                            fontSize: 27,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w700,
+                                          ),),
+                                      ),//sp word
+
+                                    ],
+                                  ),
+                                ),
+
+                              ),
+                              SizedBox(
+                                width: 30,
+                              ),
+
+
+                            ],
                           ),
 
                         ),
                     Container(
                       //  height: 130,
                       margin:EdgeInsets.all(20),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
+                      child: Row(
+                        children: [
 
 
-                            GestureDetector(
-                              onTap: () => {
-                                Fluttertoast.showToast(
-                                    msg: "The Course Will Be Added Soon",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    //    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    // backgroundColor: Colors.blue[300],
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
+                          GestureDetector(
+                            onTap: () => {
+                              Fluttertoast.showToast(
+                                  msg: "The Course Will Be Added Soon",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  //    gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  // backgroundColor: Colors.blue[300],
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              ),
+                            },
+                            child: Container(
+                              width: 130,
+                              margin:EdgeInsets.symmetric(horizontal: 25),
+                              // height: 160,
+                              decoration: BoxDecoration(
+                                //    color: Colors.white70,
+                                border: Border.all(
+                                  color: Colors.black12,
+                                  width: 2.0,
+                                  style: BorderStyle.solid,
                                 ),
-                              },
-                              child: Container(
-                                width: 130,
-                                margin:EdgeInsets.symmetric(horizontal: 25),
-                                // height: 160,
-                                decoration: BoxDecoration(
-                                  //    color: Colors.white70,
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 2.0,
-                                    style: BorderStyle.solid,
+                                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 5.0,
+                                    spreadRadius: 5.0,
                                   ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5.0,
-                                      spreadRadius: 5.0,
-                                    ),
-                                  ],
-                                  // gradient: const LinearGradient(
-                                  //   begin: Alignment.centerLeft,
-                                  //   end: Alignment.centerRight,
-                                  //   colors: [
-                                  //     Colors.grey,
-                                  //     Colors.white,
-                                  //   ],
-                                  // ),
+                                ],
+                                // gradient: const LinearGradient(
+                                //   begin: Alignment.centerLeft,
+                                //   end: Alignment.centerRight,
+                                //   colors: [
+                                //     Colors.grey,
+                                //     Colors.white,
+                                //   ],
+                                // ),
+                              ),
+                              //  height:150,
+                              //  width: 100,
+                              child: Column(
+
+                                children: [
+
+
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.white,
+
+                                    backgroundImage:AssetImage('proj_images/p.png'),
+
+
+                                  ),//sp image
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                    child: Text('Physics 2',
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),),
+                                  ),//sp word
+
+                                ],
+                              ),
+                            ),
+
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          GestureDetector(
+                            onTap: () => {
+                              Fluttertoast.showToast(
+                                  msg: "The Course Will Be Added Soon",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  //    gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  // backgroundColor: Colors.blue[300],
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              ),
+                            },
+                            child: Container(
+                              width: 130,
+                              // height: 160,
+                              decoration: BoxDecoration(
+                                //   color: Colors.white70,
+                                border: Border.all(
+                                  color: Colors.black12,
+                                  width: 2.0,
+                                  style: BorderStyle.solid,
                                 ),
-                                //  height:150,
-                                //  width: 100,
-                                child: Column(
+                                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 5.0,
+                                    spreadRadius: 5.0,
+                                  ),
+                                ],
 
-                                  children: [
-
-
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
-
-                                      backgroundImage:AssetImage('proj_images/p.png'),
-
-
-                                    ),//sp image
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
-                                      child: Text('Physics 2',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                        ),),
-                                    ),//sp word
-
-                                  ],
-                                ),
                               ),
 
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            GestureDetector(
-                              onTap: () => {
-                                Fluttertoast.showToast(
-                                    msg: "The Course Will Be Added Soon",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    //    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    // backgroundColor: Colors.blue[300],
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                ),
-                              },
-                              child: Container(
-                                width: 130,
-                                // height: 160,
-                                decoration: BoxDecoration(
-                                  //   color: Colors.white70,
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 2.0,
-                                    style: BorderStyle.solid,
+                              child: Column(
+
+                                children: [
+
+
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.white,
+
+                                    backgroundImage:AssetImage('proj_images/en.jpg'),
+
+
+                                  ),//sp image
+                                  SizedBox(
+                                    height: 10,
                                   ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5.0,
-                                      spreadRadius: 5.0,
-                                    ),
-                                  ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:8.0,bottom: 8),
+                                    child: Text('English 2',
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),),
+                                  ),//sp word
 
-                                ),
-
-                                child: Column(
-
-                                  children: [
-
-
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
-
-                                      backgroundImage:AssetImage('proj_images/en.jpg'),
-
-
-                                    ),//sp image
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:8.0,bottom: 8),
-                                      child: Text('English 2',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                        ),),
-                                    ),//sp word
-
-                                  ],
-                                ),
+                                ],
                               ),
-
-                            ),
-                            SizedBox(
-                              width: 30,
                             ),
 
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
 
-                          ],
-                        ),
+
+                        ],
                       ),
 
                     ),
