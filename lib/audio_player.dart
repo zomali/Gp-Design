@@ -143,7 +143,7 @@ class _audio_player_state extends State<audio_player>{
                               _player.seek(position);
                               },//restart audio
                               icon: Icon(
-                                Icons.restart_alt,
+                                Icons.restore,
                               ),
                            ),
                            IconButton(
