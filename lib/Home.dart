@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
             elevation: 0.0,
             backgroundColor: Theme.of(context).colorScheme.secondary,
-            title:const Text("Home page"),
+            title:const Text("Personalized E-learning System"),
             leading:const Icon(Icons.home),
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -161,6 +161,7 @@ class _HomePageState extends State<HomePage> {
 
         selectedItemColor: Colors.blue,
         selectedFontSize:16 ,
+
 
 
         unselectedItemColor: Colors.grey ,
