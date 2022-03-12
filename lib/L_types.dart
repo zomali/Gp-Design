@@ -216,7 +216,11 @@ bool _video_1st=true;
 
                           ///////////////////////////////////////////////////////
                           GestureDetector(
-                            onTap: () => {print("'Clicked'")},
+                            onTap: () => {
+                            Navigator.push(context,
+                            MaterialPageRoute(builder: (context)=> Levels(1))),
+
+                              print("'Clicked'")},
                             child: Container(
                             //  padding: EdgeInsets.only(top: 10.0),
                               width: 120,
