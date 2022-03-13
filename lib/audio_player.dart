@@ -166,6 +166,7 @@ class _audio_player_state extends State<audio_player>{
                                   setState(() {
                                     playBtn = Icons.pause;
                                     playing = true;
+
                                   });
                                 }
                                 else
@@ -174,7 +175,9 @@ class _audio_player_state extends State<audio_player>{
                                   setState(() {
                                     playBtn = Icons.play_arrow;
                                     playing = false;
+
                                   });
+
                                 }
                               },//play audio of current topic
                               icon: Icon(

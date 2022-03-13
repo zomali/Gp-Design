@@ -68,49 +68,52 @@ class _login_screenState extends State<Login_screen> {
 
               Padding(
                 padding: const EdgeInsets.only(left: 50,right: 20),
-                child: Row(
-                  children: [
-                    // SizedBox(
-                    //   width: 50,
-                    // ),
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor: Colors.white,
-                      child: Container(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      // SizedBox(
+                      //   width: 50,
+                      // ),
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Colors.white,
+                        child: Container(
 
 
-                        width: 90,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image:AssetImage('proj_images/Ain_Shams_logo.png'),
-                            fit: BoxFit.fill,
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image:AssetImage('proj_images/Ain_Shams_logo.png'),
+                              fit: BoxFit.fill,
+                            ),
                           ),
+
                         ),
-
+                      ),//image
+                      SizedBox(
+                        width: 140,
                       ),
-                    ),//image
-                    SizedBox(
-                      width: 140,
-                    ),
-                    CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Colors.white,
-                      child: Container(
+                      CircleAvatar(
+                        radius: 60,
+                        backgroundColor: Colors.white,
+                        child: Container(
 
 
-                        width: 90,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image:AssetImage('proj_images/fcis.png'),
-                            fit: BoxFit.fill,
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image:AssetImage('proj_images/fcis.png'),
+                              fit: BoxFit.fill,
+                            ),
                           ),
-                        ),
 
-                      ),
-                    ),//image
-                  ],
+                        ),
+                      ),//image
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -237,44 +240,47 @@ class _login_screenState extends State<Login_screen> {
                   right: 20,
                   bottom: 20,
                 ),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon:Icon(
-                        _remembercheck?Icons.check_box:Icons.check_box_outline_blank,
-                        color: Colors.blue,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon:Icon(
+                          _remembercheck?Icons.check_box:Icons.check_box_outline_blank,
+                          color: Colors.blue,
 
-                      ), onPressed: () {
-                        setState(() {
-                          _remembercheck=!_remembercheck;
+                        ), onPressed: () {
+                          setState(() {
+                            _remembercheck=!_remembercheck;
 
-                        });
+                          });
 
-                    },
-                    ),//remembercheck
-                    Text(
-                      "Remember Password",
-                      style: TextStyle(
-                        //fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                      },
+                      ),//remembercheck
+                      Text(
+                        "Remember Password",
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          fontSize: 15,
+
+                        ),
+                      ),//remember pass word
+
+                      SizedBox(
+                        width: 40,
+                      ),
+                      TextButton(onPressed: (){
+
+                      }, child: Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      ),
 
                       ),
-                    ),//remember pass word
-
-                    SizedBox(
-                      width: 40,
-                    ),
-                    TextButton(onPressed: (){
-
-                    }, child: Text(
-                      "Forgot Password?",
-                      style: TextStyle(
-                      fontSize: 14,
-                    ),
-                    ),
-
-                    ),
-                   ],
+                     ],
+                  ),
                 ),
               ),
 
@@ -294,11 +300,12 @@ class _login_screenState extends State<Login_screen> {
                      //   await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
                         await _auth.signInWithEmailAndPassword(email: email, password: password);
-                        await Navigator.push(context,
-                            MaterialPageRoute(
-                                builder: (context)=>Home(0)
-                            )
+                        await Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => Home(0)),
+                              (Route<dynamic> route) => false,
                         );
+
                       }
 
                       on FirebaseAuthException catch (e) {
