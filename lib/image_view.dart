@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:gp/images_data.dart';
-import 'L_types.dart';
 class image_view extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -42,22 +41,8 @@ class _image_view extends State<image_view> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("2D Arrays"),
-        centerTitle: true,
-        leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
-    onPressed: () {
-    Navigator.push(context,
-    MaterialPageRoute(builder: (context)=> types()));
-
-    },
-        ),
-      ),
-
-      body: new ListView(
-        children: _buildListItemsFromImages(),
-      ),
+    return ListView(
+      children: _buildListItemsFromImages(),
     );
   }
 }

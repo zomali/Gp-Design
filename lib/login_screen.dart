@@ -318,13 +318,6 @@ class _login_screenState extends State<Login_screen> {
                             textColor: Colors.white,
                             fontSize: 16.0
                         );
-                        // showDialog(
-                        //     context: context,
-                        //     builder: (ctx) => AlertDialog(
-                        //     title: Text("Ops! Login Failed"),
-                        //     content: Text('${e.message}'),
-                        //        )
-                        // );
 
 
                       }
