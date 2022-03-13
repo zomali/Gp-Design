@@ -7,6 +7,7 @@ import 'audio_player.dart';
 import 'package:gp/URL_view.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'PDF_viewer.dart';
+import 'image_view.dart';
 class types extends StatefulWidget {
   int _selectedIndex = 3;
   static  List<Widget> _pages = <Widget>[
@@ -174,7 +175,15 @@ bool _video_1st=true;
                           SizedBox(width: 15,),
                           //////////////////////////////////////////////////////////////////////
                           GestureDetector(
-                            onTap: () => {print("'Clicked'")},
+                            onTap: () => {print("'Clicked'"),
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => image_view()),
+                              ),
+
+
+                            },
                             child: Container(
                             //  padding: EdgeInsets.only(top: 10.0),
                               width: 120,
