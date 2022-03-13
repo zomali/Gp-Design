@@ -317,7 +317,7 @@ class _HomePageState extends State<HomePage> {
 
                     Padding(
                   padding: const EdgeInsets.only(left :10.0,bottom: 20),
-                  child: Text('Course',
+                  child: Text('Courses',
                             style: TextStyle(
                               fontSize:30,
                               color: Colors.black,

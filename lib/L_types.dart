@@ -47,6 +47,7 @@ bool _video_1st=true;
         appBar: AppBar(
           backgroundColor: Colors.blue[400],
           elevation: 30,
+
           title: Text(
 
               "Personalized E-learning System"

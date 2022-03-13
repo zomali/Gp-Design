@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'L_types.dart';
 import 'Levels.dart';
+import 'URL_view.dart';
 //import 'package:flutter/Levels.dart';
 
 class Types extends StatelessWidget {
@@ -33,7 +34,14 @@ class Types extends StatelessWidget {
                   MaterialPageRoute(builder: (context)=> types()));
 
 
-            }, child:const Text("Select your type",))
+            }, child:const Text("Select your type",)),
+            ElevatedButton(onPressed: (){
+
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=> ImagePage()));
+
+
+            }, child:const Text("Go to links",))
           ],) ) ,
 
     );
