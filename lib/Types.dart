@@ -20,9 +20,12 @@ class Types extends StatelessWidget {
           child:Column(children: [
             Text("level $index"),
             ElevatedButton(onPressed: (){
+
               Navigator.push(context,
                   MaterialPageRoute(builder: (context)=> types()));
-            }, child:const Text("Select your type"))
+
+
+            }, child:const Text("Select your type",))
           ],) ) ,
 
     );

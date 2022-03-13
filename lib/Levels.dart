@@ -134,9 +134,13 @@ class _HomeLevelState extends State<HomeLevel> {
                         fontWeight: FontWeight.w400
                     ),),
                   onTap: (){
+
+
+
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context)=> Types(index+1,know)));
                   },
+
                 ),
               );
             },
