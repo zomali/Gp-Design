@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gp/Learning%20types%20screen.dart';
+import 'L_types.dart';
 import 'package:gp/myprofile_screen.dart';
 
 import 'Home.dart';

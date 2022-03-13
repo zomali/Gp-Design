@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gp/Courses_evaluations_Screen.dart';
 import 'package:gp/Home.dart';
-import 'package:gp/Learning%20types%20screen.dart';
+import 'package:gp/L_types.dart';
 import 'package:gp/Learning_analytics_screen.dart';
 import 'package:gp/Levels.dart';
 import 'package:gp/edit_profile%20screen.dart';

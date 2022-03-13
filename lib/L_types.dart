@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/Levels.dart';
 import 'package:gp/myprofile_screen.dart';
-
+import 'audio_player.dart';
 class types extends StatefulWidget {
   int _selectedIndex = 3;
   static  List<Widget> _pages = <Widget>[
@@ -107,7 +107,14 @@ bool _video_1st=true;
                       child: Row(children: [
                         SizedBox(width: 15,),
                         GestureDetector(
-                          onTap: () => {print("'Clicked'")},
+                          onTap: () => {
+
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => audio_player()),
+                          ),
+                        },
+                            //print("'Clicked'")},
                           child: Container(
                          //   height: 100,
 

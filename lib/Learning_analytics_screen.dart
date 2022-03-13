@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gp/Courses_evaluations_Screen.dart';
-import 'package:gp/Learning%20types%20screen.dart';
+import 'package:gp/L_types.dart';
 import 'package:gp/myprofile_screen.dart';
 
 import 'Home.dart';

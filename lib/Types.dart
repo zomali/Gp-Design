@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'L_types.dart';
 import 'Levels.dart';
 //import 'package:flutter/Levels.dart';
 
@@ -20,13 +21,10 @@ class Types extends StatelessWidget {
             Text("level $index"),
             ElevatedButton(onPressed: (){
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=> Levels(index+1)));
-            }, child:const Text("open new one"))
+                  MaterialPageRoute(builder: (context)=> types()));
+            }, child:const Text("Select your type"))
           ],) ) ,
 
     );
   }
 }
-
-
-
