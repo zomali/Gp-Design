@@ -109,11 +109,13 @@ class _HomeLevelState extends State<HomeLevel> {
           backgroundColor: Colors.blue[600],
           appBar: AppBar(
             title:const Text("Levels page"),
-           leading: IconButton(icon:Icon(Icons.arrow_back),
-             onPressed: () {
-               Navigator.push(context,
-                   MaterialPageRoute(builder: (context)=> Home(0)));
-             },),
+            leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context)=> Home(0)));
+               // _selectedIndex-=2;
+
+              },),
            ),
           //),
 

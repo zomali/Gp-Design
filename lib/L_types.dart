@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/Levels.dart';
+import 'package:gp/Types.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'audio_player.dart';
 class types extends StatefulWidget {
@@ -34,6 +35,7 @@ bool _video_1st=true;
 // bool _image_1st=true;
 
 
+
  @override
   Widget build(BuildContext context) {
 
@@ -45,6 +47,13 @@ bool _video_1st=true;
 
               "Personalized E-learning System"
           ),
+          leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=> Levels(1)));
+             // _selectedIndex-=2;
+
+            },),
 
         ),
 
