@@ -4,7 +4,9 @@ import 'package:gp/Levels.dart';
 import 'package:gp/Types.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'audio_player.dart';
-import 'URL_view.dart';
+import 'package:gp/URL_view.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'PDF_viewer.dart';
 class types extends StatefulWidget {
   int _selectedIndex = 3;
   static  List<Widget> _pages = <Widget>[
@@ -218,10 +220,12 @@ bool _video_1st=true;
                           ///////////////////////////////////////////////////////
                           GestureDetector(
                             onTap: () => {
-                            Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=> URL_view())),
 
-                              print("'Clicked'")},
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PdfViewerPage()),
+                            ),
+                              },
                             child: Container(
                             //  padding: EdgeInsets.only(top: 10.0),
                               width: 120,
