@@ -4,6 +4,7 @@ import 'package:gp/myprofile_screen.dart';
 
 import 'Home.dart';
 import 'Types.dart';
+import 'classes/student.dart';
 //import 'package:flutter_application_1/home.dart';
 //import 'package:flutter_application_1/types.dart';
 
@@ -12,12 +13,13 @@ class Levels extends StatelessWidget {
   Levels(this.ind);
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomeLevel(ind),
     );
   }
 }
+
 class HomeLevel extends StatefulWidget {
   int ind;
   HomeLevel(this.ind);
@@ -28,37 +30,36 @@ class HomeLevel extends StatefulWidget {
 
 class _HomeLevelState extends State<HomeLevel> {
   //int _selectedIndex = 1;
-  List<String> levels=[];
+  List<String> levels = [];
 
-  List<bool> know=[];
+  List<bool> know = [];
 
-  addlevels(){
-    if(widget.ind==1){
+  addlevels() {
+    if (widget.ind == 1) {
       levels.add("Level 1");
       know.add(true);
-      for(int i=2;i<6;i++){
+      for (int i = 2; i < 6; i++) {
         levels.add("Level $i");
         know.add(false);
       }
-    }else{
-      for(int i=1;i<=widget.ind;i++){
+    } else {
+      for (int i = 1; i <= widget.ind; i++) {
         levels.add("Level $i");
         know.add(true);
       }
-      for(int i=widget.ind+1;i<6;i++){
+      for (int i = widget.ind + 1; i < 6; i++) {
         levels.add("Level $i");
         know.add(false);
       }
     }
   }
 
-  Widget? putIcon(index){
-    if(know[index]==false){
+  Widget? putIcon(index) {
+    if (know[index] == false) {
       return const Icon(Icons.lock);
-    }else{
+    } else {
       return null;
     }
-
   }
   // static  List<Widget> _pages = <Widget>[
   //   Home(0),
@@ -96,58 +97,53 @@ class _HomeLevelState extends State<HomeLevel> {
   @override
   Widget build(BuildContext context) {
     addlevels();
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
-                  backgroundColor:MaterialStateProperty.all(Colors.green)
-              )
-          )
-      ),
+                  backgroundColor: MaterialStateProperty.all(Colors.green)))),
       home: Scaffold(
           backgroundColor: Colors.blue[600],
           appBar: AppBar(
-            title:const Text("Levels page"),
-            leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+            title: const Text("Levels page"),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_outlined),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context)=> Home(0)));
-               // _selectedIndex-=2;
-
-              },),
-           ),
+                    MaterialPageRoute(builder: (context) => Home(student())));
+                // _selectedIndex-=2;
+              },
+            ),
+          ),
           //),
 
-          body:
-          ListView.builder(itemCount : levels.length,
-            itemBuilder: (cxt,index){
+          body: ListView.builder(
+            itemCount: levels.length,
+            itemBuilder: (cxt, index) {
               return Card(
-                margin:const EdgeInsets.all(4),
+                margin: const EdgeInsets.all(4),
                 elevation: 8,
                 child: ListTile(
                   trailing: putIcon(index),
                   enabled: know[index],
-                  title:
-                  Text(levels[index],
-                    style:const TextStyle(
+                  title: Text(
+                    levels[index],
+                    style: const TextStyle(
                         fontSize: 22,
                         color: Colors.blueGrey,
-                        fontWeight: FontWeight.w400
-                    ),),
-                  onTap: (){
-
-
-
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=> Types(index+1,know)));
+                        fontWeight: FontWeight.w400),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Types(index + 1, know)));
                   },
-
                 ),
               );
             },
-          )
-      ),
+          )),
     );
   }
 }

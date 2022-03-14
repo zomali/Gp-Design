@@ -36,6 +36,9 @@ dependencies:
   transparent_image: ^2.0.0
   cached_network_image: ^3.2.0
   path_provider: any
+  flutter_bloc: ^7.3.3
+  flutter_offline: ^2.1.0
+  firebase_database: ^8.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
