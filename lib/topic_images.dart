@@ -66,9 +66,8 @@ class _image_view extends State<image_view> {
                     height: 110,
                     child:Image.network('https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2F1.1.2.jpg?alt=media&token=d703e865-5f01-40ef-a493-9bb3bce9cf21')
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
+                  Spacer(),
+                 Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
@@ -93,7 +92,8 @@ class _image_view extends State<image_view> {
                         ),
                       ],
                     ),
-                  )
+                  Spacer(),
+
                 ],
               ),
             ),

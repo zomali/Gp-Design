@@ -56,25 +56,12 @@ class _login_screenState extends State<Login_screen> {
                 height: 20,
               ),
 
-              // Text(
-              //   "Welcome To FCIS AinShams University",
-              //   style: TextStyle(
-              //
-              //     fontSize: 17,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              //
-              // ),//welcome sentence
 
-              Padding(
-                padding: const EdgeInsets.only(left: 50,right: 20),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
+
+              Row(
+                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // SizedBox(
-                      //   width: 50,
-                      // ),
+                      Spacer(flex: 2,),
                       CircleAvatar(
                         radius: 40,
                         backgroundColor: Colors.white,
@@ -92,11 +79,10 @@ class _login_screenState extends State<Login_screen> {
 
                         ),
                       ),//image
-                      SizedBox(
-                        width: 140,
-                      ),
+
+                     Spacer(flex: 5),
                       CircleAvatar(
-                        radius: 60,
+                        radius: 65,
                         backgroundColor: Colors.white,
                         child: Container(
 
@@ -111,24 +97,16 @@ class _login_screenState extends State<Login_screen> {
                           ),
 
                         ),
-                      ),//image
+                      ),
+                      Spacer(),//image
+
                     ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-
-
-
+                  ),//logos
 
 
               SizedBox(
-                height: 20,
+                height: 40,
               ),
-
-
 
 
               Padding(
@@ -240,9 +218,7 @@ class _login_screenState extends State<Login_screen> {
                   right: 20,
                   bottom: 20,
                 ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
+                child:  Row(
                     children: [
                       IconButton(
                         icon:Icon(
@@ -266,9 +242,8 @@ class _login_screenState extends State<Login_screen> {
                         ),
                       ),//remember pass word
 
-                      SizedBox(
-                        width: 40,
-                      ),
+
+                      Spacer(flex: 20,),
                       TextButton(onPressed: (){
 
                       }, child: Text(
@@ -279,9 +254,10 @@ class _login_screenState extends State<Login_screen> {
                       ),
 
                       ),
+                      Spacer(),
                      ],
                   ),
-                ),
+
               ),
 
               Padding(
@@ -297,7 +273,7 @@ class _login_screenState extends State<Login_screen> {
 
                       try{
 
-                     //   await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                    //   await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
                         await _auth.signInWithEmailAndPassword(email: email, password: password);
                         await Navigator.pushAndRemoveUntil(
@@ -349,6 +325,7 @@ class _login_screenState extends State<Login_screen> {
                   Text(
                     "Don't have an account?",
                   ),
+
                   TextButton(onPressed: (){
                     Navigator.push(context,
                         MaterialPageRoute(
@@ -361,9 +338,7 @@ class _login_screenState extends State<Login_screen> {
                   ),
                 ],
               ),//register now
-              SizedBox(
-                height: 30,
-              ),
+
 
 
 

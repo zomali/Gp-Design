@@ -30,7 +30,15 @@ class _Edit_Proile_ScreenState extends State<Edit_Proile_Screen> {
         title: Text(
             "Edit Profile"
         ),
+        leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=> Home(0)));
+
+
+          },),
       ),
+
       body:SingleChildScrollView(
         child: Column(
 

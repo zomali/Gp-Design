@@ -51,7 +51,7 @@ bool _video_1st=true;
 
           title: Text(
 
-              "Personalized E-learning System"
+              "Learning Type"
           ),
           leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
             onPressed: () {
@@ -114,17 +114,11 @@ bool _video_1st=true;
                         ),
                       ),
                     ),
-                    //new fun
-                    ////////////////////////////////////////////////////////////////
-        //        SingleChildScrollView(
-             //       scrollDirection: Axis.horizontal,
-                  //    child:
+
                       Padding(
                         padding: const EdgeInsets.symmetric( vertical: 30),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(children: [
-                            SizedBox(width: 15,),
+                        child: Row(children: [
+                          Spacer(),
                             GestureDetector(
                               onTap: () => {
 
@@ -176,7 +170,7 @@ bool _video_1st=true;
                                 ),
                               ),
                             ),
-                            SizedBox(width: 15,),
+                          Spacer(),
                             //////////////////////////////////////////////////////////////////////
                             GestureDetector(
                               onTap: () => {print("'Clicked'"),
@@ -228,7 +222,7 @@ bool _video_1st=true;
                                 ),
                               ),
                             ),
-                            SizedBox(width: 15,),
+                          Spacer(),
 
                             ///////////////////////////////////////////////////////
                             GestureDetector(
@@ -279,8 +273,9 @@ bool _video_1st=true;
                                 ),
                               ),
                             ),
+                          Spacer(),
                           ],),
-                        ),
+
                       ),
                     //),
 

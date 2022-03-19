@@ -228,9 +228,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                   SingleChildScrollView(
-                     scrollDirection: Axis.horizontal,
-                     child: Padding(
+                  Padding(
                        padding: const EdgeInsets.only(bottom: 10,left: 10,top: 10),
                        child: Row(
                          children: [
@@ -286,16 +284,11 @@ class _HomePageState extends State<HomePage> {
 
                              ],
                            ),
-                           SizedBox(
-                             width:60
-                           ),
-                           // CircleAvatar(
-                           //   radius: 40,
-                           //   backgroundColor: Colors.grey,
-                           //
-                           //   backgroundImage: AssetImage('proj_images/Ain_Shams_logo.png'),
-                           //
-                           // ),//image
+                           // SizedBox(
+                           //   width:60
+                           // ),
+                           Spacer(),
+
                            Container(
                              width:125,
                              height: 80,
@@ -310,15 +303,17 @@ class _HomePageState extends State<HomePage> {
                          ],
                        ),//info
                      ),//info
-                   ),//info
-                SizedBox(
+
+                 SizedBox(
                   height: 10,
                 ),
 
 
                     Padding(
-                  padding: const EdgeInsets.only(left :10.0,bottom: 20),
-                  child: Text('Courses',
+                      padding: const EdgeInsets.only(left :30.0,bottom: 20),
+
+                     child: Text(
+                       'Courses',
                             style: TextStyle(
                               fontSize:30,
                               color: Colors.black,
@@ -329,12 +324,10 @@ class _HomePageState extends State<HomePage> {
 
                     Container(
                         //  height: 130,
-                          margin:EdgeInsets.all(20),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
+                          margin:EdgeInsets.only(bottom: 20,top: 20),
+                          child: Row(
                               children: [
-
+                                Spacer(),
                                 GestureDetector(
                                   onTap: () => {
                                   Navigator.push(context,
@@ -405,9 +398,10 @@ class _HomePageState extends State<HomePage> {
                                   ),
 
                                 ),
-                                SizedBox(
-                                  width: 30,
-                                ),
+                                // SizedBox(
+                                //   width: 30,
+                                // ),
+                                Spacer(),
                                 GestureDetector(
                                   onTap: () => {
                                   Fluttertoast.showToast(
@@ -480,25 +474,23 @@ class _HomePageState extends State<HomePage> {
                                   ),
 
                                 ),
-                                SizedBox(
-                                  width: 30,
-                                ),
+                                Spacer(flex: 3,),
+
 
 
                               ],
                             ),
-                          ),
+
 
                         ),
+
                     Container(
                       //  height: 130,
-                      margin:EdgeInsets.all(20),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
+                      margin:EdgeInsets.only(bottom: 20,top: 20),
+                      child:  Row(
                           children: [
 
-
+                            Spacer(),
                             GestureDetector(
                               onTap: () => {
                                 Fluttertoast.showToast(
@@ -573,9 +565,7 @@ class _HomePageState extends State<HomePage> {
                               ),
 
                             ),
-                            SizedBox(
-                              width: 30,
-                            ),
+                            Spacer(),
                             GestureDetector(
                               onTap: () => {
                                 Fluttertoast.showToast(
@@ -640,24 +630,22 @@ class _HomePageState extends State<HomePage> {
                               ),
 
                             ),
-                            SizedBox(
-                              width: 30,
-                            ),
+                            Spacer(flex: 3,),
 
 
                           ],
                         ),
-                      ),
+
 
                     ),
                     Container(
                       //  height: 130,
-                      margin:EdgeInsets.all(20),
+                      margin:EdgeInsets.only(bottom: 20,top: 20),
                       child: Row(
                         children: [
 
 
-
+                          Spacer(),
                           GestureDetector(
                             onTap: () => {
                               Fluttertoast.showToast(
@@ -731,9 +719,7 @@ class _HomePageState extends State<HomePage> {
                             ),
 
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
+                          Spacer(),
                           GestureDetector(
                             onTap: () => {
                               Fluttertoast.showToast(
@@ -799,6 +785,7 @@ class _HomePageState extends State<HomePage> {
 
                           ),
 
+                          Spacer(flex: 3,),
                         ],
                       ),
 
