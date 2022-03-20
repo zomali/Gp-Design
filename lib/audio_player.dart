@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gp/L_types.dart';
 import 'package:gp/audio_player.dart';
 import 'package:gp/Levels.dart';
 class audio_player extends StatefulWidget{
@@ -63,7 +64,7 @@ class _audio_player_state extends State<audio_player>{
           onPressed: () {
             //   _player.pause();
             Navigator.push(context,
-                MaterialPageRoute(builder: (context)=> Levels(1)));
+                MaterialPageRoute(builder: (context)=> types()));
             _player.pause();
             // _selectedIndex-=2;
 

@@ -38,7 +38,7 @@ class Types extends StatelessWidget {
             ElevatedButton(onPressed: (){
 
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=> ImagePage()));
+                  MaterialPageRoute(builder: (context)=> url_view()));
 
 
             }, child:const Text("Go to links",))

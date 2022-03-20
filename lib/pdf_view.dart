@@ -38,7 +38,9 @@ class _pdf_view extends State<pdf_view> {
                   )),
               IconButton(
                   onPressed: () {
-                    //   _pdfViewerController.jumpToPage(5);
+
+                       _pdfViewerController.jumpToPage(5);
+
                     _pdfViewerController.lastPage();
 
                   },

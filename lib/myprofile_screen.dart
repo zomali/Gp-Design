@@ -12,83 +12,83 @@ import 'package:gp/edit_profile%20screen.dart';
 //import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 //import 'lib.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
-import 'classes/student.dart';
-
 class MyProfileScreen extends StatefulWidget {
-  final student std;
-  MyProfileScreen(this.std);
+  const MyProfileScreen({Key? key}) : super(key: key);
 
   @override
-  _MyProfileScreenState createState() => _MyProfileScreenState(std);
+  _MyProfileScreenState createState() => _MyProfileScreenState();
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
-  final student std;
-  _MyProfileScreenState(this.std);
   int _selectedIndex = 3;
-  // int _selectedIndex = 2;
-  static List<Widget> _pages = <Widget>[];
+ // int _selectedIndex = 2;
+  static  List<Widget> _pages = <Widget>[
+    Home(0),
+    Learning_analytics_screen(),
 
-  void addTOList() {
-    _pages.add(Home(std));
-    _pages.add(Learning_analytics_screen(std));
-    _pages.add(Courses_evaluations_Screen(std));
-    _pages.add(MyProfileScreen(std));
-  }
 
+    Courses_evaluations_Screen(),
+    MyProfileScreen(),
+
+  ];
   void _onItemTapped(int index) {
-    setState(
-      () {
-        _selectedIndex = index;
+    setState(() {
+      _selectedIndex = index;
 
-        //   print("index = ${widget.ind} ");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => moveToPage(index)));
-      },
+
+      //   print("index = ${widget.ind} ");
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context)=>moveToPage(index)));
+
+
+
+    },
     );
   }
+  Widget moveToPage(int index){
 
-  Widget moveToPage(int index) {
     return _pages.elementAt(_selectedIndex);
   }
 
   // double _progressValue=0;
   @override
   Widget build(BuildContext context) {
-    addTOList();
+
     return Scaffold(
       //backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        title: Text("My Profile"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Home(std)));
-            _selectedIndex -= 3;
-          },
+        title: Text(
+            "My Profile"
         ),
+        leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=> Home(0)));
+            _selectedIndex-=3;
+
+          },),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
 
         selectedItemColor: Colors.blue,
-        selectedFontSize: 16,
+        selectedFontSize:16 ,
 
-        unselectedItemColor: Colors.grey,
+
+        unselectedItemColor: Colors.grey ,
         // unselectedFontSize: 11,
         unselectedFontSize: 16,
 
         //    currentIndex: 0,
-        items: const [
+        items:const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
             //backgroundColor: Colors.blue,
             //   backgroundColor: Colors.blue,
+
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.analytics_outlined),
@@ -121,10 +121,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         // },
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,
+
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
+
             children: [
               SizedBox(
                 height: 20,
@@ -139,212 +141,262 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     alignment: AlignmentDirectional.bottomEnd,
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage('proj_images/me.jpg'),
+                        backgroundImage:AssetImage('proj_images/me.jpg'),
                         //  backgroundImage: NetworkImage('https://png.pngtree.com/element_our/png_detail/20181208/male-student-icon-png_265268.jpg'),
                         radius: 55,
+
                       ),
                       CircleAvatar(
                         backgroundColor: Colors.white,
                         radius: 20,
+
                       ),
                       IconButton(
-                        icon: const Icon(
-                          Icons.edit_sharp,
-                          color: Colors.blue,
-                          size: 40,
-                        ),
-                        //    alignment: Alignment.bottomRight,
 
-                        onPressed: () {
-                          Navigator.push(
-                              context,
+
+                        icon: const Icon(Icons.edit_sharp,color: Colors.blue,size:40,),
+                    //    alignment: Alignment.bottomRight,
+
+                        onPressed: (){
+                          Navigator.push(context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      Edit_Proile_Screen(std)));
-                        },
-                      ),
+                                  builder: (context)=>Edit_Proile_Screen()
+                              )
+                          );
+                        },),
                     ],
                   ),
                   SizedBox(
                     width: 20,
                   ),
-                  Column(
-                    children: [
-                      Text(
-                        std.name,
-                        style: TextStyle(
-                          fontSize: 32,
-                          //   color : Colors.blue[600],
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Student,Ain-Shams University",
-                        style: TextStyle(
-                          fontSize: 12,
-                          // color : Colors.blue[300],
-                          // fontWeight: FontWeight.bold,
-                          // fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        std.id.toString(),
-                        style: TextStyle(
-                          fontSize: 12,
-                          //color : Colors.blue[300],
-                          //fontWeight: FontWeight.bold,
-                          // fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ],
-                  ),
+                 Column(
+                   children: [
+                     Text(
+                         "Hazem Ali",
+                       style: TextStyle(
+                         fontSize: 32,
+                      //   color : Colors.blue[600],
+                         fontWeight: FontWeight.bold,
+                         fontStyle: FontStyle.italic,
+                       ),
+                     ),
+                     SizedBox(
+                       height: 5,
+                     ),
+                     Text(
+                       "Student,Ain-Shams University",
+                       style: TextStyle(
+                         fontSize: 12,
+                        // color : Colors.blue[300],
+                        // fontWeight: FontWeight.bold,
+                         // fontStyle: FontStyle.italic,
+                       ),
+                     ),
+                     SizedBox(
+                       height: 5,
+                     ),
+                     Text(
+                       "2018170135",
+                       style: TextStyle(
+                         fontSize: 12,
+                         //color : Colors.blue[300],
+                         //fontWeight: FontWeight.bold,
+                         // fontStyle: FontStyle.italic,
+                       ),
+                     ),
+                   ],
+                 ),
+
+
                 ],
-              ), //Edit && Info
+              ),//Edit && Info
+
+
+
+
+
 
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: TextFormField(
                   readOnly: true,
                   textAlign: TextAlign.end,
+
                   decoration: InputDecoration(
-                    prefixIcon: Text(
+
+                    prefixIcon:Text(
+
                       "Name",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
+
+
+
                     ),
 
-                    hintStyle: TextStyle(
+
+                    hintStyle:TextStyle(
                       fontSize: 20,
                       //color : Colors.deepOrange,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color : Colors.black,
                       // fontStyle: FontStyle.italic,
                     ),
                     //alignLabelWithHint: ,
-                    hintText: std.name,
+                    hintText: "Hazem Ali",
                     //alignLabelWithHint:true,
+
                   ),
+
                 ),
-              ), //name info
+              ),//name info
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: TextFormField(
                   readOnly: true,
-                  textAlign: TextAlign.end,
+                   textAlign: TextAlign.end,
+
                   decoration: InputDecoration(
-                    prefixIcon: Text(
-                      "ID",
+
+                    prefixIcon:Text(
+                        "ID",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
+
+
                       ),
+
+
+
                     ),
 
-                    hintStyle: TextStyle(
+
+                    hintStyle:TextStyle(
                       fontSize: 20,
-                      color: Colors.black,
+                      color : Colors.black,
                       //color : Colors.deepOrange,
                       fontWeight: FontWeight.bold,
                       // fontStyle: FontStyle.italic,
                     ),
                     //alignLabelWithHint: ,
-                    hintText: std.id.toString(),
+                    hintText: "2018170135",
 
                     //alignLabelWithHint:true,
+
                   ),
+
                 ),
-              ), //id info
+              ),//id info
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: TextFormField(
                   readOnly: true,
                   textAlign: TextAlign.end,
+
                   decoration: InputDecoration(
-                    prefixIcon: Text(
+
+                    prefixIcon:Text(
                       "E-mail",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
+
+
+
                     ),
 
-                    hintStyle: TextStyle(
+
+                    hintStyle:TextStyle(
                       fontSize: 15,
-                      color: Colors.black,
+                      color : Colors.black,
                       fontWeight: FontWeight.bold,
                       // fontStyle: FontStyle.italic,
                     ),
                     //alignLabelWithHint: ,
-                    hintText: std.email,
+                    hintText: "Hazem2018170135@cis.asu.edu.eg",
                     //alignLabelWithHint:true,
+
                   ),
+
                 ),
-              ), //e-mail info
+              ),//e-mail info
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: TextFormField(
                   readOnly: true,
                   textAlign: TextAlign.end,
+
                   decoration: InputDecoration(
-                    prefixIcon: Text(
+
+                    prefixIcon:Text(
                       "Date Of Birth",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
+
+
+
                     ),
 
-                    hintStyle: TextStyle(
+
+                    hintStyle:TextStyle(
                       fontSize: 15,
-                      color: Colors.black,
+                      color : Colors.black,
                       fontWeight: FontWeight.bold,
                       // fontStyle: FontStyle.italic,
                     ),
                     //alignLabelWithHint: ,
-                    hintText: std.birthdate,
+                    hintText: "7 May 2000",
                     //alignLabelWithHint:true,
+
                   ),
+
                 ),
-              ), //birth info
+              ),//birth info
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: TextFormField(
                   readOnly: true,
                   textAlign: TextAlign.end,
+
                   decoration: InputDecoration(
-                    prefixIcon: Text(
+
+                    prefixIcon:Text(
                       "Level",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
+
+
+
                     ),
 
-                    hintStyle: TextStyle(
+
+                    hintStyle:TextStyle(
                       fontSize: 15,
-                      color: Colors.black,
+                      color : Colors.black,
                       fontWeight: FontWeight.bold,
                       // fontStyle: FontStyle.italic,
                     ),
                     //alignLabelWithHint: ,
-                    hintText: std.level.toString(),
+                    hintText: "1",
                     //alignLabelWithHint:true,
+
                   ),
+
                 ),
-              ), // level info
-            ],
+              ),// level info
+             ],
           ),
         ),
       ),
+
     );
   }
 }
