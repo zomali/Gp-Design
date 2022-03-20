@@ -76,21 +76,10 @@ class _login_screenState extends State<Login_screen> {
                         height: 20,
                       ),
 
-                      // Text(
-                      //   "Welcome To FCIS AinShams University",
-                      //   style: TextStyle(
-                      //
-                      //     fontSize: 17,
-                      //     fontWeight: FontWeight.bold,
-                      //   ),
-                      //
-                      // ),//welcome sentence
 
                       Padding(
                         padding: const EdgeInsets.only(left: 50, right: 20),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
+                        child: Row(
                             children: [
                               // SizedBox(
                               //   width: 50,
@@ -110,9 +99,7 @@ class _login_screenState extends State<Login_screen> {
                                   ),
                                 ),
                               ), //image
-                              SizedBox(
-                                width: 140,
-                              ),
+                              Spacer(),
                               CircleAvatar(
                                 radius: 60,
                                 backgroundColor: Colors.white,
@@ -130,7 +117,7 @@ class _login_screenState extends State<Login_screen> {
                             ],
                           ),
                         ),
-                      ),
+
                       SizedBox(
                         height: 20,
                       ),
