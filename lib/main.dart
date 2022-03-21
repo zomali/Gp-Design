@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gp/Courses_evaluations_Screen.dart';
 import 'package:gp/L_types.dart';
 import 'package:gp/Levels.dart';
 import 'package:gp/edit_profile%20screen.dart';
@@ -11,6 +12,7 @@ import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/signup%20screen.dart';
 import 'package:gp/audio_player.dart';
 import 'Home.dart';
+import 'classes/student.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,9 +37,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         //home: Edit_Proile_Screen(),
         // home: MyProfileScreen(),
-        home: Login_screen(),
+       // home: Login_screen(),
         // home: Home(0),
-        // home: types(),
+         home: Courses_evaluations_Screen(new student()),
         //home: signup_screen(),
         // home: audio_player(),
       ),

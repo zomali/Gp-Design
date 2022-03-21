@@ -3,6 +3,7 @@ import 'package:gp/L_types.dart';
 import 'package:gp/Learning_analytics_screen.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 import 'Home.dart';
 import 'Types.dart';
@@ -47,8 +48,11 @@ class _Courses_evaluations_ScreenState
     return _pages.elementAt(_selectedIndex);
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+
     addTOList();
     return Scaffold(
       appBar: AppBar(
@@ -112,44 +116,218 @@ class _Courses_evaluations_ScreenState
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,
       ),
-      body: Center(
-        child: (Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            Text(
-              "Completed Levels ",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CircularPercentIndicator(
-              radius: 180.0,
-              lineWidth: 20.0,
-              animation: true,
-              percent: 0.4,
-              // backgroundColor: Colors.white,
-              animationDuration: 3000,
-              progressColor: Colors.blue,
-              center: Text(
-                "40%",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
+      body: SingleChildScrollView(
+        child: Center(
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 30,
                 ),
-              ),
+                Text(
+                  "Completed Levels ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CircularPercentIndicator(
+                  radius: 180.0,
+                  lineWidth: 20.0,
+                  animation: true,
+                  percent: 0.4,
+                  // backgroundColor: Colors.white,
+                  animationDuration: 3000,
+                  progressColor: Colors.blue,
+                  center: Text(
+                    "40%",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
 
-              circularStrokeCap: CircularStrokeCap.round,
-              // progressColor: Colors.deepOrange,
+                  circularStrokeCap: CircularStrokeCap.round,
+                  // progressColor: Colors.deepOrange,
+                ),
+                SizedBox(
+                  height: 100,
+                ),
+
+                Text(
+                  "Quiz Scores",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+               Padding(
+                 padding: const EdgeInsets.symmetric( horizontal: 50),
+                 child: Container(
+                   height: 300,
+                     width: double.infinity,
+                     child: SimpleBarChart.withSampleData()
+                 ),
+               ),//quiz chart
+
+
+                SizedBox(
+                  height: 100,
+                ),
+                Text(
+                  "Time Taken For Each Level (in days)",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric( horizontal: 50),
+                  child: Container(
+                      height: 300,
+                      width: double.infinity,
+                      child: CustomRoundedBars.withSampleData()
+                  ),
+                ),//levels time chart
+
+                SizedBox(
+                  height: 100,
+                ),
+
+
+
+
+
+              ],
             ),
-          ],
-        )),
+          ),
       ),
+
     );
   }
+
+}
+
+
+class SimpleBarChart extends StatelessWidget {
+  final List<charts.Series> seriesList;
+  final bool animate;
+
+  SimpleBarChart(this.seriesList, {required this.animate});
+
+  /// Creates a [BarChart] with sample data and no transition.
+  factory SimpleBarChart.withSampleData() {
+    return new SimpleBarChart(
+      _createSampleData(),
+      // Disable animations for image tests.
+      animate: false,
+
+
+    );
+  }
+  static List<charts.Series<dynamic, String>> _createSampleData() {
+    final data = [
+      new add_quiz('Quiz 1', 65),
+      new add_quiz('Quiz 2', 85),
+      new add_quiz('Quiz 3', 100),
+      new add_quiz('Quiz 4', 95),
+      new add_quiz('Quiz 5', 35),
+
+    ];
+
+    return [
+      new charts.Series<add_quiz, String>(
+        id: 'Quiz',
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        domainFn: (add_quiz quiz, _) => quiz.quiz,
+        measureFn: (add_quiz quiz, _) => quiz.precent,
+        data: data,
+       // labelAccessorFn: (add_quiz quiz, _) => quiz.precent.toString(),
+      //  overlaySeries: true
+
+      )
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new charts.BarChart(
+        _createSampleData(),
+
+
+    );
+  }
+}
+class add_quiz {
+  final String quiz;
+  final int precent;
+
+  add_quiz(this.quiz, this.precent);
+}
+
+
+
+
+
+class CustomRoundedBars extends StatelessWidget {
+  final List<charts.Series> seriesList;
+  final bool animate;
+
+  CustomRoundedBars(this.seriesList, {required this.animate});
+
+  /// Creates a [BarChart] with custom rounded bars.
+  factory CustomRoundedBars.withSampleData() {
+    return new CustomRoundedBars(
+      _createSampleData(),
+      // Disable animations for image tests.
+      animate: false,
+    );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return new charts.BarChart(
+      _createSampleData(),
+      animate: animate,
+      defaultRenderer: new charts.BarRendererConfig(
+        // By default, bar renderer will draw rounded bars with a constant
+        // radius of 100.
+        // To not have any rounded corners, use [NoCornerStrategy]
+        // To change the radius of the bars, use [ConstCornerStrategy]
+          cornerStrategy: const charts.ConstCornerStrategy(30)),
+    );
+  }
+
+  /// Create one series with sample hard coded data.
+  static List<charts.Series<level_time, String>> _createSampleData() {
+    final data = [
+      new level_time('Level 1', 7),
+      new level_time('Level 2', 11),
+      new level_time('Level 3', 9),
+      new level_time('Level 4', 15),
+      new level_time('Level 5', 20),
+
+    ];
+
+    return [
+      new charts.Series<level_time, String>(
+        id: 'Time',
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        domainFn: (level_time sales, _) => sales.level,
+
+        measureFn: (level_time sales, _) => sales.days,
+        data: data,
+      )
+    ];
+  }
+}
+class level_time {
+  final String level;
+  final int days;
+
+  level_time(this.level, this.days);
 }
