@@ -61,6 +61,38 @@ class _HomeLevelState extends State<HomeLevel> {
       return null;
     }
   }
+  // static  List<Widget> _pages = <Widget>[
+  //   Home(0),
+  //   Levels(1),
+  //
+  //
+  //   types(),
+  //   MyProfileScreen(),
+  //
+  //
+  // ];
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //
+  //
+  //     //   print("index = ${widget.ind} ");
+  //     Navigator.push(context,
+  //         MaterialPageRoute(builder: (context)=>moveToPage(index)));
+  //
+  //
+  //
+  //   },
+  //   );
+  // }
+  // Widget moveToPage(int index){
+  //   // if(index==0){
+  //   //   return Home(widget.ind);
+  //   // }else {
+  //   //   return Levels(widget.ind);
+  //   // }
+  //   return _pages.elementAt(_selectedIndex);
+  // }_selectedIndex
 
   @override
   Widget build(BuildContext context) {

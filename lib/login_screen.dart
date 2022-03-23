@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/classes/student.dart';
+import 'package:gp/set_new_password.dart';
 import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/signup%20screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class Login_screen extends StatefulWidget {
@@ -251,7 +253,9 @@ class _login_screenState extends State<Login_screen> {
                                 width: 40,
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showDialogFunc(context);
+                                },
                                 child: Text(
                                   "Forgot Password?",
                                   style: TextStyle(
@@ -354,4 +358,136 @@ class _login_screenState extends State<Login_screen> {
       }),
     );
   }
+}
+showDialogFunc(context) {
+  var height = 400;
+  var width = 250;
+  var email;
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return Center(
+        child: Material(
+          type: MaterialType.transparency,
+          child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              padding: EdgeInsets.all(5),
+              height: 420,
+              width: MediaQuery.of(context).size.width * 2.7,
+              child:Container(
+                margin: EdgeInsets.only(top: height * 0.15),
+                height: height * 0.85,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50))),
+
+                child: ListView(
+                  children: [
+                    SizedBox(height: height * 0.08),
+                    Text(
+                      'reset password'.toUpperCase(),
+                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.blue),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: height * 0.01,
+                    ),
+                    Center(
+                      child: Container(
+                        height: 1,
+                        width: width * 0.8,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.15,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: width * 0.05),
+                      child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          validator :EmailValidator(errorText: 'enter a valid email address'),
+                          onChanged: (value){
+                            email=value;
+                          },
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            hintText: "Your Email * ",
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.bold, letterSpacing: 1.8),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  width: 1,
+                                  style: BorderStyle.solid,
+                                  color: Colors.blue),
+                            ),
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            contentPadding: EdgeInsets.all(12),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                  width: 1,
+                                  style: BorderStyle.solid,
+                                  color: Colors.grey),
+                            ),
+                          )),
+                    ),
+                    SizedBox(
+                      height: height * 0.08,
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        if(email==""||email==null){
+                          Fluttertoast.showToast(
+                            msg: "Please Enter Your Email ",  // message
+                            toastLength: Toast.LENGTH_SHORT, // length
+                            gravity: ToastGravity.BOTTOM,    // location
+                          );
+                        }
+                        else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup()));
+                        }
+                        return null;
+                      },
+                      child: Center(
+                        child: Container(
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 26, vertical: 10),
+                          decoration: BoxDecoration(
+                              gradient: new LinearGradient(
+                                  colors: [Colors.blue, Colors.blue]),
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 4,
+                                    color: Colors.blue,
+                                    offset: Offset(2, 2))
+                              ]),
+                          child: Text(
+                            "Reset".toUpperCase(),
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.7),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+          ),
+        ),
+      );
+    },
+  );
 }

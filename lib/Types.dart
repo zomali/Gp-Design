@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gp/topic_images.dart';
 import 'L_types.dart';
 import 'Levels.dart';
 import 'URL_view.dart';
@@ -38,7 +39,7 @@ class Types extends StatelessWidget {
             ElevatedButton(onPressed: (){
 
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=> ImagePage()));
+                  MaterialPageRoute(builder: (context)=> image_view()));
 
 
             }, child:const Text("Go to links",))

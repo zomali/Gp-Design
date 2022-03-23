@@ -7,10 +7,9 @@ import 'package:gp/myprofile_screen.dart';
 import 'audio_player.dart';
 import 'package:gp/URL_view.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'PDF_viewer.dart';
 import 'classes/student.dart';
-import 'image_view.dart';
-
+import 'topic_images.dart';
+import 'pdf_view.dart';
 class types extends StatefulWidget {
   int _selectedIndex = 3;
   static List<Widget> _pages = <Widget>[
@@ -252,7 +251,7 @@ class _typesState extends State<types> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PdfViewerPage()),
+                                    builder: (context) => pdf_view()),
                               ),
                             },
                             child: Container(
