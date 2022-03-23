@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gp/L_types.dart';
 import 'package:gp/Learning_analytics_screen.dart';
+import 'package:gp/audio_player.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -31,6 +32,13 @@ class _Courses_evaluations_ScreenState
     _pages.add(Courses_evaluations_Screen(std));
     _pages.add(MyProfileScreen(std));
   }
+  static List <String>topics=<String>[
+    "Nested Structures & Passing Structures To Funct...",
+    "Arrays",
+
+
+
+  ];
 
   void _onItemTapped(int index) {
     setState(
@@ -119,8 +127,80 @@ class _Courses_evaluations_ScreenState
       body: SingleChildScrollView(
         child: Center(
           child:Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          //  mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+
+                  "Topics Of Weakness ",
+
+
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right:  50,left: 50,bottom: 50,top: 10),
+                  child: GestureDetector(
+                    onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => audio_player()),
+                      ),
+                    },
+                    child: Container(
+                      height: 70*topics.length.toDouble(),
+                      width: double.infinity,
+
+                      child: ListView.separated(
+                          itemCount: topics.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+
+                              height: 50,
+                          //    margin: EdgeInsets.only(left: 20),
+
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(15.0)),
+
+                              child: Center(
+                                  child: Text(
+
+                                    '${topics[index]}',
+
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    textScaleFactor: 1,
+                                    textDirection: TextDirection.rtl,
+
+
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        color: Colors.white,
+                                        debugLabel: "Hazem",
+                                   //   fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+                            );
+                          },
+                          separatorBuilder: (context, index) => SizedBox(
+                      height: 17,
+                    ),
+                          ),
+                    ),
+                  ),
+                ),
+
+
+
+
+
+
                 SizedBox(
                   height: 30,
                 ),
@@ -155,6 +235,106 @@ class _Courses_evaluations_ScreenState
                 ),
                 SizedBox(
                   height: 100,
+                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(20),
+                //   child: Row(
+                //     children: [
+                //       Spacer(),
+                //       Column(
+                //         children: [
+                //           Text(
+                //             "Completed Levels ",
+                //             style: TextStyle(
+                //               fontWeight: FontWeight.bold,
+                //               fontSize: 20.0,
+                //             ),
+                //           ),
+                //           SizedBox(
+                //             height: 10,
+                //           ),
+                //           CircularPercentIndicator(
+                //             radius: 150.0,
+                //             lineWidth: 20.0,
+                //             animation: true,
+                //             percent: 0.2,
+                //             // backgroundColor: Colors.white,
+                //             animationDuration: 3000,
+                //             progressColor: Colors.blue,
+                //             center: Text(
+                //               "20%",
+                //               style: TextStyle(
+                //                 fontWeight: FontWeight.bold,
+                //                 fontSize: 20.0,
+                //               ),
+                //             ),
+                //
+                //             circularStrokeCap: CircularStrokeCap.round,
+                //             // progressColor: Colors.deepOrange,
+                //           ),
+                //         ],
+                //       ),
+                //       Spacer(),
+                //       Column(
+                //         children: [
+                //           Text(
+                //             "Completed Levels ",
+                //             style: TextStyle(
+                //               fontWeight: FontWeight.bold,
+                //               fontSize: 20.0,
+                //             ),
+                //           ),
+                //           SizedBox(
+                //             height: 10,
+                //           ),
+                //           CircularPercentIndicator(
+                //             radius: 150.0,
+                //             lineWidth: 20.0,
+                //             animation: true,
+                //             percent: 0.6,
+                //             // backgroundColor: Colors.white,
+                //             animationDuration: 3000,
+                //             progressColor: Colors.blue,
+                //             center: Text(
+                //               "60%",
+                //               style: TextStyle(
+                //                 fontWeight: FontWeight.bold,
+                //                 fontSize: 20.0,
+                //               ),
+                //             ),
+                //
+                //             circularStrokeCap: CircularStrokeCap.round,
+                //             // progressColor: Colors.deepOrange,
+                //           ),
+                //         ],
+                //       ),
+                //       Spacer(),
+                //     ],
+                //   ),
+                // ),
+
+
+                Text(
+                  "Your Progress VS Other Students Progress",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric( horizontal: 50),
+                  child: Container(
+                      height: 300,
+                      width: double.infinity,
+                      child:  StackedAreaLineChart.withSampleData(),
+                  ),
+                ),// compare graph
+
+                SizedBox(
+                  height: 80,
                 ),
 
                 Text(
@@ -230,20 +410,20 @@ class SimpleBarChart extends StatelessWidget {
   }
   static List<charts.Series<dynamic, String>> _createSampleData() {
     final data = [
-      new add_quiz('Quiz 1', 65),
-      new add_quiz('Quiz 2', 85),
-      new add_quiz('Quiz 3', 100),
-      new add_quiz('Quiz 4', 95),
-      new add_quiz('Quiz 5', 35),
+      new quiz_grades('Quiz 1', 65),
+      new quiz_grades('Quiz 2', 85),
+      new quiz_grades('Quiz 3', 100),
+      new quiz_grades('Quiz 4', 95),
+      new quiz_grades('Quiz 5', 35),
 
     ];
 
     return [
-      new charts.Series<add_quiz, String>(
+      new charts.Series<quiz_grades, String>(
         id: 'Quiz',
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (add_quiz quiz, _) => quiz.quiz,
-        measureFn: (add_quiz quiz, _) => quiz.precent,
+        domainFn: (quiz_grades quiz, _) => quiz.quiz,
+        measureFn: (quiz_grades quiz, _) => quiz.precent,
         data: data,
        // labelAccessorFn: (add_quiz quiz, _) => quiz.precent.toString(),
       //  overlaySeries: true
@@ -261,11 +441,11 @@ class SimpleBarChart extends StatelessWidget {
     );
   }
 }
-class add_quiz {
+class quiz_grades {
   final String quiz;
   final int precent;
 
-  add_quiz(this.quiz, this.precent);
+  quiz_grades(this.quiz, this.precent);
 }
 
 
@@ -330,4 +510,81 @@ class level_time {
   final int days;
 
   level_time(this.level, this.days);
+}
+
+
+
+
+
+class StackedAreaLineChart extends StatelessWidget {
+  final List<charts.Series> seriesList;
+  final bool animate;
+
+  StackedAreaLineChart(this.seriesList, {required this.animate});
+
+  /// Creates a [LineChart] with sample data and no transition.
+  factory StackedAreaLineChart.withSampleData() {
+    return new StackedAreaLineChart(
+      _createSampleData(),
+      // Disable animations for image tests.
+      animate: false,
+    );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return new charts.LineChart(
+       _createSampleData(),
+        defaultRenderer:
+        new charts.LineRendererConfig(includeArea: true, stacked: true),
+        animate: animate);
+  }
+
+  /// Create one series with sample hard coded data.
+  static List<charts.Series<compare_progress, int>> _createSampleData() {
+    final myFakeDesktopData = [
+      new compare_progress(0, 5),
+      new compare_progress(1, 25),
+      new compare_progress(2, 20),
+      new compare_progress(3, 75),
+      new compare_progress(4, 75),
+      //new compare_progress(5, 75),
+    ];
+
+    var myFakeTabletData = [
+      new compare_progress(0, 10),
+      new compare_progress(1, 50),
+      new compare_progress(2, 100),
+      new compare_progress(3, 150),
+      new compare_progress(4, 75),
+     // new compare_progress(5, 75),
+    ];
+
+
+
+    return [
+      new charts.Series<compare_progress, int>(
+        id: 'Desktop',
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        domainFn: (compare_progress sales, _) => sales.level,
+        measureFn: (compare_progress sales, _) => sales.compelted,
+        data: myFakeDesktopData,
+      ),
+      new charts.Series<compare_progress, int>(
+        id: 'Tablet',
+        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+        domainFn: (compare_progress sales, _) => sales.level,
+        measureFn: (compare_progress sales, _) => sales.compelted,
+        data: myFakeTabletData,
+      ),
+
+    ];
+  }
+}
+class compare_progress {
+  final int level;
+  final int compelted;
+
+  compare_progress(this.level, this.compelted);
 }
