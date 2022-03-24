@@ -10,6 +10,8 @@ import 'package:gp/myprofile_screen.dart';
 import 'package:gp/pdf_view.dart';
 import 'package:gp/shared/cubits/cubit/home_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_cubit.dart';
+import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
+import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/signup%20screen.dart';
 import 'package:gp/audio_player.dart';
 import 'package:gp/topic_images.dart';
@@ -33,6 +35,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => StudentCubit(),
+        ),
+         BlocProvider(
+          create: (context) => TopicCubit(),
+        ),
+        BlocProvider(
+          create: (context) => LevelCubit(),
         ),
       ],
       child: MaterialApp(
