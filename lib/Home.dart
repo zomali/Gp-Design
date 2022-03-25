@@ -214,70 +214,71 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 10, left: 10, top: 10),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundImage: AssetImage('proj_images/me.jpg'),
-                        ), //image
-                        Spacer(),
-                        Column(
-                          children: [
-                            Text(
-                              "Hi," + std.name.toString().split(" ").first,
-                              style: TextStyle(
-                                letterSpacing: 2,
+                  padding: const EdgeInsets.only(bottom: 10, left: 10, top: 10),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: NetworkImage(std.profile_picture),
+                      ), //image
+                      Spacer(),
+                      Column(
+                        children: [
+                          Text(
+                            "Hi," + std.name.toString().split(" ").first,
+                            style: TextStyle(
+                              letterSpacing: 2,
 
-                                fontSize: 25,
-                                //   color : Colors.blue[600],
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Text(
-                              "Welcome Back",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.blueGrey,
-                                // fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Text(
-                              "Level:- "+std.level.toString(),
-                              style: TextStyle(
-                                fontSize: 13,
-                                //       color : Colors.blueGrey,
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Spacer(flex: 5,),
-
-                        Container(
-                          width: 125,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('proj_images/fcis.png'),
-                              fit: BoxFit.fill,
+                              fontSize: 25,
+                              //   color : Colors.blue[600],
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
                             ),
                           ),
-                        ), //image
-                        Spacer(),
-                      ],
-                    ), //info
-                   //info
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            "Welcome Back",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.blueGrey,
+                              // fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            "Level:- " + std.level.toString(),
+                            style: TextStyle(
+                              fontSize: 13,
+                              //       color : Colors.blueGrey,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Spacer(
+                        flex: 5,
+                      ),
+
+                      Container(
+                        width: 125,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('proj_images/fcis.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ), //image
+                      Spacer(),
+                    ],
+                  ), //info
+                  //info
                 ), //info
                 SizedBox(
                   height: 10,
@@ -296,293 +297,299 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ), //course word
 
-
-
-
                 Container(
                   //  height: 130,
                   margin: EdgeInsets.all(20),
-                  child:  Row(
-                      children: [
-                        Spacer(),
-                        GestureDetector(
-                          onTap: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Levels(1))),
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 25),
-                            width: 130,
-                            // height: 160,
-                            decoration: BoxDecoration(
-                              color: Colors.white70,
-                              border: Border.all(
-                                color: Colors.black12,
-                                width: 2.0,
-                                style: BorderStyle.solid,
+                  child: Row(
+                    children: [
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Levels(1, std))),
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 25),
+                          width: 130,
+                          // height: 160,
+                          decoration: BoxDecoration(
+                            color: Colors.white70,
+                            border: Border.all(
+                              color: Colors.black12,
+                              width: 2.0,
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30.0)),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5.0,
+                                spreadRadius: 5.0,
                               ),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(30.0)),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 5.0,
-                                  spreadRadius: 5.0,
-                                ),
-                              ],
-                              // gradient: const LinearGradient(
-                              //   begin: Alignment.centerLeft,
-                              //   end: Alignment.centerRight,
-                              //   colors: [
-                              //     Colors.grey,
-                              //     Colors.white,
-                              //   ],
-                              // ),
-                            ),
-                            //  height:150,
-                            //  width: 100,
-                            child: Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.white,
-                                  backgroundImage:
-                                      AssetImage('proj_images/cc.png'),
-                                ), //sp image
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, bottom: 8),
-                                  child: Text(
-                                    'SP',
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                            ],
+                            // gradient: const LinearGradient(
+                            //   begin: Alignment.centerLeft,
+                            //   end: Alignment.centerRight,
+                            //   colors: [
+                            //     Colors.grey,
+                            //     Colors.white,
+                            //   ],
+                            // ),
+                          ),
+                          //  height:150,
+                          //  width: 100,
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.white,
+                                backgroundImage:
+                                    AssetImage('proj_images/cc.png'),
+                              ), //sp image
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8.0, bottom: 8),
+                                child: Text(
+                                  'SP',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                ), //sp word
-                              ],
-                            ),
+                                ),
+                              ), //sp word
+                            ],
                           ),
                         ),
-                        Spacer(flex: 2,),
-                        GestureDetector(
-                          onTap: () => {
-                            Fluttertoast.showToast(
-                                msg: "The Course Will Be Added Soon",
-                                toastLength: Toast.LENGTH_SHORT,
-                                //    gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                // backgroundColor: Colors.blue[300],
-                                textColor: Colors.white,
-                                fontSize: 16.0),
-                          },
-                          child: Container(
-                            width: 130,
-                            // height: 160,
-                            decoration: BoxDecoration(
-                              //color: Colors.white70,
-                              border: Border.all(
-                                color: Colors.black12,
-                                width: 2.0,
-                                style: BorderStyle.solid,
+                      ),
+                      Spacer(
+                        flex: 2,
+                      ),
+                      GestureDetector(
+                        onTap: () => {
+                          Fluttertoast.showToast(
+                              msg: "The Course Will Be Added Soon",
+                              toastLength: Toast.LENGTH_SHORT,
+                              //    gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              // backgroundColor: Colors.blue[300],
+                              textColor: Colors.white,
+                              fontSize: 16.0),
+                        },
+                        child: Container(
+                          width: 130,
+                          // height: 160,
+                          decoration: BoxDecoration(
+                            //color: Colors.white70,
+                            border: Border.all(
+                              color: Colors.black12,
+                              width: 2.0,
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30.0)),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5.0,
+                                spreadRadius: 5.0,
                               ),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(30.0)),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 5.0,
-                                  spreadRadius: 5.0,
-                                ),
-                              ],
-                              // gradient: const LinearGradient(
-                              //   begin: Alignment.centerLeft,
-                              //   end: Alignment.centerRight,
-                              //   colors: [
-                              //     Colors.grey,
-                              //     Colors.white,
-                              //   ],
-                              // ),
-                            ),
-                            //  height:150,
-                            //  width: 100,
-                            child: Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.white,
-                                  backgroundImage:
-                                      AssetImage('proj_images/m.jpg'),
-                                ), //sp image
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, bottom: 8),
-                                  child: Text(
-                                    'Math 2',
-                                    style: TextStyle(
-                                      fontSize: 27,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                            ],
+                            // gradient: const LinearGradient(
+                            //   begin: Alignment.centerLeft,
+                            //   end: Alignment.centerRight,
+                            //   colors: [
+                            //     Colors.grey,
+                            //     Colors.white,
+                            //   ],
+                            // ),
+                          ),
+                          //  height:150,
+                          //  width: 100,
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.white,
+                                backgroundImage:
+                                    AssetImage('proj_images/m.jpg'),
+                              ), //sp image
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8.0, bottom: 8),
+                                child: Text(
+                                  'Math 2',
+                                  style: TextStyle(
+                                    fontSize: 27,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                ), //sp word
-                              ],
-                            ),
+                                ),
+                              ), //sp word
+                            ],
                           ),
                         ),
-                        Spacer(flex: 5,),                      ],
-                    ),
+                      ),
+                      Spacer(
+                        flex: 5,
+                      ),
+                    ],
                   ),
+                ),
 
                 Container(
                   //  height: 130,
                   margin: EdgeInsets.all(20),
                   child: Row(
-                      children: [
-                        Spacer(),
-                        GestureDetector(
-                          onTap: () => {
-                            Fluttertoast.showToast(
-                                msg: "The Course Will Be Added Soon",
-                                toastLength: Toast.LENGTH_SHORT,
-                                //    gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
+                    children: [
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () => {
+                          Fluttertoast.showToast(
+                              msg: "The Course Will Be Added Soon",
+                              toastLength: Toast.LENGTH_SHORT,
+                              //    gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
 
-                                // backgroundColor: Colors.blue[300],
-                                textColor: Colors.white,
-                                fontSize: 16.0),
-                          },
-                          child: Container(
-                            width: 130,
-                            margin: EdgeInsets.symmetric(horizontal: 25),
-                            // height: 160,
-                            decoration: BoxDecoration(
-                              //    color: Colors.white70,
-                              border: Border.all(
-                                color: Colors.black12,
-                                width: 2.0,
-                                style: BorderStyle.solid,
+                              // backgroundColor: Colors.blue[300],
+                              textColor: Colors.white,
+                              fontSize: 16.0),
+                        },
+                        child: Container(
+                          width: 130,
+                          margin: EdgeInsets.symmetric(horizontal: 25),
+                          // height: 160,
+                          decoration: BoxDecoration(
+                            //    color: Colors.white70,
+                            border: Border.all(
+                              color: Colors.black12,
+                              width: 2.0,
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30.0)),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5.0,
+                                spreadRadius: 5.0,
                               ),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(30.0)),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 5.0,
-                                  spreadRadius: 5.0,
-                                ),
-                              ],
-                              // gradient: const LinearGradient(
-                              //   begin: Alignment.centerLeft,
-                              //   end: Alignment.centerRight,
-                              //   colors: [
-                              //     Colors.grey,
-                              //     Colors.white,
-                              //   ],
-                              // ),
-                            ),
-                            //  height:150,
-                            //  width: 100,
-                            child: Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.white,
-                                  backgroundImage:
-                                      AssetImage('proj_images/p.png'),
-                                ), //sp image
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, bottom: 8),
-                                  child: Text(
-                                    'Physics 2',
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                            ],
+                            // gradient: const LinearGradient(
+                            //   begin: Alignment.centerLeft,
+                            //   end: Alignment.centerRight,
+                            //   colors: [
+                            //     Colors.grey,
+                            //     Colors.white,
+                            //   ],
+                            // ),
+                          ),
+                          //  height:150,
+                          //  width: 100,
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.white,
+                                backgroundImage:
+                                    AssetImage('proj_images/p.png'),
+                              ), //sp image
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8.0, bottom: 8),
+                                child: Text(
+                                  'Physics 2',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                ), //sp word
-                              ],
-                            ),
+                                ),
+                              ), //sp word
+                            ],
                           ),
                         ),
-                        Spacer(flex: 2,),
-                        GestureDetector(
-                          onTap: () => {
-                            Fluttertoast.showToast(
-                                msg: "The Course Will Be Added Soon",
-                                toastLength: Toast.LENGTH_SHORT,
-                                //    gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                // backgroundColor: Colors.blue[300],
-                                textColor: Colors.white,
-                                fontSize: 16.0),
-                          },
-                          child: Container(
-                            width: 130,
-                            // height: 160,
-                            decoration: BoxDecoration(
-                              //   color: Colors.white70,
-                              border: Border.all(
-                                color: Colors.black12,
-                                width: 2.0,
-                                style: BorderStyle.solid,
+                      ),
+                      Spacer(
+                        flex: 2,
+                      ),
+                      GestureDetector(
+                        onTap: () => {
+                          Fluttertoast.showToast(
+                              msg: "The Course Will Be Added Soon",
+                              toastLength: Toast.LENGTH_SHORT,
+                              //    gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              // backgroundColor: Colors.blue[300],
+                              textColor: Colors.white,
+                              fontSize: 16.0),
+                        },
+                        child: Container(
+                          width: 130,
+                          // height: 160,
+                          decoration: BoxDecoration(
+                            //   color: Colors.white70,
+                            border: Border.all(
+                              color: Colors.black12,
+                              width: 2.0,
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30.0)),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5.0,
+                                spreadRadius: 5.0,
                               ),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(30.0)),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 5.0,
-                                  spreadRadius: 5.0,
-                                ),
-                              ],
-                            ),
+                            ],
+                          ),
 
-                            child: Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.white,
-                                  backgroundImage:
-                                      AssetImage('proj_images/en.jpg'),
-                                ), //sp image
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, bottom: 8),
-                                  child: Text(
-                                    'English 2',
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.white,
+                                backgroundImage:
+                                    AssetImage('proj_images/en.jpg'),
+                              ), //sp image
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8.0, bottom: 8),
+                                child: Text(
+                                  'English 2',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                ), //sp word
-                              ],
-                            ),
+                                ),
+                              ), //sp word
+                            ],
                           ),
                         ),
-                        Spacer(flex:5,),
-                      ],
-                    ),
+                      ),
+                      Spacer(
+                        flex: 5,
+                      ),
+                    ],
                   ),
+                ),
 
                 Container(
                   //  height: 130,
@@ -659,7 +666,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      Spacer(flex: 2,),
+                      Spacer(
+                        flex: 2,
+                      ),
                       GestureDetector(
                         onTap: () => {
                           Fluttertoast.showToast(
@@ -719,7 +728,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      Spacer(flex: 5,),
+                      Spacer(
+                        flex: 5,
+                      ),
                     ],
                   ),
                 ),

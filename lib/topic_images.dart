@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:gp/classes/student.dart';
+import 'package:gp/classes/studentBehavior.dart';
+
+import 'DatabaseManager.dart';
+import 'Levels.dart';
+
 class image_view extends StatefulWidget {
+  final student std;
+  final ForImage forImage;
+  image_view(this.std, this.forImage);
   @override
-  _image_view createState() => _image_view();
+  _image_view createState() => _image_view(std, forImage);
 }
+
 class _image_view extends State<image_view> {
+  student std;
+  ForImage forImage;
+  _image_view(this.std, this.forImage);
+  DatabaseManager db = DatabaseManager();
   var titleList = [
     "Variable in C++",
     "Variable in C++",
@@ -37,6 +51,13 @@ class _image_view extends State<image_view> {
   @override
   Widget build(BuildContext context) {
     // MediaQuery to get Device Width
+    DateTime initialTime = DateTime.now();
+    final initialHour = initialTime.hour.toString().padLeft(2, '0');
+    final initialMinute = initialTime.minute.toString().padLeft(2, '0');
+    final initialSecond = initialTime.second.toString().padLeft(2, '0');
+
+    String x = '$initialHour$initialMinute$initialSecond';
+    int firstTime = int.parse(x);
     double width = MediaQuery.of(context).size.width * 0.6;
     return Scaffold(
       appBar: AppBar(
@@ -47,6 +68,26 @@ class _image_view extends State<image_view> {
         ),
         elevation: 0,
         backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+            DateTime FinalTime = DateTime.now();
+            final FinalHour = FinalTime.hour.toString().padLeft(2, '0');
+            final FinalMinute = FinalTime.minute.toString().padLeft(2, '0');
+            final FinalSecond = FinalTime.second.toString().padLeft(2, '0');
+            x = '$FinalHour$FinalMinute$FinalSecond';
+            int SecondTime = int.parse(x);
+            ForImage NewforImage = ForImage();
+            NewforImage.NumberOfVisitedPage = forImage.NumberOfVisitedPage + 1;
+            NewforImage.TimeSpendInPage =
+                forImage.TimeSpendInPage + (SecondTime - firstTime);
+            db.updateStudentBehavior(NewforImage.TimeSpendInPage,
+                NewforImage.NumberOfVisitedPage, "image", std.id);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Levels(1, std)));
+            // _selectedIndex-=2;
+          },
+        ),
       ),
       // Main List View With Builder
       body: ListView.builder(
@@ -55,45 +96,44 @@ class _image_view extends State<image_view> {
           return GestureDetector(
             onTap: () {
               // This Will Call When User Click On ListView Item
-              showDialogFunc(context, imgList[index], titleList[index], srcList[index]);
+              showDialogFunc(
+                  context, imgList[index], titleList[index], srcList[index]);
             },
             // Card Which Holds Layout Of ListView Item
             child: Card(
               child: Row(
                 children: <Widget>[
                   Container(
-                    width: 110,
-                    height: 110,
-                    child:Image.network('https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2F1.1.2.jpg?alt=media&token=d703e865-5f01-40ef-a493-9bb3bce9cf21')
+                      width: 110,
+                      height: 110,
+                      child: Image.network(
+                          'https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2F1.1.2.jpg?alt=media&token=d703e865-5f01-40ef-a493-9bb3bce9cf21')),
+                  Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        titleList[index],
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: width,
+                        child: Text(
+                          srcList[index],
+                          maxLines: 3,
+                          style: TextStyle(fontSize: 15, color: Colors.blue),
+                        ),
+                      ),
+                    ],
                   ),
                   Spacer(),
-                 Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          titleList[index],
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: width,
-                          child: Text(
-                            srcList[index],
-                            maxLines: 3,
-                            style: TextStyle(
-                                fontSize: 15, color: Colors.blue),
-                          ),
-                        ),
-                      ],
-                    ),
-                  Spacer(),
-
                 ],
               ),
             ),
@@ -125,9 +165,11 @@ showDialogFunc(context, img, title, desc) {
               children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.circular(5),
-                  child: Image.network('https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2F1.1.2.jpg?alt=media&token=d703e865-5f01-40ef-a493-9bb3bce9cf21',
+                  child: Image.network(
+                    'https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2F1.1.2.jpg?alt=media&token=d703e865-5f01-40ef-a493-9bb3bce9cf21',
                     width: 500,
-                    height: 500,),
+                    height: 500,
+                  ),
                 ),
                 SizedBox(
                   height: 5,

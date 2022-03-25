@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gp/signup%20screen.dart';
 import 'L_types.dart';
 import 'package:gp/myprofile_screen.dart';
 
@@ -10,25 +11,29 @@ import 'classes/student.dart';
 
 class Levels extends StatelessWidget {
   final int ind;
-  Levels(this.ind);
+  final student std;
+  Levels(this.ind, this.std);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeLevel(ind),
+      home: HomeLevel(ind, std),
     );
   }
 }
 
 class HomeLevel extends StatefulWidget {
   int ind;
-  HomeLevel(this.ind);
+  student std;
+  HomeLevel(this.ind, this.std);
 
   @override
-  _HomeLevelState createState() => _HomeLevelState();
+  _HomeLevelState createState() => _HomeLevelState(std);
 }
 
 class _HomeLevelState extends State<HomeLevel> {
+  student std;
+  _HomeLevelState(this.std);
   //int _selectedIndex = 1;
   List<String> levels = [];
 
@@ -111,7 +116,7 @@ class _HomeLevelState extends State<HomeLevel> {
               icon: Icon(Icons.arrow_back_ios_outlined),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Home(student())));
+                    MaterialPageRoute(builder: (context) => Home(std)));
                 // _selectedIndex-=2;
               },
             ),
@@ -138,7 +143,7 @@ class _HomeLevelState extends State<HomeLevel> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Types(index + 1, know)));
+                            builder: (context) => Types(index + 1, know, std)));
                   },
                 ),
               );

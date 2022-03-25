@@ -139,7 +139,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     alignment: AlignmentDirectional.bottomEnd,
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage('proj_images/me.jpg'),
+                        backgroundImage: NetworkImage(std.profile_picture),
                         //  backgroundImage: NetworkImage('https://png.pngtree.com/element_our/png_detail/20181208/male-student-icon-png_265268.jpg'),
                         radius: 55,
                       ),

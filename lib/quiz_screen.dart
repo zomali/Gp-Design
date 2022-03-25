@@ -12,13 +12,16 @@ class AppColor {
   static final pripmaryColor = Color(0xFF252c4a);
   static final secondaryColor = Colors.blue;
 }
+
 class QuizzScreen extends StatefulWidget {
   const QuizzScreen({Key? key}) : super(key: key);
 
   @override
   _QuizzScreenState createState() => _QuizzScreenState();
 }
-class _QuizzScreenState extends State<QuizzScreen> with SingleTickerProviderStateMixin  {
+
+class _QuizzScreenState extends State<QuizzScreen>
+    with SingleTickerProviderStateMixin {
   static late DateTime cur_time;
   int question_pos = 0;
   int score = 0;
@@ -26,15 +29,16 @@ class _QuizzScreenState extends State<QuizzScreen> with SingleTickerProviderStat
   PageController? _controller;
   String btnText = "Next Question";
   bool answered = false;
-  bool click =false;
-   late AnimationController _animationController;
-  final limitTime=10;
+  bool click = false;
+  late AnimationController _animationController;
+  final limitTime = 10;
   @override
   void initState() {
     super.initState();
     _controller = PageController(initialPage: 0);
-    _animationController=AnimationController(vsync: this);
+    _animationController = AnimationController(vsync: this);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,41 +64,41 @@ class _QuizzScreenState extends State<QuizzScreen> with SingleTickerProviderStat
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      /*countdown(animation:StepTween(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        /*countdown(animation:StepTween(
                         begin: 100,
                         end: 0).animate(_animationController)),*/
-                  SizedBox(width: 150),
-                  RawMaterialButton(
-                    onPressed: () {
-                      if (_controller!.page?.toInt() == questions.length - 1) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ResultScreen(score)));
-                      } else {
-                        _controller!.nextPage(
-                            duration: Duration(milliseconds: 250),
-                            curve: Curves.easeInExpo);
-                        setState(() {
-                          btnPressed = false;
-                        });
-                      }
-                    },
-                    shape: StadiumBorder(),
-                    fillColor: Colors.blue,
-                    padding: EdgeInsets.all(5.0),
-                    elevation: 0.0,
-                    child: Text(
-                      btnText,
-                      style: TextStyle(color:Colors.white),
-                    ),
-                  ),
-
-            ]
-                  ),
+                        SizedBox(width: 150),
+                        RawMaterialButton(
+                          onPressed: () {
+                            if (_controller!.page?.toInt() ==
+                                questions.length - 1) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ResultScreen(score)));
+                            } else {
+                              _controller!.nextPage(
+                                  duration: Duration(milliseconds: 250),
+                                  curve: Curves.easeInExpo);
+                              setState(() {
+                                btnPressed = false;
+                              });
+                            }
+                          },
+                          shape: StadiumBorder(),
+                          fillColor: Colors.blue,
+                          padding: EdgeInsets.all(5.0),
+                          elevation: 0.0,
+                          child: Text(
+                            btnText,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ]),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -110,7 +114,7 @@ class _QuizzScreenState extends State<QuizzScreen> with SingleTickerProviderStat
                     ),
                   ),
                   Divider(
-                    color:AppColor.secondaryColor,
+                    color: AppColor.secondaryColor,
                   ),
                   SizedBox(
                     height: 10.0,
@@ -138,30 +142,29 @@ class _QuizzScreenState extends State<QuizzScreen> with SingleTickerProviderStat
                         ),
                         fillColor: btnPressed
                             ? questions[index].answers!.values.toList()[i]
-                            ? Colors.green
-                            : Colors.red
+                                ? Colors.green
+                                : Colors.red
                             : AppColor.secondaryColor,
-                        onPressed:
-                        !answered
+                        onPressed: !answered
                             ? () {
-                          if (questions[index]
-                              .answers!
-                              .values
-                              .toList()[i]) {
-                            score++;
-                            print("yes");
-                          } else {
-                            print("no");
-                          }
-                          setState(() {
-                            answered = true;
-                            btnPressed=true;
-                          });
-                        }
+                                if (questions[index]
+                                    .answers!
+                                    .values
+                                    .toList()[i]) {
+                                  score++;
+                                  print("yes");
+                                } else {
+                                  print("no");
+                                }
+                                setState(() {
+                                  answered = true;
+                                  btnPressed = true;
+                                });
+                              }
                             : null,
                         child: Text(questions[index].answers!.keys.toList()[i],
                             style: TextStyle(
-                              color:Colors.white,
+                              color: Colors.white,
                               fontSize: 18.0,
                             )),
                       ),

@@ -21,18 +21,18 @@ class Login_screen extends StatefulWidget {
 
 class _login_screenState extends State<Login_screen> {
   String email = "";
-  var password = "";
+  String password = "";
   final _auth = FirebaseAuth.instance;
   bool _passwordVisible = false;
   bool _remembercheck = false;
   final _formKey = GlobalKey<FormState>();
 
   bool studentExist(
-      var emailEntered, int passwordEnteres, List<student> listStudents) {
+      var emailEntered, var passwordEnteres, List<student> listStudents) {
     for (var std in listStudents) {
       // print(std.email + "====" + std.password);
       if (std.email == emailEntered.toString() &&
-          std.password == passwordEnteres) return true;
+          std.password == passwordEnteres.toString()) return true;
     }
     return false;
   }
@@ -78,47 +78,46 @@ class _login_screenState extends State<Login_screen> {
                         height: 20,
                       ),
 
-
                       Padding(
                         padding: const EdgeInsets.only(left: 50, right: 20),
                         child: Row(
-                            children: [
-                              // SizedBox(
-                              //   width: 50,
-                              // ),
-                              CircleAvatar(
-                                radius: 40,
-                                backgroundColor: Colors.white,
-                                child: Container(
-                                  width: 90,
-                                  height: 90,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                          'proj_images/Ain_Shams_logo.png'),
-                                      fit: BoxFit.fill,
-                                    ),
+                          children: [
+                            // SizedBox(
+                            //   width: 50,
+                            // ),
+                            CircleAvatar(
+                              radius: 40,
+                              backgroundColor: Colors.white,
+                              child: Container(
+                                width: 90,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'proj_images/Ain_Shams_logo.png'),
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
-                              ), //image
-                              Spacer(),
-                              CircleAvatar(
-                                radius: 60,
-                                backgroundColor: Colors.white,
-                                child: Container(
-                                  width: 90,
-                                  height: 90,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('proj_images/fcis.png'),
-                                      fit: BoxFit.fill,
-                                    ),
+                              ),
+                            ), //image
+                            Spacer(),
+                            CircleAvatar(
+                              radius: 60,
+                              backgroundColor: Colors.white,
+                              child: Container(
+                                width: 90,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('proj_images/fcis.png'),
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
-                              ), //image
-                            ],
-                          ),
+                              ),
+                            ), //image
+                          ],
                         ),
+                      ),
 
                       SizedBox(
                         height: 20,
@@ -280,8 +279,7 @@ class _login_screenState extends State<Login_screen> {
                               try {
                                 //   await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
-                                if (studentExist(
-                                    email, int.parse(password), list)) {
+                                if (studentExist(email, password, list)) {
                                   student std = studentLevel(email, list);
                                   Navigator.push(
                                       context,
@@ -359,6 +357,7 @@ class _login_screenState extends State<Login_screen> {
     );
   }
 }
+
 showDialogFunc(context) {
   var height = 400;
   var width = 250;
@@ -377,7 +376,7 @@ showDialogFunc(context) {
               padding: EdgeInsets.all(5),
               height: 420,
               width: MediaQuery.of(context).size.width * 2.7,
-              child:Container(
+              child: Container(
                 margin: EdgeInsets.only(top: height * 0.15),
                 height: height * 0.85,
                 decoration: BoxDecoration(
@@ -385,13 +384,15 @@ showDialogFunc(context) {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(50),
                         topRight: Radius.circular(50))),
-
                 child: ListView(
                   children: [
                     SizedBox(height: height * 0.08),
                     Text(
                       'reset password'.toUpperCase(),
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.blue),
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
@@ -411,15 +412,17 @@ showDialogFunc(context) {
                       margin: EdgeInsets.symmetric(horizontal: width * 0.05),
                       child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
-                          validator :EmailValidator(errorText: 'enter a valid email address'),
-                          onChanged: (value){
-                            email=value;
+                          validator: EmailValidator(
+                              errorText: 'enter a valid email address'),
+                          onChanged: (value) {
+                            email = value;
                           },
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             hintText: "Your Email * ",
                             hintStyle: TextStyle(
-                                fontWeight: FontWeight.bold, letterSpacing: 1.8),
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.8),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                               borderSide: BorderSide(
@@ -443,23 +446,25 @@ showDialogFunc(context) {
                       height: height * 0.08,
                     ),
                     GestureDetector(
-                      onTap: (){
-                        if(email==""||email==null){
+                      onTap: () {
+                        if (email == "" || email == null) {
                           Fluttertoast.showToast(
-                            msg: "Please Enter Your Email ",  // message
+                            msg: "Please Enter Your Email ", // message
                             toastLength: Toast.LENGTH_SHORT, // length
-                            gravity: ToastGravity.BOTTOM,    // location
+                            gravity: ToastGravity.BOTTOM, // location
                           );
-                        }
-                        else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup()));
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Signup()));
                         }
                         return null;
                       },
                       child: Center(
                         child: Container(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 26, vertical: 10),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 26, vertical: 10),
                           decoration: BoxDecoration(
                               gradient: new LinearGradient(
                                   colors: [Colors.blue, Colors.blue]),
@@ -484,8 +489,7 @@ showDialogFunc(context) {
                     ),
                   ],
                 ),
-              )
-          ),
+              )),
         ),
       );
     },

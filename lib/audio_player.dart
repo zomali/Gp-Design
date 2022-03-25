@@ -1,40 +1,49 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gp/DatabaseManager.dart';
 import 'package:gp/audio_player.dart';
 import 'package:gp/Levels.dart';
-class audio_player extends StatefulWidget{
+import 'package:gp/classes/student.dart';
+import 'package:gp/classes/studentBehavior.dart';
 
-_audio_player_state createState() => _audio_player_state();
-
+class audio_player extends StatefulWidget {
+  final student std;
+  final ForAudio forAudio;
+  audio_player(this.std, this.forAudio);
+  _audio_player_state createState() => _audio_player_state(std, forAudio);
 }
 
-class _audio_player_state extends State<audio_player>{
-
+class _audio_player_state extends State<audio_player> {
+  student std;
+  ForAudio forAudio;
+  _audio_player_state(this.std, this.forAudio);
   bool playing = false;
   IconData playBtn = Icons.play_arrow;
   AudioPlayer _player = new AudioPlayer();
   AudioCache cache = new AudioCache();
   Duration position = new Duration();
   Duration musicLength = new Duration();
+  DatabaseManager db = DatabaseManager();
 
-  Widget slider(){
+  Widget slider() {
     return Slider.adaptive(
-      activeColor: Colors.blue[800],
-      inactiveColor: Colors.grey[350],
-      value: position.inSeconds.toDouble(),
-      max: musicLength.inSeconds.toDouble(),
-      onChanged: (value) {
-        seekToSec(value.toInt());
-      });
+        activeColor: Colors.blue[800],
+        inactiveColor: Colors.grey[350],
+        value: position.inSeconds.toDouble(),
+        max: musicLength.inSeconds.toDouble(),
+        onChanged: (value) {
+          seekToSec(value.toInt());
+        });
   }
-  void seekToSec(int sec){
+
+  void seekToSec(int sec) {
     Duration newPos = Duration(seconds: sec);
     _player.seek(newPos);
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     cache = AudioCache(fixedPlayer: _player);
     //get audio duration
@@ -49,75 +58,95 @@ class _audio_player_state extends State<audio_player>{
         position = p;
       });
     });
-    _player.setUrl("https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FArabic%2Fvariable%20and%20constans.mp3?alt=media&token=d44db750-cb81-4589-8f1d-f3561f870804");
+    _player.setUrl(
+        "https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FArabic%2Fvariable%20and%20constans.mp3?alt=media&token=d44db750-cb81-4589-8f1d-f3561f870804");
   }
 
   @override
   Widget build(BuildContext context) {
+    DateTime initialTime = DateTime.now();
+    final initialHour = initialTime.hour.toString().padLeft(2, '0');
+    final initialMinute = initialTime.minute.toString().padLeft(2, '0');
+    final initialSecond = initialTime.second.toString().padLeft(2, '0');
+
+    String x = '$initialHour$initialMinute$initialSecond';
+    int firstTime = int.parse(x);
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-
         backgroundColor: Color.fromARGB(255, 3, 60, 126),
-        leading: IconButton(icon:Icon(Icons.arrow_back_ios_outlined),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: () {
             //   _player.pause();
+            DateTime FinalTime = DateTime.now();
+            final FinalHour = FinalTime.hour.toString().padLeft(2, '0');
+            final FinalMinute = FinalTime.minute.toString().padLeft(2, '0');
+            final FinalSecond = FinalTime.second.toString().padLeft(2, '0');
+            x = '$FinalHour$FinalMinute$FinalSecond';
+            int SecondTime = int.parse(x);
+            ForAudio NewforAudio = ForAudio();
+            NewforAudio.NumberOfVisitedPage = forAudio.NumberOfVisitedPage + 1;
+            NewforAudio.TimeSpendInPage =
+                forAudio.TimeSpendInPage + (SecondTime - firstTime);
+            db.updateStudentBehavior(NewforAudio.TimeSpendInPage,
+                NewforAudio.NumberOfVisitedPage, "audio", std.id);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context)=> Levels(1)));
+                MaterialPageRoute(builder: (context) => Levels(1, std)));
             _player.pause();
             // _selectedIndex-=2;
-
-          },),
-
+          },
+        ),
       ),
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromARGB(255, 3, 60, 126),
-              Colors.blue[200]!,
-            ]),
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(top: 48.0
-            ),
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0),
-                    child: Text(
-                     "Revision, Varriables & Constants", 
-                     style: TextStyle(
-                     color: Colors.white,
-                     fontSize: 32.0,
-                     fontWeight: FontWeight.bold,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(255, 3, 60, 126),
+                Colors.blue[200]!,
+              ]),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(top: 48.0),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    "Revision, Varriables & Constants",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-               SizedBox(
-                 height: 24.0,
+                SizedBox(
+                  height: 24.0,
                 ),
-               Center(
-                   child: Container(
-                   width: 300.0,
-                   height: 300.0,
-                   decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(30.0),
-                         image: DecorationImage(
-                            image: NetworkImage('https://play-lh.googleusercontent.com/RF9eZ6QIf8nW5iQLKgYd05yNqM1kTMfIxJZZhQHrsJu_uaeRKDrpaEBOy-NDUpC2xw'),
-                        ),
-                   ),
+                Center(
+                  child: Container(
+                    width: 300.0,
+                    height: 300.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.0),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            'https://play-lh.googleusercontent.com/RF9eZ6QIf8nW5iQLKgYd05yNqM1kTMfIxJZZhQHrsJu_uaeRKDrpaEBOy-NDUpC2xw'),
+                      ),
+                    ),
                   ),
                 ),
-           
-               SizedBox(height: 18.0,),
-              SizedBox(),
+                SizedBox(
+                  height: 18.0,
+                ),
+                SizedBox(),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
@@ -134,17 +163,17 @@ class _audio_player_state extends State<audio_player>{
                         Container(
                           width: 450.0,
                           child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${position.inMinutes}: ${position.inSeconds.remainder(60)}"),
-                            slider(),
-                            Text(
-                              "${musicLength.inMinutes}: ${musicLength.inSeconds.remainder(60)}"),
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                  "${position.inMinutes}: ${position.inSeconds.remainder(60)}"),
+                              slider(),
+                              Text(
+                                  "${musicLength.inMinutes}: ${musicLength.inSeconds.remainder(60)}"),
                             ],
                           ),
-                        ),   
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -152,46 +181,41 @@ class _audio_player_state extends State<audio_player>{
                             IconButton(
                               iconSize: 30.0,
                               color: Colors.blue,
-                              onPressed:() {
-                              position = new Duration(seconds: 0);
-                              _player.seek(position);
-                              },//restart audio
+                              onPressed: () {
+                                position = new Duration(seconds: 0);
+                                _player.seek(position);
+                              }, //restart audio
                               icon: Icon(
                                 Icons.restart_alt,
                               ),
-                           ),
-                           IconButton(
+                            ),
+                            IconButton(
                               iconSize: 40.0,
                               color: Colors.blue,
-                              onPressed:() {
-
-                              },//previous topic audio
+                              onPressed: () {}, //previous topic audio
                               icon: Icon(
                                 Icons.skip_previous,
                               ),
-                           ),
-                           
+                            ),
                             IconButton(
                               iconSize: 62.0,
                               color: Colors.blue[800],
-                              onPressed:() {
-                                if(!playing)
-                                {
-                                  _player.play("https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FArabic%2Fvariable%20and%20constans.mp3?alt=media&token=d44db750-cb81-4589-8f1d-f3561f870804");
+                              onPressed: () {
+                                if (!playing) {
+                                  _player.play(
+                                      "https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FArabic%2Fvariable%20and%20constans.mp3?alt=media&token=d44db750-cb81-4589-8f1d-f3561f870804");
                                   setState(() {
                                     playBtn = Icons.pause;
                                     playing = true;
                                   });
-                                }
-                                else
-                                {
+                                } else {
                                   _player.pause();
                                   setState(() {
                                     playBtn = Icons.play_arrow;
                                     playing = false;
                                   });
                                 }
-                              },//play audio of current topic
+                              }, //play audio of current topic
                               icon: Icon(
                                 playBtn,
                               ),
@@ -199,17 +223,15 @@ class _audio_player_state extends State<audio_player>{
                             IconButton(
                               iconSize: 40.0,
                               color: Colors.blue,
-                              onPressed:() {
-
-                              },//next topic audio
+                              onPressed: () {}, //next topic audio
                               icon: Icon(
                                 Icons.skip_next,
                               ),
-                           ),
-                           IconButton(
+                            ),
+                            IconButton(
                               iconSize: 30.0,
                               color: Colors.blue,
-                              onPressed:() {},//view audio info
+                              onPressed: () {}, //view audio info
                               icon: Icon(
                                 Icons.info_outline,
                               ),
@@ -219,13 +241,12 @@ class _audio_player_state extends State<audio_player>{
                       ],
                     ),
                   ),
-               ),
-            ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
+      ),
     );
   }
-
 }

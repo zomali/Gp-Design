@@ -9,6 +9,7 @@ import 'package:gp/login_screen.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:gp/pdf_view.dart';
 import 'package:gp/shared/cubits/cubit/home_cubit.dart';
+import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
@@ -36,18 +37,21 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => StudentCubit(),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => TopicCubit(),
         ),
         BlocProvider(
           create: (context) => LevelCubit(),
+        ),
+        BlocProvider(
+          create: (context) => StudentBehaviorCubit(),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         //home: Edit_Proile_Screen(),
         // home: MyProfileScreen(),
-        home:Login_screen(),
+        home: Login_screen(),
         //home:Start_quiz(),
         // home: Home(0),
         // home: types(),
