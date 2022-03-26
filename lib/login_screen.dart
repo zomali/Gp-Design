@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gp/Home.dart';
+import 'package:gp/Sidebar/BlockNavigation.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/set_new_password.dart';
 import 'package:gp/shared/cubits/cubit/student_cubit.dart';
@@ -12,7 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
-class Login_screen extends StatefulWidget {
+class Login_screen extends StatefulWidget  {
   const Login_screen({Key? key}) : super(key: key);
 
   @override

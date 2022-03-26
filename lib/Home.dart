@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gp/Courses_evaluations_Screen.dart';
 import 'package:gp/Learning_analytics_screen.dart';
+import 'package:gp/Sidebar/BlockNavigation.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -35,7 +36,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatefulWidget  {
   final student std;
   HomePage(this.std);
 
