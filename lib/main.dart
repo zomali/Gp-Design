@@ -13,6 +13,9 @@ import 'package:gp/signup%20screen.dart';
 import 'package:gp/audio_player.dart';
 import 'Home.dart';
 import 'classes/student.dart';
+import 'Start_Quiz.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,9 +38,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+
         //home: Edit_Proile_Screen(),
+        home:Start_Quiz(),
         // home: MyProfileScreen(),
-        home: Login_screen(),
+        //home: Login_screen(),
         // home: Home(0),
          //home: Courses_evaluations_Screen(new student()),
         //home: signup_screen(),
