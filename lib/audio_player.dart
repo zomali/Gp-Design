@@ -1,23 +1,25 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gp/DatabaseManager.dart';
-import 'package:gp/audio_player.dart';
+import 'package:gp/infoDialog.dart';
 import 'package:gp/Levels.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
+import 'package:gp/classes/classes.dart';
 
 class audio_player extends StatefulWidget {
   final student std;
   final ForAudio forAudio;
-  audio_player(this.std, this.forAudio);
-  _audio_player_state createState() => _audio_player_state(std, forAudio);
+  final Audio_ audio;
+  audio_player(this.std, this.audio, this.forAudio);
+  _audio_player_state createState() => _audio_player_state(std, audio, forAudio);
 }
 
 class _audio_player_state extends State<audio_player> {
   student std;
   ForAudio forAudio;
-  _audio_player_state(this.std, this.forAudio);
+  Audio_ audio;
+  _audio_player_state(this.std, this.audio,  this.forAudio);
   bool playing = false;
   IconData playBtn = Icons.play_arrow;
   AudioPlayer _player = new AudioPlayer();
@@ -36,12 +38,10 @@ class _audio_player_state extends State<audio_player> {
           seekToSec(value.toInt());
         });
   }
-
   void seekToSec(int sec) {
     Duration newPos = Duration(seconds: sec);
     _player.seek(newPos);
   }
-
   @override
   void initState() {
     super.initState();
@@ -58,8 +58,7 @@ class _audio_player_state extends State<audio_player> {
         position = p;
       });
     });
-    _player.setUrl(
-        "https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FArabic%2Fvariable%20and%20constans.mp3?alt=media&token=d44db750-cb81-4589-8f1d-f3561f870804");
+    _player.setUrl(audio.URL);
   }
 
   @override
@@ -119,7 +118,7 @@ class _audio_player_state extends State<audio_player> {
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0),
                   child: Text(
-                    "Revision, Varriables & Constants",
+                    audio.title,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 32.0,
@@ -178,32 +177,38 @@ class _audio_player_state extends State<audio_player> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            IconButton(
-                              iconSize: 30.0,
-                              color: Colors.blue,
-                              onPressed: () {
-                                position = new Duration(seconds: 0);
-                                _player.seek(position);
-                              }, //restart audio
-                              icon: Icon(
-                                Icons.restart_alt,
-                              ),
-                            ),
-                            IconButton(
-                              iconSize: 40.0,
-                              color: Colors.blue,
-                              onPressed: () {}, //previous topic audio
-                              icon: Icon(
-                                Icons.skip_previous,
-                              ),
-                            ),
+                                    IconButton(
+                                      iconSize: 30.0,
+                                      color: Colors.blue,
+                                      onPressed: () {
+                                        position = new Duration(seconds: 0);
+                                        _player.seek(position);
+                                      }, //restart audio
+                                      icon: Icon(
+                                        Icons.restart_alt,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      iconSize: 40.0,
+                                      color: Colors.blue,
+                                      onPressed: () {
+                                        position = position - Duration(seconds: 10);
+                                        if (position >= Duration(seconds: 0))
+                                          _player.seek(position);
+                                        else {
+                                          _player.seek(Duration(seconds: 0));
+                                        }
+                                      }, //replay previous 10 secs
+                                      icon: Icon(
+                                        Icons.replay_10_rounded,
+                                      ),
+                                    ),
                             IconButton(
                               iconSize: 62.0,
                               color: Colors.blue[800],
                               onPressed: () {
                                 if (!playing) {
-                                  _player.play(
-                                      "https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FArabic%2Fvariable%20and%20constans.mp3?alt=media&token=d44db750-cb81-4589-8f1d-f3561f870804");
+                                  _player.play(audio.URL);
                                   setState(() {
                                     playBtn = Icons.pause;
                                     playing = true;
@@ -222,16 +227,32 @@ class _audio_player_state extends State<audio_player> {
                             ),
                             IconButton(
                               iconSize: 40.0,
-                              color: Colors.blue,
-                              onPressed: () {}, //next topic audio
-                              icon: Icon(
-                                Icons.skip_next,
-                              ),
-                            ),
+                                      color: Colors.blue,
+                                      onPressed: () {
+                                        position = position + Duration(seconds: 10);
+                                        if (position <= musicLength)
+                                          _player.seek(position);
+                                        else {
+                                          _player.seek(musicLength);
+                                        }
+                                      }, //forward 10 secs
+                                      icon: Icon(
+                                        Icons.forward_10_rounded,
+                                      ),
+                                    ),
                             IconButton(
                               iconSize: 30.0,
                               color: Colors.blue,
-                              onPressed: () {}, //view audio info
+                              onPressed: () {
+                                String audioInfo = "Instructor: "+ audio.source +"\nDuration: " + audio.duration +"\nLanguage: " + audio.language;
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                  infoDialog(
+                                  title: "Audio Information",
+                                  description: audioInfo,
+                                  buttonText: "OK"));                                                               
+                              }, //view audio info
                               icon: Icon(
                                 Icons.info_outline,
                               ),

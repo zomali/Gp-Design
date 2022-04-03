@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:gp/classes/classes.dart';
 class url_view extends StatefulWidget {
-  @override _url_view createState() => _url_view();
+  final List<URL_> url;
+  url_view(this.url);
+  @override _url_view createState() => _url_view(url);
 }
 class _url_view extends State<url_view> {
-  var urlList = [
-    "https://www.w3schools.com/cpp/cpp_variables.asp",
-    "https://www.geeksforgeeks.org/variables-in-c/",
-    "https://www.geeksforgeeks.org/constants-in-c-cpp/",
-    "https://www.cplusplus.com/doc/tutorial/constants/",
-  ];
-  var titleList = [
-    "W3schools",
-    "W3schools",
-    "W3schools",
-    "W3schools",
-  ];
+  List<URL_> url;
+  _url_view(this.url);
+  
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.6;
@@ -31,12 +25,12 @@ class _url_view extends State<url_view> {
       ),
       // Main List View With Builder
       body: ListView.builder(
-        itemCount: urlList.length,
+        itemCount: url.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
               // This Will Call When User Click On ListView Item
-              launch(urlList[index]);
+              launch(url[index].url);
             },
             // Card Which Holds Layout Of ListView Item
             child: Card(
@@ -53,7 +47,7 @@ class _url_view extends State<url_view> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          titleList[index],
+                          url[index].title,
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.blue,

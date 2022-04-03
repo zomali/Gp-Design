@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gp/DatabaseManager.dart';
 import 'package:gp/classes/student.dart';
+import 'package:gp/classes/classes.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
@@ -9,15 +10,17 @@ import 'Levels.dart';
 class pdf_view extends StatefulWidget {
   final student std;
   final ForText forText;
-  pdf_view(this.std, this.forText);
+  final Text_ text_;
+  pdf_view(this.std, this.text_, this.forText);
   @override
-  _pdf_view createState() => _pdf_view(std, forText);
+  _pdf_view createState() => _pdf_view(std, text_, forText);
 }
 
 class _pdf_view extends State<pdf_view> {
   student std;
   ForText forText;
-  _pdf_view(this.std, this.forText);
+  Text_ text_;
+  _pdf_view(this.std,this.text_, this.forText);
   DatabaseManager db = DatabaseManager();
   late PdfViewerController _pdfViewerController;
   final GlobalKey<SfPdfViewerState> _pdfViewerStateKey = GlobalKey();
@@ -38,12 +41,11 @@ class _pdf_view extends State<pdf_view> {
     int firstTime = int.parse(x);
     return SafeArea(
         child: Scaffold(
-      body: SfPdfViewer.network(
-          'https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2FRevision%2C%20Variables%20%26%20Constants.pdf?alt=media&token=cb4470fe-1b65-48fb-8924-e494e7b2515c',
+      body: SfPdfViewer.network(text_.URL,
           controller: _pdfViewerController,
           key: _pdfViewerStateKey),
       appBar: AppBar(
-        title: Text('Revision, Variables & Constants'),
+        title: Text(text_.title),
         actions: <Widget>[
           IconButton(
               onPressed: () {
