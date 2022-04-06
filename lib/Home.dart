@@ -13,6 +13,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'L_types.dart';
 import 'Levels.dart';
 import 'Types.dart';
+import 'package:gp/Levels_View.dart';
 //import 'package:flutter_application_1/levels.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -309,7 +310,9 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Levels(1, std))),
+                                  //builder: (context) => Levels(1, std))),
+                                  builder: (context) => levels_view())),
+
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 25),

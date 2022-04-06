@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gp/Topic_view.dart';
 import 'package:gp/signup%20screen.dart';
 import 'L_types.dart';
 import 'package:gp/myprofile_screen.dart';
@@ -143,7 +144,8 @@ class _HomeLevelState extends State<HomeLevel> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Types(index + 1, know, std)));
+                           // builder: (context) => Types(index + 1, know, std))
+                            builder: (context) => topic_view()));
                   },
                 ),
               );

@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gp/classes/student.dart';
-import 'package:gp/classes/classes.dart';
-import 'package:gp/classes/studentBehavior.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import 'package:gp/Levels.dart';
 import 'package:gp/infoDialog.dart';
 
 class video_player extends StatefulWidget {
-  final student std;
-  final ForVideo forVideo;
-  final Video_ video;
-  video_player(this.std, this.video, this.forVideo);
-  _video_player_state createState() => _video_player_state(std, video, forVideo);
+  _video_player_state createState() => _video_player_state();
 }
 
 class _video_player_state extends State<video_player> {
-  student std;
-  ForVideo forVideo;
-  Video_ video;
-  _video_player_state(this.std, this.video, this.forVideo);
+  String videoURL =
+      "https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2FRevision%2C%20Variables%20%26%20Constants%20Video.mp4?alt=media&token=e71fa7c8-5082-460f-8b21-c2ad1b8ae25c";
+  String videoInfo =
+      "Instructor: DR. Sally Saad\nDuration: 43 minutes\nLanguage: Arabic";
 
   ChewieController? chewieController;
 
@@ -27,7 +21,7 @@ class _video_player_state extends State<video_player> {
   void initState() {
     super.initState();
     chewieController = ChewieController(
-        videoPlayerController: VideoPlayerController.network(video.URL),
+        videoPlayerController: VideoPlayerController.network(videoURL),
         aspectRatio: 16 / 9,
         autoInitialize: true,
         autoPlay: false,
@@ -51,7 +45,7 @@ class _video_player_state extends State<video_player> {
                       context: context,
                       builder: (BuildContext context) => infoDialog(
                           title: "Video Info",
-                          description: "Instructor: "+ video.source +"\nDuration: " + video.duration +"\nLanguage: " + video.language,
+                          description: videoInfo,
                           buttonText: "Ok"));
                 },
                 iconData: Icons.info_outline,
@@ -77,7 +71,7 @@ class _video_player_state extends State<video_player> {
       appBar: AppBar(
         elevation: 1,
         title: Text(
-          video.title,
+          "Revision, Variables & Constants",
           style: TextStyle(
             color: Colors.white,
             fontSize: 18.0,
