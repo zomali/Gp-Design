@@ -1,10 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gp/DatabaseManager.dart';
 import 'package:gp/Levels_View.dart';
-import 'package:gp/audio_player.dart';
+import 'package:gp/infoDialog.dart';
 import 'package:gp/classes/student.dart';
+import 'package:gp/classes/classes.dart';
 import 'package:gp/classes/studentBehavior.dart';
 
 class audio_player extends StatefulWidget {
@@ -20,6 +20,7 @@ class audio_player extends StatefulWidget {
 class _audio_player_state extends State<audio_player> {
   student std;
   ForAudio forAudio;
+  Audio_ audio = new Audio_();
   int LevelNumber;
   int TopicNumber;
   _audio_player_state(
@@ -87,8 +88,6 @@ class _audio_player_state extends State<audio_player> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: () {
-            //   _player.pause();
-
             DateTime FinalTime = DateTime.now();
             final FinalHour = FinalTime.hour.toString().padLeft(2, '0');
             final FinalMinute = FinalTime.minute.toString().padLeft(2, '0');
@@ -208,64 +207,91 @@ class _audio_player_state extends State<audio_player> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            IconButton(
-                              iconSize: 30.0,
-                              color: Colors.blue,
-                              onPressed: () {
-                                position = new Duration(seconds: 0);
-                                _player.seek(position);
-                              }, //restart audio
-                              icon: Icon(
-                                Icons.restart_alt,
-                              ),
-                            ),
-                            IconButton(
-                              iconSize: 40.0,
-                              color: Colors.blue,
-                              onPressed: () {}, //previous topic audio
-                              icon: Icon(
-                                Icons.skip_previous,
-                              ),
-                            ),
-                            IconButton(
-                              iconSize: 62.0,
-                              color: Colors.blue[800],
-                              onPressed: () {
-                                if (!playing) {
-                                  _player.play(
-                                      "https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FArabic%2Fvariable%20and%20constans.mp3?alt=media&token=d44db750-cb81-4589-8f1d-f3561f870804");
-                                  setState(() {
-                                    playBtn = Icons.pause;
-                                    playing = true;
-                                  });
-                                } else {
-                                  _player.pause();
-                                  setState(() {
-                                    playBtn = Icons.play_arrow;
-                                    playing = false;
-                                  });
-                                }
-                              }, //play audio of current topic
-                              icon: Icon(
-                                playBtn,
-                              ),
-                            ),
-                            IconButton(
-                              iconSize: 40.0,
-                              color: Colors.blue,
-                              onPressed: () {}, //next topic audio
-                              icon: Icon(
-                                Icons.skip_next,
-                              ),
-                            ),
-                            IconButton(
-                              iconSize: 30.0,
-                              color: Colors.blue,
-                              onPressed: () {}, //view audio info
-                              icon: Icon(
-                                Icons.info_outline,
-                              ),
-                            ),
+                                    IconButton(
+                                      iconSize: 30.0,
+                                      color: Colors.blue,
+                                      onPressed: () {
+                                        position = new Duration(seconds: 0);
+                                        _player.seek(position);
+                                      }, //restart audio
+                                      icon: Icon(
+                                        Icons.restart_alt,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      iconSize: 40.0,
+                                      color: Colors.blue,
+                                      onPressed: () {
+                                        position = position - Duration(seconds: 10);
+                                        if (position >= Duration(seconds: 0))
+                                          _player.seek(position);
+                                        else {
+                                          _player.seek(Duration(seconds: 0));
+                                        }
+                                      }, //replay previous 10 secs
+                                      icon: Icon(
+                                        Icons.replay_10_rounded,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      iconSize: 62.0,
+                                      color: Colors.blue[800],
+                                      onPressed: () {
+                                        if (!playing) {
+                                          _player.play(audio.URL);
+                                          setState(() {
+                                            playBtn = Icons.pause;
+                                            playing = true;
+                                          });
+                                        } else {
+                                          _player.pause();
+                                          setState(() {
+                                            playBtn = Icons.play_arrow;
+                                            playing = false;
+                                          });
+                                        }
+                                      }, //play audio of current topic
+                                      icon: Icon(
+                                        playBtn,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      iconSize: 40.0,
+                                      color: Colors.blue,
+                                      onPressed: () {
+                                        position = position + Duration(seconds: 10);
+                                        if (position <= musicLength)
+                                          _player.seek(position);
+                                        else {
+                                          _player.seek(musicLength);
+                                        }
+                                      }, //forward 10 secs
+                                      icon: Icon(
+                                        Icons.forward_10_rounded,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      iconSize: 30.0,
+                                      color: Colors.blue,
+                                      onPressed: () {
+                                        String audioInfo = "Instructor: " +
+                                            audio.source +
+                                            "\nDuration: " +
+                                            audio.duration +
+                                            "\nLanguage: " +
+                                            audio.language;
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                infoDialog(
+                                                    title: "Audio Information",
+                                                    description: audioInfo,
+                                                    buttonText: "OK"));
+                                      }, //view audio info
+                                      icon: Icon(
+                                        Icons.info_outline,
+                                      ),
+                                    ),
                           ],
                         )
                       ],

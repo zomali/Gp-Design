@@ -12,7 +12,7 @@ class LevelCubit extends Cubit<LevelState> {
   late Level_ level;
   final DatabaseManager db = DatabaseManager();
 
-  Future<void> getAudioData(int levelID) async{
+  Future<void> getLevelData(int levelID) async{
     emit(LevelLoading());
     level = await db.getLevelData(levelID);
     emit(LevelLoaded());

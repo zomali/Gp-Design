@@ -13,7 +13,7 @@ class TopicCubit extends Cubit<TopicState> {
   late Topic_ topic;
   final DatabaseManager db = DatabaseManager();
 
-  Future<void> getAudioData(int topicID) async{
+  Future<void> getTopicData(int topicID) async{
     emit(TopicLoading());
     topic = await db.getTopicData(topicID);
     emit(TopicLoaded());
