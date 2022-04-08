@@ -37,7 +37,7 @@ class Types extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => types(std)));
+                    MaterialPageRoute(builder: (context) => types(std, 0, 0)));
               },
               child: const Text(
                 "Select your type",
@@ -47,7 +47,8 @@ class Types extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => image_view(std, ForImage())));
+                        builder: (context) =>
+                            image_view(std, ForImage(), 0, 0)));
               },
               child: const Text(
                 "Go to links",

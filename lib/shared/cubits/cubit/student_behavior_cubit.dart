@@ -17,9 +17,16 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
 
   final DatabaseManager db = DatabaseManager();
   late studentBehavior std;
-  Future<void> getStudentBehaviorData(var ID) async {
+  late studentBehavior value;
+  Future<void> getTimeSpendEveryOnce(var ID, var Level, var Topic) async {
     emit(StudentBehaviorLoading());
-    std = await db.fetchStudentBehavior(ID);
+    value = await db.fetchTimeSpendEveryOnce(ID, Level, Topic);
+    emit(StudentBehaviorLoaded());
+  }
+
+  Future<void> getStudentBehaviorData(var ID, var Level, var Topic) async {
+    emit(StudentBehaviorLoading());
+    std = await db.fetchStudentBehavior(ID, Level, Topic);
     emit(StudentBehaviorLoaded());
   }
 }

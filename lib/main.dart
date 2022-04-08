@@ -9,6 +9,7 @@ import 'package:gp/edit_profile%20screen.dart';
 import 'package:gp/login_screen.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:gp/shared/cubits/cubit/home_cubit.dart';
+import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/signup%20screen.dart';
 import 'package:gp/audio_player.dart';
@@ -16,8 +17,6 @@ import 'Home.dart';
 import 'classes/student.dart';
 import 'Start_Quiz.dart';
 import 'Levels_View.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +36,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => StudentCubit(),
         ),
+        BlocProvider(
+          create: (context) => StudentBehaviorCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
         // home: MyProfileScreen(),
         home: Login_screen(),
         // home: Home(0),
-         //home: Courses_evaluations_Screen(new student()),
+        //home: Courses_evaluations_Screen(new student()),
         //home: signup_screen(),
         // home: audio_player(),
       ),

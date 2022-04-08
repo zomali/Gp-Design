@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gp/Levels_View.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
 
@@ -8,16 +9,24 @@ import 'Levels.dart';
 class image_view extends StatefulWidget {
   final student std;
   final ForImage forImage;
-  image_view(this.std, this.forImage);
+  final int LevelNumber;
+  final int TopicNumber;
+  image_view(this.std, this.forImage, this.LevelNumber, this.TopicNumber);
   @override
-  _image_view createState() => _image_view(std, forImage);
+  _image_view createState() =>
+      _image_view(std, forImage, LevelNumber, TopicNumber);
 }
 
 class _image_view extends State<image_view> {
   student std;
   ForImage forImage;
-  _image_view(this.std, this.forImage);
+  int LevelNumber;
+  int TopicNumber;
+  _image_view(this.std, this.forImage, this.LevelNumber, this.TopicNumber);
   DatabaseManager db = DatabaseManager();
+  int NumperOfEnters = 0;
+  List<int> times = [];
+  int i = 0;
   var titleList = [
     "Variable in C++",
     "Variable in C++",
@@ -71,20 +80,43 @@ class _image_view extends State<image_view> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: () {
+            try {
+              for (int i = 1; i < 5; i++) {
+                forImage.Time_spent_every_once[i];
+                NumperOfEnters++;
+              }
+            } catch (e) {}
+
             DateTime FinalTime = DateTime.now();
             final FinalHour = FinalTime.hour.toString().padLeft(2, '0');
             final FinalMinute = FinalTime.minute.toString().padLeft(2, '0');
             final FinalSecond = FinalTime.second.toString().padLeft(2, '0');
             x = '$FinalHour$FinalMinute$FinalSecond';
             int SecondTime = int.parse(x);
+            int timeStayed = SecondTime - firstTime;
             ForImage NewforImage = ForImage();
             NewforImage.NumberOfVisitedPage = forImage.NumberOfVisitedPage + 1;
             NewforImage.TimeSpendInPage =
                 forImage.TimeSpendInPage + (SecondTime - firstTime);
-            db.updateStudentBehavior(NewforImage.TimeSpendInPage,
-                NewforImage.NumberOfVisitedPage, "image", std.id);
+            for (i = 0; i < 100; i++) {
+              try {
+                times.add(forImage.Time_spent_every_once[i]);
+                NumperOfEnters++;
+              } catch (e) {
+                times.add(timeStayed);
+                break;
+              }
+            }
+            db.updateStudentBehavior(
+                NewforImage.TimeSpendInPage,
+                NewforImage.NumberOfVisitedPage,
+                "image",
+                std.id,
+                LevelNumber,
+                TopicNumber,
+                times);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Levels(1, std)));
+                MaterialPageRoute(builder: (context) => levels_view(std)));
             // _selectedIndex-=2;
           },
         ),

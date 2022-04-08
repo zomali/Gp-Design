@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gp/Courses_evaluations_Screen.dart';
+import 'package:gp/DatabaseManager.dart';
 import 'package:gp/Learning_analytics_screen.dart';
 import 'package:gp/Sidebar/BlockNavigation.dart';
 import 'package:gp/myprofile_screen.dart';
@@ -37,7 +38,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-class HomePage extends StatefulWidget  {
+class HomePage extends StatefulWidget {
   final student std;
   HomePage(this.std);
 
@@ -311,8 +312,7 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                   //builder: (context) => Levels(1, std))),
-                                  builder: (context) => levels_view())),
-
+                                  builder: (context) => levels_view(std))),
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 25),

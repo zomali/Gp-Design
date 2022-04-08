@@ -3,6 +3,7 @@ import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'classes/course.dart';
 import 'package:gp/classes/classes.dart';
+import 'dart:convert';
 
 class DatabaseManager {
   Future<course> getCourses() async {
@@ -147,106 +148,1726 @@ class DatabaseManager {
       'password': std.password,
       'profile_picture': std.profile_picture //hint
     });
-    firebaseDatabase
-        .child('student_behavior_model')
-        .child(std.id)
-        .child('1')
-        .set({
-      'audio': {
-        'content_progress': '60min',
-        'number_of_visits': 0,
-        'popUpQuestion': {'qID': 'answerID'},
-        'time_progress_ratio': 0,
-        'time_spent': 0
+    firebaseDatabase.child('student_behavior_model').child(std.id).set({
+      '1': {
+        '1': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '2': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '3': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
       },
-      'image': {
-        'content_progress': '/',
-        'number_of_visits': 0,
-        'popUpQuestion': {'qID': 'answerID'},
-        'time_progress_ratio': 0,
-        'time_spent': 0
+      '2': {
+        '4': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '5': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '6': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
       },
-      'text': {
-        'content_progress': '/',
-        'number_of_visits': 0,
-        'popUpQuestion': {'qID': 'answerID'},
-        'time_progress_ratio': 0,
-        'time_spent': 0
+      '3': {
+        '7': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '8': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '9': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '10': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
       },
-      'video': {
-        'content_progress': '/',
-        'number_of_visits': 0,
-        'popUpQuestion': {'qID': 'answerID'},
-        'time_progress_ratio': 0,
-        'time_spent': 0
+      '4': {
+        '11': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '12': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '13': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
+      },
+      '5': {
+        '14': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '15': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '16': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '17': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
       }
     });
   }
 
-  Future<studentBehavior> fetchStudentBehavior(var id) async {
+  Future<studentBehavior> fetchStudentBehavior(
+      var id, var level, var topic) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase
         .child('student_behavior_model')
         .child(id.toString())
-        .child('1')
         .get();
     var value = response.value;
     studentBehavior std = studentBehavior();
+    int startTopic = 0;
+    if (level == 1) {
+      startTopic = 1;
+    } else if (level == 2) {
+      startTopic = 4;
+      topic += 3;
+    } else if (level == 3) {
+      startTopic = 7;
+      topic += 6;
+    } else if (level == 4) {
+      startTopic = 11;
+      topic += 10;
+    } else if (level == 5) {
+      startTopic = 14;
+      topic += 13;
+    }
 
-    //for video
-    std.forVideo.NumberOfVisitedPage = value['video']['number_of_visits'];
-    std.forVideo.TimeSpendInPage = value['video']['time_spent'];
+    for (int i = 1; i <= level; i++) {
+      for (int j = startTopic; j < topic; j++) {
+        //for video
+        std.forVideo.NumberOfVisitedPage +=
+            value[i][j]['video']['number_of_visits'];
+        std.forVideo.TimeSpendInPage += value[i][j]['video']['time_spent'];
 
-    //for audio
-    std.forAudio.NumberOfVisitedPage = value['audio']['number_of_visits'];
-    std.forAudio.TimeSpendInPage = value['audio']['time_spent'];
+        //for audio
+        std.forAudio.NumberOfVisitedPage +=
+            value[i][j]['audio']['number_of_visits'];
+        std.forAudio.TimeSpendInPage += value[i][j]['audio']['time_spent'];
 
-    //for Image
-    std.forImage.NumberOfVisitedPage = value['image']['number_of_visits'];
-    std.forImage.TimeSpendInPage = value['image']['time_spent'];
+        //for Image
+        std.forImage.NumberOfVisitedPage +=
+            value[i][j]['image']['number_of_visits'];
+        std.forImage.TimeSpendInPage += value[i][j]['image']['time_spent'];
 
-    //for Text
-    std.forText.NumberOfVisitedPage = value['text']['number_of_visits'];
-    std.forText.TimeSpendInPage = value['text']['time_spent'];
+        //for Text
+        std.forText.NumberOfVisitedPage +=
+            value[i][j]['text']['number_of_visits'];
+        std.forText.TimeSpendInPage += value[i][j]['text']['time_spent'];
+      }
+    }
 
     return std;
   }
 
-  void updateStudentBehavior(int time, int clicks, String type, var id) {
+  Future<studentBehavior> fetchTimeSpendEveryOnce(
+      var id, var level, var topic) async {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('student_behavior_model')
+        .child(id.toString())
+        .child(level.toString())
+        .child(topic.toString())
+        .get();
+    var value = response.value;
+    studentBehavior std = studentBehavior();
+    std.forAudio.NumberOfVisitedPage = value['audio']['number_of_visits'];
+    std.forAudio.PopUpQuastion = value['audio']['popUpQuestion'];
+    std.forAudio.TimeSpendInPage = value['audio']['time_spent'];
+    std.forAudio.Time_progress_ratio = value['audio']['Time_progress_ratio'];
+    std.forAudio.Time_spent_every_once =
+        value['audio']['time_spent_every_once'];
+
+    std.forImage.NumberOfVisitedPage = value['image']['number_of_visits'];
+    std.forImage.PopUpQuastion = value['image']['popUpQuestion'];
+    std.forImage.TimeSpendInPage = value['image']['time_spent'];
+    std.forImage.Time_progress_ratio = value['image']['Time_progress_ratio'];
+    std.forImage.Time_spent_every_once =
+        value['image']['time_spent_every_once'];
+
+    std.forText.NumberOfVisitedPage = value['text']['number_of_visits'];
+    std.forText.PopUpQuastion = value['text']['popUpQuestion'];
+    std.forText.TimeSpendInPage = value['text']['time_spent'];
+    std.forText.Time_progress_ratio = value['text']['Time_progress_ratio'];
+    std.forText.Time_spent_every_once = value['text']['time_spent_every_once'];
+
+    std.forVideo.NumberOfVisitedPage = value['video']['number_of_visits'];
+    std.forVideo.PopUpQuastion = value['video']['popUpQuestion'];
+    std.forVideo.TimeSpendInPage = value['video']['time_spent'];
+    std.forVideo.Time_progress_ratio = value['video']['Time_progress_ratio'];
+    std.forVideo.Time_spent_every_once =
+        value['video']['time_spent_every_once'];
+    return std;
+  }
+
+  void updateStudentBehavior(int time, int clicks, String type, var id,
+      var Level, var Topic, var arr) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     firebaseDatabase
         .child('student_behavior_model')
         .child(id.toString())
-        .child('1')
+        .child(Level.toString())
+        .child(Topic.toString())
         .child(type)
-        .update({'number_of_visits': clicks, 'time_spent': time});
+        .update({
+      'number_of_visits': clicks,
+      'time_spent': time,
+      'time_spent_every_once': arr
+    });
   }
 
+  void update1() {
+    List<int> arr = [];
+    arr.add(0);
+    arr.add(3);
+
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    firebaseDatabase
+        .child('student_behavior_model')
+        .child('2018170065')
+        .child('1')
+        .child('1')
+        .child('audio')
+        .set({
+      'number_of_visits': 0,
+      'popUpQuestion': {'qID': 'answerID'},
+      'time_spent_every_once': arr,
+      'time_progress_ratio': 0,
+      'time_spent': 0
+    });
+  }
+
+  void updateStudentBehavior1() {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    firebaseDatabase
+        .child('student_behavior_model')
+        .child('2018170135')
+        .update({
+      '1': {
+        '1': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '2': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '3': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
+      },
+      '2': {
+        '4': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '5': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '6': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
+      },
+      '3': {
+        '7': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '8': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '9': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '10': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
+      },
+      '4': {
+        '11': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '12': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '13': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
+      },
+      '5': {
+        '14': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '15': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '16': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        },
+        '17': {
+          'audio': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'image': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'text': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          },
+          'video': {
+            'number_of_visits': 0,
+            'popUpQuestion': {'qID': 'answerID'},
+            'time_spent_every_once': {'1': 0},
+            'time_progress_ratio': 0,
+            'time_spent': 0
+          }
+        }
+      }
+    });
+  }
+
+  void update() {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    firebaseDatabase
+        .child('student_behavior_model')
+        .child('2018170065')
+        .child('1')
+        .child('1')
+        .child('audio')
+        .update({
+      'number_of_visits': 0,
+      'time_spent': 0,
+      'time_spent_every_once': {'1': 1}
+    });
+  }
   // void update() {
   //   DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
-  //   firebaseDatabase
-  //       .child('student_behavior_model')
-  //       .child('2018170076')
-  //       .child('1')
-  //       .child('audio')
-  //       .update({'time_spent': 0});
-  //   firebaseDatabase
-  //       .child('student_behavior_model')
-  //       .child('2018170076')
-  //       .child('1')
-  //       .child('image')
-  //       .update({'time_spent': 0});
-  //   firebaseDatabase
-  //       .child('student_behavior_model')
-  //       .child('2018170076')
-  //       .child('1')
-  //       .child('text')
-  //       .update({'time_spent': 0});
-  //   firebaseDatabase
-  //       .child('student_behavior_model')
-  //       .child('2018170076')
-  //       .child('1')
-  //       .child('video')
-  //       .update({'time_spent': 0});
+  //   firebaseDatabase.child('student_behavior_model').child('2018170065').set({
+  //     '1': {
+  //       '1': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '2': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '3': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       }
+  //     },
+  //     '2': {
+  //       '4': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '5': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '6': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       }
+  //     },
+  //     '3': {
+  //       '7': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '8': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '9': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '10': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       }
+  //     },
+  //     '4': {
+  //       '11': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '12': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '13': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       }
+  //     },
+  //     '5': {
+  //       '14': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '15': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '16': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       },
+  //       '17': {
+  //         'audio': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'image': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'text': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         },
+  //         'video': {
+  //           'number_of_visits': 0,
+  //           'popUpQuestion': {'qID': 'answerID'},
+  //           'time_spent_every_once': {'1': 0},
+  //           'time_progress_ratio': 0,
+  //           'time_spent': 0
+  //         }
+  //       }
+  //     }
+  //   });
   // }
 }

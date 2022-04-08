@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gp/DatabaseManager.dart';
+import 'package:gp/Levels_View.dart';
 import 'package:gp/audio_player.dart';
 import 'package:gp/Levels.dart';
 import 'package:gp/classes/student.dart';
@@ -10,15 +11,24 @@ import 'package:gp/classes/studentBehavior.dart';
 class audio_player extends StatefulWidget {
   final student std;
   final ForAudio forAudio;
-  audio_player(this.std, this.forAudio);
-  _audio_player_state createState() => _audio_player_state(std, forAudio);
+  final int LevelNumber;
+  final int TopicNumber;
+  audio_player(this.std, this.forAudio, this.LevelNumber, this.TopicNumber);
+  _audio_player_state createState() =>
+      _audio_player_state(std, forAudio, LevelNumber, TopicNumber);
 }
 
 class _audio_player_state extends State<audio_player> {
   student std;
   ForAudio forAudio;
-  _audio_player_state(this.std, this.forAudio);
+  int LevelNumber;
+  int TopicNumber;
+  _audio_player_state(
+      this.std, this.forAudio, this.LevelNumber, this.TopicNumber);
   bool playing = false;
+  List<int> times = [];
+  int i = 0;
+  int NumperOfEnters = 0;
   IconData playBtn = Icons.play_arrow;
   AudioPlayer _player = new AudioPlayer();
   AudioCache cache = new AudioCache();
@@ -79,20 +89,41 @@ class _audio_player_state extends State<audio_player> {
           icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: () {
             //   _player.pause();
+
             DateTime FinalTime = DateTime.now();
             final FinalHour = FinalTime.hour.toString().padLeft(2, '0');
             final FinalMinute = FinalTime.minute.toString().padLeft(2, '0');
             final FinalSecond = FinalTime.second.toString().padLeft(2, '0');
             x = '$FinalHour$FinalMinute$FinalSecond';
             int SecondTime = int.parse(x);
+            int timeStayed = SecondTime - firstTime;
             ForAudio NewforAudio = ForAudio();
+
+            for (i = 0; i < 100; i++) {
+              try {
+                times.add(forAudio.Time_spent_every_once[i]);
+                NumperOfEnters++;
+              } catch (e) {
+                times.add(timeStayed);
+                break;
+              }
+            }
+
             NewforAudio.NumberOfVisitedPage = forAudio.NumberOfVisitedPage + 1;
             NewforAudio.TimeSpendInPage =
                 forAudio.TimeSpendInPage + (SecondTime - firstTime);
-            db.updateStudentBehavior(NewforAudio.TimeSpendInPage,
-                NewforAudio.NumberOfVisitedPage, "audio", std.id);
+            db.updateStudentBehavior(
+              NewforAudio.TimeSpendInPage,
+              NewforAudio.NumberOfVisitedPage,
+              "audio",
+              std.id,
+              LevelNumber,
+              TopicNumber,
+              times,
+            );
+
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Levels(1, std)));
+                MaterialPageRoute(builder: (context) => levels_view(std)));
             _player.pause();
             // _selectedIndex-=2;
           },

@@ -144,8 +144,8 @@ class _HomeLevelState extends State<HomeLevel> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                           // builder: (context) => Types(index + 1, know, std))
-                            builder: (context) => topic_view()));
+                            // builder: (context) => Types(index + 1, know, std))
+                            builder: (context) => topic_view(std, 1)));
                   },
                 ),
               );

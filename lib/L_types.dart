@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/Levels.dart';
+import 'package:gp/Levels_View.dart';
 import 'package:gp/Types.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
+import 'package:path/path.dart';
 import 'audio_player.dart';
 import 'package:gp/URL_view.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -16,23 +18,29 @@ import 'pdf_view.dart';
 
 class types extends StatefulWidget {
   final student std;
-  types(this.std);
+  final int LevelNumber;
+  final int TopicNumber;
+  types(this.std, this.LevelNumber, this.TopicNumber);
   int _selectedIndex = 3;
   static List<Widget> _pages = <Widget>[
     Home(student()),
     Levels(1, student()),
-    types(student()),
+    types(student(), 0, 0),
     MyProfileScreen(student()),
   ];
 
   @override
-  _typesState createState() => _typesState(std);
+  _typesState createState() => _typesState(std, LevelNumber, TopicNumber);
 }
 
 class _typesState extends State<types> {
   student std;
-  _typesState(this.std);
+  int LevelNumber;
+  int TopicNumber;
+  _typesState(this.std, this.LevelNumber, this.TopicNumber);
   late studentBehavior stdBehavior;
+  //late TypesForStudent list;
+  var cupit;
   bool _video_1st = true;
   //bool _video_1st=false;
 
@@ -56,20 +64,24 @@ class _typesState extends State<types> {
             icon: Icon(Icons.arrow_back_ios_outlined),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Levels(1, std)));
+                  MaterialPageRoute(builder: (context) => levels_view(std)));
               // _selectedIndex-=2;
             },
           ),
         ),
         body: Builder(builder: (context) {
-          StudentBehaviorCubit.get(context).getStudentBehaviorData(std.id);
+          // StudentBehaviorCubit.get(context)
+          //     .getStudentBehaviorData(std.id, LevelNumber, TopicNumber);
+          StudentBehaviorCubit.get(context)
+              .getTimeSpendEveryOnce(std.id, LevelNumber, TopicNumber);
           return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
             builder: (context, state) {
               if (state is StudentBehaviorLoading)
                 return Center(child: CircularProgressIndicator());
               else {
                 var behaviorCubit = StudentBehaviorCubit.get(context);
-                stdBehavior = behaviorCubit.std;
+                stdBehavior = behaviorCubit.value;
+                //stdBehavior = behaviorCubit.std;
                 return Center(
                   child: Container(
                     color: Colors.blue[200],
@@ -82,7 +94,12 @@ class _typesState extends State<types> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: () => {print("'Clicked'")},
+                            onTap: () => {
+                              print("'Clicked'"),
+
+                              // print(
+                              //     stdBehavior.forAudio.Time_spent_every_once[1])
+                            },
                             child: Container(
                               width: 250,
                               decoration: BoxDecoration(
@@ -150,7 +167,10 @@ class _typesState extends State<types> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => audio_player(
-                                                std, stdBehavior.forAudio)),
+                                                std,
+                                                stdBehavior.forAudio,
+                                                LevelNumber,
+                                                TopicNumber)),
                                       ),
                                     },
                                     //print("'Clicked'")},
@@ -215,7 +235,10 @@ class _typesState extends State<types> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => image_view(
-                                                std, stdBehavior.forImage)),
+                                                std,
+                                                stdBehavior.forImage,
+                                                LevelNumber,
+                                                TopicNumber)),
                                       ),
                                     },
                                     child: Container(
@@ -280,7 +303,10 @@ class _typesState extends State<types> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => pdf_view(
-                                                std, stdBehavior.forText)),
+                                                std,
+                                                stdBehavior.forText,
+                                                LevelNumber,
+                                                TopicNumber)),
                                       ),
                                     },
                                     child: Container(

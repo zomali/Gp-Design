@@ -49,8 +49,10 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
           icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: () {
             //   _player.pause();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => types(student())));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => types(student(), 0, 0)));
 
             // _selectedIndex-=2;
           },

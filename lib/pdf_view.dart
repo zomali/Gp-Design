@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gp/DatabaseManager.dart';
+import 'package:gp/Levels_View.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -9,16 +10,23 @@ import 'Levels.dart';
 class pdf_view extends StatefulWidget {
   final student std;
   final ForText forText;
-  pdf_view(this.std, this.forText);
+  final int LevelNumber;
+  final int TopicNumber;
+  pdf_view(this.std, this.forText, this.LevelNumber, this.TopicNumber);
   @override
-  _pdf_view createState() => _pdf_view(std, forText);
+  _pdf_view createState() => _pdf_view(std, forText, LevelNumber, TopicNumber);
 }
 
 class _pdf_view extends State<pdf_view> {
   student std;
   ForText forText;
-  _pdf_view(this.std, this.forText);
+  int LevelNumber;
+  int TopicNumber;
+  _pdf_view(this.std, this.forText, this.LevelNumber, this.TopicNumber);
   DatabaseManager db = DatabaseManager();
+  int NumperOfEnters = 0;
+  List<int> times = [];
+  int i = 0;
   late PdfViewerController _pdfViewerController;
   final GlobalKey<SfPdfViewerState> _pdfViewerStateKey = GlobalKey();
   @override
@@ -83,20 +91,43 @@ class _pdf_view extends State<pdf_view> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: () {
+            try {
+              for (int i = 1; i < 5; i++) {
+                forText.Time_spent_every_once[i];
+                NumperOfEnters++;
+              }
+            } catch (e) {}
+
             DateTime FinalTime = DateTime.now();
             final FinalHour = FinalTime.hour.toString().padLeft(2, '0');
             final FinalMinute = FinalTime.minute.toString().padLeft(2, '0');
             final FinalSecond = FinalTime.second.toString().padLeft(2, '0');
             x = '$FinalHour$FinalMinute$FinalSecond';
             int SecondTime = int.parse(x);
+            int timeStayed = SecondTime - firstTime;
             ForText NewforText = ForText();
             NewforText.NumberOfVisitedPage = forText.NumberOfVisitedPage + 1;
             NewforText.TimeSpendInPage =
                 forText.TimeSpendInPage + (SecondTime - firstTime);
-            db.updateStudentBehavior(NewforText.TimeSpendInPage,
-                NewforText.NumberOfVisitedPage, "text", std.id);
+            for (i = 0; i < 100; i++) {
+              try {
+                times.add(forText.Time_spent_every_once[i]);
+                NumperOfEnters++;
+              } catch (e) {
+                times.add(timeStayed);
+                break;
+              }
+            }
+            db.updateStudentBehavior(
+                NewforText.TimeSpendInPage,
+                NewforText.NumberOfVisitedPage,
+                "text",
+                std.id,
+                LevelNumber,
+                TopicNumber,
+                times);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Levels(1, std)));
+                MaterialPageRoute(builder: (context) => levels_view(std)));
             // _selectedIndex-=2;
           },
         ),
