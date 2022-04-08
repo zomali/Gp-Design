@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/topic_images.dart';
 import 'L_types.dart';
-import 'Levels.dart';
 import 'URL_view.dart';
 import 'classes/studentBehavior.dart';
+import 'package:gp/Levels_View.dart';
 //import 'package:flutter/Levels.dart';
 
 class Types extends StatelessWidget {
@@ -25,7 +25,7 @@ class Types extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Levels(index, std)));
+                MaterialPageRoute(builder: (context) => levels_view( std)));
             // _selectedIndex-=2;
           },
         ),

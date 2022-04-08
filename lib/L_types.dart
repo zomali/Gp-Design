@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Home.dart';
-import 'package:gp/Levels.dart';
 import 'package:gp/Levels_View.dart';
 import 'package:gp/Types.dart';
 import 'package:gp/classes/studentBehavior.dart';
@@ -15,6 +14,7 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'classes/student.dart';
 import 'topic_images.dart';
 import 'pdf_view.dart';
+import 'Levels_View.dart';
 
 class types extends StatefulWidget {
   final student std;
@@ -24,7 +24,7 @@ class types extends StatefulWidget {
   int _selectedIndex = 3;
   static List<Widget> _pages = <Widget>[
     Home(student()),
-    Levels(1, student()),
+    levels_view(student()),
     types(student(), 0, 0),
     MyProfileScreen(student()),
   ];

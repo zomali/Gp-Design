@@ -12,7 +12,6 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'L_types.dart';
-import 'Levels.dart';
 import 'Types.dart';
 import 'package:gp/Levels_View.dart';
 //import 'package:flutter_application_1/levels.dart';

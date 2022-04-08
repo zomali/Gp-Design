@@ -117,7 +117,7 @@ class _levels_view extends State<levels_view> {
                                 left: 20, right: 20, bottom: 20),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Color(0xFf363f93),
+                                color: Colors.blue,
                                 borderRadius: const BorderRadius.only(
                                     bottomRight: Radius.circular(80.0)),
                                 boxShadow: [

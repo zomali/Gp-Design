@@ -4,9 +4,6 @@ import 'package:gp/Levels_View.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
-import 'Levels.dart';
-
 class pdf_view extends StatefulWidget {
   final student std;
   final ForText forText;

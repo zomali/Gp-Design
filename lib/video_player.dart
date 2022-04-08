@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gp/classes/student.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
-import 'package:gp/Levels.dart';
 import 'package:gp/infoDialog.dart';
 
 class video_player extends StatefulWidget {

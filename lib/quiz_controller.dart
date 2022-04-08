@@ -17,6 +17,7 @@ import 'welcome_screen.dart';
 
 class QuizController extends GetxController{
   String name = '';
+  String status='';
   //question variables
   int get countOfQuestion => _questionsList.length;
   final List<QuestionModel> _questionsList = [
@@ -113,26 +114,18 @@ class QuizController extends GetxController{
 
 
   int get countOfCorrectAnswers => _countOfCorrectAnswers;
-
   //map for check if the question has been answered
   final Map<int, bool> _questionIsAnswerd = {};
-
-
   //page view controller
   late PageController pageController;
 
   //timer
   Timer? _timer;
-
-
-  final maxSec = 15;
-
-
-  final RxInt _sec = 15.obs;
-
-
-  RxInt get sec => _sec;
-
+  //min to display quiz to stident
+  final maxMin = 15;
+  //time in progress time design must equal maxMin variable
+  final RxInt _min = 15.obs;
+  RxInt get min => _min;
   @override
   void onInit() {
     pageController = PageController(initialPage: 0);
@@ -150,7 +143,23 @@ class QuizController extends GetxController{
   double get scoreResult {
     return _countOfCorrectAnswers * 100 / _questionsList.length;
   }
-
+  void checkStatusOfStudent(){
+    if(scoreResult>80)
+    {
+      status="Congratulations";
+    }
+    else if(scoreResult==0)
+    {
+      status="Very frustrating. You have to change the way you study";
+    }
+    else if(scoreResult<50)
+    {
+      status="You Must Study Well, You Will Repeat This Level";
+    }
+    else{
+      status="Not bad, but you should study more";
+    }
+  }
   void checkAnswer(QuestionModel questionModel, int selectAnswer) {
     _isPressed = true;
 
@@ -160,7 +169,7 @@ class QuizController extends GetxController{
     if (_correctAnswer == _selectAnswer) {
       _countOfCorrectAnswers++;
     }
-    stopTimer();
+    //stopTimer();
     _questionIsAnswerd.update(questionModel.id, (value) => true);
     Future.delayed(const Duration(milliseconds: 500)).then((value) => nextQuestion());
     update();
@@ -177,15 +186,15 @@ class QuizController extends GetxController{
     if (_timer != null || _timer!.isActive) {
       stopTimer();
     }
-
-    if (pageController.page == _questionsList.length - 1) {
+    if (pageController.page == _questionsList.length - 1 || _min.value==0) {
+      checkStatusOfStudent();
       Get.offAndToNamed(ResultScreen.routeName);
     } else {
       _isPressed = false;
       pageController.nextPage(
           duration: const Duration(milliseconds: 500), curve: Curves.linear);
 
-      startTimer();
+      //startTimer();
     }
     _numberOfQuestion = pageController.page! + 2;
     update();
@@ -227,25 +236,26 @@ class QuizController extends GetxController{
 
   void startTimer() {
     resetTimer();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_sec.value > 0) {
-        _sec.value--;
+    _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
+      if (_min.value > 1) {
+        _min.value--;
       } else {
         stopTimer();
-        nextQuestion();
+        Get.offAndToNamed(ResultScreen.routeName);
+        //nextQuestion();
       }
     });
   }
 
-  void resetTimer() => _sec.value = maxSec;
+  void resetTimer() => _min.value = maxMin;
 
   void stopTimer() => _timer!.cancel();
-  //call when start again quiz
-  void startAgain() {
+//call when start again quiz
+/*void startAgain() {
     _correctAnswer = null;
     _countOfCorrectAnswers = 0;
     resetAnswer();
     _selectAnswer = null;
     Get.offAllNamed(WelcomeScreen.routeName);
-  }
+  }*/
 }

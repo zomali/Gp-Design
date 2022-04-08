@@ -4,7 +4,6 @@ import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
 
 import 'DatabaseManager.dart';
-import 'Levels.dart';
 
 class image_view extends StatefulWidget {
   final student std;
