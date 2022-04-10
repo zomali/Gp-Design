@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/Courses_evaluations_Screen.dart';
+import 'package:gp/Change_Password_Screen.dart';
+
 import 'package:gp/L_types.dart';
 import 'package:gp/Topic_view.dart';
 import 'package:gp/edit_profile%20screen.dart';
@@ -27,9 +28,12 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+  //  final student std=student();
+  //  _HomePageState(this.std);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -56,12 +60,12 @@ class MyApp extends StatelessWidget {
         //home:Start_Quiz(),
 
         // home: MyProfileScreen(),
-        //home: Login_screen(),
-        // home: Home(0),
+       home: Login_screen(),
+      //   home: Change_password(),
         //home: Courses_evaluations_Screen(new student()),
         //home: signup_screen(),
         // home: audio_player(),
-        home: video_player(),
+    //    home: video_player(),
       ),
     );
   }

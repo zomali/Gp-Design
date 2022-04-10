@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gp/Courses_evaluations_Screen.dart';
+
 import 'package:gp/Home.dart';
 import 'package:gp/L_types.dart';
 import 'package:gp/Learning_analytics_screen.dart';
@@ -12,6 +12,7 @@ import 'package:gp/edit_profile%20screen.dart';
 //import 'lib.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'classes/student.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   void addTOList() {
     _pages.add(Home(std));
     _pages.add(Learning_analytics_screen(std));
-    _pages.add(Courses_evaluations_Screen(std));
+    _pages.add(Course_evual_categories(std));
     _pages.add(MyProfileScreen(std));
   }
 
