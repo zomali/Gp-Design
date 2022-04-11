@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/Sidebar/hom.dart';
+import 'package:gp/pages/Info.dart';
+import 'package:gp/pages/hom.dart';
 import 'package:gp/login_screen.dart';
 import '';
 import 'BlockNavigation.dart';
