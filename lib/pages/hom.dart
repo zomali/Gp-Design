@@ -12,7 +12,7 @@ class hhh extends StatelessWidget with NavigationStates {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Home',style: TextStyle(fontSize: 30.0),)
+            Text('Levels',style: TextStyle(fontSize: 30.0),)
           ],
         ),
       ),

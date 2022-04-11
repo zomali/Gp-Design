@@ -116,8 +116,8 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                           oniconpress();
                         },
                         child: Menu_SideBar(
-                          icon: Icons.home,
-                          title: "Home",
+                          icon: Icons.topic,
+                          title: "Levels",
                           // ontap: () {
                           //
                           //  BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
