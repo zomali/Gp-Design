@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:gp/DatabaseManager.dart';
+import 'package:gp/L_types.dart';
 import 'package:gp/Levels_View.dart';
 import 'package:gp/infoDialog.dart';
 import 'package:gp/classes/student.dart';
@@ -11,21 +12,21 @@ class audio_player extends StatefulWidget {
   final student std;
   final ForAudio forAudio;
   final Audio_ audio;
-  final int LevelNumber;
-  final int TopicNumber;
-  audio_player(this.std,this.audio, this.forAudio, this.LevelNumber, this.TopicNumber);
+  final Level_ level;
+  final Topic_ topic;
+  audio_player(this.std,this.audio, this.forAudio, this.level, this.topic);
   _audio_player_state createState() =>
-      _audio_player_state(std, audio, forAudio, LevelNumber, TopicNumber);
+      _audio_player_state(std, audio, forAudio, level, topic);
 }
 
 class _audio_player_state extends State<audio_player> {
   student std;
   ForAudio forAudio;
   Audio_ audio;
-  int LevelNumber;
-  int TopicNumber;
+  Level_ level;
+  Topic_ topic;
   _audio_player_state(
-      this.std,this.audio, this.forAudio, this.LevelNumber, this.TopicNumber);
+      this.std,this.audio, this.forAudio, this.level, this.topic);
   bool playing = false;
   List<int> times = [];
   int i = 0;
@@ -70,7 +71,7 @@ class _audio_player_state extends State<audio_player> {
       });
     });
     _player.setUrl(
-        "https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FArabic%2Fvariable%20and%20constans.mp3?alt=media&token=d44db750-cb81-4589-8f1d-f3561f870804");
+        audio.URL);
   }
 
   @override
@@ -84,6 +85,7 @@ class _audio_player_state extends State<audio_player> {
     int firstTime = int.parse(x);
     return Scaffold(
       appBar: AppBar(
+        title: Text(audio.title),
         elevation: 1,
         backgroundColor: Color.fromARGB(255, 3, 60, 126),
         leading: IconButton(
@@ -116,15 +118,15 @@ class _audio_player_state extends State<audio_player> {
               NewforAudio.NumberOfVisitedPage,
               "audio",
               std.id,
-              LevelNumber,
-              TopicNumber,
+              level.id,
+              topic.id,
               times,
             );
 
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => levels_view(std)));
+                MaterialPageRoute(builder: (context) => types(std, level, topic)));
             _player.pause();
-            // _selectedIndex-=2;
+            
           },
         ),
       ),
@@ -146,17 +148,17 @@ class _audio_player_state extends State<audio_player> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
+               /* Padding(
                   padding: const EdgeInsets.only(left: 12.0),
                   child: Text(
-                    "Revision, Varriables & Constants",
+                    audio.title,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 32.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
+                ),*/
                 SizedBox(
                   height: 24.0,
                 ),

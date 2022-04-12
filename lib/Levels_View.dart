@@ -6,6 +6,7 @@ import 'package:gp/Start_Quiz.dart';
 import 'package:gp/Topic_view.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/classes/student.dart';
+import 'Home.dart';
 import 'L_types.dart';
 
 class levels_view extends StatefulWidget {
@@ -37,7 +38,8 @@ class _levels_view extends State<levels_view> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: (){
-            
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Home(std)));
           },
           ),),
         body: Builder(

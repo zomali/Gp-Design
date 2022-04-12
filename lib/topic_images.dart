@@ -10,21 +10,21 @@ class image_view extends StatefulWidget {
   final student std;
   final List<Image_> image_;
   final ForImage forImage;
-  final int LevelNumber;
-  final int TopicNumber;
-  image_view(this.std,this.image_, this.forImage, this.LevelNumber, this.TopicNumber);
+  final Level_ level;
+  final Topic_ topic;
+  image_view(this.std,this.image_, this.forImage, this.level, this.topic);
   @override
   _image_view createState() =>
-      _image_view(std, image_, forImage, LevelNumber, TopicNumber);
+      _image_view(std, image_, forImage, level, topic);
 }
 
 class _image_view extends State<image_view> {
   student std;
   List<Image_> image_;
   ForImage forImage;
-  int LevelNumber;
-  int TopicNumber;
-  _image_view(this.std, this.image_, this.forImage, this.LevelNumber, this.TopicNumber);
+  Level_ level;
+  Topic_ topic;
+  _image_view(this.std, this.image_, this.forImage, this.level, this.topic);
   DatabaseManager db = DatabaseManager();
   
   int NumperOfEnters = 0;
@@ -45,13 +45,14 @@ class _image_view extends State<image_view> {
       appBar: AppBar(
         // App Bar
         title: Text(
-          "topic name",
-          style: TextStyle(color: Colors.blue),
+          topic.name,
+          style: TextStyle(color: Colors.white),
         ),
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
+          color: Colors.white,
           onPressed: () {
             try {
               for (int i = 1; i < 5; i++) {
@@ -85,8 +86,8 @@ class _image_view extends State<image_view> {
                 NewforImage.NumberOfVisitedPage,
                 "image",
                 std.id,
-                LevelNumber,
-                TopicNumber,
+                level.id,
+                topic.id,
                 times);
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => levels_view(std)));

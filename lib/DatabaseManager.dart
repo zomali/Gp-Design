@@ -49,7 +49,8 @@ class DatabaseManager {
         await firebaseDatabase.child('topics').child(topicID.toString()).get();
     var values = response.value;
     Topic_ topic = Topic_();
-    //get name
+    //get name & ID
+    topic.id = topicID;
     topic.name = values['name'];
     //get audios
     topic.audios = <Audio_>[];

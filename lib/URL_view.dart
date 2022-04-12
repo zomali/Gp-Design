@@ -1,38 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:gp/classes/classes.dart';
+import 'L_types.dart';
 import 'classes/student.dart';
 import 'classes/studentBehavior.dart';
 
 class url_view extends StatefulWidget {
   final student std;
   final List<URL_> urls;
-  final int LevelNumber;
-  final int TopicNumber;
+  final Level_ level;
+  final Topic_ topic;
 
-  url_view(this.std, this.urls, this.LevelNumber, this.TopicNumber);
-  @override _url_view createState() => _url_view(std, urls, LevelNumber, TopicNumber);
+  url_view(this.std, this.urls, this.level, this.topic);
+  @override _url_view createState() => _url_view(std, urls, level, topic);
 }
 class _url_view extends State<url_view> {
-  /*
-  var urlList = [
-    "https://www.w3schools.com/cpp/cpp_variables.asp",
-    "https://www.geeksforgeeks.org/variables-in-c/",
-    "https://www.geeksforgeeks.org/constants-in-c-cpp/",
-    "https://www.cplusplus.com/doc/tutorial/constants/",
-  ];
-  var titleList = [
-    "W3schools",
-    "W3schools",
-    "W3schools",
-    "W3schools",
-  ];
-  */
   student std;
   List<URL_> urls;
-  int LevelNumber;
-  int TopicNumber;
-  _url_view(this.std, this.urls, this.LevelNumber, this.TopicNumber);
+  Level_ level;
+  Topic_ topic;
+  _url_view(this.std, this.urls, this.level, this.topic);
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.6;
@@ -40,11 +27,18 @@ class _url_view extends State<url_view> {
       appBar: AppBar(
         // App Bar
         title: Text(
-          "topic name",
+          topic.name,
           style: TextStyle(color: Colors.blue),
         ),
         elevation: 0,
         backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => types(std, level, topic)));
+          }
+        )
       ),
       // Main List View With Builder
       body: ListView.builder(

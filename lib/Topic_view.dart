@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gp/Levels_View.dart';
 import 'package:gp/Start_Quiz.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/classes.dart';
@@ -31,7 +32,8 @@ class _topic_view extends State<topic_view> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: (){
-            
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => levels_view(std)));            
           },
           ),),
         body: Column(children: [
@@ -85,7 +87,7 @@ class _topic_view extends State<topic_view> {
                         //action on tap
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
-                                types(std, level.id, level.topics[index].id)));
+                                types(std, level, level.topics[index])));
                       },
                       child: Card(
                         child: Row(children: <Widget>[

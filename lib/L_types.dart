@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/Levels_View.dart';
+import 'package:gp/Topic_view.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
@@ -11,7 +12,6 @@ import 'package:path/path.dart';
 import 'audio_player.dart';
 import 'video_player.dart';
 import 'package:gp/URL_view.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'classes/student.dart';
 import 'classes/classes.dart';
 import 'topic_images.dart';
@@ -20,9 +20,10 @@ import 'Levels_View.dart';
 
 class types extends StatefulWidget {
   final student std;
-  final int LevelNumber;
-  final int TopicNumber;
-  types(this.std, this.LevelNumber, this.TopicNumber);
+  final Level_ level;
+  final Topic_ topic;
+  types(this.std, this.level, this.topic);
+/*
   int _selectedIndex = 3;
   static List<Widget> _pages = <Widget>[
     Home(student()),
@@ -30,16 +31,16 @@ class types extends StatefulWidget {
     types(student(), 0, 0),
     MyProfileScreen(student()),
   ];
-
+*/
   @override
-  _typesState createState() => _typesState(std, LevelNumber, TopicNumber);
+  _typesState createState() => _typesState(std, level, topic);
 }
 
 class _typesState extends State<types> {
   student std;
-  int LevelNumber;
-  int TopicNumber;
-  _typesState(this.std, this.LevelNumber, this.TopicNumber);
+  Level_ level;
+  Topic_ topic;
+  _typesState(this.std, this.level, this.topic);
   late studentBehavior stdBehavior;
   //late TypesForStudent list;
   var cupit;
@@ -67,14 +68,14 @@ class _typesState extends State<types> {
             icon: Icon(Icons.arrow_back_ios_outlined),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => levels_view(std)));
+                  MaterialPageRoute(builder: (context) => topic_view(std, level)));
               // _selectedIndex-=2;
             },
           ),
         ),
         body: Builder(builder: (context) {
           StudentBehaviorCubit.get(context)
-              .getTimeSpendEveryOnce(std.id, LevelNumber, TopicNumber);
+              .getTimeSpendEveryOnce(std.id, level.id, topic.id);
           return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
             builder: (context, state){
               if(state is StudentBehaviorLoading)
@@ -84,7 +85,7 @@ class _typesState extends State<types> {
               else {
                 var behaviorCubit = StudentBehaviorCubit.get(context);
                 stdBehavior = behaviorCubit.value;
-                TopicCubit.get(context).getTopicData(TopicNumber);
+                TopicCubit.get(context).getTopicData(topic.id);
                 return BlocBuilder<TopicCubit, TopicState>(
                 builder: (context, state) {
                   if (state is TopicLoading)
@@ -181,8 +182,8 @@ class _typesState extends State<types> {
                                                     std,
                                                    topic.audios[0],
                                                     stdBehavior.forAudio,
-                                                    LevelNumber,
-                                                    TopicNumber)),
+                                                    level,
+                                                    topic)),
                                           ),
                                         },
                                         //print("'Clicked'")},
@@ -250,8 +251,8 @@ class _typesState extends State<types> {
                                                     std,
                                                     topic.images,
                                                     stdBehavior.forImage,
-                                                    LevelNumber,
-                                                    TopicNumber)),
+                                                    level,
+                                                    topic)),
                                           ),
                                         },
                                         child: Container(
@@ -315,13 +316,12 @@ class _typesState extends State<types> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => /*pdf_view(
+                                                builder: (context) => pdf_view(
                                                     std,
                                                     topic.pdf,
                                                     stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                                    video_player(std, topic.videos[0], stdBehavior.forVideo, LevelNumber, TopicNumber)),
+                                                    level,
+                                                    topic)),
                                           ),
                                         },
                                         child: Container(

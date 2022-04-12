@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gp/DatabaseManager.dart';
+import 'package:gp/L_types.dart';
 import 'package:gp/Levels_View.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
@@ -9,20 +10,20 @@ class pdf_view extends StatefulWidget {
   final student std;
   final Text_ text_;
   final ForText forText;
-  final int LevelNumber;
-  final int TopicNumber;
-  pdf_view(this.std,this.text_, this.forText, this.LevelNumber, this.TopicNumber);
+  final Level_ level;
+  final Topic_ topic;
+  pdf_view(this.std,this.text_, this.forText, this.level, this.topic);
   @override
-  _pdf_view createState() => _pdf_view(std, text_, forText, LevelNumber, TopicNumber);
+  _pdf_view createState() => _pdf_view(std, text_, forText, level, topic);
 }
 
 class _pdf_view extends State<pdf_view> {
   student std;
   final Text_ text_;
   ForText forText;
-  int LevelNumber;
-  int TopicNumber;
-  _pdf_view(this.std,this.text_, this.forText, this.LevelNumber, this.TopicNumber);
+  Level_ level;
+  Topic_ topic;
+  _pdf_view(this.std,this.text_, this.forText, this.level, this.topic);
   DatabaseManager db = DatabaseManager();
   int NumperOfEnters = 0;
   List<int> times = [];
@@ -124,11 +125,11 @@ class _pdf_view extends State<pdf_view> {
                 NewforText.NumberOfVisitedPage,
                 "text",
                 std.id,
-                LevelNumber,
-                TopicNumber,
+                level.id,
+                topic.id,
                 times);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => levels_view(std)));
+                MaterialPageRoute(builder: (context) => types(std, level, topic)));
             // _selectedIndex-=2;
           },
         ),
