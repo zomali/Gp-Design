@@ -7,16 +7,9 @@ class hhh extends StatelessWidget with NavigationStates {
   Widget build(BuildContext context) {
     return Scaffold(
     appBar: AppBar(
+    title: Text('Hello'),
     ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Home',style: TextStyle(fontSize: 30.0),)
-          ],
-        ),
-      ),
-
+    body: Container(),
     );
   }
 }

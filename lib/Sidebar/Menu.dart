@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 class Menu_SideBar extends StatelessWidget {
 final IconData?icon;
 final String?title;
-//final Function ontap;
-const Menu_SideBar({Key? key, this.icon, this.title,  }) : super(key: key);
+final Function ontap;
+  const Menu_SideBar({Key? key, this.icon, this.title, required this.ontap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //onTap: ontap!(),
+      onTap: ontap(),
       child: Padding(
           padding:  const EdgeInsets.all(16),
         child: Row(

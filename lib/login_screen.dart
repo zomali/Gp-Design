@@ -13,7 +13,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
-class Login_screen extends StatefulWidget with NavigationStates  {
+import 'DatabaseManager.dart';
+
+class Login_screen extends StatefulWidget {
   const Login_screen({Key? key}) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class _login_screenState extends State<Login_screen> {
   bool _passwordVisible = false;
   bool _remembercheck = false;
   final _formKey = GlobalKey<FormState>();
+  DatabaseManager db = DatabaseManager();
 
   bool studentExist(
       var emailEntered, var passwordEnteres, List<student> listStudents) {

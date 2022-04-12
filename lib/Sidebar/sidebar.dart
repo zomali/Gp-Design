@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/login_screen.dart';
-import 'package:gp/pages/Info.dart';
+import 'package:gp/Info.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'BlockNavigation.dart';
@@ -76,33 +75,26 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                       SizedBox(
                         height: 100,
                       ),
-                      GestureDetector(
-                        onTap: (){
-                                    // navigate to profile
-                        },
-                        child: ListTile(
-                          title: Text(
-                            "Hossam",
-                            style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w800),
+                      ListTile(
+                        title: Text(
+                          "Hossam",
+                          style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w800),
+                        ),
+                        subtitle: Text(
+                          "hh@gmail.com",
+                          style: TextStyle(
+                            color: Color(0xFF1BB5FD),
+                            fontSize: 18,
                           ),
-                          subtitle: Text(
-                            "hh@gmail.com",
-                            style: TextStyle(
-                              color: Color(0xFF1BB5FD),
-                              fontSize: 18,
-                            ),
+                        ),
+                        leading: CircleAvatar(
+                          child: Icon(
+                            Icons.perm_identity,
+                            color: Colors.white,
                           ),
-                          leading: CircleAvatar(
-                            child: Icon(
-                              Icons.perm_identity,
-                              color: Colors.white,
-                            ),
-                            radius: 40,
-                          ),
-
+                          radius: 40,
                         ),
                       ),
-
                       Divider(
                         height: 64,
                         thickness: 0.5,
@@ -110,33 +102,22 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                         indent: 32,
                         endIndent: 32,
                       ),
-                      GestureDetector(
-                        onTap: (){
+                      Menu_SideBar(
+                        icon: Icons.home,
+                        title: "Home",
+                        ontap: () {
+
                           BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
-                          oniconpress();
+
                         },
-                        child: Menu_SideBar(
-                          icon: Icons.home,
-                          title: "Home",
-                          // ontap: () {
-                          //
-                          //  BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
-                          // },
-                        ),
                       ),
-                      GestureDetector(
-                        onTap: (){
-                          BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
-                          oniconpress();
+                      Menu_SideBar(
+                        icon: Icons.person,
+                        title: "My Account",
+                        ontap: () {
+
+                          BlocProvider.of<Navigationn>(context).add(NavigationEvents.Infoevent);
                         },
-                        child: Menu_SideBar(
-                          icon: Icons.person,
-                          title: "My Quizes",
-                          // ontap: () {
-                          //
-                          //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
-                          // },
-                        ),
                       ),
 
                       Divider(
@@ -147,41 +128,19 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                         endIndent: 32,
                       ),
 
-                      GestureDetector(
-                        onTap: (){
-                          BlocProvider.of<Navigationn>(context).add(NavigationEvents.Infoevent);
-                          oniconpress();
-                          },
-                        child: Menu_SideBar(
-                          icon: Icons.info,
-                          title: "INfo",
-                          // ontap: (){
-                          //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
-                          //
-                          // },
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>  Login_screen()),
-                          );
+                      Menu_SideBar(
+                        icon: Icons.info,
+                        title: "INfo",
+                        ontap: (){
+                          BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
                         },
-                        child: Menu_SideBar(
-                          icon: Icons.logout,
-                          title: "Log out",
-                          // ontap: (){
-                          //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
-                          // },
-                        ),
                       ),
                     ],
                   ),
                 ),
               ),
               Align(
-                alignment: Alignment(0, 0.1),
+                alignment: Alignment(0, -0.9),
                 child: GestureDetector(
                   onTap: () {
                     oniconpress();
@@ -189,8 +148,8 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                   child: ClipPath(
                     clipper: CustomMenuClipper(),
                     child: Container(
-                      width: 40,
-                      height: 100,
+                      width: 35,
+                      height: 110,
                       color: Color(0xFF262AAA),
                       alignment: Alignment.centerLeft,
                       child: AnimatedIcon(
