@@ -105,6 +105,8 @@ class DatabaseManager {
     t.URL = values['text']['English']['text'];
     t.source = values['text']['English']['source'];
     t.title = values['text']['English']['title'];
+    topic.pdf = t;
+
     return topic;
   }
 

@@ -9,6 +9,7 @@ import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:path/path.dart';
 import 'audio_player.dart';
+import 'video_player.dart';
 import 'package:gp/URL_view.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'classes/student.dart';
@@ -314,12 +315,13 @@ class _typesState extends State<types> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => pdf_view(
+                                                builder: (context) => /*pdf_view(
                                                     std,
                                                     topic.pdf,
                                                     stdBehavior.forText,
                                                     LevelNumber,
-                                                    TopicNumber)),
+                                                    TopicNumber)*/
+                                                    video_player(std, topic.videos[0], stdBehavior.forVideo, LevelNumber, TopicNumber)),
                                           ),
                                         },
                                         child: Container(
