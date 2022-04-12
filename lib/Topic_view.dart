@@ -2,54 +2,38 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp/Start_Quiz.dart';
 import 'package:gp/classes/student.dart';
+import 'package:gp/classes/classes.dart';
 import 'L_types.dart';
-
-class topic_data {
-  var topic_index = [
-    "Variable in C++",
-    "Variable in C++",
-    "Variable in C++",
-    "Variable in C++",
-  ];
-  var level_name = [
-    "geeksforgeeks",
-    "Revision, Variables & Constant",
-    "Revision, Variables & Constant",
-    "Revision, Variables & Constant",
-  ];
-}
 
 class topic_view extends StatefulWidget {
   final student std;
-  final int LevelNumber;
-  topic_view(this.std, this.LevelNumber);
+  final Level_ level;
+  topic_view(this.std, this.level);
   @override
-  _topic_view createState() => _topic_view(std, LevelNumber);
+  _topic_view createState() => _topic_view(std, level);
 }
 
 class _topic_view extends State<topic_view> {
   student std;
-  int LevelNumber;
-  _topic_view(this.std, this.LevelNumber);
+  Level_ level;
+  _topic_view(this.std, this.level);
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    var level_name = "Introduction";
-    var topic_name = [
-      "Revision, Variables & Constants",
-      "Control Structures",
-      "Jump Statements",
-    ];
 
-    var index_topic = [
-      "First Topic",
-      "Second Topic",
-      "Third Topic",
-    ];
     return Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBar(
+        elevation: 1,
+        backgroundColor: Colors.blue,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined),
+          onPressed: (){
+            
+          },
+          ),),
         body: Column(children: [
           Container(
             height: 200,
@@ -76,9 +60,9 @@ class _topic_view extends State<topic_view> {
                     top: 100,
                     left: 20,
                     child: Text(
-                      level_name,
+                      level.name,
                       style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 25,
                           color: Colors.blue,
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -94,14 +78,14 @@ class _topic_view extends State<topic_view> {
               context: context,
               removeTop: true,
               child: ListView.builder(
-                itemCount: topic_name.length,
+                itemCount: level.topics.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                       onTap: () {
                         //action on tap
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
-                                types(std, LevelNumber, index + 1)));
+                                types(std, level.id, level.topics[index].id)));
                       },
                       child: Card(
                         child: Row(children: <Widget>[
@@ -131,7 +115,8 @@ class _topic_view extends State<topic_view> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    index_topic[index],
+                                    "Topic " +
+                                    level.topics[index].id.toString(),
                                     style: TextStyle(
                                         fontSize: 16, color: Colors.white),
                                   ),
@@ -139,7 +124,7 @@ class _topic_view extends State<topic_view> {
                                     height: 2,
                                   ),
                                   Text(
-                                    topic_name[index],
+                                    level.topics[index].name,
                                     style: TextStyle(
                                         fontSize: 22,
                                         color: Colors.white,

@@ -5,7 +5,6 @@ import 'package:gp/myprofile_screen.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 import 'Home.dart';
-import 'Types.dart';
 import 'classes/student.dart';
 
 class Courses_evaluations_Screen extends StatefulWidget {

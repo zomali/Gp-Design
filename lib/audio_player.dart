@@ -10,21 +10,22 @@ import 'package:gp/classes/studentBehavior.dart';
 class audio_player extends StatefulWidget {
   final student std;
   final ForAudio forAudio;
+  final Audio_ audio;
   final int LevelNumber;
   final int TopicNumber;
-  audio_player(this.std, this.forAudio, this.LevelNumber, this.TopicNumber);
+  audio_player(this.std,this.audio, this.forAudio, this.LevelNumber, this.TopicNumber);
   _audio_player_state createState() =>
-      _audio_player_state(std, forAudio, LevelNumber, TopicNumber);
+      _audio_player_state(std, audio, forAudio, LevelNumber, TopicNumber);
 }
 
 class _audio_player_state extends State<audio_player> {
   student std;
   ForAudio forAudio;
-  Audio_ audio = new Audio_();
+  Audio_ audio;
   int LevelNumber;
   int TopicNumber;
   _audio_player_state(
-      this.std, this.forAudio, this.LevelNumber, this.TopicNumber);
+      this.std,this.audio, this.forAudio, this.LevelNumber, this.TopicNumber);
   bool playing = false;
   List<int> times = [];
   int i = 0;

@@ -5,7 +5,6 @@ import 'package:gp/myprofile_screen.dart';
 import 'package:charts_flutter/flutter.dart'as charts;
 import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Home.dart';
-import 'Types.dart';
 import 'classes/student.dart';
 import 'package:pie_chart/pie_chart.dart';
 

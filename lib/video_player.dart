@@ -1,24 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:gp/classes/student.dart';
+import 'package:gp/classes/classes.dart';
+import 'package:gp/classes/studentBehavior.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import 'package:gp/infoDialog.dart';
 
 class video_player extends StatefulWidget {
-  _video_player_state createState() => _video_player_state();
+  final student std;
+  final Video_ video_;
+  final ForVideo forVideo;
+  final int LevelNumber;
+  final int TopicNumber;
+  video_player(this.std, this.video_, this.forVideo, this.LevelNumber, this.TopicNumber);
+  _video_player_state createState() => _video_player_state(std, video_, forVideo, LevelNumber, TopicNumber);
 }
 
 class _video_player_state extends State<video_player> {
-  String videoURL = "https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2FRevision%2C%20Variables%20%26%20Constants%20Video.mp4?alt=media&token=e71fa7c8-5082-460f-8b21-c2ad1b8ae25c";
-  String videoInfo = "Instructor: DR. Sally Saad\nDuration: 43 minutes\nLanguage: Arabic";
+ // String videoURL = "https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2FRevision%2C%20Variables%20%26%20Constants%20Video.mp4?alt=media&token=e71fa7c8-5082-460f-8b21-c2ad1b8ae25c";
+ // String videoInfo = "Instructor: DR. Sally Saad\nDuration: 43 minutes\nLanguage: Arabic";
 
+  student std;
+  Video_ video_;
+  ForVideo forVideo;
+  int LevelNumber;
+  int TopicNumber;
+  _video_player_state(this.std, this.video_, this.forVideo, this.LevelNumber, this.TopicNumber);
   ChewieController? chewieController;
-
   @override
   void initState() {
     super.initState();
     chewieController = ChewieController(
-      videoPlayerController: VideoPlayerController.network(videoURL),
+      videoPlayerController: VideoPlayerController.network(video_.URL),
       aspectRatio: 16/9,
       autoInitialize: true,
       autoPlay: false,
@@ -36,6 +49,7 @@ class _video_player_state extends State<video_player> {
          return <OptionItem>[
            OptionItem(
              onTap: (){
+              String videoInfo = "Instructor:" + video_.source + "\nDuration:" + video_.duration + "\nLanguage:" + video_.language;
                showDialog(
                  context: context,
                  builder: (BuildContext context) => 

@@ -2,60 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:gp/Levels_View.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
+import 'package:gp/classes/classes.dart';
 
 import 'DatabaseManager.dart';
 
 class image_view extends StatefulWidget {
   final student std;
+  final List<Image_> image_;
   final ForImage forImage;
   final int LevelNumber;
   final int TopicNumber;
-  image_view(this.std, this.forImage, this.LevelNumber, this.TopicNumber);
+  image_view(this.std,this.image_, this.forImage, this.LevelNumber, this.TopicNumber);
   @override
   _image_view createState() =>
-      _image_view(std, forImage, LevelNumber, TopicNumber);
+      _image_view(std, image_, forImage, LevelNumber, TopicNumber);
 }
 
 class _image_view extends State<image_view> {
   student std;
+  List<Image_> image_;
   ForImage forImage;
   int LevelNumber;
   int TopicNumber;
-  _image_view(this.std, this.forImage, this.LevelNumber, this.TopicNumber);
+  _image_view(this.std, this.image_, this.forImage, this.LevelNumber, this.TopicNumber);
   DatabaseManager db = DatabaseManager();
+  
   int NumperOfEnters = 0;
   List<int> times = [];
   int i = 0;
-  var titleList = [
-    "Variable in C++",
-    "Variable in C++",
-    "Variable in C++",
-    "Variable in C++",
-    "Variable in C++",
-    "Variable in C++",
-    "Variable in C++",
-  ];
-
-  var srcList = [
-    "geeksforgeeks",
-    "geeksforgeeks",
-    "geeksforgeeks",
-    "geeksforgeeks",
-    "geeksforgeeks",
-    "geeksforgeeks",
-    "geeksforgeeks",
-  ];
-
-  var imgList = [
-    "assets/images/img1.jpg",
-    "assets/images/img2.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img4.jpg",
-    "assets/images/img5.jpg",
-    "assets/images/img6.jpg",
-    "assets/images/img7.jpg"
-  ];
-
   @override
   Widget build(BuildContext context) {
     // MediaQuery to get Device Width
@@ -71,7 +45,7 @@ class _image_view extends State<image_view> {
       appBar: AppBar(
         // App Bar
         title: Text(
-          "Images Of Topic",
+          "topic name",
           style: TextStyle(color: Colors.blue),
         ),
         elevation: 0,
@@ -122,13 +96,13 @@ class _image_view extends State<image_view> {
       ),
       // Main List View With Builder
       body: ListView.builder(
-        itemCount: imgList.length,
+        itemCount: image_.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
               // This Will Call When User Click On ListView Item
               showDialogFunc(
-                  context, imgList[index], titleList[index], srcList[index]);
+                  context, image_[index].URL, image_[index].title, image_[index].source);
             },
             // Card Which Holds Layout Of ListView Item
             child: Card(
@@ -138,13 +112,13 @@ class _image_view extends State<image_view> {
                       width: 110,
                       height: 110,
                       child: Image.network(
-                          'https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2F1.1.2.jpg?alt=media&token=d703e865-5f01-40ef-a493-9bb3bce9cf21')),
+                          image_[index].URL)),
                   Spacer(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        titleList[index],
+                        image_[index].title,
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.blue,
@@ -157,7 +131,7 @@ class _image_view extends State<image_view> {
                       Container(
                         width: width,
                         child: Text(
-                          srcList[index],
+                          image_[index].source,
                           maxLines: 3,
                           style: TextStyle(fontSize: 15, color: Colors.blue),
                         ),
@@ -197,7 +171,7 @@ showDialogFunc(context, img, title, desc) {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: Image.network(
-                    'https://firebasestorage.googleapis.com/v0/b/graduation-project-a9cdf.appspot.com/o/Revision%2C%20Variables%20%26%20Constants%2FEnglish%2F1.1.2.jpg?alt=media&token=d703e865-5f01-40ef-a493-9bb3bce9cf21',
+                    img,
                     width: 500,
                     height: 500,
                   ),

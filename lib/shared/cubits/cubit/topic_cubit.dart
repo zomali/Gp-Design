@@ -10,7 +10,7 @@ class TopicCubit extends Cubit<TopicState> {
    static TopicCubit get(context){
     return BlocProvider.of(context);
   }
-  late Topic_ topic;
+  late Topic_ topic = Topic_();
   final DatabaseManager db = DatabaseManager();
 
   Future<void> getTopicData(int topicID) async{
