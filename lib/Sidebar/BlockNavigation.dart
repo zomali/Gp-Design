@@ -1,25 +1,37 @@
 import 'package:bloc/bloc.dart';
 import 'package:gp/Home.dart';
+import 'package:gp/L_types.dart';
+
+import 'package:gp/Last_quizes.dart';
 import 'package:gp/Sidebar/sidebar_layout.dart';
 
 import '../Info.dart';
+
 import '../Learning_analytics_screen.dart';
 import '../classes/student.dart';
 import '../login_screen.dart';
 import 'hom.dart';
+
 enum NavigationEvents {
   HomePageClickedEvent,
-    evalution,
-    Infoevent,
+  evalution,
+  Infoevent,
+  logout,
 }
 abstract class NavigationStates {}
 
 class Navigationn extends Bloc<NavigationEvents,NavigationStates>{
   Navigationn(NavigationStates initialState) : super(initialState);
 
- // Navigationn(NavigationStates initialState) : super(INFO());
+  // Navigationn(NavigationStates initialState) : super(INFO());
   @override
   NavigationStates get initialState => hhh();
+
+
+
+  //Navigationn(NavigationStates initialState) : super(initialState);
+
+  // Navigationn(NavigationStates initialState) : super(INFO());
 
   @override
   Stream<NavigationStates> mapEventToState(NavigationEvents event) async* {
@@ -27,12 +39,18 @@ class Navigationn extends Bloc<NavigationEvents,NavigationStates>{
       case NavigationEvents.HomePageClickedEvent:
         yield hhh();
         break;
+      case NavigationEvents.evalution:
+        yield lastQuizes();
+        break;
       case NavigationEvents.Infoevent:
         yield INFO();
         break;
+      case NavigationEvents.logout:
+        yield Login_screen();
+        break;
+
+
 
     }
   }
-
-}
-
+    }

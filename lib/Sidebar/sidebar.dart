@@ -1,33 +1,28 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/Info.dart';
+import 'package:gp/login_screen.dart';
 import 'package:rxdart/rxdart.dart';
-
 import 'BlockNavigation.dart';
 import 'Menu.dart';
 class sidebar extends StatefulWidget {
-
-
   @override
   State<sidebar> createState() => _sidebarState();
 }
-
 class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<sidebar>{
   AnimationController? _animationController;
-   StreamController<bool>? isSidebaropenstreamctrl;
-   Stream<bool>? isSidebarstream;
-   StreamSink<bool> ? isSidebaropensink;
+  StreamController<bool>? isSidebaropenstreamctrl;
+  Stream<bool>? isSidebarstream;
+  StreamSink<bool> ? isSidebaropensink;
   //final bool isSidebarOpened = true ;
   final _animationDura = const Duration(milliseconds: 500);
   @override
   void initState() {
     super.initState();
-        _animationController = AnimationController(vsync: this, duration: _animationDura);
-        isSidebaropenstreamctrl = PublishSubject<bool>();
-        isSidebarstream =isSidebaropenstreamctrl!.stream;
-        isSidebaropensink = isSidebaropenstreamctrl!.sink;
+    _animationController = AnimationController(vsync: this, duration: _animationDura);
+    isSidebaropenstreamctrl = PublishSubject<bool>();
+    isSidebarstream =isSidebaropenstreamctrl!.stream;
+    isSidebaropensink = isSidebaropenstreamctrl!.sink;
   }
   @override
   void dispose() {
@@ -40,10 +35,10 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
     final animationstatus = _animationController!.status;
     final isAnimationCompleted = animationstatus == AnimationStatus.completed;
     if(isAnimationCompleted)
-      {
-        isSidebaropensink!.add(false);
-        _animationController!.reverse();
-      }
+    {
+      isSidebaropensink!.add(false);
+      _animationController!.reverse();
+    }
     else{
       isSidebaropensink!.add(true);
       _animationController!.forward();
@@ -51,9 +46,7 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
   }
   @override
   Widget build(BuildContext context) {
-     final screenWidth = MediaQuery.of(context).size.width;
-
-
+    final screenWidth = MediaQuery.of(context).size.width;
     return StreamBuilder<bool>(
       initialData: false,
       stream: isSidebarstream,
@@ -75,24 +68,29 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                       SizedBox(
                         height: 100,
                       ),
-                      ListTile(
-                        title: Text(
-                          "Hossam",
-                          style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w800),
-                        ),
-                        subtitle: Text(
-                          "hh@gmail.com",
-                          style: TextStyle(
-                            color: Color(0xFF1BB5FD),
-                            fontSize: 18,
+                      GestureDetector(
+                        onTap: (){
+                          // navigate to profile
+                        },
+                        child: ListTile(
+                          title: Text(
+                            "Hossam",
+                            style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w800),
                           ),
-                        ),
-                        leading: CircleAvatar(
-                          child: Icon(
-                            Icons.perm_identity,
-                            color: Colors.white,
+                          subtitle: Text(
+                            "hh@gmail.com",
+                            style: TextStyle(
+                              color: Color(0xFF1BB5FD),
+                              fontSize: 18,
+                            ),
                           ),
-                          radius: 40,
+                          leading: CircleAvatar(
+                            child: Icon(
+                              Icons.perm_identity,
+                              color: Colors.white,
+                            ),
+                            radius: 40,
+                          ),
                         ),
                       ),
                       Divider(
@@ -102,45 +100,77 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                         indent: 32,
                         endIndent: 32,
                       ),
-                      Menu_SideBar(
-                        icon: Icons.home,
-                        title: "Home",
-                        ontap: () {
-
+                      GestureDetector(
+                        onTap: (){
                           BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
-
+                          oniconpress();
                         },
-                      ),
-                      Menu_SideBar(
-                        icon: Icons.person,
-                        title: "My Account",
-                        ontap: () {
+                        child: Menu_SideBar(
 
+                          icon: Icons.topic,
+                          title: "Levels",
+                          // ontap: () {
+                          //
+                          //  BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
+                          // },
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
+                          oniconpress();
+                        },
+                        child: Menu_SideBar(
+                          icon: Icons.person,
+                          title: "My Quizes",
+                          // ontap: () {
+                          //
+                          //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
+                          // },
+                        ),
+                      ),
+                      Divider(
+                        height: 64,
+                        thickness: 0.5,
+                        color: Colors.white.withOpacity(0.3),
+                        indent: 32,
+                        endIndent: 32,
+                      ),
+                      GestureDetector(
+                        onTap: (){
                           BlocProvider.of<Navigationn>(context).add(NavigationEvents.Infoevent);
+                          oniconpress();
                         },
+                        child: Menu_SideBar(
+                          icon: Icons.info,
+                          title: "INfo",
+                          // ontap: (){
+                          //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
+                          //
+                          // },
+                        ),
                       ),
-
-                      Divider(
-                        height: 64,
-                        thickness: 0.5,
-                        color: Colors.white.withOpacity(0.3),
-                        indent: 32,
-                        endIndent: 32,
-                      ),
-
-                      Menu_SideBar(
-                        icon: Icons.info,
-                        title: "INfo",
-                        ontap: (){
-                          BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  Login_screen()),
+                          );
                         },
+                        child: Menu_SideBar(
+                          icon: Icons.logout,
+                          title: "Log out",
+                          // ontap: (){
+                          //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
+                          // },
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
               Align(
-                alignment: Alignment(0, -0.9),
+                alignment: Alignment(0, 0.1),
                 child: GestureDetector(
                   onTap: () {
                     oniconpress();
@@ -148,8 +178,8 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                   child: ClipPath(
                     clipper: CustomMenuClipper(),
                     child: Container(
-                      width: 35,
-                      height: 110,
+                      width: 40,
+                      height: 100,
                       color: Color(0xFF262AAA),
                       alignment: Alignment.centerLeft,
                       child: AnimatedIcon(
@@ -169,16 +199,13 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
     );
   }
 }
-
 class CustomMenuClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Paint paint = Paint();
     paint.color = Colors.white;
-
     final width = size.width;
     final height = size.height;
-
     Path path = Path();
     path.moveTo(0, 0);
     path.quadraticBezierTo(0, 8, 10, 16);
@@ -188,7 +215,6 @@ class CustomMenuClipper extends CustomClipper<Path> {
     path.close();
     return path;
   }
-
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;

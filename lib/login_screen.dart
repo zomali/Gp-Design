@@ -15,7 +15,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 
 import 'DatabaseManager.dart';
 
-class Login_screen extends StatefulWidget {
+class Login_screen extends StatefulWidget with NavigationStates {
   const Login_screen({Key? key}) : super(key: key);
 
   @override

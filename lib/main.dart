@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Courses_evaluations_Screen.dart';
+import 'package:gp/Sidebar/sidebar_layout.dart';
 import 'package:gp/login_screen.dart';
 import 'package:gp/shared/cubits/cubit/home_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
         //home:Start_Quiz(),
 
         // home: MyProfileScreen(),
-        home: Login_screen(),
+       // home: Login_screen(),
+       home: side_layout(),
         // home: Home(0),
         //home: Courses_evaluations_Screen(new student()),
         //home: signup_screen(),
