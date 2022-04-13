@@ -23,19 +23,19 @@ class _topic_view extends State<topic_view> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-        elevation: 1,
-        backgroundColor: Colors.blue,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined),
-          onPressed: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => levels_view(std)));            
-          },
-          ),),
+          elevation: 1,
+          backgroundColor: Colors.blue,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_outlined),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => levels_view(std)));
+            },
+          ),
+        ),
         body: Column(children: [
           Container(
             height: 200,
@@ -118,7 +118,7 @@ class _topic_view extends State<topic_view> {
                                 children: <Widget>[
                                   Text(
                                     "Topic " +
-                                    level.topics[index].id.toString(),
+                                        level.topics[index].id.toString(),
                                     style: TextStyle(
                                         fontSize: 16, color: Colors.white),
                                   ),
@@ -139,6 +139,54 @@ class _topic_view extends State<topic_view> {
                         ]),
                       ));
                 },
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              //action on tap
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Start_Quiz()));
+            },
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 10, top: 25),
+              height: 150,
+              width: width * 0.9,
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(80.0)),
+                  boxShadow: [
+                    new BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      offset: new Offset(-10.0, 10.0),
+                      blurRadius: 20.0,
+                      spreadRadius: 4.0,
+                    )
+                  ],
+                ),
+                padding: const EdgeInsets.only(left: 32, top: 20.0, bottom: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Quiz will be opened for one time ",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      "Quiz",
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ),
           )

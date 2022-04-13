@@ -8,27 +8,26 @@ import 'quiz__screen.dart';
 import 'quiz_controller.dart';
 import 'result_screen.dart';
 
-
 void main() {
   runApp(Start_Level_Quiz());
 }
 
 class Start_Level_Quiz extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: BilndingsApp(),
-      home:  WelcomeScreen(),
+      home: WelcomeScreen(),
       getPages: [
         GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen()),
-        GetPage(name: QuizScreen.routeName, page: () =>  QuizScreen()),
-        GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen()),
+        GetPage(name: QuizScreen.routeName, page: () => QuizScreen()),
+        GetPage(name: ResultScreen.routeName, page: () => ResultScreen()),
       ],
     );
   }
 }
+
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
   static const routeName = '/welcome_screen';
@@ -47,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _formkey.currentState!.save();
     Get.offAndToNamed(QuizScreen.routeName);
     Get.find<QuizController>().startTimer();
-    Get.lazyPut(()=>QuizController());
+    Get.lazyPut(() => QuizController());
   }
 
   @override
@@ -77,12 +76,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     radius: 40,
                     backgroundColor: Colors.transparent,
                     child: Container(
-                      width: 90,
-                      height: 90,
+                      width: 70,
+                      height: 70,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(
-                              'proj_images/Ain_Shams_logo.png'),
+                          image: AssetImage('proj_images/Ain_Shams_logo.png'),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -93,8 +91,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     radius: 40,
                     backgroundColor: Colors.transparent,
                     child: Container(
-                      width: 80,
-                      height: 80,
+                      width: 60,
+                      height: 60,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('proj_images/faculty_logo.png'),
@@ -103,13 +101,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                   ), //image
-                ]
-            ),
+                ]),
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
-              child: Image.asset('proj_images/quiz.png',
+              child: Image.asset(
+                'proj_images/quiz.png',
                 width: 800,
-                height: 300,),
+                height: 200,
+              ),
             ),
             SizedBox(
               height: 10,
@@ -125,7 +124,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 30,
             ),
             Expanded(
               child: Center(
@@ -137,7 +136,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   fillColor: Colors.blue,
                   child: const Padding(
                     padding:
-                    EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                        EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                     child: Text(
                       "Start the Quizz",
                       style: TextStyle(
@@ -154,9 +153,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               key: _formkey,
               child: GetBuilder<QuizController>(
                 init: Get.find<QuizController>(),
-                builder: (controller) => TextFormField(
+                builder: (controller) => TextFormField(),
               ),
-            ),)
+            )
           ],
         ),
       ),

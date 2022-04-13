@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -18,6 +19,7 @@ class Student {}
 class _signup_screenState extends State<signup_screen> {
   DateTime _date = DateTime.now();
   String d = '';
+  final Storage storage = Storage();
 
   Future<Null> _selectDate(BuildContext context) async {
     DateTime _datepicker = (await showDatePicker(
@@ -33,6 +35,27 @@ class _signup_screenState extends State<signup_screen> {
           _date.month.toString() +
           "/" +
           _date.year.toString();
+    });
+  }
+
+  bool loaded = false;
+  Future<Null> _upLoadImage(BuildContext context) async {
+    final results = await FilePicker.platform.pickFiles(
+        allowMultiple: false,
+        type: FileType.custom,
+        allowedExtensions: ['png', 'jpg']);
+    if (results == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('no file')));
+      return null;
+    }
+    final path = results.files.single.path;
+    final name = results.files.single.name;
+
+    await storage.UpLoadImage(path!, name).then((value) => print('done'));
+    setState(() {
+      image = storage.downloadURL;
+      loaded = true;
     });
   }
 
@@ -52,6 +75,7 @@ class _signup_screenState extends State<signup_screen> {
   var level;
   DatabaseManager db = DatabaseManager();
   student std = student();
+  var image = 'proj_images/stud_image.jpg';
 
   var _username_text = '';
   var _id_text = "";
@@ -68,6 +92,14 @@ class _signup_screenState extends State<signup_screen> {
     }
     // return null if the text is valid
     return null;
+  }
+
+  ImageProvider returnImage() {
+    if (loaded == false) {
+      return AssetImage(image);
+    } else {
+      return NetworkImage(image);
+    }
   }
 
   String? get _error_id_Text {
@@ -113,7 +145,7 @@ class _signup_screenState extends State<signup_screen> {
                 alignment: AlignmentDirectional.bottomEnd,
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage('proj_images/stud_image.jpg'),
+                    backgroundImage: returnImage(),
                     //  backgroundImage: NetworkImage('https://png.pngtree.com/element_our/png_detail/20181208/male-student-icon-png_265268.jpg'),
                     radius: 60,
                   ),
@@ -127,7 +159,9 @@ class _signup_screenState extends State<signup_screen> {
                       color: Colors.blue,
                       size: 40,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _upLoadImage(context);
+                    },
                   ),
                 ],
               ),
