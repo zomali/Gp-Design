@@ -5,6 +5,7 @@ import 'package:gp/classes/studentBehavior.dart';
 import 'package:gp/classes/classes.dart';
 
 import 'DatabaseManager.dart';
+import 'L_types.dart';
 
 class image_view extends StatefulWidget {
   final student std;
@@ -90,7 +91,7 @@ class _image_view extends State<image_view> {
                 topic.id,
                 times);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => levels_view(std)));
+                MaterialPageRoute(builder: (context) => types(std, level, topic)));
             // _selectedIndex-=2;
           },
         ),

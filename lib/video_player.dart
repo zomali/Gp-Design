@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gp/Levels_View.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/classes.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import 'package:gp/infoDialog.dart';
+
+import 'L_types.dart';
 
 class video_player extends StatefulWidget {
   final student std;
@@ -90,6 +93,7 @@ class _video_player_state extends State<video_player> {
           ),
         ),
         backgroundColor: Color.fromARGB(255, 3, 60, 126),
+
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_outlined,
@@ -97,6 +101,8 @@ class _video_player_state extends State<video_player> {
           ),
           onPressed: () {
             // _selectedIndex-=2;
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => types(std, level, topic)));
             chewieController!.pause();
           },
         ),

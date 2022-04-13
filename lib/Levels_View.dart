@@ -2,15 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gp/Sidebar/BlockNavigation.dart';
+import 'package:gp/Home.dart';
 import 'package:gp/Start_Quiz.dart';
 import 'package:gp/Topic_view.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/classes/student.dart';
-import 'Home.dart';
 import 'L_types.dart';
 
-class levels_view extends StatefulWidget with NavigationStates{
+class levels_view extends StatefulWidget {
   final student std;
   levels_view(this.std);
   @override

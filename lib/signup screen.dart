@@ -1,3 +1,5 @@
+
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -81,7 +83,7 @@ class _signup_screenState extends State<signup_screen> {
   var _id_text = "";
   bool _submitted = false;
   final requiredValidator =
-      RequiredValidator(errorText: 'this field is required');
+  RequiredValidator(errorText: 'this field is required');
   String? get _error_username_Text {
     final text = usernameController.value.text;
     if (text.isEmpty) {

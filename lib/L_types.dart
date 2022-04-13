@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/Levels_View.dart';
-import 'package:gp/Topic_view.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
@@ -12,6 +11,7 @@ import 'package:path/path.dart';
 import 'audio_player.dart';
 import 'video_player.dart';
 import 'package:gp/URL_view.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'classes/student.dart';
 import 'classes/classes.dart';
 import 'topic_images.dart';
@@ -20,41 +20,47 @@ import 'Levels_View.dart';
 
 class types extends StatefulWidget {
   final student std;
+
+  // final int LevelNumber;
+  // final int TopicNumber;
   final Level_ level;
   final Topic_ topic;
+
   types(this.std, this.level, this.topic);
-/*
-  int _selectedIndex = 3;
-  static List<Widget> _pages = <Widget>[
-    Home(student()),
-    levels_view(student()),
-    types(student(), 0, 0),
-    MyProfileScreen(student()),
-  ];
-*/
+
+
   @override
   _typesState createState() => _typesState(std, level, topic);
+
+ // @override
+
 }
 
 class _typesState extends State<types> {
   student std;
   Level_ level;
   Topic_ topic;
+  // int LevelNumber;
+  // int TopicNumber;
+
   _typesState(this.std, this.level, this.topic);
   late studentBehavior stdBehavior;
   //late TypesForStudent list;
   var cupit;
-  bool _video_1st = true;
-  //bool _video_1st=false;
+ bool _video_1st = true;
+ // bool _video_1st=false;
 
   bool _audio_1st = false;
-//  bool _audio_1st=true;
+// bool _audio_1st=true;
 
   bool _text_1st = false;
-  // bool _text_1st=true;
+//  bool _text_1st=true;
 
   bool _image_1st = false;
-// bool _image_1st=true;
+ //bool _image_1st=true;
+
+  bool _url_1st = false;
+ //bool _url_1st =true;
 
 //Topic_ topic  = Topic_();
   @override
@@ -68,7 +74,7 @@ class _typesState extends State<types> {
             icon: Icon(Icons.arrow_back_ios_outlined),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => topic_view(std, level)));
+                  MaterialPageRoute(builder: (context) => levels_view(std)));
               // _selectedIndex-=2;
             },
           ),
@@ -107,7 +113,74 @@ class _typesState extends State<types> {
                             children: [
                               GestureDetector(
                                 onTap: () => {
-                                  print("'Clicked'"),
+
+                                  _video_1st? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                        video_player(std, topic.videos[0], stdBehavior.forVideo, level, topic)),
+                                  ):
+                                  _audio_1st? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                        audio_player(std, topic.audios[0], stdBehavior.forAudio, level,topic )),
+                                  ):
+                                  _image_1st? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                        image_view(std, topic.images, stdBehavior.forImage, level, topic)),
+                                  ) :
+                                  _text_1st?  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                        pdf_view(std, topic.pdf, stdBehavior.forText, level, topic)),
+                                  ):
+                                  _url_1st? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                        url_view(std, topic.urls, level, topic)),
+                                  ) :
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                        audio_player(std, topic.audios[0], stdBehavior.forAudio, level, topic)),
+                                  ),
+
           
                                   // print(
                                   //     stdBehavior.forAudio.Time_spent_every_once[1])
@@ -124,13 +197,18 @@ class _typesState extends State<types> {
                                         image: _video_1st
                                             ? AssetImage('proj_images/video.png')
                                             : _audio_1st
-                                                ? AssetImage(
-                                                    'proj_images/audio.png')
-                                                : _image_1st
-                                                    ? AssetImage(
-                                                        'proj_images/image.png')
-                                                    : AssetImage(
-                                                        'proj_images/Text.png'),
+                                            ? AssetImage(
+                                            'proj_images/audio.png')
+                                            : _image_1st
+                                            ? AssetImage(
+                                            'proj_images/image.png')
+                                            : _text_1st
+                                            ? AssetImage(
+                                            'proj_images/t.png')
+                                            :_url_1st?AssetImage(
+                                            'proj_images/URL.jpg')
+                                            :AssetImage('proj_images/video.png'),
+
                                         height: 250,
                                         width: 250,
                                         fit: BoxFit.cover,
@@ -147,7 +225,11 @@ class _typesState extends State<types> {
                                                   ? 'Audio'
                                                   : _image_1st
                                                       ? 'Image'
-                                                      : 'Text',
+                                                      : _text_1st
+                                                         ?'Text'
+                                                         :_url_1st
+                                                           ?'URL'
+                                                             :'Video',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 20,
@@ -165,25 +247,43 @@ class _typesState extends State<types> {
                               //       scrollDirection: Axis.horizontal,
                               //    child:
                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 30),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
+                                padding: const EdgeInsets.only(top:40,bottom: 20),
+                                child:Row(
                                     children: [
-                                      SizedBox(
-                                        width: 15,
-                                      ),
+                                      Spacer(),
                                       GestureDetector(
                                         onTap: () => {
-                                          Navigator.push(
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) => audio_player(
+                                          //           std,
+                                          //          topic.audios[0],
+                                          //           stdBehavior.forAudio,
+                                          //           LevelNumber,
+                                          //           TopicNumber)),
+                                          // ),
+                                          _video_1st? Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => audio_player(
+                                                builder: (context) => /*pdf_view(
                                                     std,
-                                                   topic.audios[0],
-                                                    stdBehavior.forAudio,
-                                                    level,
-                                                    topic)),
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                                audio_player(std, topic.audios[0], stdBehavior.forAudio, level, topic)),
+                                          )
+                                              :Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                                video_player(std, topic.videos[0], stdBehavior.forVideo, level, topic)),
                                           ),
                                         },
                                         //print("'Clicked'")},
@@ -200,16 +300,8 @@ class _typesState extends State<types> {
                                             children: [
                                               Image(
                                                 image: _video_1st
-                                                    ? AssetImage(
-                                                        'proj_images/audio.png')
-                                                    : _audio_1st
-                                                        ? AssetImage(
-                                                            'proj_images/video.png')
-                                                        : _image_1st
-                                                            ? AssetImage(
-                                                                'proj_images/video.png')
-                                                            : AssetImage(
-                                                                'proj_images/video.png'),
+                                                    ? AssetImage('proj_images/audio.png')
+                                                    : AssetImage('proj_images/video.png'),
                                                 height: 110,
                                                 fit: BoxFit.cover,
                                               ),
@@ -221,11 +313,7 @@ class _typesState extends State<types> {
                                                 child: Text(
                                                   _video_1st
                                                       ? "Audio"
-                                                      : _audio_1st
-                                                          ? 'Video'
-                                                          : _image_1st
-                                                              ? 'Video'
-                                                              : 'Video',
+                                                      : 'Video',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     fontSize: 17,
@@ -237,23 +325,43 @@ class _typesState extends State<types> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
+                                      Spacer(),
                                       //////////////////////////////////////////////////////////////////////
                                       GestureDetector(
                                         onTap: () => {
-                                          print("'Clicked'"),
+                                          _video_1st? Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                                image_view(std, topic.images, stdBehavior.forImage, level, topic)),
+                                          ) :
+                                          _audio_1st? Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                                image_view(std, topic.images, stdBehavior.forImage, level, topic)),
+                                          ) :
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => image_view(
+                                                builder: (context) => /*pdf_view(
                                                     std,
-                                                    topic.images,
-                                                    stdBehavior.forImage,
-                                                    level,
-                                                    topic)),
-                                          ),
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                                audio_player(std, topic.audios[0], stdBehavior.forAudio, level, topic)),
+                                          )
                                         },
                                         child: Container(
                                           //  padding: EdgeInsets.only(top: 10.0),
@@ -267,16 +375,10 @@ class _typesState extends State<types> {
                                             children: [
                                               Image(
                                                 image: _video_1st
-                                                    ? AssetImage(
-                                                        'proj_images/image.png')
+                                                    ? AssetImage('proj_images/image.png')
                                                     : _audio_1st
-                                                        ? AssetImage(
-                                                            'proj_images/image.png')
-                                                        : _image_1st
-                                                            ? AssetImage(
-                                                                'proj_images/audio.png')
-                                                            : AssetImage(
-                                                                'proj_images/audio.png'),
+                                                    ? AssetImage('proj_images/image.png')
+                                                    :AssetImage('proj_images/audio.png'),
                                                 //   height: 250,
                                                 //  width: 250,
                                                 height: 110,
@@ -292,9 +394,7 @@ class _typesState extends State<types> {
                                                       ? "Image"
                                                       : _audio_1st
                                                           ? 'Image'
-                                                          : _image_1st
-                                                              ? 'Audio'
-                                                              : 'Audio',
+                                                          : 'Audio',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     fontSize: 17,
@@ -306,46 +406,72 @@ class _typesState extends State<types> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-          
+                                      Spacer(),
+
+                                    ],
+                                  ),
+
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 20),
+                                child:  Row(
+                                    children: [
+                                      Spacer(),
+
                                       ///////////////////////////////////////////////////////
                                       GestureDetector(
                                         onTap: () => {
+
+                                          _text_1st?   Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => /*pdf_view(
+                                                  std,
+                                                  topic.pdf,
+                                                  stdBehavior.forText,
+                                                  LevelNumber,
+                                                  TopicNumber)*/
+                                              image_view(std, topic.images, stdBehavior.forImage, level, topic)),
+                                        ):
+                                          _url_1st?  Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => /*pdf_view(
+                                                  std,
+                                                  topic.pdf,
+                                                  stdBehavior.forText,
+                                                  LevelNumber,
+                                                  TopicNumber)*/
+                                                image_view(std, topic.images, stdBehavior.forImage, level, topic)),
+                                          ) :
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => pdf_view(
+                                                builder: (context) => /*pdf_view(
                                                     std,
                                                     topic.pdf,
                                                     stdBehavior.forText,
-                                                    level,
-                                                    topic)),
-                                          ),
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                                pdf_view(std, topic.pdf, stdBehavior.forText, level, topic)),
+                                          )
                                         },
                                         child: Container(
                                           //  padding: EdgeInsets.only(top: 10.0),
                                           width: 120,
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(30.0)),
+                                              BorderRadius.circular(30.0)),
                                           clipBehavior: Clip.antiAliasWithSaveLayer,
                                           child: Stack(
                                             alignment: Alignment.bottomCenter,
                                             children: [
                                               Image(
-                                                image: _video_1st
-                                                    ? AssetImage(
-                                                        'proj_images/Text.png')
-                                                    : _audio_1st
-                                                        ? AssetImage(
-                                                            'proj_images/Text.png')
-                                                        : _image_1st
-                                                            ? AssetImage(
-                                                                'proj_images/Text.png')
-                                                            : AssetImage(
-                                                                'proj_images/image.png'),
+                                                image: _text_1st
+                                                    ? AssetImage('proj_images/image.png')
+                                                    : _url_1st
+                                                    ?AssetImage('proj_images/image.png')
+                                                    :AssetImage('proj_images/t.png'),
                                                 height: 110,
                                                 // height: 250,
                                                 //    width: 250,
@@ -357,13 +483,11 @@ class _typesState extends State<types> {
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 10.0),
                                                 child: Text(
-                                                  _video_1st
-                                                      ? "Text"
-                                                      : _audio_1st
-                                                          ? 'Text'
-                                                          : _image_1st
-                                                              ? 'Text'
-                                                              : 'Image',
+                                                  _text_1st
+                                                      ? "Image"
+                                                      : _url_1st
+                                                      ? 'Image'
+                                                      : 'Text',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     fontSize: 17,
@@ -375,10 +499,77 @@ class _typesState extends State<types> {
                                           ),
                                         ),
                                       ),
+                                      Spacer(),
+                                      GestureDetector(
+                                        onTap: () => {
+
+                                          _url_1st?  Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                                pdf_view(std, topic.pdf, stdBehavior.forText, level, topic)),
+                                          ):
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => /*pdf_view(
+                                                    std,
+                                                    topic.pdf,
+                                                    stdBehavior.forText,
+                                                    LevelNumber,
+                                                    TopicNumber)*/
+                                                url_view(std, topic.urls, level, topic)),
+                                          )
+                                        },
+                                        child: Container(
+                                          //  padding: EdgeInsets.only(top: 10.0),
+                                          width: 120,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.circular(30.0)),
+                                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                                          child: Stack(
+                                            alignment: Alignment.bottomCenter,
+                                            children: [
+                                              Image(
+                                                image: _url_1st
+                                                    ? AssetImage('proj_images/t.png')
+                                                    :AssetImage('proj_images/URL.jpg'),
+                                                height: 110,
+                                                // height: 250,
+                                                //    width: 250,
+                                                fit: BoxFit.cover,
+                                              ),
+                                              Container(
+                                                color: Colors.black.withOpacity(.7),
+                                                width: double.infinity,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 10.0),
+                                                child: Text(
+                                                  _url_1st
+                                                      ? "Text"
+                                                      : 'URL',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 17,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Spacer(),
                                     ],
                                   ),
                                 ),
-                              ),
+
                               //),
                             ],
                           ),

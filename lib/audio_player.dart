@@ -126,7 +126,7 @@ class _audio_player_state extends State<audio_player> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => types(std, level, topic)));
             _player.pause();
-            
+
           },
         ),
       ),
@@ -148,7 +148,7 @@ class _audio_player_state extends State<audio_player> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-               /* Padding(
+                /* Padding(
                   padding: const EdgeInsets.only(left: 12.0),
                   child: Text(
                     audio.title,
@@ -210,91 +210,91 @@ class _audio_player_state extends State<audio_player> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                                    IconButton(
-                                      iconSize: 30.0,
-                                      color: Colors.blue,
-                                      onPressed: () {
-                                        position = new Duration(seconds: 0);
-                                        _player.seek(position);
-                                      }, //restart audio
-                                      icon: Icon(
-                                        Icons.restart_alt,
-                                      ),
-                                    ),
-                                    IconButton(
-                                      iconSize: 40.0,
-                                      color: Colors.blue,
-                                      onPressed: () {
-                                        position = position - Duration(seconds: 10);
-                                        if (position >= Duration(seconds: 0))
-                                          _player.seek(position);
-                                        else {
-                                          _player.seek(Duration(seconds: 0));
-                                        }
-                                      }, //replay previous 10 secs
-                                      icon: Icon(
-                                        Icons.replay_10_rounded,
-                                      ),
-                                    ),
-                                    IconButton(
-                                      iconSize: 62.0,
-                                      color: Colors.blue[800],
-                                      onPressed: () {
-                                        if (!playing) {
-                                          _player.play(audio.URL);
-                                          setState(() {
-                                            playBtn = Icons.pause;
-                                            playing = true;
-                                          });
-                                        } else {
-                                          _player.pause();
-                                          setState(() {
-                                            playBtn = Icons.play_arrow;
-                                            playing = false;
-                                          });
-                                        }
-                                      }, //play audio of current topic
-                                      icon: Icon(
-                                        playBtn,
-                                      ),
-                                    ),
-                                    IconButton(
-                                      iconSize: 40.0,
-                                      color: Colors.blue,
-                                      onPressed: () {
-                                        position = position + Duration(seconds: 10);
-                                        if (position <= musicLength)
-                                          _player.seek(position);
-                                        else {
-                                          _player.seek(musicLength);
-                                        }
-                                      }, //forward 10 secs
-                                      icon: Icon(
-                                        Icons.forward_10_rounded,
-                                      ),
-                                    ),
-                                    IconButton(
-                                      iconSize: 30.0,
-                                      color: Colors.blue,
-                                      onPressed: () {
-                                        String audioInfo = "Instructor: " +
-                                            audio.source +
-                                            "\nDuration: " +
-                                            audio.duration +
-                                            "\nLanguage: " +
-                                            audio.language;
-                                        showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) =>
-                                                infoDialog(
-                                                    title: "Audio Information",
-                                                    description: audioInfo,
-                                                    buttonText: "OK"));
-                                      }, //view audio info
-                                      icon: Icon(
-                                        Icons.info_outline,
-                                      ),
-                                    ),
+                            IconButton(
+                              iconSize: 30.0,
+                              color: Colors.blue,
+                              onPressed: () {
+                                position = new Duration(seconds: 0);
+                                _player.seek(position);
+                              }, //restart audio
+                              icon: Icon(
+                                Icons.restart_alt,
+                              ),
+                            ),
+                            IconButton(
+                              iconSize: 40.0,
+                              color: Colors.blue,
+                              onPressed: () {
+                                position = position - Duration(seconds: 10);
+                                if (position >= Duration(seconds: 0))
+                                  _player.seek(position);
+                                else {
+                                  _player.seek(Duration(seconds: 0));
+                                }
+                              }, //replay previous 10 secs
+                              icon: Icon(
+                                Icons.replay_10_rounded,
+                              ),
+                            ),
+                            IconButton(
+                              iconSize: 62.0,
+                              color: Colors.blue[800],
+                              onPressed: () {
+                                if (!playing) {
+                                  _player.play(audio.URL);
+                                  setState(() {
+                                    playBtn = Icons.pause;
+                                    playing = true;
+                                  });
+                                } else {
+                                  _player.pause();
+                                  setState(() {
+                                    playBtn = Icons.play_arrow;
+                                    playing = false;
+                                  });
+                                }
+                              }, //play audio of current topic
+                              icon: Icon(
+                                playBtn,
+                              ),
+                            ),
+                            IconButton(
+                              iconSize: 40.0,
+                              color: Colors.blue,
+                              onPressed: () {
+                                position = position + Duration(seconds: 10);
+                                if (position <= musicLength)
+                                  _player.seek(position);
+                                else {
+                                  _player.seek(musicLength);
+                                }
+                              }, //forward 10 secs
+                              icon: Icon(
+                                Icons.forward_10_rounded,
+                              ),
+                            ),
+                            IconButton(
+                              iconSize: 30.0,
+                              color: Colors.blue,
+                              onPressed: () {
+                                String audioInfo = "Instructor: " +
+                                    audio.source +
+                                    "\nDuration: " +
+                                    audio.duration +
+                                    "\nLanguage: " +
+                                    audio.language;
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        infoDialog(
+                                            title: "Audio Information",
+                                            description: audioInfo,
+                                            buttonText: "OK"));
+                              }, //view audio info
+                              icon: Icon(
+                                Icons.info_outline,
+                              ),
+                            ),
                           ],
                         )
                       ],

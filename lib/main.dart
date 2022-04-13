@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => TopicCubit(),
-        ),
+        ),        
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -50,10 +50,11 @@ class MyApp extends StatelessWidget {
 
         // home: MyProfileScreen(),
         home: Login_screen(),
-        //home: side_layout(),
+     //  home: side_layout(),
         // home: Home(0),
         //home: Courses_evaluations_Screen(new student()),
         //home: signup_screen(),
+
       ),
     );
   }
