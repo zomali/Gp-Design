@@ -6,13 +6,14 @@ import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'package:gp/classes/classes.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
 class pdf_view extends StatefulWidget {
   final student std;
   final Text_ text_;
   final ForText forText;
   final Level_ level;
   final Topic_ topic;
-  pdf_view(this.std,this.text_, this.forText, this.level, this.topic);
+  pdf_view(this.std, this.text_, this.forText, this.level, this.topic);
   @override
   _pdf_view createState() => _pdf_view(std, text_, forText, level, topic);
 }
@@ -23,7 +24,7 @@ class _pdf_view extends State<pdf_view> {
   ForText forText;
   Level_ level;
   Topic_ topic;
-  _pdf_view(this.std,this.text_, this.forText, this.level, this.topic);
+  _pdf_view(this.std, this.text_, this.forText, this.level, this.topic);
   DatabaseManager db = DatabaseManager();
   int NumperOfEnters = 0;
   List<int> times = [];
@@ -47,11 +48,8 @@ class _pdf_view extends State<pdf_view> {
     int firstTime = int.parse(x);
     return SafeArea(
         child: Scaffold(
-          
-      body: SfPdfViewer.network(
-          text_.URL,
-          controller: _pdfViewerController,
-          key: _pdfViewerStateKey),
+      body: SfPdfViewer.network(text_.URL,
+          controller: _pdfViewerController, key: _pdfViewerStateKey),
       appBar: AppBar(
         title: Text(text_.title),
         actions: <Widget>[
@@ -105,6 +103,11 @@ class _pdf_view extends State<pdf_view> {
             final FinalMinute = FinalTime.minute.toString().padLeft(2, '0');
             final FinalSecond = FinalTime.second.toString().padLeft(2, '0');
             x = '$FinalHour$FinalMinute$FinalSecond';
+            final FinalDay = FinalTime.day;
+            final FinalMonth = FinalTime.month;
+            final FinalYear = FinalTime.year;
+            var last_time =
+                '$FinalHour:$FinalMinute:$FinalSecond  $FinalDay/$FinalMonth/$FinalYear';
             int SecondTime = int.parse(x);
             int timeStayed = SecondTime - firstTime;
             ForText NewforText = ForText();
@@ -127,9 +130,12 @@ class _pdf_view extends State<pdf_view> {
                 std.id,
                 level.id,
                 topic.id,
-                times);
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => types(std, level, topic)));
+                times,
+                last_time);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => types(std, level, topic)));
             // _selectedIndex-=2;
           },
         ),

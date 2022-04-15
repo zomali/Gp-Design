@@ -12,10 +12,9 @@ class image_view extends StatefulWidget {
   final ForImage forImage;
   final Level_ level;
   final Topic_ topic;
-  image_view(this.std,this.image_, this.forImage, this.level, this.topic);
+  image_view(this.std, this.image_, this.forImage, this.level, this.topic);
   @override
-  _image_view createState() =>
-      _image_view(std, image_, forImage, level, topic);
+  _image_view createState() => _image_view(std, image_, forImage, level, topic);
 }
 
 class _image_view extends State<image_view> {
@@ -26,7 +25,7 @@ class _image_view extends State<image_view> {
   Topic_ topic;
   _image_view(this.std, this.image_, this.forImage, this.level, this.topic);
   DatabaseManager db = DatabaseManager();
-  
+
   int NumperOfEnters = 0;
   List<int> times = [];
   int i = 0;
@@ -66,6 +65,11 @@ class _image_view extends State<image_view> {
             final FinalMinute = FinalTime.minute.toString().padLeft(2, '0');
             final FinalSecond = FinalTime.second.toString().padLeft(2, '0');
             x = '$FinalHour$FinalMinute$FinalSecond';
+            final FinalDay = FinalTime.day;
+            final FinalMonth = FinalTime.month;
+            final FinalYear = FinalTime.year;
+            var last_time =
+                '$FinalHour:$FinalMinute:$FinalSecond  $FinalDay/$FinalMonth/$FinalYear';
             int SecondTime = int.parse(x);
             int timeStayed = SecondTime - firstTime;
             ForImage NewforImage = ForImage();
@@ -88,7 +92,8 @@ class _image_view extends State<image_view> {
                 std.id,
                 level.id,
                 topic.id,
-                times);
+                times,
+                last_time);
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => levels_view(std)));
             // _selectedIndex-=2;
@@ -102,8 +107,8 @@ class _image_view extends State<image_view> {
           return GestureDetector(
             onTap: () {
               // This Will Call When User Click On ListView Item
-              showDialogFunc(
-                  context, image_[index].URL, image_[index].title, image_[index].source);
+              showDialogFunc(context, image_[index].URL, image_[index].title,
+                  image_[index].source);
             },
             // Card Which Holds Layout Of ListView Item
             child: Card(
@@ -112,8 +117,7 @@ class _image_view extends State<image_view> {
                   Container(
                       width: 110,
                       height: 110,
-                      child: Image.network(
-                          image_[index].URL)),
+                      child: Image.network(image_[index].URL)),
                   Spacer(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

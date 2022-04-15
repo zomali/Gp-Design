@@ -3,6 +3,7 @@ class studentBehavior {
   ForImage forImage = ForImage();
   ForVideo forVideo = ForVideo();
   ForText forText = ForText();
+  late String last_time_entered;
 }
 
 class ForVideo {

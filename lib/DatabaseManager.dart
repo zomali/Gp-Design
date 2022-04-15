@@ -34,7 +34,7 @@ class DatabaseManager {
       std.name = values[key]['name'];
       std.email = values[key]['email'];
       std.password = values[key]['password'];
-      std.level = values[key]['level'];
+      std.level = values[key]['courses']['CSW150']['current_level'];
       std.birthdate = values[key]['date_of_birth'];
       std.courses = values[key]['courses'];
       std.profile_picture = values[key]['profile_picture'];
@@ -159,6 +159,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -166,6 +167,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -173,6 +175,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -180,6 +183,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -189,6 +193,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -196,6 +201,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -203,6 +209,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -210,6 +217,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -219,6 +227,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -226,6 +235,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -233,6 +243,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -240,6 +251,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         }
@@ -251,6 +263,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -258,6 +271,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -265,6 +279,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -272,6 +287,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -281,6 +297,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -288,6 +305,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -295,6 +313,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -302,6 +321,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -311,6 +331,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -318,6 +339,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -325,6 +347,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -332,6 +355,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         }
@@ -343,6 +367,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -350,6 +375,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -357,6 +383,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -364,6 +391,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -373,6 +401,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -380,6 +409,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -387,6 +417,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -394,6 +425,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -403,6 +435,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -410,6 +443,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -417,6 +451,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -424,6 +459,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -433,6 +469,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -440,6 +477,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -447,6 +485,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -454,6 +493,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         }
@@ -465,6 +505,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -472,6 +513,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -479,6 +521,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -486,6 +529,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -495,6 +539,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -502,6 +547,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -509,6 +555,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -516,6 +563,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -525,6 +573,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -532,6 +581,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -539,6 +589,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -546,6 +597,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         }
@@ -557,6 +609,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -564,6 +617,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -571,6 +625,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -578,6 +633,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -587,6 +643,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -594,6 +651,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -601,6 +659,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -608,6 +667,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -617,6 +677,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -624,6 +685,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -631,6 +693,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -638,6 +701,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         },
@@ -647,6 +711,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'image': {
@@ -654,6 +719,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'text': {
@@ -661,6 +727,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           },
           'video': {
@@ -668,6 +735,7 @@ class DatabaseManager {
             'popUpQuestion': {'qID': 'answerID'},
             'time_spent_every_once': {'1': 0},
             'time_progress_ratio': 0,
+            'last_time_enterd': 0,
             'time_spent': 0
           }
         }
@@ -739,6 +807,9 @@ class DatabaseManager {
         .get();
     var value = response.value;
     studentBehavior std = studentBehavior();
+
+    std.last_time_entered = value['last_time_enterd'];
+
     std.forAudio.NumberOfVisitedPage = value['audio']['number_of_visits'];
     std.forAudio.PopUpQuastion = value['audio']['popUpQuestion'];
     std.forAudio.TimeSpendInPage = value['audio']['time_spent'];
@@ -769,7 +840,7 @@ class DatabaseManager {
   }
 
   void updateStudentBehavior(int time, int clicks, String type, var id,
-      var Level, var Topic, var arr) {
+      var Level, var Topic, var arr, var last_time) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     firebaseDatabase
         .child('student_behavior_model')
@@ -780,8 +851,16 @@ class DatabaseManager {
         .update({
       'number_of_visits': clicks,
       'time_spent': time,
+      'last_time_enterd': last_time,
       'time_spent_every_once': arr
     });
+
+    firebaseDatabase
+        .child('student_behavior_model')
+        .child(id.toString())
+        .child(Level.toString())
+        .child(Topic.toString())
+        .update({'last_time_enterd': last_time});
   }
 
   void update1() {
