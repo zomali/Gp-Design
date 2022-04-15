@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'question__model.dart';
 import 'bindings_app.dart';
 import 'custom_button.dart';
@@ -9,15 +8,13 @@ import 'question_card.dart';
 import 'quiz__screen.dart';
 import 'quiz_controller.dart';
 import 'result_screen.dart';
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class backButton extends StatelessWidget {
+  const backButton({
     Key? key,
     required this.onPressed,
-    required this.text,
     this.width=140,
   }) : super(key: key);
   final Function() onPressed;
-  final String text;
   final double width;
 
   @override
@@ -29,10 +26,10 @@ class CustomButton extends StatelessWidget {
       ),
       child: FloatingActionButton.extended(
         backgroundColor: KPrimaryColor,
-        icon: Icon(Icons.arrow_forward_ios),
+        icon: Icon(Icons.arrow_back_ios),
         onPressed: onPressed,
         label: Text(
-          text,
+          "Back",
           style: Theme.of(context)
               .textTheme
               .headline6!

@@ -9,12 +9,10 @@ import 'question_card.dart';
 import 'quiz__screen.dart';
 import 'quiz_controller.dart';
 import 'result_screen.dart';
-
 import 'answer_option.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 class QuestionCard extends StatelessWidget {
   final QuestionModel questionModel;
-
   const QuestionCard({
     Key? key,
     required this.questionModel,
@@ -33,7 +31,7 @@ class QuestionCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -53,8 +51,10 @@ class QuestionCard extends StatelessWidget {
                             questionId: questionModel.id,
                             text: questionModel.options[index],
                             index: index,
-                            onPressed: () => Get.find<QuizController>()
-                                .checkAnswer(questionModel, index)),
+                            onPressed: () =>
+                                Get.find<QuizController>()
+                                .marked_answer(questionModel,index),
+                        ),
                         const SizedBox(
                           height: 15,
                         )

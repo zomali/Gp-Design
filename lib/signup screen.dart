@@ -1,23 +1,17 @@
 
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_validator/form_validator.dart';
-
-import 'DatabaseManager.dart';
 import 'classes/student.dart';
-
+import 'DatabaseManager.dart';
 class signup_screen extends StatefulWidget {
   const signup_screen({Key? key}) : super(key: key);
-
   @override
   _signup_screenState createState() => _signup_screenState();
 }
-
 class Student {}
-
 class _signup_screenState extends State<signup_screen> {
   DateTime _date = DateTime.now();
   String d = '';
@@ -83,7 +77,7 @@ class _signup_screenState extends State<signup_screen> {
   var _id_text = "";
   bool _submitted = false;
   final requiredValidator =
-  RequiredValidator(errorText: 'this field is required');
+      RequiredValidator(errorText: 'this field is required');
   String? get _error_username_Text {
     final text = usernameController.value.text;
     if (text.isEmpty) {

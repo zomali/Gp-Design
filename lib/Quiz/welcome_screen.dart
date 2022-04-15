@@ -1,41 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:gp/L_types.dart';
 import 'question__model.dart';
 import 'bindings_app.dart';
 import 'custom_button.dart';
 import 'quiz__screen.dart';
 import 'quiz_controller.dart';
 import 'result_screen.dart';
-
 void main() {
   runApp(Start_Level_Quiz());
 }
 
 class Start_Level_Quiz extends StatelessWidget {
+  Map<int,int> student_answered={};
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: BilndingsApp(),
-      home: WelcomeScreen(),
+      home:  WelcomeScreen("2"),
       getPages: [
-        GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen()),
-        GetPage(name: QuizScreen.routeName, page: () => QuizScreen()),
-        GetPage(name: ResultScreen.routeName, page: () => ResultScreen()),
+        GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen("2")),
+        GetPage(name: QuizScreen.routeName, page: () =>  QuizScreen("2")),
+        GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen(1,student_answered)),
       ],
     );
   }
 }
-
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  final String level;
+  WelcomeScreen(this.level);
   static const routeName = '/welcome_screen';
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
+  State<WelcomeScreen> createState() => _WelcomeScreenState(level);
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  final String level;
+  _WelcomeScreenState(this.level);
   final _nameController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
@@ -46,7 +49,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _formkey.currentState!.save();
     Get.offAndToNamed(QuizScreen.routeName);
     Get.find<QuizController>().startTimer();
-    Get.lazyPut(() => QuizController());
+    Get.lazyPut(()=>QuizController());
   }
 
   @override
@@ -76,11 +79,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     radius: 40,
                     backgroundColor: Colors.transparent,
                     child: Container(
-                      width: 70,
-                      height: 70,
+                      width: 90,
+                      height: 90,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('proj_images/Ain_Shams_logo.png'),
+                          image: AssetImage(
+                              'proj_images/Ain_Shams_logo.png'),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -91,8 +95,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     radius: 40,
                     backgroundColor: Colors.transparent,
                     child: Container(
-                      width: 60,
-                      height: 60,
+                      width: 80,
+                      height: 80,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('proj_images/faculty_logo.png'),
@@ -101,27 +105,42 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                   ), //image
-                ]),
+                ]
+            ),
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
-              child: Image.asset(
-                'proj_images/quiz.png',
+              child: Image.asset('proj_images/quiz.png',
                 width: 800,
-                height: 200,
-              ),
+                height: 200,),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
-            const Center(
-              child: Text(
-                "-The quiz consists of 10 questions. \n-Time of quiz is 15 minutes.\n-Read the question carefully before answering.\n-The quiz was created by Dr. Sally and Dr. Salsabil.",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            Center(
+                child:Column(
+                  children: [
+                    Text(
+                      "Level "+level,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "-The quiz consists of 10 questions. \n-Time of quiz is 15 minutes.\n-Read the question carefully before answering.\n-The quiz was created by Dr. Sally and Dr. Salsabil.",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                )
+
             ),
             SizedBox(
               height: 30,
@@ -136,7 +155,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   fillColor: Colors.blue,
                   child: const Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                    EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                     child: Text(
                       "Start the Quizz",
                       style: TextStyle(
@@ -153,9 +172,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               key: _formkey,
               child: GetBuilder<QuizController>(
                 init: Get.find<QuizController>(),
-                builder: (controller) => TextFormField(),
-              ),
-            )
+                builder: (controller) => Row(),
+              ),)
           ],
         ),
       ),

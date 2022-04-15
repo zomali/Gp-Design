@@ -10,6 +10,7 @@ import 'quiz_controller.dart';
 import 'result_screen.dart';
 
 class BilndingsApp implements Bindings {
+  Map<QuestionModel,int> stuednt_asnwered={};
   @override
   void dependencies() {
     Get.lazyPut(() => QuizController());

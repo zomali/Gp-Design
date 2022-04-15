@@ -26,19 +26,19 @@ class _url_view extends State<url_view> {
     return Scaffold(
       appBar: AppBar(
         // App Bar
-          title: Text(
-            topic.name,
-          //  style: TextStyle(color: Colors.blue),
-          ),
-          elevation: 0,
-      //    backgroundColor: Colors.white,
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_outlined),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => types(std, level, topic)));
-              }
-          )
+        title: Text(
+          topic.name,
+          style: TextStyle(color: Colors.blue),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => types(std, level, topic)));
+          }
+        )
       ),
       // Main List View With Builder
       body: ListView.builder(

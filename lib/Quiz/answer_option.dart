@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'question__model.dart';
-import 'bindings_app.dart';
-import 'custom_button.dart';
-import 'answer_option.dart';
-import 'progress_timer.dart';
-import 'question_card.dart';
-import 'quiz__screen.dart';
+import 'backButton.dart';
 import 'quiz_controller.dart';
-import 'result_screen.dart';
+
 
 class AnswerOption extends StatelessWidget {
   const AnswerOption({
@@ -23,7 +17,6 @@ class AnswerOption extends StatelessWidget {
   final int index;
   final int questionId;
   final Function() onPressed;
-//هنا الويدجت بتاععت الاجابات
   @override
   Widget build(BuildContext context) {
     return GetBuilder<QuizController>(
@@ -67,14 +60,12 @@ class AnswerOption extends StatelessWidget {
                               width: 3,
                             ),
                             shape: BoxShape.circle),
-                        child: Icon(
-                          controller.getIcon(index),
-                          color: Colors.white,
-                        ))
+                        )
                 ],
               ),
             ),
-          )),
+          ),
+      ),
     );
   }
 }
