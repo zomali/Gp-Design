@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gp/Course_evaluation_screens/My_Evaluation_screen.dart';
 import 'package:gp/Course_evaluation_screens/other_students_evaluation_screen.dart';
 
-
-
 import '../Home.dart';
 import '../Learning_analytics_screen.dart';
 import '../classes/student.dart';
@@ -15,14 +13,13 @@ class Course_evual_categories extends StatefulWidget {
   final student std;
   Course_evual_categories(this.std);
 
-
   @override
-  State<Course_evual_categories> createState() => _Course_evual_categoriesState(std);
+  State<Course_evual_categories> createState() =>
+      _Course_evual_categoriesState(std);
 }
 
-class _Course_evual_categoriesState
-    extends State<Course_evual_categories> {
-  final student std;
+class _Course_evual_categoriesState extends State<Course_evual_categories> {
+  student std;
   _Course_evual_categoriesState(this.std);
   int _selectedIndex = 2;
   static List<Widget> _pages = <Widget>[];
@@ -34,12 +31,11 @@ class _Course_evual_categoriesState
     _pages.add(MyProfileScreen(std));
   }
 
-
   void _onItemTapped(int index) {
     setState(
-          () {
+      () {
         _selectedIndex = index;
-       // _selectedIndex%=3;
+        // _selectedIndex%=3;
 
         //   print("index = ${widget.ind} ");
         Navigator.push(context,
@@ -51,8 +47,10 @@ class _Course_evual_categoriesState
   Widget moveToPage(int index) {
     return _pages.elementAt(_selectedIndex);
   }
+
   @override
   Widget build(BuildContext context) {
+    addTOList();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Courses Evaluation"),
@@ -116,11 +114,11 @@ class _Course_evual_categoriesState
         onTap: _onItemTapped,
       ),
       body: Column(
-       // mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only( bottom: 20,top: 50),
+            padding: const EdgeInsets.only(bottom: 20, top: 50),
             child: Text(
               'Categories',
               style: TextStyle(
@@ -135,49 +133,11 @@ class _Course_evual_categoriesState
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60),
             child: GestureDetector(
-              onTap:() {
-            Navigator.push(
-            context,
-            MaterialPageRoute(
-            builder: (context) => My_Evaluation()));
-              },
-              child: Container(
-                height: 70,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(15.0)),
-                // padding: const EdgeInsets.only(
-                //     left: 10, top: 30.0, bottom: 30),
-                child: Column(
-
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-
-                  children: [
-                    Text(
-                      "My Evaluation ",
-                      style: TextStyle(
-                          fontSize: 16, color: Colors.white),
-                    ),
-
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-              height: 30
-          ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60),
-            child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Other_students_evaluation_screen()));
+                        builder: (context) => My_Evaluation(std)));
               },
               child: Container(
                 height: 70,
@@ -188,29 +148,57 @@ class _Course_evual_categoriesState
                 // padding: const EdgeInsets.only(
                 //     left: 10, top: 30.0, bottom: 30),
                 child: Column(
-
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-
                   children: [
                     Text(
-                      "    ME VS Other Students",
-                      style: TextStyle(
-                          fontSize: 16, color: Colors.white),
+                      "My Evaluation ",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
-
                   ],
                 ),
               ),
             ),
           ),
-          SizedBox(
-              height: 30),
+          SizedBox(height: 30),
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60),
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Other_students_evaluation_screen()));
+              },
+              child: Container(
+                height: 70,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(15.0)),
+                // padding: const EdgeInsets.only(
+                //     left: 10, top: 30.0, bottom: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "    ME VS Other Students",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 30),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 60),
+            child: GestureDetector(
+              onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -225,17 +213,13 @@ class _Course_evual_categoriesState
                 // padding: const EdgeInsets.only(
                 //     left: 10, top: 30.0, bottom: 30),
                 child: Column(
-
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-
                   children: [
                     Text(
                       "Quiz Evaluation ",
-                      style: TextStyle(
-                          fontSize: 16, color: Colors.white),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
-
                   ],
                 ),
               ),
@@ -243,7 +227,6 @@ class _Course_evual_categoriesState
           ),
         ],
       ),
-
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,6 +9,7 @@ import 'package:gp/myprofile_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'L_types.dart';
 import 'package:gp/Levels_View.dart';
 //import 'package:flutter_application_1/levels.dart';
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
   void addTOList() {
     _pages.add(Home(std));
     _pages.add(Learning_analytics_screen(std));
-    _pages.add(Courses_evaluations_Screen(std));
+    _pages.add(Course_evual_categories(std));
     _pages.add(MyProfileScreen(std));
   }
 

@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 
 import '../../../DatabaseManager.dart';
+import '../../../classes/student.dart';
 
 part 'student_behavior_state.dart';
 
@@ -18,6 +19,14 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   final DatabaseManager db = DatabaseManager();
   late studentBehavior std;
   late studentBehavior value;
+  late List<int> times;
+
+  Future<void> getTimeTokenForEachLevel(student std) async {
+    emit(StudentBehaviorLoading());
+    times = await db.getTimeTokenForEachLevel(std);
+    emit(StudentBehaviorLoaded());
+  }
+
   Future<void> getTimeSpendEveryOnce(var ID, var Level, var Topic) async {
     emit(StudentBehaviorLoading());
     value = await db.fetchTimeSpendEveryOnce(ID, Level, Topic);
