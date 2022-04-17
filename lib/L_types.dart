@@ -1,28 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/Home.dart';
-import 'package:gp/Levels_View.dart';
 import 'package:gp/classes/studentBehavior.dart';
-import 'package:gp/myprofile_screen.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:path/path.dart';
+import 'dialogs/languageDialog.dart';
+import 'Topic_View.dart';
+import 'classes/student.dart';
+import 'classes/classes.dart';
 import 'audio_player.dart';
 import 'video_player.dart';
 import 'package:gp/URL_view.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'classes/student.dart';
-import 'classes/classes.dart';
 import 'topic_images.dart';
 import 'pdf_view.dart';
-import 'Topic_View.dart';
 
 class types extends StatefulWidget {
   final student std;
-
-  // final int LevelNumber;
-  // final int TopicNumber;
   final Level_ level;
   final Topic_ topic;
 
@@ -31,16 +25,15 @@ class types extends StatefulWidget {
   @override
   _typesState createState() => _typesState(std, level, topic);
 
-// @override
-
 }
 
 class _typesState extends State<types> {
   student std;
   Level_ level;
   Topic_ topic;
-  // int LevelNumber;
-  // int TopicNumber;
+  String? selectedLanguage;
+  Video_? video_;
+  Audio_? audio_;
 
   _typesState(this.std, this.level, this.topic);
   late studentBehavior stdBehavior;
@@ -60,8 +53,6 @@ class _typesState extends State<types> {
 
   bool _url_1st = false;
   //bool _url_1st =true;
-
-//Topic_ topic  = Topic_();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,7 +158,7 @@ class _typesState extends State<types> {
                                     right: 290,
                                     child: Center(
                                         child: Text(
-                                      "Level " + level.id.toString(),
+                                      level.name,
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontStyle: FontStyle.italic,
@@ -180,7 +171,7 @@ class _typesState extends State<types> {
                                     right: 290,
                                     child: Center(
                                         child: Text(
-                                      "Topic " + topic.id.toString(),
+                                      topic.name,
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontStyle: FontStyle.italic,
@@ -192,20 +183,28 @@ class _typesState extends State<types> {
                               ),
                               GestureDetector(
                                 onTap: () => {
-                                  _video_1st
+                                        showDialog(
+                                           context: context,
+                                           builder: (BuildContext context) => languageDialog(
+                                           selectedLanguage: "",))
+                                           .then((value){ 
+                                           if(value == "Arabic")
+                                           {
+                                             audio_ = topic.audios[0];
+                                             video_ = topic.videos[0];
+                                           }
+                                           else{
+                                             audio_ = topic.audios[1];
+                                             video_ = topic.videos[1];
+                                           }                                  _video_1st
                                       ? Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder:
-                                                  (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                  (context) =>
                                                       video_player(
                                                           std,
-                                                          topic.videos[0],
+                                                          video_!,
                                                           stdBehavior.forVideo,
                                                           level,
                                                           topic)),
@@ -215,12 +214,7 @@ class _typesState extends State<types> {
                                               context,
                                               MaterialPageRoute(
                                                   builder:
-                                                      (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                      (context) =>
                                                           audio_player(
                                                               std,
                                                               topic.audios[0],
@@ -234,12 +228,7 @@ class _typesState extends State<types> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder:
-                                                          (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                          (context) =>
                                                               image_view(
                                                                   std,
                                                                   topic.images,
@@ -253,17 +242,11 @@ class _typesState extends State<types> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder:
-                                                              (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                              (context) =>
                                                                   pdf_view(
                                                                       std,
                                                                       topic.pdf,
-                                                                      stdBehavior
-                                                                          .forText,
+                                                                      stdBehavior.forText,
                                                                       level,
                                                                       topic)),
                                                     )
@@ -272,16 +255,10 @@ class _typesState extends State<types> {
                                                           context,
                                                           MaterialPageRoute(
                                                               builder:
-                                                                  (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                                  (context) =>
                                                                       url_view(
                                                                           std,
-                                                                          topic
-                                                                              .urls,
+                                                                          topic.urls,
                                                                           level,
                                                                           topic)),
                                                         )
@@ -289,21 +266,16 @@ class _typesState extends State<types> {
                                                           context,
                                                           MaterialPageRoute(
                                                               builder:
-                                                                  (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                                  (context) =>
                                                                       audio_player(
                                                                           std,
-                                                                          topic.audios[
-                                                                              0],
-                                                                          stdBehavior
-                                                                              .forAudio,
+                                                                          audio_!,
+                                                                          stdBehavior.forAudio,
                                                                           level,
                                                                           topic)),
-                                                        ),
+                                                        );
+                                           }),                                  
+
                                 },
                                 child: Container(
                                   width: 250,
@@ -387,22 +359,31 @@ class _typesState extends State<types> {
                                         //           LevelNumber,
                                         //           TopicNumber)),
                                         // ),
+                                        showDialog(
+                                           context: context,
+                                           builder: (BuildContext context) => languageDialog(
+                                           selectedLanguage: "",))
+                                           .then((value){ 
+                                           if(value == "Arabic")
+                                           {
+                                             audio_ = topic.audios[0];
+                                             video_ = topic.videos[0];
+                                           }
+                                           else{
+                                             audio_ = topic.audios[1];
+                                             video_ = topic.videos[1];
+                                           }
+                                           }),
                                         _video_1st
                                             ? Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder:
-                                                        (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                        (context) =>
                                                             audio_player(
                                                                 std,
-                                                                topic.audios[0],
-                                                                stdBehavior
-                                                                    .forAudio,
+                                                                audio_!,
+                                                                stdBehavior.forAudio,
                                                                 level,
                                                                 topic)),
                                               )
@@ -410,22 +391,16 @@ class _typesState extends State<types> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder:
-                                                        (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                        (context) =>
                                                             video_player(
                                                                 std,
-                                                                topic.videos[0],
+                                                                video_!,
                                                                 stdBehavior
                                                                     .forVideo,
                                                                 level,
                                                                 topic)),
                                               ),
                                       },
-                                      //print("'Clicked'")},
                                       child: Container(
                                         //   height: 100,
 
@@ -475,12 +450,7 @@ class _typesState extends State<types> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder:
-                                                        (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                        (context) =>
                                                             image_view(
                                                                 std,
                                                                 topic.images,
@@ -494,12 +464,7 @@ class _typesState extends State<types> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder:
-                                                            (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                            (context) =>
                                                                 image_view(
                                                                     std,
                                                                     topic
@@ -513,18 +478,11 @@ class _typesState extends State<types> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder:
-                                                            (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                            (context) =>
                                                                 audio_player(
                                                                     std,
-                                                                    topic.audios[
-                                                                        0],
-                                                                    stdBehavior
-                                                                        .forAudio,
+                                                                    audio_!,
+                                                                    stdBehavior.forAudio,
                                                                     level,
                                                                     topic)),
                                                   )
@@ -596,12 +554,7 @@ class _typesState extends State<types> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder:
-                                                        (context) => /*pdf_view(
-                                                  std,
-                                                  topic.pdf,
-                                                  stdBehavior.forText,
-                                                  LevelNumber,
-                                                  TopicNumber)*/
+                                                        (context) =>
                                                             image_view(
                                                                 std,
                                                                 topic.images,
@@ -615,12 +568,7 @@ class _typesState extends State<types> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder:
-                                                            (context) => /*pdf_view(
-                                                  std,
-                                                  topic.pdf,
-                                                  stdBehavior.forText,
-                                                  LevelNumber,
-                                                  TopicNumber)*/
+                                                            (context) =>
                                                                 image_view(
                                                                     std,
                                                                     topic
@@ -634,17 +582,11 @@ class _typesState extends State<types> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder:
-                                                            (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                            (context) =>
                                                                 pdf_view(
                                                                     std,
                                                                     topic.pdf,
-                                                                    stdBehavior
-                                                                        .forText,
+                                                                    stdBehavior.forText,
                                                                     level,
                                                                     topic)),
                                                   )
@@ -705,17 +647,11 @@ class _typesState extends State<types> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder:
-                                                        (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                        (context) =>
                                                             pdf_view(
                                                                 std,
                                                                 topic.pdf,
-                                                                stdBehavior
-                                                                    .forText,
+                                                                stdBehavior.forText,
                                                                 level,
                                                                 topic)),
                                               )
@@ -723,12 +659,7 @@ class _typesState extends State<types> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder:
-                                                        (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
+                                                        (context) =>
                                                             url_view(
                                                                 std,
                                                                 topic.urls,

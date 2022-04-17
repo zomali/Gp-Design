@@ -4,8 +4,7 @@ import 'package:gp/classes/classes.dart';
 import 'package:gp/classes/studentBehavior.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
-import 'package:gp/infoDialog.dart';
-
+import 'package:gp/dialogs/infoDialog.dart';
 import 'DatabaseManager.dart';
 import 'L_types.dart';
 
@@ -100,7 +99,7 @@ class _video_player_state extends State<video_player> {
       appBar: AppBar(
         elevation: 1,
         title: Text(
-          "Revision, Variables & Constants",
+          video_.title,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18.0,
