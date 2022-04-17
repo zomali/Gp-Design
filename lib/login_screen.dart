@@ -51,6 +51,7 @@ class _login_screenState extends State<Login_screen> {
 
   @override
   Widget build(BuildContext context) {
+    db.update2();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[500],

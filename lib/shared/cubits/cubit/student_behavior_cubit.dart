@@ -20,6 +20,13 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   late studentBehavior std;
   late studentBehavior value;
   late List<int> times;
+  late String percent;
+
+  Future<void> getCurrentTopicPercet(student std) async {
+    emit(StudentBehaviorLoading());
+    percent = await db.getCurrentTopicPercet(std);
+    emit(StudentBehaviorLoaded());
+  }
 
   Future<void> getTimeTokenForEachLevel(student std) async {
     emit(StudentBehaviorLoading());
