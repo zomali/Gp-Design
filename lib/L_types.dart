@@ -16,7 +16,7 @@ import 'classes/student.dart';
 import 'classes/classes.dart';
 import 'topic_images.dart';
 import 'pdf_view.dart';
-import 'Levels_View.dart';
+import 'Topic_View.dart';
 
 class types extends StatefulWidget {
   final student std;
@@ -73,8 +73,7 @@ class _typesState extends State<types> {
             icon: Icon(Icons.arrow_back_ios_outlined),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => levels_view(std)));
-              // _selectedIndex-=2;
+                  MaterialPageRoute(builder: (context) => topic_view(std,level)));
             },
           ),
         ),
