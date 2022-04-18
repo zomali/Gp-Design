@@ -5,6 +5,7 @@ import 'package:gp/Courses_evaluations_Screen.dart';
 import 'package:gp/DatabaseManager.dart';
 import 'package:gp/Learning_analytics_screen.dart';
 import 'package:gp/Sidebar/BlockNavigation.dart';
+import 'package:gp/Sidebar/Menu.dart';
 import 'package:gp/myprofile_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -15,6 +16,7 @@ import 'package:gp/Levels_View.dart';
 //import 'package:flutter_application_1/levels.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'Sidebar/sidebar_layout.dart';
 import 'classes/student.dart';
 
 class Home extends StatefulWidget {
@@ -148,6 +150,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     addTOList();
     return Material(
       child: Scaffold(
@@ -201,6 +204,7 @@ class _HomePageState extends State<HomePage> {
           currentIndex: _selectedIndex, //New
           onTap: _onItemTapped,
         ),
+
         body: SingleChildScrollView(
           child: Container(
             height: 800,

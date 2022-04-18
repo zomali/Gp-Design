@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Courses_evaluations_Screen.dart';
 import 'package:gp/Quiz/quiz_result.dart';
+import 'package:gp/Sidebar/Menu.dart';
 import 'package:gp/Sidebar/sidebar_layout.dart';
 import 'package:gp/login_screen.dart';
 import 'package:gp/shared/cubits/cubit/home_cubit.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -45,13 +47,13 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-
         //home: Edit_Proile_Screen(),
         //home:Start_Quiz("1"),
         //home:QuizResults("1"),
         // home: MyProfileScreen(),
         home: Login_screen(),
         //home: side_layout(),
+        //home: Menu_SideBar(),
         // home: Home(0),
         //home: Courses_evaluations_Screen(new student()),
         //home: signup_screen(),
