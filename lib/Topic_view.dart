@@ -18,12 +18,20 @@ class _topic_view extends State<topic_view> {
   student std;
   Level_ level;
   _topic_view(this.std, this.level);
+  
+  List<TopicsPlusQuiz> topicsPlusQuiz = <TopicsPlusQuiz>[];
+    @override
+    void initState() {
+
+      super.initState();
+      topicsPlusQuiz = initializeTopicsList(topicsPlusQuiz, level);
+    }
+  
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-
-
+   
     return Scaffold(
         backgroundColor: Colors.white,
         body: Column(children: [
@@ -78,11 +86,11 @@ class _topic_view extends State<topic_view> {
               context: context,
               removeTop: true,
               child: ListView.builder(
-                itemCount: level.topics.length,
+                itemCount: topicsPlusQuiz.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                       onTap: () {
-                        if(index==level.topics.length-1)
+                        if(index==topicsPlusQuiz.length-1)
                         {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
@@ -132,10 +140,10 @@ class _topic_view extends State<topic_view> {
                                   left: 22, top: 20.0, bottom: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
+                                children: 
+                                <Widget>[
                                   Text(
-                                    "Topic " +
-                                        level.topics[index].id.toString(),
+                                    topicsPlusQuiz[index].topicID,
                                     style: TextStyle(
                                         fontSize: 12, color: Colors.white),
                                   ),
@@ -143,7 +151,7 @@ class _topic_view extends State<topic_view> {
                                     height: 1,
                                   ),
                                   Text(
-                                    level.topics[index].name,
+                                    topicsPlusQuiz[index].topicName,
                                     style: TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,
@@ -162,3 +170,24 @@ class _topic_view extends State<topic_view> {
         ]));
   }
 }
+class TopicsPlusQuiz{
+  late String topicID;
+  late String topicName;
+}
+List<TopicsPlusQuiz> initializeTopicsList(List<TopicsPlusQuiz> topicsPlusQuiz, Level_ level){
+      //add quiz to topics list
+      topicsPlusQuiz = <TopicsPlusQuiz>[];
+      for(var topic in level.topics)
+      {
+        TopicsPlusQuiz TPQ = new TopicsPlusQuiz();
+        TPQ.topicID = "Topic " + topic.id.toString();
+        TPQ.topicName = topic.name;
+        topicsPlusQuiz.add(TPQ);
+      }
+        TopicsPlusQuiz TPQ = new TopicsPlusQuiz();
+        TPQ.topicID = "  ";
+        TPQ.topicName = "Quiz " + level.id.toString();
+        topicsPlusQuiz.add(TPQ);
+
+        return topicsPlusQuiz;
+    }

@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/Sidebar/BlockNavigation.dart';
-import 'package:gp/Sidebar/sidebar_layout.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/set_new_password.dart';
 import 'package:gp/shared/cubits/cubit/student_cubit.dart';
@@ -52,16 +51,14 @@ class _login_screenState extends State<Login_screen> {
 
   @override
   Widget build(BuildContext context) {
-
+    db.update2();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[500],
         elevation: 30,
         title: Text("Personalized E-learning System"),
       ),
-
       body: Builder(builder: (context) {
-
         StudentCubit.get(context).getStudentData();
         return BlocBuilder<StudentCubit, StudentState>(
           builder: (context, state) {
@@ -289,7 +286,6 @@ class _login_screenState extends State<Login_screen> {
 
                                 if (studentExist(email, password, list)) {
                                   student std = studentLevel(email, list);
-                                  side_layout();
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

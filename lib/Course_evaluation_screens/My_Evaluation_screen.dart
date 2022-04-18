@@ -24,6 +24,16 @@ class _My_EvaluationState extends State<My_Evaluation> {
     "Nested Structures ",
     "Arrays",
   ];
+
+  String percent = "10";
+  double percentInNmber = 0.1;
+  void setStatePersent(String per, double per1) {
+    setState(() {
+      percent = per;
+      percentInNmber = per1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +51,7 @@ class _My_EvaluationState extends State<My_Evaluation> {
       ),
       body: Builder(builder: (context) {
         StudentBehaviorCubit.get(context).getTimeTokenForEachLevel(std);
+        StudentBehaviorCubit.get(context).getCurrentTopicPercet(std);
         return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
           builder: (context, state) {
             if (state is StudentBehaviorLoading)
@@ -48,6 +59,9 @@ class _My_EvaluationState extends State<My_Evaluation> {
             else {
               var studentCubit = StudentBehaviorCubit.get(context);
               list = studentCubit.times;
+              percent = studentCubit.percent;
+              percentInNmber = double.parse(percent);
+              percentInNmber /= 100;
               return SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -69,12 +83,12 @@ class _My_EvaluationState extends State<My_Evaluation> {
                         radius: 180.0,
                         lineWidth: 20.0,
                         animation: true,
-                        percent: 0.4,
+                        percent: percentInNmber,
                         // backgroundColor: Colors.white,
                         animationDuration: 3000,
                         progressColor: Colors.blue,
                         center: Text(
-                          "40%",
+                          percent + "%",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,

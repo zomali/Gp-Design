@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
   student std;
   _HomePageState(this.std);
   static List<Widget> _pages = <Widget>[];
+  DatabaseManager db = DatabaseManager();
 
   void addTOList() {
     _pages.add(Home(std));
