@@ -1,25 +1,45 @@
-import 'dart:ffi';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
-import 'classes/course.dart';
 import 'package:gp/classes/classes.dart';
-import 'dart:convert';
 
 class DatabaseManager {
-  Future<course> getCourses() async {
+  Future<Course_> getCourseData(String courseCode) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
-    final response = await firebaseDatabase.child('courses').get();
-    var keys = response.value.keys;
+    final response = await firebaseDatabase.child('courses').child(courseCode).get();
+    //var keys = response.value.keys;
     var values = response.value;
-    course c = new course();
-    for (var key in keys) {
-      c.instructors = values[key]['instructors'];
-      c.levels = values[key]['levels'];
-      c.name = values[key]['name'];
-      c.learning_outcomes = values[key]['learning_outcomes'];
-      c.number_of_levels = values[key]['number_of_levels'];
+    Course_ c = new Course_();
+    //get name and code
+    c.code = courseCode;
+    c.name = values['name'];
+    //get learning outcomes
+    c.learning_outcomes = <String>[];
+    var outcomes = values['learning_outcomes'].keys;
+    for(var outcome in outcomes)
+    {
+      String o = values['learning_outcomes'][outcome];
+      c.learning_outcomes.add(o);
+    }
+
+    //get instructors
+    c.instructors = <Instructor_>[];
+    var instructors = values['instructors'].keys;
+    for (var instructor in instructors) {
+      Instructor_ i = Instructor_();
+      i.name = values['instructors'][instructor]['name'];
+      i.contact = values['instructors'][instructor]['contact'];
+      i.department = values['instructors'][instructor]['department'];
+      c.instructors.add(i);
+    }
+    //get levels
+    c.levels = <Level_>[];
+    var levels = values['levels'].keys;
+    for (var level in levels) {
+      Level_ l = Level_();
+      l.id = values['levels'][level]['level_id'];
+      l.name = values['levels'][level]['level_name'];
+      c.levels.add(l);
     }
     return c;
   }

@@ -48,3 +48,15 @@ class Level_{
   //number of topics may not be needed
   late List<Topic_> topics;
 }
+class Course_ {
+  late String code;
+  late String name;
+  late List<Instructor_> instructors;
+  late List<Level_> levels;
+  late List<String> learning_outcomes;
+}
+class Instructor_{
+  late String name;
+  late String department;
+  late String contact;
+}

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 class languageDialog extends StatelessWidget {
 
-  String? selectedLanguage;
-  languageDialog({ @required this.selectedLanguage});
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -38,7 +36,6 @@ class languageDialog extends StatelessWidget {
                       width: 200,
                       child: ElevatedButton(
                           onPressed: () {
-                            //selectedLanguage = "Arabic";
                             Navigator.of(context).pop("Arabic");
                           },
                           child: Text("Arabic",
@@ -49,7 +46,6 @@ class languageDialog extends StatelessWidget {
                       width: 200,
                       child: ElevatedButton(
                           onPressed: () {
-                            //selectedLanguage = "English";
                             Navigator.of(context).pop("English");
                           },
                           child: Text("English",
