@@ -46,36 +46,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+
   student std;
   _HomePageState(this.std);
-  static List<Widget> _pages = <Widget>[];
+
   DatabaseManager db = DatabaseManager();
 
-  void addTOList() {
-    _pages.add(Home(std));
-    _pages.add(Learning_analytics_screen(std));
-    _pages.add(Course_evual_categories(std));
-    _pages.add(MyProfileScreen(std));
-  }
-
-  void _onItemTapped(int index) {
-    setState(
-      () {
-        _selectedIndex = index;
-
-        //   print("index = ${widget.ind} ");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => moveToPage(index)));
-      },
-    );
-  }
-
-  Widget moveToPage(int index) {
-    //Widget page = _pages.elementAt(_selectedIndex);
-    //page(std);
-    return _pages.elementAt(_selectedIndex);
-  }
 
   Widget _selectedCleaning(@required Color color, @required String title,
       @required String supTitle) {
@@ -152,7 +128,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    addTOList();
+
     return Material(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -162,49 +138,7 @@ class _HomePageState extends State<HomePage> {
           title: const Text("Personalized E-learning System"),
           leading: const Icon(Icons.home),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          showUnselectedLabels: true,
 
-          selectedItemColor: Colors.blue,
-          selectedFontSize: 16,
-
-          unselectedItemColor: Colors.grey,
-          // unselectedFontSize: 11,
-          unselectedFontSize: 16,
-
-          //    currentIndex: 0,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              //backgroundColor: Colors.blue,
-              //   backgroundColor: Colors.blue,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.analytics_outlined),
-              //  icon: Icon(Icons.up),
-              label: 'Analytics',
-
-              // backgroundColor: Colors.blue,
-              //     backgroundColor: Colors.blue,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.equalizer_outlined),
-              label: 'Evaluation',
-              //  backgroundColor: Colors.blue
-              //    backgroundColor: Colors.blue,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded),
-              label: 'Dashboard',
-              //   backgroundColor: Colors.blue
-              //     backgroundColor: Colors.blue,
-            )
-          ],
-
-          currentIndex: _selectedIndex, //New
-          onTap: _onItemTapped,
-        ),
 
         body: SingleChildScrollView(
           child: Container(

@@ -5,6 +5,7 @@ import 'Quiz/Start_Quiz.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/classes.dart';
 import 'L_types.dart';
+import 'l2.dart';
 
 class topic_view extends StatefulWidget {
   final student std;
@@ -101,7 +102,7 @@ class _topic_view extends State<topic_view> {
                           //action on tap
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
-                                  types(std, level, level.topics[index])));
+                                  type(std, level, level.topics[index])));
                         }
                         //code of locked topics
                         /*if (TopicList[index].id <= std.courses['CSW150']['current_level']) {

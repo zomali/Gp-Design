@@ -13,6 +13,7 @@ import 'package:gp/edit_profile%20screen.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 import 'Course_evaluation_screens/Courses_evaluations.dart';
+import 'Levels_View.dart';
 import 'classes/student.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   static List<Widget> _pages = <Widget>[];
 
   void addTOList() {
-    _pages.add(Home(std));
+    _pages.add(levels_view(std));
     _pages.add(Learning_analytics_screen(std));
     _pages.add(Course_evual_categories(std));
     _pages.add(MyProfileScreen(std));
@@ -40,6 +41,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   void _onItemTapped(int index) {
     setState(
       () {
+        index%=4;
         _selectedIndex = index;
 
         //   print("index = ${widget.ind} ");
@@ -50,6 +52,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   Widget moveToPage(int index) {
+    _selectedIndex%=4;
     return _pages.elementAt(_selectedIndex);
   }
 

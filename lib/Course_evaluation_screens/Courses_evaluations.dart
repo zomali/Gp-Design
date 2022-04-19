@@ -4,6 +4,7 @@ import 'package:gp/Course_evaluation_screens/other_students_evaluation_screen.da
 
 import '../Home.dart';
 import '../Learning_analytics_screen.dart';
+import '../Levels_View.dart';
 import '../classes/student.dart';
 import '../myprofile_screen.dart';
 import 'quiz_evaluation_screen.dart';
@@ -25,7 +26,7 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
   static List<Widget> _pages = <Widget>[];
 
   void addTOList() {
-    _pages.add(Home(std));
+    _pages.add(levels_view(std));
     _pages.add(Learning_analytics_screen(std));
     _pages.add(Course_evual_categories(std));
     _pages.add(MyProfileScreen(std));
@@ -34,6 +35,7 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
   void _onItemTapped(int index) {
     setState(
       () {
+        index%=4;
         _selectedIndex = index;
         // _selectedIndex%=3;
 
@@ -45,6 +47,7 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
   }
 
   Widget moveToPage(int index) {
+    _selectedIndex%=4;
     return _pages.elementAt(_selectedIndex);
   }
 

@@ -1,67 +1,58 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/Home.dart';
-import 'package:gp/Levels_View.dart';
 import 'package:gp/classes/studentBehavior.dart';
-import 'package:gp/myprofile_screen.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:path/path.dart';
+import 'dialogs/languageDialog.dart';
+import 'Topic_View.dart';
+import 'classes/student.dart';
+import 'classes/classes.dart';
 import 'audio_player.dart';
 import 'video_player.dart';
 import 'package:gp/URL_view.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'classes/student.dart';
-import 'classes/classes.dart';
 import 'topic_images.dart';
 import 'pdf_view.dart';
-import 'Levels_View.dart';
 
-class types extends StatefulWidget {
+class type extends StatefulWidget {
   final student std;
-
-  // final int LevelNumber;
-  // final int TopicNumber;
   final Level_ level;
   final Topic_ topic;
 
-  types(this.std, this.level, this.topic);
+  type(this.std, this.level, this.topic);
 
   @override
   _typesState createState() => _typesState(std, level, topic);
 
-// @override
-
 }
 
-class _typesState extends State<types> {
+class _typesState extends State<type> {
   student std;
   Level_ level;
   Topic_ topic;
-  // int LevelNumber;
-  // int TopicNumber;
+  String? selectedLanguage;
+  Video_? video_;
+  Audio_? audio_;
 
   _typesState(this.std, this.level, this.topic);
   late studentBehavior stdBehavior;
   //late TypesForStudent list;
   var cupit;
-  bool _video_1st = true;
-  // bool _video_1st=false;
+  //bool _video_1st = true;
+   bool _video_1st=false;
 
-  bool _audio_1st = false;
-// bool _audio_1st=true;
+ // bool _audio_1st = false;
+  bool _audio_1st=true;
 
   bool _text_1st = false;
 //  bool _text_1st=true;
 
   bool _image_1st = false;
   //bool _image_1st=true;
-
+  final String val=" hazem";
   bool _url_1st = false;
   //bool _url_1st =true;
-
-//Topic_ topic  = Topic_();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,8 +64,7 @@ class _typesState extends State<types> {
             icon: Icon(Icons.arrow_back_ios_outlined),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => levels_view(std)));
-              // _selectedIndex-=2;
+                  MaterialPageRoute(builder: (context) => topic_view(std,level)));
             },
           ),
         ),
@@ -168,7 +158,7 @@ class _typesState extends State<types> {
                                         right: 290,
                                         child: Center(
                                             child: Text(
-                                              "Level " + level.id.toString(),
+                                              level.name,
                                               style: TextStyle(
                                                   fontSize: 20,
                                                   fontStyle: FontStyle.italic,
@@ -181,7 +171,7 @@ class _typesState extends State<types> {
                                         right: 290,
                                         child: Center(
                                             child: Text(
-                                              "Topic " + topic.id.toString(),
+                                              topic.name,
                                               style: TextStyle(
                                                   fontSize: 16,
                                                   fontStyle: FontStyle.italic,
@@ -190,112 +180,104 @@ class _typesState extends State<types> {
                                             )),
                                       )
                                     ]),
-                                  ),// info
-
+                                  ),
                                   GestureDetector(
                                     onTap: () => {
-                                      _video_1st
-                                          ? Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder:
-                                                (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                            video_player(
-                                                std,
-                                                topic.videos[0],
-                                                stdBehavior.forVideo,
-                                                level,
-                                                topic)),
-                                      )
-                                          : _audio_1st
-                                          ? Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder:
-                                                (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                            audio_player(
-                                                std,
-                                                topic.audios[0],
-                                                stdBehavior
-                                                    .forAudio,
-                                                level,
-                                                topic)),
-                                      )
-                                          : _image_1st
-                                          ? Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder:
-                                                (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                            image_view(
-                                                std,
-                                                topic.images,
-                                                stdBehavior
-                                                    .forImage,
-                                                level,
-                                                topic)),
-                                      )
-                                          : _text_1st
-                                          ? Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder:
-                                                (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                            pdf_view(
-                                                std,
-                                                topic.pdf,
-                                                stdBehavior
-                                                    .forText,
-                                                level,
-                                                topic)),
-                                      )
-                                          : _url_1st
-                                          ? Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder:
-                                                (context) =>
-                                            url_view(
-                                                std,
-                                                topic
-                                                    .urls,
-                                                level,
-                                                topic)),
-                                      )
-                                          : Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder:
-                                                (context) =>
-                                            audio_player(
-                                                std,
-                                                topic.audios[
-                                                0],
-                                                stdBehavior
-                                                    .forAudio,
-                                                level,
-                                                topic)),
-                                      )
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) => languageDialog(
+                                            selectedLanguage: "",))
+                                          .then((value){
+                                 //           print(value);
+                                        if(value == "Arabic")
+                                        {
+                                          audio_ = topic.audios[1];
+                                          video_ = topic.videos[1];
+                                        }
+                                        else{
+                                          audio_ = topic.audios[0];
+                                          video_ = topic.videos[0];
+                                        }             
+                                        _video_1st
+                                            ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                  video_player(
+                                                      std,
+                                                      video_!,
+                                                      stdBehavior.forVideo,
+                                                      level,
+                                                      topic)),
+                                        )
+                                            : _audio_1st
+                                            ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                  audio_player(
+                                                      std,
+                                                      topic.audios[0],
+                                                      stdBehavior
+                                                          .forAudio,
+                                                      level,
+                                                      topic)),
+                                        )
+                                            : _image_1st
+                                            ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                  image_view(
+                                                      std,
+                                                      topic.images,
+                                                      stdBehavior
+                                                          .forImage,
+                                                      level,
+                                                      topic)),
+                                        )
+                                            : _text_1st
+                                            ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                  pdf_view(
+                                                      std,
+                                                      topic.pdf,
+                                                      stdBehavior.forText,
+                                                      level,
+                                                      topic)),
+                                        )
+                                            : _url_1st
+                                            ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                  url_view(
+                                                      std,
+                                                      topic.urls,
+                                                      level,
+                                                      topic)),
+                                        )
+                                            : Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                  audio_player(
+                                                      std,
+                                                      audio_!,
+                                                      stdBehavior.forAudio,
+                                                      level,
+                                                      topic)),
+                                        );
+                                      }),
+
                                     },
                                     child: Container(
                                       width: 250,
@@ -355,12 +337,8 @@ class _typesState extends State<types> {
                                         ],
                                       ),
                                     ),
-                                  ),
-                                  //new fun
-                                  ////////////////////////////////////////////////////////////////
-                                  //        SingleChildScrollView(
-                                  //       scrollDirection: Axis.horizontal,
-                                  //    child:
+                                  ),//first_button
+                               
                                   Padding(
                                     padding:
                                     const EdgeInsets.only(top: 40, bottom: 20),
@@ -368,56 +346,156 @@ class _typesState extends State<types> {
                                       children: [
                                         Spacer(),
                                         GestureDetector(
-                                          onTap: () => {
-                                            // Navigator.push(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //       builder: (context) => audio_player(
-                                            //           std,
-                                            //          topic.audios[0],
-                                            //           stdBehavior.forAudio,
-                                            //           LevelNumber,
-                                            //           TopicNumber)),
-                                            // ),
-                                            _video_1st
-                                                ? Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder:
-                                                      (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                                  audio_player(
-                                                      std,
-                                                      topic.audios[0],
-                                                      stdBehavior
-                                                          .forAudio,
-                                                      level,
-                                                      topic)),
-                                            )
-                                                : Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder:
-                                                      (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                                  video_player(
-                                                      std,
-                                                      topic.videos[0],
-                                                      stdBehavior
-                                                          .forVideo,
-                                                      level,
-                                                      topic)),
-                                            ),
+                                          onTap: ()
+                                         // async =>
+                                          {
+
+
+                                            showDialog(
+                                                context: context,
+
+
+                                                builder: (BuildContext context) => languageDialog(selectedLanguage:val ),
+
+
+                                            );
+
+
+
+                                            //     .then((value){
+                                            //   print("{{{{{{{{{{{{{{{{{{{{{{ "+value.toString()+" }}}}}}}}}}}}} ");
+                                            //   if(value == "Arabic")
+                                            //   {
+                                            //     audio_ = topic.audios[0];
+                                            //     video_ = topic.videos[0];
+                                            //   }
+                                            //   else{
+                                            //     audio_ = topic.audios[1];
+                                            //     video_ = topic.videos[1];
+                                            //   }
+                                            // }
+                                            // );
+
+                                           // await new Future.delayed(const Duration(seconds: 10), () {
+                                           //    setState(() {
+                                           //      // Here you can write your code for open new view
+                                           //    });
+                                           //  }),
+                                            if(audio_ !=null || video_ !=null) {
+                                              _video_1st
+                                                  ? Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder:
+                                                        (context) =>
+                                                        audio_player(
+                                                            std,
+                                                            audio_!,
+                                                            stdBehavior
+                                                                .forAudio,
+                                                            level,
+                                                            topic)),
+                                              )
+                                                  : Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder:
+                                                        (context) =>
+                                                        video_player(
+                                                            std,
+                                                            video_!,
+                                                            stdBehavior
+                                                                .forVideo,
+                                                            level,
+                                                            topic)),
+                                              );
+                                              audio_=null;
+                                              video_=null;
+                                            }
+                                            else if(audio_ !=null || video_ !=null) {
+                                              _video_1st
+                                                  ? Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder:
+                                                        (context) =>
+                                                        audio_player(
+                                                            std,
+                                                            audio_!,
+                                                            stdBehavior
+                                                                .forAudio,
+                                                            level,
+                                                            topic)),
+                                              )
+                                                  : Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder:
+                                                        (context) =>
+                                                        video_player(
+                                                            std,
+                                                            video_!,
+                                                            stdBehavior
+                                                                .forVideo,
+                                                            level,
+                                                            topic)),
+                                              );
+                                            }
+                                            else{
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (BuildContext context) => languageDialog(
+                                                    selectedLanguage: "",))
+
+
+                                                  .then((value){
+                                                print("{{{{{{{{{{{{{{{{{{{{{{ "+val.toString()+" }}}}}}}}}}}}} ");
+                                                if(value == "Arabic")
+                                                {
+
+                                                  audio_ = topic.audios[0];
+                                                  video_ = topic.videos[0];
+                                                }
+                                                else{
+                                                  audio_ = topic.audios[1];
+                                                  video_ = topic.videos[1];
+                                                  if(audio_ !=null || video_ !=null) {
+                                                    _video_1st
+                                                        ? Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder:
+                                                              (context) =>
+                                                              audio_player(
+                                                                  std,
+                                                                  audio_!,
+                                                                  stdBehavior
+                                                                      .forAudio,
+                                                                  level,
+                                                                  topic)),
+                                                    )
+                                                        : Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder:
+                                                              (context) =>
+                                                              video_player(
+                                                                  std,
+                                                                  video_!,
+                                                                  stdBehavior
+                                                                      .forVideo,
+                                                                  level,
+                                                                  topic)),
+                                                    );
+                                                  }
+                                                }
+                                                //audio_=null;
+                                               // video_=null;
+                                              });
+                                            }
+                                       //     audio_=null;
+                                        //    video_=null;
                                           },
-                                          //print("'Clicked'")},
                                           child: Container(
                                             //   height: 100,
 
@@ -457,68 +535,72 @@ class _typesState extends State<types> {
                                               ],
                                             ),
                                           ),
-                                        ),
+                                        ),//second_button
                                         Spacer(),
                                         //////////////////////////////////////////////////////////////////////
                                         GestureDetector(
                                           onTap: () => {
+
+                                          showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) => languageDialog(
+                                          selectedLanguage: "",))
+
+
+                                              .then((value){
+
+                                          if(value == "Arabic")
+                                          {
+                                          audio_ = topic.audios[0];
+                                          video_ = topic.videos[0];
+                                          }
+                                          else{
+                                          audio_ = topic.audios[1];
+                                          video_ = topic.videos[1];
+                                          }
+                                          }),
+
+
                                             _video_1st
                                                 ? Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder:
-                                                      (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                                  image_view(
-                                                      std,
-                                                      topic.images,
-                                                      stdBehavior
-                                                          .forImage,
-                                                      level,
-                                                      topic)),
+                                                      (context) =>
+                                                      image_view(
+                                                          std,
+                                                          topic.images,
+                                                          stdBehavior
+                                                              .forImage,
+                                                          level,
+                                                          topic)),
                                             )
                                                 : _audio_1st
                                                 ? Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder:
-                                                      (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                                  image_view(
-                                                      std,
-                                                      topic
-                                                          .images,
-                                                      stdBehavior
-                                                          .forImage,
-                                                      level,
-                                                      topic)),
+                                                      (context) =>
+                                                      image_view(
+                                                          std,
+                                                          topic
+                                                              .images,
+                                                          stdBehavior
+                                                              .forImage,
+                                                          level,
+                                                          topic)),
                                             )
                                                 : Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder:
-                                                      (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                                  audio_player(
-                                                      std,
-                                                      topic.audios[
-                                                      0],
-                                                      stdBehavior
-                                                          .forAudio,
-                                                      level,
-                                                      topic)),
+                                                      (context) =>
+                                                      audio_player(
+                                                          std,
+                                                          audio_!,
+                                                          stdBehavior.forAudio,
+                                                          level,
+                                                          topic)),
                                             )
                                           },
                                           child: Container(
@@ -588,57 +670,41 @@ class _typesState extends State<types> {
                                               context,
                                               MaterialPageRoute(
                                                   builder:
-                                                      (context) => /*pdf_view(
-                                                  std,
-                                                  topic.pdf,
-                                                  stdBehavior.forText,
-                                                  LevelNumber,
-                                                  TopicNumber)*/
-                                                  image_view(
-                                                      std,
-                                                      topic.images,
-                                                      stdBehavior
-                                                          .forImage,
-                                                      level,
-                                                      topic)),
+                                                      (context) =>
+                                                      image_view(
+                                                          std,
+                                                          topic.images,
+                                                          stdBehavior
+                                                              .forImage,
+                                                          level,
+                                                          topic)),
                                             )
                                                 : _url_1st
                                                 ? Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder:
-                                                      (context) => /*pdf_view(
-                                                  std,
-                                                  topic.pdf,
-                                                  stdBehavior.forText,
-                                                  LevelNumber,
-                                                  TopicNumber)*/
-                                                  image_view(
-                                                      std,
-                                                      topic
-                                                          .images,
-                                                      stdBehavior
-                                                          .forImage,
-                                                      level,
-                                                      topic)),
+                                                      (context) =>
+                                                      image_view(
+                                                          std,
+                                                          topic
+                                                              .images,
+                                                          stdBehavior
+                                                              .forImage,
+                                                          level,
+                                                          topic)),
                                             )
                                                 : Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder:
-                                                      (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                                  pdf_view(
-                                                      std,
-                                                      topic.pdf,
-                                                      stdBehavior
-                                                          .forText,
-                                                      level,
-                                                      topic)),
+                                                      (context) =>
+                                                      pdf_view(
+                                                          std,
+                                                          topic.pdf,
+                                                          stdBehavior.forText,
+                                                          level,
+                                                          topic)),
                                             )
                                           },
                                           child: Container(
@@ -697,35 +763,24 @@ class _typesState extends State<types> {
                                               context,
                                               MaterialPageRoute(
                                                   builder:
-                                                      (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                                  pdf_view(
-                                                      std,
-                                                      topic.pdf,
-                                                      stdBehavior
-                                                          .forText,
-                                                      level,
-                                                      topic)),
+                                                      (context) =>
+                                                      pdf_view(
+                                                          std,
+                                                          topic.pdf,
+                                                          stdBehavior.forText,
+                                                          level,
+                                                          topic)),
                                             )
                                                 : Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder:
-                                                      (context) => /*pdf_view(
-                                                    std,
-                                                    topic.pdf,
-                                                    stdBehavior.forText,
-                                                    LevelNumber,
-                                                    TopicNumber)*/
-                                                  url_view(
-                                                      std,
-                                                      topic.urls,
-                                                      level,
-                                                      topic)),
+                                                      (context) =>
+                                                      url_view(
+                                                          std,
+                                                          topic.urls,
+                                                          level,
+                                                          topic)),
                                             )
                                           },
                                           child: Container(
@@ -790,8 +845,10 @@ class _typesState extends State<types> {
 }
 
 showlanguageDialogFunc(context) {
+  String lang="";
   return showDialog(
     context: context,
+
     builder: (context) {
       return Center(
         child: Dialog(
@@ -826,8 +883,11 @@ showlanguageDialogFunc(context) {
                       width: 200,
                       child: ElevatedButton(
                           onPressed: () {
+                            lang="Arabic";
                             //call arabic type
+
                             Navigator.of(context).pop();
+
                           },
                           child: Text("Arabic",
                               style: TextStyle(
@@ -839,6 +899,7 @@ showlanguageDialogFunc(context) {
                           onPressed: () {
                             //call english type
 
+                            lang="English";
                             Navigator.of(context).pop();
                           },
                           child: Text("English",

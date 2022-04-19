@@ -5,6 +5,7 @@ import 'package:gp/myprofile_screen.dart';
 import 'package:charts_flutter/flutter.dart'as charts;
 import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Home.dart';
+import 'Levels_View.dart';
 import 'classes/student.dart';
 import 'package:pie_chart/pie_chart.dart';
 
@@ -29,7 +30,7 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
   };
 
   void addTOList() {
-    _pages.add(Home(std));
+    _pages.add(levels_view(std));
     _pages.add(Learning_analytics_screen(std));
     _pages.add(Course_evual_categories(std));
     _pages.add(MyProfileScreen(std));
@@ -38,6 +39,7 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
   void _onItemTapped(int index) {
     setState(
           () {
+            index%=4;
         _selectedIndex = index;
 
         //   print("index = ${widget.ind} ");
@@ -48,6 +50,7 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
   }
 
   Widget moveToPage(int index) {
+    _selectedIndex%=4;
     return _pages.elementAt(_selectedIndex);
   }
 

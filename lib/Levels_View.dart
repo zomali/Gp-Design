@@ -6,7 +6,10 @@ import 'package:gp/Sidebar/BlockNavigation.dart';
 import 'package:gp/Topic_view.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/classes/student.dart';
+import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Home.dart';
+import 'Learning_analytics_screen.dart';
+import 'myprofile_screen.dart';
 
 class levels_view extends StatefulWidget with NavigationStates {
   final student std;
@@ -16,6 +19,35 @@ class levels_view extends StatefulWidget with NavigationStates {
 }
 
 class _levels_view extends State<levels_view> {
+
+  int _selectedIndex = 0;
+  static List<Widget> _pages = <Widget>[];
+  void addTOList() {
+    _pages.add(levels_view(std));
+    _pages.add(Learning_analytics_screen(std));
+    _pages.add(Course_evual_categories(std));
+    _pages.add(MyProfileScreen(std));
+  }
+
+  void _onItemTapped(int index) {
+    setState(
+          () {
+            index%=4;
+        _selectedIndex = index;
+
+        //   print("index = ${widget.ind} ");
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) =>moveToPage(_selectedIndex) ));
+      },
+    );
+  }
+
+  Widget moveToPage(int index) {
+    //Widget page = _pages.elementAt(_selectedIndex);
+    //page(std);
+    _selectedIndex%=4;
+    return _pages.elementAt(_selectedIndex);
+  }
   student std;
   _levels_view(this.std);
   set value(String? value) {}
@@ -30,11 +62,55 @@ class _levels_view extends State<levels_view> {
 
   @override
   Widget build(BuildContext context) {
+    addTOList();
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     var course_name = "Structured Programming";
     List<int> levelIDs = [1, 2, 3, 4, 5];
     return Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          showUnselectedLabels: true,
+
+          selectedItemColor: Colors.blue,
+          selectedFontSize: 16,
+
+          unselectedItemColor: Colors.grey,
+          // unselectedFontSize: 11,
+          unselectedFontSize: 16,
+
+          //    currentIndex: 0,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              //backgroundColor: Colors.blue,
+              //   backgroundColor: Colors.blue,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.analytics_outlined),
+              //  icon: Icon(Icons.up),
+              label: 'Analytics',
+
+              // backgroundColor: Colors.blue,
+              //     backgroundColor: Colors.blue,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.equalizer_outlined),
+              label: 'Evaluation',
+              //  backgroundColor: Colors.blue
+              //    backgroundColor: Colors.blue,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_rounded),
+              label: 'Dashboard',
+              //   backgroundColor: Colors.blue
+              //     backgroundColor: Colors.blue,
+            )
+          ],
+
+          currentIndex: _selectedIndex, //New
+          onTap: _onItemTapped,
+        ),
         backgroundColor: Colors.white,
         body: Builder(builder: (context) {
           LevelCubit.get(context).getAllLevels(levelIDs);
