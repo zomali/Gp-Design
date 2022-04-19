@@ -18,20 +18,27 @@ class _topic_view extends State<topic_view> {
   student std;
   Level_ level;
   _topic_view(this.std, this.level);
-  
-  List<TopicsPlusQuiz> topicsPlusQuiz = <TopicsPlusQuiz>[];
-    @override
-    void initState() {
 
-      super.initState();
-      topicsPlusQuiz = initializeTopicsList(topicsPlusQuiz, level);
+  List<TopicsPlusQuiz> topicsPlusQuiz = <TopicsPlusQuiz>[];
+  @override
+  void initState() {
+    super.initState();
+    topicsPlusQuiz = initializeTopicsList(topicsPlusQuiz, level);
+  }
+
+  Widget putIcon(index) {
+    if ((std.current_topic - 1) < index) {
+      return const Icon(Icons.lock);
+    } else {
+      return const Icon(Icons.lock_open);
     }
-  
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-   
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: Column(children: [
@@ -41,45 +48,45 @@ class _topic_view extends State<topic_view> {
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(50)),
               color: Colors.blue,
             ),
-            child: Stack(
-                children: [
-                  Positioned(
-                      top: 30,
-                      left: 0,
-                      child: Container(
-                        height: 50,
-                        width: 310,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(50),
-                              bottomRight: Radius.circular(50),
-                            )),
-                      )),
-                  Positioned(
-                    top: 30,
-                    left: 0,
-                    child:Row(
-                        children:[
-                          IconButton(
-                            icon: Icon(Icons.arrow_back_ios_outlined),
-                            color: Colors.blue,
-                            onPressed: (){
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => levels_view(std)));
-                            },
-                          ),
-                          Text(
-                            level.name,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          )
-                        ]), )
-                ]
-            ),
+            child: Stack(children: [
+              Positioned(
+                  top: 30,
+                  left: 0,
+                  child: Container(
+                    height: 50,
+                    width: 310,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(50),
+                          bottomRight: Radius.circular(50),
+                        )),
+                  )),
+              Positioned(
+                top: 30,
+                left: 0,
+                child: Row(children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios_outlined),
+                    color: Colors.blue,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => levels_view(std)));
+                    },
+                  ),
+                  Text(
+                    level.name,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  )
+                ]),
+              )
+            ]),
           ),
           Expanded(
             child: MediaQuery.removePadding(
@@ -90,14 +97,11 @@ class _topic_view extends State<topic_view> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                       onTap: () {
-                        if(index==topicsPlusQuiz.length-1)
-                        {
+                        if (index == topicsPlusQuiz.length - 1) {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   Start_Quiz(level.id.toString())));
-                        }
-                        else
-                        {
+                        } else {
                           //action on tap
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
@@ -116,6 +120,7 @@ class _topic_view extends State<topic_view> {
                       },
                       child: Card(
                         child: Row(children: <Widget>[
+                          putIcon(index),
                           Container(
                             margin: const EdgeInsets.only(bottom: 5, top: 5),
                             height: 120,
@@ -140,8 +145,7 @@ class _topic_view extends State<topic_view> {
                                   left: 22, top: 20.0, bottom: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: 
-                                <Widget>[
+                                children: <Widget>[
                                   Text(
                                     topicsPlusQuiz[index].topicID,
                                     style: TextStyle(
@@ -170,24 +174,26 @@ class _topic_view extends State<topic_view> {
         ]));
   }
 }
-class TopicsPlusQuiz{
+
+class TopicsPlusQuiz {
   late String topicID;
   late String topicName;
 }
-List<TopicsPlusQuiz> initializeTopicsList(List<TopicsPlusQuiz> topicsPlusQuiz, Level_ level){
-      //add quiz to topics list
-      topicsPlusQuiz = <TopicsPlusQuiz>[];
-      for(var topic in level.topics)
-      {
-        TopicsPlusQuiz TPQ = new TopicsPlusQuiz();
-        TPQ.topicID = "Topic " + topic.id.toString();
-        TPQ.topicName = topic.name;
-        topicsPlusQuiz.add(TPQ);
-      }
-        TopicsPlusQuiz TPQ = new TopicsPlusQuiz();
-        TPQ.topicID = "  ";
-        TPQ.topicName = "Quiz " + level.id.toString();
-        topicsPlusQuiz.add(TPQ);
 
-        return topicsPlusQuiz;
-    }
+List<TopicsPlusQuiz> initializeTopicsList(
+    List<TopicsPlusQuiz> topicsPlusQuiz, Level_ level) {
+  //add quiz to topics list
+  topicsPlusQuiz = <TopicsPlusQuiz>[];
+  for (var topic in level.topics) {
+    TopicsPlusQuiz TPQ = new TopicsPlusQuiz();
+    TPQ.topicID = "Topic " + topic.id.toString();
+    TPQ.topicName = topic.name;
+    topicsPlusQuiz.add(TPQ);
+  }
+  TopicsPlusQuiz TPQ = new TopicsPlusQuiz();
+  TPQ.topicID = "  ";
+  TPQ.topicName = "Quiz " + level.id.toString();
+  topicsPlusQuiz.add(TPQ);
+
+  return topicsPlusQuiz;
+}

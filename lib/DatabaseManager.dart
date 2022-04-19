@@ -37,6 +37,7 @@ class DatabaseManager {
       std.email = values[key]['email'];
       std.password = values[key]['password'];
       std.level = values[key]['courses']['CSW150']['current_level'];
+      std.current_topic = values[key]['courses']['CSW150']['current_topic'];
       std.birthdate = values[key]['date_of_birth'];
       std.courses = values[key]['courses'];
       std.profile_picture = values[key]['profile_picture'];
@@ -1500,6 +1501,147 @@ class DatabaseManager {
         .update({
       'last_time_enterd': 'First Time',
     });
+  }
+
+  Future<List<int>> fetchAllStudentGrades(student std) async {
+    List<int> arr = [];
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase.child('students').get();
+    var keys = response.value.keys;
+    var values = response.value;
+    List<int> length = [];
+    length.add(0);
+    length.add(0);
+    length.add(0);
+    length.add(0);
+    length.add(0);
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    for (var key in keys) {
+      for (int i = 0; i < 5; i++) {
+        if (values[key]['courses']['CSW150']['quizes'][i] == 0) {
+          continue;
+        } else {
+          length[i]++;
+        }
+      }
+    }
+    for (var key in keys) {
+      if (key == std.id) {
+        continue;
+      } else {
+        for (int i = 0; i < 5; i++) {
+          arr[i] += values[key]['courses']['CSW150']['quizes'][i] as int;
+        }
+      }
+    }
+    for (int i = 0; i < 5; i++) {
+      arr[i] = (arr[i] / (length[i] - 1)).round();
+    }
+    return arr;
+  }
+
+  Future<List<int>> fetchStudentGrades(student std) async {
+    List<int> arr = [];
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('students')
+        .child(std.id)
+        .child('courses')
+        .child('CSW150')
+        .child('quizes')
+        .get();
+    for (int i = 0; i < 5; i++) {
+      arr.add(response.value[i]);
+    }
+    return arr;
+  }
+
+  Future<List<int>> getTimeTokenForEachLevelForAllStudents(student std) async {
+    List<int> arr = [];
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response =
+        await firebaseDatabase.child('student_behavior_model').get();
+    var keys = response.value.keys;
+    var values = response.value;
+    int length = 0;
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    for (var key in keys) {
+      length++;
+    }
+    for (var key in keys) {
+      if (key == std.id) {
+        continue;
+      } else {
+        int type = 1;
+        int topic = 3;
+        for (int Level = 1; Level < 6; Level++) {
+          var time = 0;
+          int startTopic = 0;
+          if (Level == 1) {
+            startTopic = 1;
+          } else if (Level == 2) {
+            startTopic = 4;
+            topic += 3;
+          } else if (Level == 3) {
+            startTopic = 7;
+            topic += 4;
+          } else if (Level == 4) {
+            startTopic = 11;
+            topic += 3;
+          } else if (Level == 5) {
+            startTopic = 14;
+            topic += 4;
+          }
+          //print(values[1][1]['audio']['time_spent']);
+          if (Level == 1) {
+            for (int t = startTopic; t <= topic; t++) {
+              arr[Level - 1] +=
+                  values[key][Level][t]['audio']['time_spent'] as int;
+              arr[Level - 1] +=
+                  values[key][Level][t]['text']['time_spent'] as int;
+              arr[Level - 1] +=
+                  values[key][Level][t]['video']['time_spent'] as int;
+              arr[Level - 1] +=
+                  values[key][Level][t]['image']['time_spent'] as int;
+            }
+          } else {
+            for (int t = startTopic; t <= topic; t++) {
+              arr[Level - 1] += values[key][Level][t.toString()]['audio']
+                  ['time_spent'] as int;
+              arr[Level - 1] +=
+                  values[key][Level][t.toString()]['text']['time_spent'] as int;
+              arr[Level - 1] += values[key][Level][t.toString()]['video']
+                  ['time_spent'] as int;
+              arr[Level - 1] += values[key][Level][t.toString()]['image']
+                  ['time_spent'] as int;
+            }
+          }
+        }
+      }
+    }
+    List<int> times = [];
+    for (int i = 0; i < 5; i++) {
+      double average = arr[i] / (length - 1);
+      int timeInMinetes = 0;
+      if (average < 60 && average > 0) {
+        timeInMinetes = 1;
+      } else {
+        while (average >= 60) {
+          timeInMinetes++;
+          average -= 60;
+        }
+      }
+      times.add(timeInMinetes);
+    }
+    return times;
   }
 
   void update2() {
