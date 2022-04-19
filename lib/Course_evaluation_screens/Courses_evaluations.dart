@@ -173,7 +173,7 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            Other_students_evaluation_screen()));
+                            Other_students_evaluation_screen(std)));
               },
               child: Container(
                 height: 70,

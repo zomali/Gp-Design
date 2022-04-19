@@ -27,12 +27,6 @@ class _My_EvaluationState extends State<My_Evaluation> {
 
   String percent = "10";
   double percentInNmber = 0.1;
-  void setStatePersent(String per, double per1) {
-    setState(() {
-      percent = per;
-      percentInNmber = per1;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +53,11 @@ class _My_EvaluationState extends State<My_Evaluation> {
             else {
               var studentCubit = StudentBehaviorCubit.get(context);
               list = studentCubit.times;
-              percent = studentCubit.percent;
-              percentInNmber = double.parse(percent);
-              percentInNmber /= 100;
+              try {
+                percent = studentCubit.percent;
+                percentInNmber = double.parse(percent);
+                percentInNmber /= 100;
+              } catch (e) {}
               return SingleChildScrollView(
                 child: Center(
                   child: Column(

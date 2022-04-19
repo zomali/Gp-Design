@@ -19,7 +19,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'Sidebar/sidebar_layout.dart';
 import 'classes/student.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatefulWidget with NavigationStates {
   final student std;
   Home(this.std);
 

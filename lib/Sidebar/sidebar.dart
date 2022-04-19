@@ -1,29 +1,39 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gp/classes/student.dart';
 import 'package:gp/login_screen.dart';
 import 'package:rxdart/rxdart.dart';
 import 'BlockNavigation.dart';
 import 'Menu.dart';
+
 class sidebar extends StatefulWidget {
+  // final student std;
+  // sidebar(this.std);
   @override
   State<sidebar> createState() => _sidebarState();
 }
-class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<sidebar>{
+
+class _sidebarState extends State<sidebar>
+    with SingleTickerProviderStateMixin<sidebar> {
+  // student std;
+  // _sidebarState(this.std);
   AnimationController? _animationController;
   StreamController<bool>? isSidebaropenstreamctrl;
   Stream<bool>? isSidebarstream;
-  StreamSink<bool> ? isSidebaropensink;
+  StreamSink<bool>? isSidebaropensink;
   //final bool isSidebarOpened = true ;
   final _animationDura = const Duration(milliseconds: 500);
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: _animationDura);
+    _animationController =
+        AnimationController(vsync: this, duration: _animationDura);
     isSidebaropenstreamctrl = PublishSubject<bool>();
-    isSidebarstream =isSidebaropenstreamctrl!.stream;
+    isSidebarstream = isSidebaropenstreamctrl!.stream;
     isSidebaropensink = isSidebaropenstreamctrl!.sink;
   }
+
   @override
   void dispose() {
     _animationController!.dispose();
@@ -31,32 +41,32 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
     isSidebaropensink!.close();
     super.dispose();
   }
-  void oniconpress(){
+
+  void oniconpress() {
     final animationstatus = _animationController!.status;
     final isAnimationCompleted = animationstatus == AnimationStatus.completed;
-    if(isAnimationCompleted)
-    {
+    if (isAnimationCompleted) {
       isSidebaropensink!.add(false);
       _animationController!.reverse();
-    }
-    else{
+    } else {
       isSidebaropensink!.add(true);
       _animationController!.forward();
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return StreamBuilder<bool>(
       initialData: false,
       stream: isSidebarstream,
-      builder: (context,isSideBarOpenedAsync){
+      builder: (context, isSideBarOpenedAsync) {
         return AnimatedPositioned(
-          duration: _animationDura ,
+          duration: _animationDura,
           top: 0,
           bottom: 0,
-          left: isSideBarOpenedAsync.data! ? 0: -screenWidth,
-          right: isSideBarOpenedAsync.data! ?  0 : screenWidth - 45,
+          left: isSideBarOpenedAsync.data! ? 0 : -screenWidth,
+          right: isSideBarOpenedAsync.data! ? 0 : screenWidth - 45,
           child: Row(
             children: <Widget>[
               Expanded(
@@ -69,13 +79,16 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                         height: 100,
                       ),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           // navigate to profile
                         },
                         child: ListTile(
                           title: Text(
                             "Hossam",
-                            style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w800),
                           ),
                           subtitle: Text(
                             "hh@gmail.com",
@@ -85,10 +98,6 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                             ),
                           ),
                           leading: CircleAvatar(
-                            child: Icon(
-                              Icons.perm_identity,
-                              color: Colors.white,
-                            ),
                             radius: 40,
                           ),
                         ),
@@ -101,12 +110,12 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                         endIndent: 32,
                       ),
                       GestureDetector(
-                        onTap: (){
-                          BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
+                        onTap: () {
+                          BlocProvider.of<Navigationn>(context)
+                              .add(NavigationEvents.HomePageClickedEvent);
                           oniconpress();
                         },
                         child: Menu_SideBar(
-
                           icon: Icons.topic,
                           title: "Levels",
                           // ontap: () {
@@ -116,8 +125,9 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                         ),
                       ),
                       GestureDetector(
-                        onTap: (){
-                          BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
+                        onTap: () {
+                          BlocProvider.of<Navigationn>(context)
+                              .add(NavigationEvents.evalution);
                           oniconpress();
                         },
                         child: Menu_SideBar(
@@ -137,8 +147,9 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                         endIndent: 32,
                       ),
                       GestureDetector(
-                        onTap: (){
-                          BlocProvider.of<Navigationn>(context).add(NavigationEvents.Infoevent);
+                        onTap: () {
+                          BlocProvider.of<Navigationn>(context)
+                              .add(NavigationEvents.Infoevent);
                           oniconpress();
                         },
                         child: Menu_SideBar(
@@ -151,10 +162,11 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
                         ),
                       ),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>  Login_screen()),
+                            MaterialPageRoute(
+                                builder: (context) => Login_screen()),
                           );
                         },
                         child: Menu_SideBar(
@@ -199,6 +211,7 @@ class _sidebarState extends State<sidebar> with SingleTickerProviderStateMixin<s
     );
   }
 }
+
 class CustomMenuClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -215,6 +228,7 @@ class CustomMenuClipper extends CustomClipper<Path> {
     path.close();
     return path;
   }
+
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;

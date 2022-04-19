@@ -4,6 +4,7 @@ import 'package:gp/L_types.dart';
 
 import 'package:gp/Last_quizes.dart';
 import 'package:gp/Sidebar/sidebar_layout.dart';
+import 'package:gp/signup%20screen.dart';
 
 import '../Info.dart';
 
@@ -18,16 +19,16 @@ enum NavigationEvents {
   Infoevent,
   logout,
 }
+
 abstract class NavigationStates {}
 
-class Navigationn extends Bloc<NavigationEvents,NavigationStates>{
-  Navigationn(NavigationStates initialState) : super(initialState);
+class Navigationn extends Bloc<NavigationEvents, NavigationStates> {
+  student std;
+  Navigationn(NavigationStates initialState, this.std) : super(initialState);
 
   // Navigationn(NavigationStates initialState) : super(INFO());
   @override
   NavigationStates get initialState => hhh();
-
-
 
   //Navigationn(NavigationStates initialState) : super(initialState);
 
@@ -37,7 +38,7 @@ class Navigationn extends Bloc<NavigationEvents,NavigationStates>{
   Stream<NavigationStates> mapEventToState(NavigationEvents event) async* {
     switch (event) {
       case NavigationEvents.HomePageClickedEvent:
-        yield hhh();
+        yield Home(std);
         break;
       case NavigationEvents.evalution:
         yield lastQuizes();
@@ -48,9 +49,6 @@ class Navigationn extends Bloc<NavigationEvents,NavigationStates>{
       case NavigationEvents.logout:
         yield Login_screen();
         break;
-
-
-
     }
   }
-    }
+}

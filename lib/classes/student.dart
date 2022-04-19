@@ -9,6 +9,7 @@ class student {
   var level;
   var password;
   var profile_picture;
+  var current_topic;
   var email;
   var courses;
   var birthdate;
@@ -31,7 +32,7 @@ class Storage {
 
   Future<String> DownloadURL(String name) async {
     String downloadURL =
-    await storage.ref('users_profiles/$name').getDownloadURL();
+        await storage.ref('users_profiles/$name').getDownloadURL();
     return downloadURL;
   }
 }

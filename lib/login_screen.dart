@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gp/Home.dart';
 import 'package:gp/Sidebar/BlockNavigation.dart';
+import 'package:gp/Sidebar/sidebar_layout.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/set_new_password.dart';
 import 'package:gp/shared/cubits/cubit/student_cubit.dart';
@@ -51,7 +52,6 @@ class _login_screenState extends State<Login_screen> {
 
   @override
   Widget build(BuildContext context) {
-    db.update2();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[500],
@@ -289,7 +289,8 @@ class _login_screenState extends State<Login_screen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Home(std)));
+                                          builder: (context) =>
+                                              side_layout(std)));
                                 } else {
                                   Fluttertoast.showToast(
                                       msg: "not exist",

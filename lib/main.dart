@@ -6,7 +6,7 @@ import 'package:gp/Quiz/quiz_result.dart';
 import 'package:gp/Sidebar/Menu.dart';
 import 'package:gp/Sidebar/sidebar_layout.dart';
 import 'package:gp/login_screen.dart';
-import 'package:gp/shared/cubits/cubit/home_cubit.dart';
+import 'package:gp/shared/cubits/cubit/course_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => HomeCubit(),
+          create: (context) => CourseCubit(),
         ),
         BlocProvider(
           create: (context) => StudentCubit(),
