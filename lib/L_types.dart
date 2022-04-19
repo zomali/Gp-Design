@@ -123,72 +123,118 @@ class _typesState extends State<types> {
                                                   topLeft: Radius.circular(50),
                                                   bottomLeft: Radius.circular(50),
                                                 )),
+                                            child: Column(
+                                              children: [
+                                                Spacer(),
+                                                Text(
+                                                  "Last Time Visited: ",
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontStyle: FontStyle.italic,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Colors.blue),
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  stdBehavior.last_time_entered,
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontStyle: FontStyle.italic,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Colors.blue),
+                                                ),
+                                                Spacer(),
+                                              ],
+                                            ),
                                           )),
-                                      Positioned(
-                                        top: 10,
-                                        left: 230,
-                                        child: Center(
-                                            child: Text(
-                                              "Last Time Visited: ",
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontStyle: FontStyle.italic,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.blue),
-                                            )),
-                                      ),
-                                      Positioned(
-                                        top: 30,
-                                        left: 230,
-                                        child: Center(
-                                            child: Text(
-                                              stdBehavior.last_time_entered,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontStyle: FontStyle.italic,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.blue),
-                                            )),
-                                      ),
+                                      // Positioned(
+                                      //   top: 10,
+                                      //   left: 230,
+                                      //   child: Center(
+                                      //       child: Text(
+                                      //         "Last Time Visited: ",
+                                      //         style: TextStyle(
+                                      //             fontSize: 14,
+                                      //             fontStyle: FontStyle.italic,
+                                      //             fontWeight: FontWeight.w600,
+                                      //             color: Colors.blue),
+                                      //       )),
+                                      // ),
+                                      // Positioned(
+                                      //   top: 30,
+                                      //   left: 230,
+                                      //   child: Center(
+                                      //       child: Text(
+                                      //         stdBehavior.last_time_entered,
+                                      //         style: TextStyle(
+                                      //             fontSize: 14,
+                                      //             fontStyle: FontStyle.italic,
+                                      //             fontWeight: FontWeight.w600,
+                                      //             color: Colors.blue),
+                                      //       )),
+                                      // ),
                                       Positioned(
                                           top: 0,
                                           left: 0,
                                           child: Container(
                                             height: 60,
-                                            width: 85,
+                                            width: 120,
                                             decoration: BoxDecoration(
                                                 color: Colors.white,
                                                 borderRadius: BorderRadius.only(
                                                   topRight: Radius.circular(50),
                                                   bottomRight: Radius.circular(50),
                                                 )),
+                                            child: Column(
+                                              children: [
+                                                Spacer(),
+                                                Text(
+                                                  level.name,
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontStyle: FontStyle.italic,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Colors.blue),
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  topic.name,
+                                                  style: TextStyle(
+                                                      fontSize: 11,
+                                                      fontStyle: FontStyle.italic,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Colors.blue),
+                                                ),
+                                                Spacer(),
+                                              ],
+                                            ),
                                           )),
-                                      Positioned(
-                                        top: 10,
-                                        right: 290,
-                                        child: Center(
-                                            child: Text(
-                                              "Level " + level.id.toString(),
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontStyle: FontStyle.italic,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.blue),
-                                            )),
-                                      ),
-                                      Positioned(
-                                        top: 30,
-                                        right: 290,
-                                        child: Center(
-                                            child: Text(
-                                              "Topic " + topic.id.toString(),
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontStyle: FontStyle.italic,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.blue),
-                                            )),
-                                      )
+                                      // Positioned(
+                                      //   top: 10,
+                                      //   right: 290,
+                                      //   child: Center(
+                                      //       child: Text(
+                                      //         "Level " + level.id.toString(),
+                                      //         style: TextStyle(
+                                      //             fontSize: 20,
+                                      //             fontStyle: FontStyle.italic,
+                                      //             fontWeight: FontWeight.w600,
+                                      //             color: Colors.blue),
+                                      //       )),
+                                      // ),
+                                      // Positioned(
+                                      //   top: 30,
+                                      //   right: 290,
+                                      //   child: Center(
+                                      //       child: Text(
+                                      //         "Topic " + topic.id.toString(),
+                                      //         style: TextStyle(
+                                      //             fontSize: 16,
+                                      //             fontStyle: FontStyle.italic,
+                                      //             fontWeight: FontWeight.w600,
+                                      //             color: Colors.blue),
+                                      //       )),
+                                      // )
                                     ]),
                                   ),// info
 

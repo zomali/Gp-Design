@@ -102,7 +102,7 @@ class _topic_view extends State<topic_view> {
                           //action on tap
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
-                                  type(std, level, level.topics[index])));
+                                  types(std, level, level.topics[index])));
                         }
                         //code of locked topics
                         /*if (TopicList[index].id <= std.courses['CSW150']['current_level']) {
