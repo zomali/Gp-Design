@@ -38,8 +38,8 @@ class languageDialog extends StatelessWidget {
                       width: 200,
                       child: ElevatedButton(
                           onPressed: () {
-                            selectedLanguage = "Arabic";
-                            Navigator.of(context).pop();
+                            //selectedLanguage = "Arabic";
+                            Navigator.of(context).pop("Arabic");
                           },
                           child: Text("Arabic",
                               style: TextStyle(
@@ -49,8 +49,8 @@ class languageDialog extends StatelessWidget {
                       width: 200,
                       child: ElevatedButton(
                           onPressed: () {
-                            selectedLanguage = "English";
-                            Navigator.of(context).pop();
+                            //selectedLanguage = "English";
+                            Navigator.of(context).pop("English");
                           },
                           child: Text("English",
                               style: TextStyle(

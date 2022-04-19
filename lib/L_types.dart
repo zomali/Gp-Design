@@ -185,17 +185,16 @@ class _typesState extends State<types> {
                                 onTap: () => {
                                         showDialog(
                                            context: context,
-                                           builder: (BuildContext context) => languageDialog(
-                                           selectedLanguage: "",))
+                                           builder: (BuildContext context) => languageDialog())
                                            .then((value){ 
                                            if(value == "Arabic")
                                            {
-                                             audio_ = topic.audios[0];
-                                             video_ = topic.videos[0];
-                                           }
-                                           else{
                                              audio_ = topic.audios[1];
                                              video_ = topic.videos[1];
+                                           }
+                                           else if (value == "English"){
+                                             audio_ = topic.audios[0];
+                                             video_ = topic.videos[0];
                                            }                                  _video_1st
                                       ? Navigator.push(
                                           context,
@@ -295,13 +294,13 @@ class _typesState extends State<types> {
                                                     'proj_images/audio.png')
                                                 : _image_1st
                                                     ? AssetImage(
-                                                        'proj_images/image.png')
+                                                        'proj_images\image.png')
                                                     : _text_1st
                                                         ? AssetImage(
-                                                            'proj_images/Text.png')
+                                                            'proj_images\Text.png')
                                                         : _url_1st
                                                             ? AssetImage(
-                                                                'proj_images/url.jpg')
+                                                                'proj_images\URL.png')
                                                             : AssetImage(
                                                                 'proj_images/video.png'),
                                         height: 250,
@@ -361,8 +360,7 @@ class _typesState extends State<types> {
                                         // ),
                                         showDialog(
                                            context: context,
-                                           builder: (BuildContext context) => languageDialog(
-                                           selectedLanguage: "",))
+                                           builder: (BuildContext context) => languageDialog())
                                            .then((value){ 
                                            if(value == "Arabic")
                                            {
