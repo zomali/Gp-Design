@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gp/Info.dart';
-import 'package:gp/classes/classes.dart';
 
 import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Learning_analytics_screen.dart';
@@ -9,27 +8,25 @@ import 'Sidebar/BlockNavigation.dart';
 import 'classes/student.dart';
 class lastQuizes extends StatefulWidget with NavigationStates{
   final student std;
-  final String courseCode;
-  lastQuizes(this.std, this.courseCode);
+  lastQuizes(this.std);
 
   @override
-  State<lastQuizes> createState() => _lastQuizesState(std, courseCode);
+  State<lastQuizes> createState() => _lastQuizesState(std);
 }
 
 class _lastQuizesState extends State<lastQuizes> {
 
-  student std;
-  String courseCode;
-  _lastQuizesState(this.std, this.courseCode);
+  final student std;
+  _lastQuizesState(this.std);
   int _selectedIndex = 3;
   // int _selectedIndex = 2;
   static List<Widget> _pages = <Widget>[];
 
   void addTOList() {
-    _pages.add(INFO(std, courseCode));
-    _pages.add(levels_view(std, courseCode));
-    _pages.add(Course_evual_categories(std, courseCode));
-    _pages.add(lastQuizes(std, courseCode));
+    _pages.add(INFO(std));
+    _pages.add(levels_view(std));
+    _pages.add(Course_evual_categories(std));
+    _pages.add(lastQuizes(std));
   }
 
   void _onItemTapped(int index) {

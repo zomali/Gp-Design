@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gp/L_types.dart';
 import 'package:gp/Levels_View.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
@@ -96,7 +95,7 @@ class _image_view extends State<image_view> {
                 times,
                 last_time);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => types(std, level, topic)));
+                MaterialPageRoute(builder: (context) => levels_view(std)));
             // _selectedIndex-=2;
           },
         ),

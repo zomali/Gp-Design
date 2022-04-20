@@ -15,40 +15,31 @@ class DatabaseManager {
     c.name = values['name'];
     //get learning outcomes
     c.learning_outcomes = <String>[];
-    var outcomes = values['learning_outcomes'];
+    var outcomes = values['learning_outcomes'].keys;
     for(var outcome in outcomes)
     {
-      if(outcome == null)
-      continue;
-      String o = outcome['outcome'];
+      String o = values['learning_outcomes'][outcome];
       c.learning_outcomes.add(o);
-    }//get instructors
+    }
+
+    //get instructors
     c.instructors = <Instructor_>[];
-    var instructors = values['instructors'];
+    var instructors = values['instructors'].keys;
     for (var instructor in instructors) {
-      if(instructor == null)
-      continue;
       Instructor_ i = Instructor_();
-      i.name = instructor['name'];
-      i.contact = instructor['contact'];
-      i.department = instructor['department'];
+      i.name = values['instructors'][instructor]['name'];
+      i.contact = values['instructors'][instructor]['contact'];
+      i.department = values['instructors'][instructor]['department'];
       c.instructors.add(i);
     }
     //get levels
     c.levels = <Level_>[];
-    var levels = values['levels'];
+    var levels = values['levels'].keys;
     for (var level in levels) {
-      if(level == null)
-      continue;
       Level_ l = Level_();
-      l.id = level['level_id'];
-      l.name = level['level_name'];
-/*      l.id = values['levels'][level]['level_id'];
-      l.name = values['levels'][level]['level_name'];*/
+      l.id = values['levels'][level]['level_id'];
+      l.name = values['levels'][level]['level_name'];
       c.levels.add(l);
-      
-
-    
     }
     return c;
   }
