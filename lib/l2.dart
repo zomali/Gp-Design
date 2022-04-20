@@ -185,8 +185,7 @@ class _typesState extends State<type> {
                                     onTap: () => {
                                       showDialog(
                                           context: context,
-                                          builder: (BuildContext context) => languageDialog(
-                                            selectedLanguage: "",))
+                                          builder: (BuildContext context) => languageDialog())
                                           .then((value){
                                  //           print(value);
                                         if(value == "Arabic")
@@ -355,7 +354,7 @@ class _typesState extends State<type> {
                                                 context: context,
 
 
-                                                builder: (BuildContext context) => languageDialog(selectedLanguage:val ),
+                                                builder: (BuildContext context) => languageDialog( ),
 
 
                                             );
@@ -445,7 +444,7 @@ class _typesState extends State<type> {
                                               showDialog(
                                                   context: context,
                                                   builder: (BuildContext context) => languageDialog(
-                                                    selectedLanguage: "",))
+                                                   ))
 
 
                                                   .then((value){
@@ -543,8 +542,7 @@ class _typesState extends State<type> {
 
                                           showDialog(
                                           context: context,
-                                          builder: (BuildContext context) => languageDialog(
-                                          selectedLanguage: "",))
+                                          builder: (BuildContext context) => languageDialog())
 
 
                                               .then((value){

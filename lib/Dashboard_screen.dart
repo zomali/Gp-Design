@@ -1,31 +1,34 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gp/Sidebar/BlockNavigation.dart';
-import 'package:gp/login_screen.dart';
 
 import 'Course_evaluation_screens/Courses_evaluations.dart';
-import 'Last_quizes.dart';
+import 'Home.dart';
+import 'Learning_analytics_screen.dart';
 import 'Levels_View.dart';
 import 'classes/student.dart';
-class INFO extends StatefulWidget with NavigationStates {
+import 'myprofile_screen.dart';
+
+class Dashboard_screen extends StatefulWidget {
+ // const Dashboard_screen({Key? key}) : super(key: key);
   final student std;
-  INFO(this.std);
+  Dashboard_screen(this.std);
   @override
-  State<INFO> createState() => _INFOState(this.std);
+  State<Dashboard_screen> createState() => _Dashboard_screenState(std);
 }
 
-class _INFOState extends State<INFO> {
+class _Dashboard_screenState extends State<Dashboard_screen> {
+  int _selectedIndex = 3;
+  final student std;
+  _Dashboard_screenState(this.std);
 
-
-   student std;
-  _INFOState(this.std);
-  int _selectedIndex = 0;
+  // int _selectedIndex = 2;
   static List<Widget> _pages = <Widget>[];
 
   void addTOList() {
-    _pages.add(INFO(std));
     _pages.add(levels_view(std));
+    _pages.add(Learning_analytics_screen(std));
     _pages.add(Course_evual_categories(std));
-    _pages.add(lastQuizes(std));
+    _pages.add(Dashboard_screen(std));
   }
 
   void _onItemTapped(int index) {
@@ -33,7 +36,6 @@ class _INFOState extends State<INFO> {
           () {
 
         _selectedIndex = index;
-        // _selectedIndex%=3;
 
         //   print("index = ${widget.ind} ");
         Navigator.push(context,
@@ -49,13 +51,19 @@ class _INFOState extends State<INFO> {
 
   @override
   Widget build(BuildContext context) {
-    addTOList();
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[600],
-        title: Text('Info '),
-        leading: const Icon(Icons.info),
+        elevation: 0.0,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        title: Text("Dashboard"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Home(std)));
+            _selectedIndex -= 3;
+          },
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
@@ -76,9 +84,9 @@ class _INFOState extends State<INFO> {
             //   backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.analytics_outlined),
             //  icon: Icon(Icons.up),
-            label: 'Levels',
+            label: 'Analytics',
 
             // backgroundColor: Colors.blue,
             //     backgroundColor: Colors.blue,
@@ -90,34 +98,22 @@ class _INFOState extends State<INFO> {
             //    backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper),
-            label: 'Quizzes',
+            icon: Icon(Icons.person_rounded),
+            label: 'Dashboard',
             //   backgroundColor: Colors.blue
             //     backgroundColor: Colors.blue,
           )
         ],
-
+        // onTap: (index){
+        //   print("index = ${widget.ind} ");
+        //   Navigator.push(context,
+        //       MaterialPageRoute(builder: (context)=>moveToPage(index)));
+        //
+        //
+        //
+        // },
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,
-      ),
-      body: Padding(
-
-        padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-
-          children: [
-
-            Text('Course by DR.Sallly Saad' , style: TextStyle(fontSize: 20.0,color: Colors.black,),),
-            SizedBox(height: 10.0,),
-            Text('TA: DR.ss' , style: TextStyle(fontSize: 20.0,color: Colors.black,),),
-            SizedBox(height: 10.0,),
-            Text('TA: DR.vv' , style: TextStyle(fontSize: 20.0,color: Colors.black,),),
-
-          ],
-
-
-        ),
       ),
     );
   }

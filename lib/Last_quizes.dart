@@ -1,26 +1,104 @@
 import 'package:flutter/material.dart';
+import 'package:gp/Info.dart';
 
+import 'Course_evaluation_screens/Courses_evaluations.dart';
+import 'Learning_analytics_screen.dart';
+import 'Levels_View.dart';
 import 'Sidebar/BlockNavigation.dart';
+import 'classes/student.dart';
 class lastQuizes extends StatefulWidget with NavigationStates{
-
+  final student std;
+  lastQuizes(this.std);
 
   @override
-  State<lastQuizes> createState() => _lastQuizesState();
+  State<lastQuizes> createState() => _lastQuizesState(std);
 }
 
 class _lastQuizesState extends State<lastQuizes> {
+
+  final student std;
+  _lastQuizesState(this.std);
+  int _selectedIndex = 3;
+  // int _selectedIndex = 2;
+  static List<Widget> _pages = <Widget>[];
+
+  void addTOList() {
+    _pages.add(INFO(std));
+    _pages.add(levels_view(std));
+    _pages.add(Course_evual_categories(std));
+    _pages.add(lastQuizes(std));
+  }
+
+  void _onItemTapped(int index) {
+    setState(
+          () {
+
+        _selectedIndex = index;
+
+        //   print("index = ${widget.ind} ");
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => moveToPage(index)));
+      },
+    );
+  }
+
+  Widget moveToPage(int index) {
+
+    return _pages.elementAt(_selectedIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
+    addTOList();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Archive"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined),
-          onPressed: () {},
-        ),
+        title: const Text("Quizzes History"),
+        leading: Icon(Icons.newspaper),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: true,
 
+        selectedItemColor: Colors.blue,
+        selectedFontSize: 16,
+
+        unselectedItemColor: Colors.grey,
+        // unselectedFontSize: 11,
+        unselectedFontSize: 16,
+
+        //    currentIndex: 0,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            //backgroundColor: Colors.blue,
+            //   backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            //  icon: Icon(Icons.up),
+            label: 'Levels',
+
+            // backgroundColor: Colors.blue,
+            //     backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.equalizer_outlined),
+            label: 'Evaluation',
+            //  backgroundColor: Colors.blue
+            //    backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.newspaper),
+            label: 'Quizzes',
+            //   backgroundColor: Colors.blue
+            //     backgroundColor: Colors.blue,
+          )
+        ],
+
+        currentIndex: _selectedIndex, //New
+        onTap: _onItemTapped,
+      ),
       body: SingleChildScrollView(
         child: Column(
 

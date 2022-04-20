@@ -3,6 +3,8 @@ import 'package:gp/Course_evaluation_screens/My_Evaluation_screen.dart';
 import 'package:gp/Course_evaluation_screens/other_students_evaluation_screen.dart';
 
 import '../Home.dart';
+import '../Info.dart';
+import '../Last_quizes.dart';
 import '../Learning_analytics_screen.dart';
 import '../Levels_View.dart';
 import '../classes/student.dart';
@@ -26,16 +28,16 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
   static List<Widget> _pages = <Widget>[];
 
   void addTOList() {
+    _pages.add(INFO(std));
     _pages.add(levels_view(std));
-    _pages.add(Learning_analytics_screen(std));
     _pages.add(Course_evual_categories(std));
-    _pages.add(MyProfileScreen(std));
+    _pages.add(lastQuizes(std));
   }
 
   void _onItemTapped(int index) {
     setState(
       () {
-        index%=4;
+
         _selectedIndex = index;
         // _selectedIndex%=3;
 
@@ -56,15 +58,10 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
     addTOList();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Courses Evaluation"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Home(std)));
-            _selectedIndex -= 2;
-          },
-        ),
+        title: const Text("Course Evaluation"),
+        leading: Icon(Icons.equalizer_outlined),
+
+
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
@@ -85,9 +82,9 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
             //   backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_outlined),
+            icon: Icon(Icons.list),
             //  icon: Icon(Icons.up),
-            label: 'Analytics',
+            label: 'Levels',
 
             // backgroundColor: Colors.blue,
             //     backgroundColor: Colors.blue,
@@ -99,8 +96,8 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
             //    backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_rounded),
-            label: 'Dashboard',
+            icon: Icon(Icons.newspaper),
+            label: 'Quizzes',
             //   backgroundColor: Colors.blue
             //     backgroundColor: Colors.blue,
           )

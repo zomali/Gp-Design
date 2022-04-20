@@ -2,12 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gp/Info.dart';
 import 'package:gp/Sidebar/BlockNavigation.dart';
 import 'package:gp/Topic_view.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/classes/student.dart';
 import 'Course_evaluation_screens/Courses_evaluations.dart';
+import 'Dashboard_screen.dart';
 import 'Home.dart';
+import 'Last_quizes.dart';
 import 'Learning_analytics_screen.dart';
 import 'myprofile_screen.dart';
 
@@ -20,19 +23,19 @@ class levels_view extends StatefulWidget with NavigationStates {
 
 class _levels_view extends State<levels_view> {
 
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static List<Widget> _pages = <Widget>[];
   void addTOList() {
+    _pages.add(INFO(std));
     _pages.add(levels_view(std));
-    _pages.add(Learning_analytics_screen(std));
     _pages.add(Course_evual_categories(std));
-    _pages.add(MyProfileScreen(std));
+    _pages.add(lastQuizes(std));
   }
 
   void _onItemTapped(int index) {
     setState(
           () {
-            index%=4;
+
         _selectedIndex = index;
 
         //   print("index = ${widget.ind} ");
@@ -87,9 +90,9 @@ class _levels_view extends State<levels_view> {
               //   backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.analytics_outlined),
+              icon: Icon(Icons.list),
               //  icon: Icon(Icons.up),
-              label: 'Analytics',
+              label: 'Levels',
 
               // backgroundColor: Colors.blue,
               //     backgroundColor: Colors.blue,
@@ -101,8 +104,8 @@ class _levels_view extends State<levels_view> {
               //    backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded),
-              label: 'Dashboard',
+              icon: Icon(Icons.newspaper),
+              label: 'Quizzes',
               //   backgroundColor: Colors.blue
               //     backgroundColor: Colors.blue,
             )
@@ -143,19 +146,11 @@ class _levels_view extends State<levels_view> {
                               )),
                         )),
                     Positioned(
-                      top: 30,
-                      left: 0,
+                      top: 40,
+                      left: 10,
                       child: Row(children: [
-                        IconButton(
-                          icon: Icon(Icons.arrow_back_ios_outlined),
-                          color: Colors.blue,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Home(std)));
-                          },
-                        ),
+                        Icon(Icons.list,color: Colors.blue,),
+                        SizedBox(width: 10,),
                         Text(
                           course_name,
                           style: TextStyle(

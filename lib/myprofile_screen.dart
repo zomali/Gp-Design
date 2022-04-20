@@ -41,7 +41,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   void _onItemTapped(int index) {
     setState(
       () {
-        index%=4;
+
         _selectedIndex = index;
 
         //   print("index = ${widget.ind} ");
@@ -52,7 +52,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   Widget moveToPage(int index) {
-    _selectedIndex%=4;
+
     return _pages.elementAt(_selectedIndex);
   }
 
