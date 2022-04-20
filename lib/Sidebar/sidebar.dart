@@ -84,14 +84,14 @@ class _sidebarState extends State<sidebar>
                         },
                         child: ListTile(
                           title: Text(
-                            "Hossam",
+                            "Ahmed",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 30,
                                 fontWeight: FontWeight.w800),
                           ),
                           subtitle: Text(
-                            "hh@gmail.com",
+                            "Ahmed@gmail.com",
                             style: TextStyle(
                               color: Color(0xFF1BB5FD),
                               fontSize: 18,
@@ -99,6 +99,7 @@ class _sidebarState extends State<sidebar>
                           ),
                           leading: CircleAvatar(
                             radius: 40,
+                            backgroundImage: NetworkImage('https://1.bp.blogspot.com/-cJ0t9sZe2eE/Xd-pc7mH88I/AAAAAAAAAZM/giDxYSf5CBoA3zLmYW4yHnKPcQUxnWeRwCLcBGAsYHQ/s1600/%25D8%25AA%25D9%2585%25D8%25A8%2B%25D8%25AC%25D9%258A%25D8%25B1%25D9%2589%2B%25D8%25A8%25D9%258A%25D8%25B6%25D8%25AD%25D9%2583%2B%25D9%2588%25D8%25AD%25D8%25A7%25D8%25B7%25D8%25B7%2B%25D8%25A7%25D9%258A%25D8%25AF%25D9%2587%2B%25D8%25B9%25D9%2584%25D9%2589%2B%25D8%25A8%25D9%2582%25D9%2587.jpg'),
                           ),
                         ),
                       ),
@@ -116,8 +117,8 @@ class _sidebarState extends State<sidebar>
                           oniconpress();
                         },
                         child: Menu_SideBar(
-                          icon: Icons.topic,
-                          title: "Levels",
+                          icon: Icons.home,
+                          title: "Home",
                           // ontap: () {
                           //
                           //  BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
@@ -131,8 +132,8 @@ class _sidebarState extends State<sidebar>
                           oniconpress();
                         },
                         child: Menu_SideBar(
-                          icon: Icons.person,
-                          title: "My Quizes",
+                          icon: Icons.question_answer,
+                          title: "Quizes Answer",
                           // ontap: () {
                           //
                           //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
