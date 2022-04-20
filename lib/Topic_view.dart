@@ -10,6 +10,7 @@ import 'l2.dart';
 class topic_view extends StatefulWidget {
   final student std;
   final Level_ level;
+
   topic_view(this.std, this.level);
   @override
   _topic_view createState() => _topic_view(std, level);
@@ -74,7 +75,7 @@ class _topic_view extends State<topic_view> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => levels_view(std)));
+                              builder: (context) => levels_view(std, "CSW150")));
                     },
                   ),
                   Text(

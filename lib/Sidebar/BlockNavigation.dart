@@ -41,10 +41,10 @@ class Navigationn extends Bloc<NavigationEvents, NavigationStates> {
         yield Home(std);
         break;
       case NavigationEvents.evalution:
-        yield lastQuizes(std);
+        yield lastQuizes(std, "CSW150");
         break;
       case NavigationEvents.Infoevent:
-        yield INFO(std);
+        yield INFO(std, "CSW150");
         break;
       case NavigationEvents.logout:
         yield Login_screen();

@@ -5,6 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gp/Info.dart';
 import 'package:gp/Sidebar/BlockNavigation.dart';
 import 'package:gp/Topic_view.dart';
+import 'package:gp/classes/classes.dart';
+import 'package:gp/shared/cubits/cubit/course_cubit.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/classes/student.dart';
 import 'Course_evaluation_screens/Courses_evaluations.dart';
@@ -16,20 +18,23 @@ import 'myprofile_screen.dart';
 
 class levels_view extends StatefulWidget with NavigationStates {
   final student std;
-  levels_view(this.std);
+  final String courseCode;
+  levels_view(this.std, this.courseCode);
   @override
-  _levels_view createState() => _levels_view(std);
+  _levels_view createState() => _levels_view(std, courseCode);
 }
 
 class _levels_view extends State<levels_view> {
-
+  student std;
+  String courseCode;
+  _levels_view(this.std, this.courseCode);
   int _selectedIndex = 1;
   static List<Widget> _pages = <Widget>[];
   void addTOList() {
-    _pages.add(INFO(std));
-    _pages.add(levels_view(std));
-    _pages.add(Course_evual_categories(std));
-    _pages.add(lastQuizes(std));
+    _pages.add(INFO(std, courseCode));
+    _pages.add(levels_view(std, courseCode));
+    _pages.add(Course_evual_categories(std, courseCode));
+    _pages.add(lastQuizes(std, courseCode));
   }
 
   void _onItemTapped(int index) {
@@ -51,8 +56,7 @@ class _levels_view extends State<levels_view> {
     _selectedIndex%=4;
     return _pages.elementAt(_selectedIndex);
   }
-  student std;
-  _levels_view(this.std);
+
   set value(String? value) {}
 
   Widget putIcon(index) {

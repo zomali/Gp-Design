@@ -32,9 +32,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   static List<Widget> _pages = <Widget>[];
 
   void addTOList() {
-    _pages.add(levels_view(std));
+    _pages.add(levels_view(std, "CSW150"));
     _pages.add(Learning_analytics_screen(std));
-    _pages.add(Course_evual_categories(std));
+    _pages.add(Course_evual_categories(std, "CSW150"));
     _pages.add(MyProfileScreen(std));
   }
 

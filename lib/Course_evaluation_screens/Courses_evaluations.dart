@@ -14,24 +14,26 @@ import 'quiz_evaluation_screen.dart';
 class Course_evual_categories extends StatefulWidget {
   //final student std;
   final student std;
-  Course_evual_categories(this.std);
+  final String courseCode;
+  Course_evual_categories(this.std, this.courseCode);
 
   @override
   State<Course_evual_categories> createState() =>
-      _Course_evual_categoriesState(std);
+      _Course_evual_categoriesState(std, courseCode);
 }
 
 class _Course_evual_categoriesState extends State<Course_evual_categories> {
   student std;
-  _Course_evual_categoriesState(this.std);
+  String courseCode;
+  _Course_evual_categoriesState(this.std, this.courseCode);
   int _selectedIndex = 2;
   static List<Widget> _pages = <Widget>[];
 
   void addTOList() {
-    _pages.add(INFO(std));
-    _pages.add(levels_view(std));
-    _pages.add(Course_evual_categories(std));
-    _pages.add(lastQuizes(std));
+    _pages.add(INFO(std, courseCode));
+    _pages.add(levels_view(std, courseCode));
+    _pages.add(Course_evual_categories(std, courseCode));
+    _pages.add(lastQuizes(std, courseCode));
   }
 
   void _onItemTapped(int index) {
