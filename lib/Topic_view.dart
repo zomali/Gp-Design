@@ -75,7 +75,7 @@ class _topic_view extends State<topic_view> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => levels_view(std, "CSW150")));
+                              builder: (context) => levels_view(std)));
                     },
                   ),
                   Text(

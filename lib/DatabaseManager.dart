@@ -43,12 +43,8 @@ class DatabaseManager {
       Level_ l = Level_();
       l.id = level['level_id'];
       l.name = level['level_name'];
-/*      l.id = values['levels'][level]['level_id'];
-      l.name = values['levels'][level]['level_name'];*/
       c.levels.add(l);
-      
-
-    
+          
     }
     return c;
   }

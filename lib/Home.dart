@@ -249,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                   //builder: (context) => Levels(1, std))),
-                                  builder: (context) => INFO(std))),
+                                  builder: (context) => INFO(std, "CSW150"))),
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 25),

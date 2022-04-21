@@ -39,7 +39,7 @@ class _My_EvaluationState extends State<My_Evaluation> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => Course_evual_categories(std)));
+                    builder: (context) => Course_evual_categories(std, "CSW150")));
           },
         ),
       ),

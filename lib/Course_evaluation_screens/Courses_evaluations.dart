@@ -31,7 +31,7 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
 
   void addTOList() {
     _pages.add(INFO(std, courseCode));
-    _pages.add(levels_view(std, courseCode));
+    _pages.add(levels_view(std));
     _pages.add(Course_evual_categories(std, courseCode));
     _pages.add(lastQuizes(std, courseCode));
   }

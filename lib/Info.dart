@@ -25,7 +25,7 @@ class _INFOState extends State<INFO> {
 
   void addTOList() {
     _pages.add(INFO(std, courseCode));
-    _pages.add(levels_view(std, courseCode));
+    _pages.add(levels_view(std));
     _pages.add(Course_evual_categories(std, courseCode));
     _pages.add(lastQuizes(std, courseCode));
   }
@@ -54,8 +54,8 @@ class _INFOState extends State<INFO> {
       padding: const EdgeInsets.only(
         left: 20,
       ),
-      height: 120,
-      width: 240,
+      height: 140,
+      width: 280,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(15.0),
@@ -73,33 +73,13 @@ class _INFOState extends State<INFO> {
           ),
           Text(
             supTitle,
-            style: const TextStyle(fontSize: 19, color: Colors.white70),
+            style: const TextStyle(fontSize: 17, color: Colors.white70),
           )
         ],
       ),
     );
   }
-  Widget _outcomes(@required Color color, @required String title){
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10.0),
-      padding: const EdgeInsets.only(left: 20),
-      height: 40,
-      width: 440,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(fontSize: 22, color: Colors.white),
-            ),
-          ]),
-    );
-  }
+  
   
   @override
   Widget build(BuildContext context) {
@@ -175,10 +155,6 @@ class _INFOState extends State<INFO> {
                         topRight: Radius.circular(30))),
                 child: ListView(
                   children: [
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                    ),
-
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
@@ -237,7 +213,7 @@ class _INFOState extends State<INFO> {
                                          ' levels', //course code
                                         style: TextStyle(
                                           fontSize: 19,
-                                          color: Colors.grey[350],
+                                          color: Colors.grey,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
@@ -248,147 +224,108 @@ class _INFOState extends State<INFO> {
                         ],
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 30, top: 10),
-                      child: Text(
-                        "Learning Outcomes",
+                    const Padding(padding: EdgeInsets.only(left: 10.0, bottom: 20)),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10.0, right: 20.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: new Container(
+                              margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                              child: Divider(color: Colors.grey, height: 30, thickness: 2,),)),
+                          Text("Instructors",
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 20,
                           color: Colors.black87,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w500,),),
+                          Expanded(
+                            child: new Container(
+                              margin: const EdgeInsets.only(left: 20.0, right: 10.0),
+                              child: Divider(color: Colors.grey, height: 30, thickness: 2,),)),
+                        ],
+                      ),
+                    ),
+
+                     Padding(
+                        padding: const EdgeInsets.only(
+                          left: 18,
+                          top: 10,
                         ),
+                        child: Container(
+                          height: 140,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: course.instructors.length,
+                            itemBuilder: (BuildContext context, int index){
+                              return _selectedCleaning(
+                                Theme.of(context).colorScheme.secondary,
+                                course.instructors[index].name,
+                                course.instructors[index].contact);
+                            },
+                          ),
+                        ),
+                      ),
+                    const Padding(
+                      padding: EdgeInsets.only(
+                        bottom: 30,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10.0, right: 20.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: new Container(
+                              margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                              child: Divider(color: Colors.grey, height: 30, thickness: 2,),)),
+                          Text("Learning Outcomes",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w500,),),
+                          Expanded(
+                            child: new Container(
+                              margin: const EdgeInsets.only(left: 20.0, right: 10.0),
+                              child: Divider(color: Colors.grey, height: 30, thickness: 2,),)),
+                        ],
                       ),
                     ),
 
                     Padding(
                       padding: const EdgeInsets.only(
                         left: 18,
-                        top: 20,
+                        top: 10,
                         right: 10,
-                      ), //outcomes
-                      child: ListView.builder(
-                        itemCount: course.learning_outcomes.length,
-                        itemBuilder: (BuildContext context,int index){
-                          return GestureDetector(
-                            onTap:(){},
-                            child: Card(
-                              child: _outcomes(Theme.of(context).colorScheme.secondary,
-                              course.learning_outcomes[index]),
-                            //  child: padding:const EdgeInsets.only(bottom: 10,),
-                          
-                          ),);
-                        },                        
-                      ),
-                    ),
-
-                    const Padding(
-                      padding: EdgeInsets.only(left: 30, top: 30),
-                      child: Text(
-                        "Instructors",
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-Padding(
-                      padding: const EdgeInsets.only(
-                        left: 18,
-                        top: 20,
-                        right: 10,
-                      ), //outcomes
-                      child: Column(
-                        children: [
-                          _outcomes(Theme.of(context).colorScheme.secondary,
-                              course.learning_outcomes[0]),
-                          const Padding(
-                            padding: EdgeInsets.only(
-                              bottom: 10,
+                      ), 
+                      child: Container(
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: course.learning_outcomes.length,
+                          itemBuilder: (BuildContext context, int index){
+                            return Card(
+                              elevation: 8.0,
+                              margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                              child: Container(
+                                decoration: BoxDecoration(color: Colors.blue),
+                                child: ListTile(
+                                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                                  leading: Container(
+                                    padding: EdgeInsets.only(right: 12.0),
+                                    decoration: new BoxDecoration(
+                                      border: new Border(
+                                        right: new BorderSide(width: 1.0, color: Colors.white24))),
+                                        child: Icon(Icons.checklist_rounded, color: Colors.white),),
+                                        title: Text(
+                                          course.learning_outcomes[index],
+                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),),
+                                          ),
+                                        ),
+                        );}
+                                ),
+                              ),
                             ),
-                          ),
-                          _outcomes(Theme.of(context).colorScheme.secondary,
-                              course.learning_outcomes[1]),
-                          const Padding(
-                            padding: EdgeInsets.only(
-                              bottom: 10,
-                            ),
-                          ),
-                          _outcomes(Theme.of(context).colorScheme.secondary,
-                              course.learning_outcomes[2]),
-                          const Padding(
-                            padding: EdgeInsets.only(
-                              bottom: 10,
-                            ),
-                          ),
-                          _outcomes(Theme.of(context).colorScheme.secondary,
-                              course.learning_outcomes[3]),
-                          const Padding(
-                            padding: EdgeInsets.only(
-                              bottom: 10,
-                            ),
-                          ),
-                          _outcomes(Theme.of(context).colorScheme.secondary,
-                              course.learning_outcomes[4]),
-                          const Padding(
-                            padding: EdgeInsets.only(
-                              bottom: 10,
-                            ),
-                          ),
-                          _outcomes(Theme.of(context).colorScheme.secondary,
-                              course.learning_outcomes[5]),
-                         const Padding(
-                            padding: EdgeInsets.only(
-                              bottom: 10,
-                            ),
-                          ),
-                          _outcomes(Theme.of(context).colorScheme.secondary,
-                              course.learning_outcomes[6]),
-                        ],
-                      ),
-                    ),
-
-                    const Padding(
-                      padding: EdgeInsets.only(left: 30, top: 30),
-                      child: Text(
-                        "Instructors",
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                          top: 30,
-                        ),
-                        child: Row(
-                          children: [
-                            _selectedCleaning(
-                                Theme.of(context).colorScheme.secondary,
-                                course.instructors[0].name,
-                                course.instructors[0].contact),
-                            _selectedCleaning(
-                                Theme.of(context).colorScheme.secondary,
-                                course.instructors[1].name,
-                                course.instructors[1].contact),
-                            _selectedCleaning(
-                                Theme.of(context).colorScheme.secondary,
-                                course.instructors[2].name,
-                                course.instructors[2].contact)
-                          ],
-                        ),
-                      ),
-                    ), //instructors
-                    const Padding(
-                      padding: EdgeInsets.only(
-                        bottom: 10,
-                      ),
-                    ),
                   ],
                 ),
               );

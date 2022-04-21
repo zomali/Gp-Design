@@ -18,23 +18,21 @@ import 'myprofile_screen.dart';
 
 class levels_view extends StatefulWidget with NavigationStates {
   final student std;
-  final String courseCode;
-  levels_view(this.std, this.courseCode);
+  levels_view(this.std);
   @override
-  _levels_view createState() => _levels_view(std, courseCode);
+  _levels_view createState() => _levels_view(std);
 }
 
 class _levels_view extends State<levels_view> {
   student std;
-  String courseCode;
-  _levels_view(this.std, this.courseCode);
+  _levels_view(this.std);
   int _selectedIndex = 1;
   static List<Widget> _pages = <Widget>[];
   void addTOList() {
-    _pages.add(INFO(std, courseCode));
-    _pages.add(levels_view(std, courseCode));
-    _pages.add(Course_evual_categories(std, courseCode));
-    _pages.add(lastQuizes(std, courseCode));
+    _pages.add(INFO(std, "CSW150"));
+    _pages.add(levels_view(std));
+    _pages.add(Course_evual_categories(std, "CSW150"));
+    _pages.add(lastQuizes(std, "CSW150"));
   }
 
   void _onItemTapped(int index) {

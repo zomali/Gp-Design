@@ -22,7 +22,7 @@ class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
     icon: Icon(Icons.arrow_back_ios_outlined),
     onPressed: () {
     Navigator.push(
-    context, MaterialPageRoute(builder: (context) => Course_evual_categories(std)));
+    context, MaterialPageRoute(builder: (context) => Course_evual_categories(std, "CSW150")));
 
     },
     ),

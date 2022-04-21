@@ -132,7 +132,7 @@ class _Other_students_evaluation_screenState
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => Course_evual_categories(std)));
+                    builder: (context) => Course_evual_categories(std, "CSW150")));
           },
         ),
       ),
