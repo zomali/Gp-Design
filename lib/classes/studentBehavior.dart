@@ -12,6 +12,8 @@ class ForVideo {
   var PopUpQuastion;
   var Time_progress_ratio;
   var Time_spent_every_once;
+
+  var prefrence_weight;
 }
 
 class ForImage {
@@ -20,6 +22,8 @@ class ForImage {
   var PopUpQuastion;
   var Time_progress_ratio;
   var Time_spent_every_once;
+
+  var prefrence_weight;
 }
 
 class ForText {
@@ -28,6 +32,8 @@ class ForText {
   var PopUpQuastion;
   var Time_progress_ratio;
   var Time_spent_every_once;
+
+  var prefrence_weight;
 }
 
 class ForAudio {
@@ -36,6 +42,8 @@ class ForAudio {
   var PopUpQuastion;
   var Time_progress_ratio;
   var Time_spent_every_once;
+
+  var prefrence_weight;
 }
 
 class TypesForStudent {
@@ -43,6 +51,8 @@ class TypesForStudent {
   var text;
   var video;
   var image;
+
+
 }
 
 class TimeSpentEveryOnce {

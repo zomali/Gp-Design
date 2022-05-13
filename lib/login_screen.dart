@@ -282,7 +282,7 @@ class _login_screenState extends State<Login_screen> {
                           child: MaterialButton(
                             onPressed: () async {
                               try {
-                                //   await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                                 //  await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
                                 if (studentExist(email, password, list)) {
                                   student std = studentLevel(email, list);

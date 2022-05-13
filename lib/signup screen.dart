@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_validator/form_validator.dart';
 import 'classes/student.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'DatabaseManager.dart';
 class signup_screen extends StatefulWidget {
   const signup_screen({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class Student {}
 class _signup_screenState extends State<signup_screen> {
   DateTime _date = DateTime.now();
   String d = '';
+  final _auth = FirebaseAuth.instance;
   final Storage storage = Storage();
 
   Future<Null> _selectDate(BuildContext context) async {
@@ -451,7 +454,7 @@ class _signup_screenState extends State<signup_screen> {
                 child: Container(
                   width: double.infinity,
                   child: MaterialButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (studentidController.text.isNotEmpty &&
                           usernameController.text.isNotEmpty &&
                           emailController.text.isNotEmpty &&
@@ -463,6 +466,7 @@ class _signup_screenState extends State<signup_screen> {
                         std.profile_picture = 'proj_images/login_image.jpeg';
                         std.birthdate = d;
                         db.insertNewStudent(std);
+                   //     await _auth.createUserWithEmailAndPassword(email: std.email, password: std.password);
                         print("inserted");
                       } else {
                         print("not inserted");

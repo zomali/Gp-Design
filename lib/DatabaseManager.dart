@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/studentBehavior.dart';
@@ -44,7 +46,7 @@ class DatabaseManager {
       l.id = level['level_id'];
       l.name = level['level_name'];
       c.levels.add(l);
-          
+
     }
     return c;
   }
@@ -70,6 +72,126 @@ class DatabaseManager {
     }
     return list;
   }
+  Future<List<int>> getTimeTokenForEachContentType(student std) async {
+    List<int> arr = [];
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('student_behavior_model')
+        .child(std.id)
+        .get();
+    //var keys = response.value.keys;
+    var values = response.value;
+ //   int type = 1;
+    int topic = 3;
+    for (int Level = 1; Level < 6; Level++) {
+      var audio_time = 0;
+      var video_time = 0;
+      var image_time = 0;
+      var text_time = 0;
+
+      if (Level > std.level) {
+        arr.add(0);
+      }
+      else {
+        int startTopic = 0;
+        if (Level == 1) {
+          startTopic = 1;
+        } else if (Level == 2) {
+          startTopic = 4;
+          topic += 3;
+        } else if (Level == 3) {
+          startTopic = 7;
+          topic += 4;
+        } else if (Level == 4) {
+          startTopic = 11;
+          topic += 3;
+        } else if (Level == 5) {
+          startTopic = 14;
+          topic += 4;
+        }
+        //print(values[1][1]['audio']['time_spent']);
+        for (int t = startTopic; t <= topic; t++) {
+          audio_time += values[Level][t]['audio']['time_spent'] as int;
+          text_time += values[Level][t]['text']['time_spent'] as int;
+          video_time += values[Level][t]['video']['time_spent'] as int;
+          image_time += values[Level][t]['image']['time_spent'] as int;
+        }
+        //print(time);
+        //time = time / 60 as int;
+        int timeInMinetesAudio = 0;
+        int timeInMinetesVideo = 0;
+        int timeInMinetesText = 0;
+        int timeInMinetesImage = 0;
+        if (video_time < 60) {
+          timeInMinetesVideo = 1;
+        } else {
+          while (video_time >= 60) {
+            timeInMinetesVideo++;
+            video_time -= 60;
+          }
+
+          if (audio_time < 60) {
+            timeInMinetesAudio = 1;
+          } else {
+            while (audio_time >= 60) {
+              timeInMinetesAudio++;
+              audio_time -= 60;
+            }
+
+            if (text_time < 60) {
+              timeInMinetesText = 1;
+            } else {
+              while (text_time >= 60) {
+                timeInMinetesText++;
+                text_time -= 60;
+              }
+
+              if (image_time < 60) {
+                timeInMinetesImage = 1;
+              } else {
+                while (image_time >= 60) {
+                  timeInMinetesImage++;
+                  image_time -= 60;
+                }
+              }
+              arr.add(timeInMinetesVideo);//arr[0]=video_time_spent
+              arr.add(timeInMinetesAudio);//arr[1]=audio_time_spent
+              arr.add(timeInMinetesImage);//arr[2]=image_time_spent
+              arr.add(timeInMinetesText);//arr[3]=text_time_spent
+              //print(time);
+            }
+          }
+        }
+      }
+    }
+          return arr;
+  }
+
+
+
+  Future<List<double>> set_prefered_content_type(studentBehavior std,List<int> ar) async {
+    List<double> arr = [];
+    var video_time_weight=ar[0]*0.6;
+    var audio_time_weight=ar[1]*0.6;
+    var text_time_weight=ar[2]*0.6;
+    var image_time_weight=ar[3]*0.6;
+
+
+
+    var video_click_weight=std.forVideo.NumberOfVisitedPage*0.4;
+    var audio_click_weight=std.forAudio.NumberOfVisitedPage*0.4;
+    var image_click_weight=std.forImage.NumberOfVisitedPage*0.4;
+    var text_click_weight=std.forText.NumberOfVisitedPage*0.4;
+
+    arr.add(video_time_weight+video_click_weight);
+    arr.add(audio_time_weight+audio_click_weight);
+    arr.add(image_time_weight+image_click_weight);
+    arr.add(text_time_weight+text_click_weight);
+
+
+
+    return arr;
+  }
 
   Future<List<int>> getTimeTokenForEachLevel(student std) async {
     List<int> arr = [];
@@ -86,7 +208,8 @@ class DatabaseManager {
       var time = 0;
       if (Level > std.level) {
         arr.add(0);
-      } else {
+      }
+      else {
         int startTopic = 0;
         if (Level == 1) {
           startTopic = 1;
