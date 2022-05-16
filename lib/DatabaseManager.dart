@@ -342,6 +342,30 @@ class DatabaseManager {
     }
     return level;
   }
+  Future<List<Question_>> getTopicQuestions(int topicID, String complexity) async {
+    DatabaseReference ref = FirebaseDatabase.instance.reference();
+    final snapshot = await ref.child('quiz_question').orderByChild('topic_complexity').equalTo(topicID.toString()+'_'+complexity).once();
+    List<Question_> questions = [];
+    var ques = snapshot.value;
+    var quesK = ques.keys;
+    for (var question in quesK) {
+      Question_ q = Question_();
+      q.id = int.parse(question);
+      q.question = ques[question]['question'];
+      //q.choices = ques[question]['choices'];
+      q.choices = [];
+      for (var choice in ques[question]['choices']) {
+        q.choices.add(choice);
+      }
+      q.answer_id = ques[question]['answer_id'];
+      q.topic_id = ques[question]['topic_id'];
+      q.complexity = ques[question]['complexity'];
+      q.points = ques[question]['points'];
+      questions.add(q);
+    }
+
+    return questions;
+  }
 
   void insertNewStudent(student std) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
