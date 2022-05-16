@@ -82,47 +82,61 @@ class _login_screenState extends State<Login_screen> {
                       SizedBox(
                         height: 20,
                       ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 50, right: 20),
-                        child: Row(
-                          children: [
-                            // SizedBox(
-                            //   width: 50,
-                            // ),
-                            CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.white,
-                              child: Container(
-                                width: 90,
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        'proj_images/Ain_Shams_logo.png'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                            ), //image
-                            Spacer(),
-                            CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.white,
-                              child: Container(
-                                width: 90,
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('proj_images/fcis.png'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                            ), //image
-                          ],
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Colors.white,
+                        child: Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  'proj_images/Ain_Shams_logo.png'),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                         ),
                       ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 50, right: 20),
+                      //   child: Row(
+                      //     children: [
+                      //       // SizedBox(
+                      //       //   width: 50,
+                      //       // ),
+                      //       CircleAvatar(
+                      //         radius: 40,
+                      //         backgroundColor: Colors.white,
+                      //         child: Container(
+                      //           width: 90,
+                      //           height: 90,
+                      //           decoration: BoxDecoration(
+                      //             image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   'proj_images/Ain_Shams_logo.png'),
+                      //               fit: BoxFit.fill,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ), //image
+                      //       // Spacer(),
+                      //       // CircleAvatar(
+                      //       //   radius: 60,
+                      //       //   backgroundColor: Colors.white,
+                      //       //   child: Container(
+                      //       //     width: 90,
+                      //       //     height: 90,
+                      //       //     decoration: BoxDecoration(
+                      //       //       image: DecorationImage(
+                      //       //         image: AssetImage('proj_images/fcis.png'),
+                      //       //         fit: BoxFit.fill,
+                      //       //       ),
+                      //       //     ),
+                      //       //   ),
+                      //       // ), //image
+                      //     ],
+                      //   ),
+                      // ),
 
                       SizedBox(
                         height: 20,
