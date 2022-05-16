@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Sidebar/BlockNavigation.dart';
 import 'package:gp/login_screen.dart';
@@ -79,9 +81,57 @@ class _INFOState extends State<INFO> {
       ),
     );
   }
-  
-  
-  @override
+  //
+   ScrollController scrollViewColtroller = ScrollController();
+   final ScrollController controllerOne = ScrollController();
+   final ScrollController controllerTwo = ScrollController();
+   @override
+   void initState() {
+     scrollViewColtroller = ScrollController();
+     scrollViewColtroller.addListener(_scrollListener);
+     super.initState();
+   }
+
+   _scrollListener() {
+     if (scrollViewColtroller.offset >=
+         scrollViewColtroller.position.maxScrollExtent &&
+         !scrollViewColtroller.position.outOfRange) {
+       setState(() {
+         message = "reach the bottom";
+         _direction = true;
+       });
+     }
+     if (scrollViewColtroller.offset <=
+         scrollViewColtroller.position.minScrollExtent &&
+         !scrollViewColtroller.position.outOfRange) {
+       setState(() {
+         message = "reach the top";
+         _direction = false;
+       });
+     }
+   }
+
+   String message = '';
+   bool _direction = false;
+
+   @override
+   void dispose() {
+     super.dispose();
+     scrollViewColtroller.dispose();
+   }
+
+   _moveUp() {
+     scrollViewColtroller.animateTo(scrollViewColtroller.offset - 50,
+         curve: Curves.linear, duration: Duration(milliseconds: 500));
+   }
+
+   _moveDown() {
+     scrollViewColtroller.animateTo(scrollViewColtroller.offset + 50,
+         curve: Curves.linear, duration: Duration(milliseconds: 500));
+   }
+
+//
+   @override
   Widget build(BuildContext context) {
     addTOList();
 
@@ -134,7 +184,61 @@ class _INFOState extends State<INFO> {
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,
       ),
-      body: Builder(
+
+      //
+
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Visibility(
+            visible: _direction,
+            maintainSize: false,
+            child: FloatingActionButton(
+              onPressed: () {
+                _moveUp();
+              },
+              child: RotatedBox(
+                  quarterTurns: 1, child: Icon(Icons.chevron_left)),
+            ),
+          ),
+          Visibility(
+            maintainSize: false,
+            visible: !_direction,
+            child: FloatingActionButton(
+              onPressed: () {
+                _moveDown();
+              },
+              child: RotatedBox(
+                  quarterTurns: 3, child: Icon(Icons.chevron_left)),
+            ),
+          )
+        ],
+      ),
+      //
+      body:  NotificationListener<ScrollUpdateNotification>(
+        onNotification: (ScrollNotification scrollInfo) {
+          if (scrollViewColtroller.position.userScrollDirection ==
+              ScrollDirection.reverse) {
+            print('User is going down');
+            setState(() {
+              message = 'going down';
+              _direction = true;
+            });
+          } else {
+            if (scrollViewColtroller.position.userScrollDirection ==
+                ScrollDirection.forward) {
+              print('User is going up');
+              setState(() {
+                message = 'going up';
+                _direction = false;
+              });
+            }
+          }
+          return true;
+        },
+
+
+      child:Builder(
         builder: (context) {
           CourseCubit.get(context).getCourseData(courseCode);
           return BlocBuilder<CourseCubit, CourseState>(
@@ -143,6 +247,7 @@ class _INFOState extends State<INFO> {
                return Center(child: CircularProgressIndicator());
               }
               else{
+
                 var courseCubit = CourseCubit.get(context);
                 var course = courseCubit.course;
                 return Container(
@@ -154,6 +259,7 @@ class _INFOState extends State<INFO> {
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30))),
                 child: ListView(
+                //  controller: scrollViewColtroller,
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -254,6 +360,7 @@ class _INFOState extends State<INFO> {
                         child: Container(
                           height: 140,
                           child: ListView.builder(
+                      //     controller: scrollViewColtroller,
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             itemCount: course.instructors.length,
@@ -290,7 +397,7 @@ class _INFOState extends State<INFO> {
                               child: Divider(color: Colors.grey, height: 30, thickness: 2,),)),
                         ],
                       ),
-                    ),
+                    ),//learning outcomes
 
                     Padding(
                       padding: const EdgeInsets.only(
@@ -299,31 +406,36 @@ class _INFOState extends State<INFO> {
                         right: 10,
                       ), 
                       child: Container(
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: course.learning_outcomes.length,
-                          itemBuilder: (BuildContext context, int index){
-                            return Card(
-                              elevation: 8.0,
-                              margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                              child: Container(
-                                decoration: BoxDecoration(color: Colors.blue),
-                                child: ListTile(
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                                  leading: Container(
-                                    padding: EdgeInsets.only(right: 12.0),
-                                    decoration: new BoxDecoration(
-                                      border: new Border(
-                                        right: new BorderSide(width: 1.0, color: Colors.white24))),
-                                        child: Icon(Icons.checklist_rounded, color: Colors.white),),
-                                        title: Text(
-                                          course.learning_outcomes[index],
-                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),),
+
+
+                          child: ListView.builder(
+                             controller: scrollViewColtroller,
+                           //   physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: course.learning_outcomes.length,
+                            itemBuilder: (BuildContext context, int index){
+                              return Card(
+                                elevation: 8.0,
+                                margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                                child: Container(
+                                  decoration: BoxDecoration(color: Colors.blue),
+                                  child: ListTile(
+                                    contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                                    leading: Container(
+                                      padding: EdgeInsets.only(right: 12.0),
+                                      decoration: new BoxDecoration(
+                                        border: new Border(
+                                          right: new BorderSide(width: 1.0, color: Colors.white24))),
+                                          child: Icon(Icons.checklist_rounded, color: Colors.white),),
+                                          title: Text(
+                                            course.learning_outcomes[index],
+                                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),),
+                                            ),
                                           ),
-                                        ),
-                        );}
-                                ),
+                          );}
+                                  ),
+
                               ),
                             ),
                   ],
@@ -332,8 +444,10 @@ class _INFOState extends State<INFO> {
               }
             },
           );
+
         }
       ),
-    );
+      ));
+
   }
 }
