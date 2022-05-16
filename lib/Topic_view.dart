@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gp/Levels_View.dart';
 import 'Quiz/Start_Quiz.dart';
 import 'package:gp/classes/student.dart';
@@ -20,7 +21,7 @@ class _topic_view extends State<topic_view> {
   student std;
   Level_ level;
   _topic_view(this.std, this.level);
-
+  List<int>weakness_topics=[1,2,3];
   List<TopicsPlusQuiz> topicsPlusQuiz = <TopicsPlusQuiz>[];
   @override
   void initState() {
@@ -102,9 +103,10 @@ class _topic_view extends State<topic_view> {
                         if (index == topicsPlusQuiz.length - 1) {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
-                                  Start_Quiz(level.id.toString())));
+                                  Start_Quiz(level.id,"level",weakness_topics)));
                         } else {
                           //action on tap
+                          Fluttertoast.showToast(msg:level.id.toString());
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   types(std, level, level.topics[index])));

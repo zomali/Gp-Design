@@ -11,126 +11,126 @@ import 'quiz__screen.dart';
 import 'quiz_controller.dart';
 import 'result_screen.dart';
 import 'backButton.dart';
-
+import 'package:gp/classes/student.dart';
+import 'package:gp/classes/classes.dart';
 class QuizScreen extends StatelessWidget {
-  late final String level;
-  QuizScreen(this.level);
+  final int id;
+  final String stat;
+  List<int>weakness_topics=[];
+  QuizScreen(this.id,this.stat,this.weakness_topics);
   static const routeName = '/quiz_screen';
   @override
   Widget build(BuildContext context) {
     String text;
     return Scaffold(
       body: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                  color: Colors.white),
-            ),
-            SafeArea(
-              child: GetBuilder<QuizController>(
-                init: QuizController(),
-                builder: (controller) => Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child:Container(
-                          child:Column(
-                            children: [
-                              Text(
-                                " Quiz On Level "+level,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline4!
-                                    .copyWith(color: Colors.blue),
-                              ),
-                              SizedBox(
-                                height: 50,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  RichText(
-                                    text: TextSpan(
-                                        text: 'Question ',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline4!
-                                            .copyWith(color: Colors.blue),
-                                        children: [
-                                          TextSpan(
-                                              text: controller.numberOfQuestion
-                                                  .round()
-                                                  .toString(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline4!
-                                                  .copyWith(color: Colors.blue)),
-                                          TextSpan(
-                                              text: '/',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline5!
-                                                  .copyWith(color: Colors.blue)),
-                                          TextSpan(
-                                              text: controller.countOfQuestion.toString(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline5!
-                                                  .copyWith(color: Colors.blue)),
-                                        ]),
-                                  ),
-                                  ProgressTimer(),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      height: 450,
-                      child: PageView.builder(
-                        scrollDirection: Axis.horizontal,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) => QuestionCard(
-                          questionModel: controller.questionsList[index],
+        alignment: Alignment.center,
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+                color: Colors.white),
+          ),
+          SafeArea(
+            child: GetBuilder<QuizController>(
+              init: QuizController(0,stat,weakness_topics),
+
+              builder: (controller) => Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child:Container(
+                        child:Column(
+                          children: [
+                            Text(
+                              " Quiz On Level "+(id).toString(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4!
+                                  .copyWith(color: Colors.blue),
+                            ),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                      text: 'Question ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline4!
+                                          .copyWith(color: Colors.blue),
+                                      children: [
+                                        TextSpan(
+                                            text: controller.numberOfQuestion
+                                                .round()
+                                                .toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline4!
+                                                .copyWith(color: Colors.blue)),
+                                        TextSpan(
+                                            text: '/',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline5!
+                                                .copyWith(color: Colors.blue)),
+                                        TextSpan(
+                                            text: controller.countOfQuestion.toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline5!
+                                                .copyWith(color: Colors.blue)),
+                                      ]),
+                                ),
+                                ProgressTimer(),
+                              ],
+                            ),
+                          ],
                         ),
-                        controller: controller.pageController,
-                        itemCount: controller.questionsList.length,
+                      )
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  SizedBox(
+                    height: 450,
+                    child: PageView.builder(
+                      scrollDirection: Axis.horizontal,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => QuestionCard(
+                        questionModel: controller.quiz_question[index],
                       ),
+                      controller: controller.pageController,
+                      itemCount: controller.quiz_question.length,
                     ),
-                    Spacer(),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    Spacer(),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
             ),
-            //Spacer(),
-          ],
-        ),
-
+          ),
+        ],
+      ),
       floatingActionButton: GetBuilder<QuizController>(
-          init: QuizController(),
+          init: QuizController(0,stat,weakness_topics),
           builder: (controller) =>
               Row(
                 children: [
-                  Spacer(flex: 2,),
+                    SizedBox(width: 30,),
                   backButton(
                       onPressed: () =>
                           controller.previousQuestion(),
                   ),
-                  Spacer(flex: 2,),
-
+                  SizedBox(
+                    width: 70,
+                  ),
                   nextButton(
                       onPressed: () => controller.nextQuestion()),
-                  Spacer(),
                 ],
               )
       ),

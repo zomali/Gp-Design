@@ -16,9 +16,11 @@ import 'result_screen.dart';
 import 'backButton.dart';
 //import 'quiz_selected_controller.dart';
 class QuizResults extends StatelessWidget {
-  late final String level;
+  final int id;
   Map<int, int?> student_answers = {};
-  QuizResults(this.level, this.student_answers);
+  QuizResults(this.id, this.student_answers);
+  String? stat;
+  List<int>weakness_topics=[];
   late int score;
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class QuizResults extends StatelessWidget {
           ),
           SafeArea(
             child: GetBuilder<QuizController>(
-              init: QuizController(),
+              init: QuizController(0,stat,weakness_topics),
               builder: (controller) =>
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -42,7 +44,7 @@ class QuizResults extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "  Results Of Quiz Level " + level,
+                                  "  Results Of Quiz Level " + id.toString(),
                                   style: Theme
                                       .of(context)
                                       .textTheme
@@ -61,7 +63,7 @@ class QuizResults extends StatelessWidget {
                           context: context,
                           removeTop: true,
                           child: ListView.builder(
-                            itemCount: controller.questionsList.length,
+                            itemCount: controller.quiz_question.length,
                             itemBuilder: (context, index) {
                               return Card(
                                 child: Row(
@@ -88,7 +90,7 @@ class QuizResults extends StatelessWidget {
                                                     "Question " + controller
                                                         .questionsList[index].id
                                                         .toString() + " / " +
-                                                        controller.questionsList
+                                                        controller.quiz_question
                                                             .length.toString(),
                                                     style: Theme
                                                         .of(context)

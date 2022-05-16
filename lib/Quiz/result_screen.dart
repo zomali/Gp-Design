@@ -3,21 +3,15 @@ import 'package:get/get.dart';
 import 'package:gp/Levels_View.dart';
 import 'package:gp/Quiz/quiz_result.dart';
 import 'package:gp/classes/student.dart';
+import '../classes/classes.dart';
 import 'question__model.dart';
-import 'bindings_app.dart';
 import 'custom_button.dart';
-import 'answer_option.dart';
-import 'progress_timer.dart';
-import 'question_card.dart';
-import 'quiz__screen.dart';
 import 'quiz_controller.dart';
-import 'result_screen.dart';
-import 'package:gp/main.dart';
 class ResultScreen extends StatelessWidget {
   static const routeName = '/result_screen';
-  late int level;
+  final int id;
   Map<int,int> student_answers={};
-  ResultScreen(this.level,this.student_answers);
+  ResultScreen(this.id,this.student_answers);
   late QuizController controller;
   late student std;
 
@@ -102,7 +96,7 @@ class ResultScreen extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          '${controller.scoreResult.round()} /100',
+                          '${controller.scoreResult.round()} /${controller.calculate_total_quiz_points()}',
                           style: Theme.of(context).textTheme.headline3!.copyWith(
                             color: KPrimaryColor,
                           ),
@@ -110,7 +104,7 @@ class ResultScreen extends StatelessWidget {
                         SizedBox(height: 20,),
                         viewAnswersButton(
                             onPressed: () =>  Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => QuizResults("1",controller.get_answred())))),
+                                MaterialPageRoute(builder: (context) => QuizResults(id,controller.get_answred())))),
                         const SizedBox(
                           height: 5,
                         ),

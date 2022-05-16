@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:gp/L_types.dart';
+import '../classes/classes.dart';
 import 'question__model.dart';
 import 'bindings_app.dart';
 import 'custom_button.dart';
@@ -13,43 +14,49 @@ void main() {
 }
 
 class Start_Level_Quiz extends StatelessWidget {
+  late final Level_ level;
   Map<int,int> student_answered={};
+  List<int> weakness_topic=[];
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialBinding: BilndingsApp(),
-      home:  WelcomeScreen("2"),
+      initialBinding: BilndingsApp(0," ",weakness_topic),
+      home:  WelcomeScreen(0,"level",weakness_topic),
       getPages: [
-        GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen("2")),
-        GetPage(name: QuizScreen.routeName, page: () =>  QuizScreen("2")),
-        GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen(1,student_answered)),
+        GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen(0,"level",weakness_topic)),
+        GetPage(name: QuizScreen.routeName, page: () =>  QuizScreen(0,"level",weakness_topic)),
+        GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen(0,student_answered)),
       ],
     );
   }
 }
 class WelcomeScreen extends StatefulWidget {
-  final String level;
-  WelcomeScreen(this.level);
+  final int id;
+  String stat;
+  List<int>weakness_topic;
+  WelcomeScreen(this.id, this.stat,this.weakness_topic);
   static const routeName = '/welcome_screen';
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState(level);
+  State<WelcomeScreen> createState() => _WelcomeScreenState(id,stat,weakness_topic);
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  final String level;
-  _WelcomeScreenState(this.level);
+  final int id;
+  String stat;
+  List<int>weakness_topic=[];
+  _WelcomeScreenState(this.id,this.stat,this.weakness_topic);
   final _nameController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
 
-  void _submit(context) {
+  void _submit(context,id,stat,weakness_topics) {
     FocusScope.of(context).unfocus();
     if (!_formkey.currentState!.validate()) return;
     _formkey.currentState!.save();
     Get.offAndToNamed(QuizScreen.routeName);
     Get.find<QuizController>().startTimer();
-    Get.lazyPut(()=>QuizController());
+    Get.lazyPut(()=>QuizController(id, stat,weakness_topic));
   }
 
   @override
@@ -120,7 +127,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child:Column(
                   children: [
                     Text(
-                      "Level "+level,
+                      "Level "+(id).toString(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 32,
@@ -149,7 +156,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Center(
                 child: RawMaterialButton(
                   onPressed: () {
-                    _submit(context);
+                    _submit(context,id,stat,weakness_topic);
                   },
                   shape: const StadiumBorder(),
                   fillColor: Colors.blue,
