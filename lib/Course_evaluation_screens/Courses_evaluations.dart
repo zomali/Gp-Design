@@ -39,7 +39,6 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
   void _onItemTapped(int index) {
     setState(
       () {
-
         _selectedIndex = index;
         // _selectedIndex%=3;
 
@@ -51,7 +50,7 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
   }
 
   Widget moveToPage(int index) {
-    _selectedIndex%=4;
+    _selectedIndex %= 4;
     return _pages.elementAt(_selectedIndex);
   }
 
@@ -62,8 +61,6 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
       appBar: AppBar(
         title: const Text("Course Evaluation"),
         leading: Icon(Icons.equalizer_outlined),
-
-
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
@@ -204,7 +201,7 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => quiz_evaluation_screen()));
+                        builder: (context) => quiz_evaluation_screen(std)));
               },
               child: Container(
                 height: 70,
