@@ -8,16 +8,16 @@ import 'BlockNavigation.dart';
 import 'Menu.dart';
 
 class sidebar extends StatefulWidget {
-  // final student std;
-  // sidebar(this.std);
+  final student std;
+  sidebar(this.std);
   @override
-  State<sidebar> createState() => _sidebarState();
+  State<sidebar> createState() => _sidebarState(std);
 }
 
 class _sidebarState extends State<sidebar>
     with SingleTickerProviderStateMixin<sidebar> {
-  // student std;
-  // _sidebarState(this.std);
+  student std;
+  _sidebarState(this.std);
   AnimationController? _animationController;
   StreamController<bool>? isSidebaropenstreamctrl;
   Stream<bool>? isSidebarstream;
@@ -74,34 +74,66 @@ class _sidebarState extends State<sidebar>
                   padding: const EdgeInsets.symmetric(horizontal: 0),
                   color: Colors.blue[900]!,
                   child: Column(
+                    
                     children: <Widget>[
                       SizedBox(
-                        height: 100,
+                        height: 50,
                       ),
                       GestureDetector(
                         onTap: () {
-                          // navigate to profile
-                        },
-                        child: ListTile(
+                          BlocProvider.of<Navigationn>(context)
+                              .add(NavigationEvents.profile);
+                          oniconpress();
+                        },                        
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 90,
+                              height: 90,
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(std.profile_picture),
+                              ),
+                            ),
+                            SizedBox(height: 16,),
+                            Text(
+                              std.name,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800),
+                            ),
+                            SizedBox(height: 6.0,),
+                            Text(
+                              std.email,
+                             style: TextStyle(
+                              color: Colors.white60,
+                              fontSize: 15,),
+                           ),
+                          ],
+                        ),                        
+                        /*
+                         child: ListTile(
+                          
                           title: Text(
-                            "Ahmed Gamal",
+                            std.name,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800),
                           ),
                           subtitle: Text(
-                            "Ahmed2018170000@cis.asu.edu.eg",
+                            std.email,
                             style: TextStyle(
                               color: Colors.white60,
                               fontSize: 15,
                             ),
                           ),
                           leading: CircleAvatar(
-                            radius: 40,
-                            backgroundImage: NetworkImage('https://1.bp.blogspot.com/-cJ0t9sZe2eE/Xd-pc7mH88I/AAAAAAAAAZM/giDxYSf5CBoA3zLmYW4yHnKPcQUxnWeRwCLcBGAsYHQ/s1600/%25D8%25AA%25D9%2585%25D8%25A8%2B%25D8%25AC%25D9%258A%25D8%25B1%25D9%2589%2B%25D8%25A8%25D9%258A%25D8%25B6%25D8%25AD%25D9%2583%2B%25D9%2588%25D8%25AD%25D8%25A7%25D8%25B7%25D8%25B7%2B%25D8%25A7%25D9%258A%25D8%25AF%25D9%2587%2B%25D8%25B9%25D9%2584%25D9%2589%2B%25D8%25A8%25D9%2582%25D9%2587.jpg'),
+                            radius: 70,
+                            backgroundImage: NetworkImage(std.profile_picture),
                           ),
-                        ),
+                        ),*/
                       ),
                       Divider(
                         height: 64,
