@@ -7,7 +7,7 @@ import 'Learning_analytics_screen.dart';
 import 'Levels_View.dart';
 import 'Sidebar/BlockNavigation.dart';
 import 'classes/student.dart';
-class lastQuizes extends StatefulWidget with NavigationStates{
+class lastQuizes extends StatefulWidget{
   final student std;
   final String courseCode;
   lastQuizes(this.std, this.courseCode);
@@ -57,45 +57,33 @@ class _lastQuizesState extends State<lastQuizes> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Quizzes History"),
-        leading: Icon(Icons.newspaper),
+        leading: Icon(Icons.quiz),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
 
         selectedItemColor: Colors.blue,
-        selectedFontSize: 16,
+        selectedFontSize: 18,
 
         unselectedItemColor: Colors.grey,
-        // unselectedFontSize: 11,
         unselectedFontSize: 16,
 
-        //    currentIndex: 0,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            //backgroundColor: Colors.blue,
-            //   backgroundColor: Colors.blue,
+            icon: Icon(Icons.info),
+            label: 'Info',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            //  icon: Icon(Icons.up),
+            icon: Icon(Icons.keyboard_double_arrow_up),
             label: 'Levels',
-
-            // backgroundColor: Colors.blue,
-            //     backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.equalizer_outlined),
             label: 'Evaluation',
-            //  backgroundColor: Colors.blue
-            //    backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper),
+            icon: Icon(Icons.quiz),
             label: 'Quizzes',
-            //   backgroundColor: Colors.blue
-            //     backgroundColor: Colors.blue,
           )
         ],
 

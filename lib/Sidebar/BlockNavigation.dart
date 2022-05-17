@@ -1,22 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:gp/Home.dart';
-import 'package:gp/L_types.dart';
-
-import 'package:gp/Last_quizes.dart';
-import 'package:gp/Sidebar/sidebar_layout.dart';
-import 'package:gp/signup%20screen.dart';
-
-import '../Info.dart';
-
+import 'package:gp/Dashboard_screen.dart';
+import 'package:gp/myprofile_screen.dart';
 import '../Learning_analytics_screen.dart';
-import '../classes/student.dart';
 import '../login_screen.dart';
+
+
+import 'package:gp/Sidebar/sidebar_layout.dart';
+import '../classes/student.dart';
 import 'hom.dart';
 
 enum NavigationEvents {
   HomePageClickedEvent,
-  evalution,
-  Infoevent,
+  analytics,
+  profile,
+  dashboard,
   logout,
 }
 
@@ -40,12 +38,15 @@ class Navigationn extends Bloc<NavigationEvents, NavigationStates> {
       case NavigationEvents.HomePageClickedEvent:
         yield Home(std);
         break;
-      case NavigationEvents.evalution:
-        yield lastQuizes(std, "CSW150");
+      case NavigationEvents.analytics:
+        yield Learning_analytics_screen(std);
         break;
-      case NavigationEvents.Infoevent:
-        yield INFO(std, "CSW150");
+      case NavigationEvents.dashboard:
+        yield Dashboard_screen(std);
         break;
+      case NavigationEvents.profile:
+        yield MyProfileScreen(std);
+        break;  
       case NavigationEvents.logout:
         yield Login_screen();
         break;

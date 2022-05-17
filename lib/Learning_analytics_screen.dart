@@ -6,10 +6,11 @@ import 'package:charts_flutter/flutter.dart'as charts;
 import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Home.dart';
 import 'Levels_View.dart';
+import 'Sidebar/BlockNavigation.dart';
 import 'classes/student.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-class Learning_analytics_screen extends StatefulWidget {
+class Learning_analytics_screen extends StatefulWidget with NavigationStates  {
   final student std;
   Learning_analytics_screen(this.std);
   @override

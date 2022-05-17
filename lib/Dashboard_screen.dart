@@ -5,10 +5,11 @@ import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Home.dart';
 import 'Learning_analytics_screen.dart';
 import 'Levels_View.dart';
+import 'Sidebar/BlockNavigation.dart';
 import 'classes/student.dart';
 import 'myprofile_screen.dart';
 
-class Dashboard_screen extends StatefulWidget {
+class Dashboard_screen extends StatefulWidget with NavigationStates  {
  // const Dashboard_screen({Key? key}) : super(key: key);
   final student std;
   Dashboard_screen(this.std);
@@ -65,7 +66,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
           },
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      /*bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
 
         selectedItemColor: Colors.blue,
@@ -114,7 +115,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
         // },
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,
-      ),
+      ),*/
     );
   }
 }

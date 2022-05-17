@@ -71,8 +71,8 @@ class _sidebarState extends State<sidebar>
             children: <Widget>[
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  color: const Color(0xFF262AAA),
+                  padding: const EdgeInsets.symmetric(horizontal: 0),
+                  color: Colors.blue[900]!,
                   child: Column(
                     children: <Widget>[
                       SizedBox(
@@ -84,17 +84,17 @@ class _sidebarState extends State<sidebar>
                         },
                         child: ListTile(
                           title: Text(
-                            "Ahmed",
+                            "Ahmed Gamal",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 30,
+                                fontSize: 22,
                                 fontWeight: FontWeight.w800),
                           ),
                           subtitle: Text(
-                            "Ahmed@gmail.com",
+                            "Ahmed2018170000@cis.asu.edu.eg",
                             style: TextStyle(
-                              color: Color(0xFF1BB5FD),
-                              fontSize: 18,
+                              color: Colors.white60,
+                              fontSize: 15,
                             ),
                           ),
                           leading: CircleAvatar(
@@ -118,26 +118,48 @@ class _sidebarState extends State<sidebar>
                         },
                         child: Menu_SideBar(
                           icon: Icons.home,
+                          iconColor: Colors.cyan,
                           title: "Home",
-                          // ontap: () {
-                          //
-                          //  BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
-                          // },
+                          titleColor: Colors.white,
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
                           BlocProvider.of<Navigationn>(context)
-                              .add(NavigationEvents.evalution);
+                              .add(NavigationEvents.profile);
                           oniconpress();
                         },
                         child: Menu_SideBar(
-                          icon: Icons.question_answer,
-                          title: "Quizes Answer",
-                          // ontap: () {
-                          //
-                          //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
-                          // },
+                          icon: Icons.person,
+                          iconColor: Colors.cyan,
+                          title: "Profile",
+                          titleColor: Colors.white,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<Navigationn>(context)
+                              .add(NavigationEvents.dashboard);
+                          oniconpress();
+                        },
+                        child: Menu_SideBar(
+                          icon: Icons.dashboard,
+                          iconColor: Colors.cyan,
+                          title: "Dashboard",
+                          titleColor: Colors.white,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<Navigationn>(context)
+                              .add(NavigationEvents.analytics);
+                          oniconpress();
+                        },
+                        child: Menu_SideBar(
+                          icon: Icons.insert_chart_outlined_sharp,
+                          iconColor: Colors.cyan,
+                          title: "Analytics",
+                          titleColor: Colors.white,
                         ),
                       ),
                       Divider(
@@ -146,22 +168,7 @@ class _sidebarState extends State<sidebar>
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
                         endIndent: 32,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          BlocProvider.of<Navigationn>(context)
-                              .add(NavigationEvents.Infoevent);
-                          oniconpress();
-                        },
-                        child: Menu_SideBar(
-                          icon: Icons.info,
-                          title: "INfo",
-                          // ontap: (){
-                          //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.HomePageClickedEvent);
-                          //
-                          // },
-                        ),
-                      ),
+                      ),                      
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -172,10 +179,9 @@ class _sidebarState extends State<sidebar>
                         },
                         child: Menu_SideBar(
                           icon: Icons.logout,
+                          iconColor: Colors.red[400],
                           title: "Log out",
-                          // ontap: (){
-                          //   BlocProvider.of<Navigationn>(context).add(NavigationEvents.evalution);
-                          // },
+                          titleColor: Colors.white,
                         ),
                       ),
                     ],
@@ -193,12 +199,12 @@ class _sidebarState extends State<sidebar>
                     child: Container(
                       width: 40,
                       height: 100,
-                      color: Color(0xFF262AAA),
+                      color: Colors.blue[900]!,
                       alignment: Alignment.centerLeft,
                       child: AnimatedIcon(
                         progress: _animationController!.view,
                         icon: AnimatedIcons.menu_close,
-                        color: Color(0xFF1BB5FD),
+                        color: Colors.white,
                         size: 25,
                       ),
                     ),

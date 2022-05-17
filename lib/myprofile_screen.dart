@@ -14,9 +14,10 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Levels_View.dart';
+import 'Sidebar/BlockNavigation.dart';
 import 'classes/student.dart';
 
-class MyProfileScreen extends StatefulWidget {
+class MyProfileScreen extends StatefulWidget with NavigationStates {
   final student std;
   MyProfileScreen(this.std);
 

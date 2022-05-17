@@ -66,39 +66,28 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
         showUnselectedLabels: true,
 
         selectedItemColor: Colors.blue,
-        selectedFontSize: 16,
+        selectedFontSize: 18,
 
         unselectedItemColor: Colors.grey,
-        // unselectedFontSize: 11,
         unselectedFontSize: 16,
 
-        //    currentIndex: 0,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            //backgroundColor: Colors.blue,
-            //   backgroundColor: Colors.blue,
+            icon: Icon(Icons.info),
+            label: 'Info',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            //  icon: Icon(Icons.up),
+            icon: Icon(Icons.keyboard_double_arrow_up),
             label: 'Levels',
 
-            // backgroundColor: Colors.blue,
-            //     backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.equalizer_outlined),
             label: 'Evaluation',
-            //  backgroundColor: Colors.blue
-            //    backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper),
+            icon: Icon(Icons.quiz),
             label: 'Quizzes',
-            //   backgroundColor: Colors.blue
-            //     backgroundColor: Colors.blue,
           )
         ],
         // onTap: (index){

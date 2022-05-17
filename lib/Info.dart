@@ -9,7 +9,7 @@ import 'Last_quizes.dart';
 import 'Levels_View.dart';
 import 'package:gp/classes/classes.dart';
 import 'classes/student.dart';
-class INFO extends StatefulWidget with NavigationStates {
+class INFO extends StatefulWidget{
   final student std;
   final String courseCode;
   INFO(this.std, this.courseCode);
@@ -133,7 +133,7 @@ class _INFOState extends State<INFO> {
      super.dispose();
      scrollViewColtroller.dispose();
    }
-
+/*
    _moveUp() {
      scrollViewColtroller.animateTo(scrollViewColtroller.offset - 50,
          curve: Curves.linear, duration: Duration(milliseconds: 500));
@@ -143,7 +143,7 @@ class _INFOState extends State<INFO> {
      scrollViewColtroller.animateTo(scrollViewColtroller.offset + 50,
          curve: Curves.linear, duration: Duration(milliseconds: 500));
    }
-
+*/
 //
    @override
   Widget build(BuildContext context) {
@@ -160,42 +160,29 @@ class _INFOState extends State<INFO> {
         showUnselectedLabels: true,
 
         selectedItemColor: Colors.blue,
-        selectedFontSize: 16,
+        selectedFontSize: 18,
 
         unselectedItemColor: Colors.grey,
-        // unselectedFontSize: 11,
         unselectedFontSize: 16,
 
-        //    currentIndex: 0,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            //backgroundColor: Colors.blue,
-            //   backgroundColor: Colors.blue,
+            icon: Icon(Icons.info),
+            label: 'Info',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            //  icon: Icon(Icons.up),
+            icon: Icon(Icons.keyboard_double_arrow_up),
             label: 'Levels',
-
-            // backgroundColor: Colors.blue,
-            //     backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.equalizer_outlined),
             label: 'Evaluation',
-            //  backgroundColor: Colors.blue
-            //    backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper),
+            icon: Icon(Icons.quiz),
             label: 'Quizzes',
-            //   backgroundColor: Colors.blue
-            //     backgroundColor: Colors.blue,
           )
         ],
-
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,
       ),
@@ -318,7 +305,7 @@ class _INFOState extends State<INFO> {
                              Icon(Icons.quiz, color: Colors.yellowAccent[700]! , size: 27,),
                              Text("Quizzes", style: TextStyle(color: Colors.yellowAccent[700]!, fontSize: 17, fontWeight: FontWeight.bold),),
                              Padding(padding: EdgeInsets.only(bottom: 3)),                             
-                             Text("22", style: TextStyle(fontSize: 23),),
+                             Text("+20", style: TextStyle(fontSize: 23),),
                             ],
                           ),
                           Padding(
@@ -343,18 +330,18 @@ class _INFOState extends State<INFO> {
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.all(10),
+                    /*Padding(padding: EdgeInsets.all(10),
                     child: Container(
                     child: Divider(
-                      height: 10,
-                      thickness: 3,
+                      height: 5,
+                      thickness: 2,
                       indent: 5,
                       endIndent:5,
-                      color: Colors.black87,
+                      color: Colors.black26,
                     ),  
                     ),
-                    ),
-                    Padding(padding: EdgeInsets.only(left:30, top: 10),
+                    ),*/
+                    Padding(padding: EdgeInsets.only(left:30),
                     child: Text("Instructors",
                         style: TextStyle(
                           fontSize: 20,
