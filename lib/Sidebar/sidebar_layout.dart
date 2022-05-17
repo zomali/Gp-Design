@@ -4,9 +4,9 @@ import 'package:gp/Home.dart';
 import 'package:gp/Sidebar/hom.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/login_screen.dart';
-import '';
+
 import 'BlockNavigation.dart';
-import 'SideBar.dart';
+import 'package:gp/Sidebar/sidebar.dart';
 
 class side_layout extends StatelessWidget with NavigationStates {
   final student std;
@@ -23,7 +23,7 @@ class side_layout extends StatelessWidget with NavigationStates {
                 return navigationState as Widget;
               },
             ),
-            sidebar(),
+            sidebar(std),
           ],
         ),
       ),
