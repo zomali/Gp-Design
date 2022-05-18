@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../classes/classes.dart';
 import 'question__model.dart';
 import 'answer_option.dart';
 import 'quiz_controller.dart';
 class QuestionCard extends StatelessWidget {
-  final QuestionModel questionModel;
+  final Question_ questionModel;
   const QuestionCard({
     Key? key,
     required this.questionModel,
@@ -36,12 +37,12 @@ class QuestionCard extends StatelessWidget {
                   flex: 1,
                 ),
                 ...List.generate(
-                    questionModel.options.length,
+                    questionModel.choices.length,
                         (index) => Column(
                       children: [
                         AnswerOption(
                             questionId: questionModel.id,
-                            text: questionModel.options[index],
+                            text: questionModel.choices[index],
                             index: index,
                             onPressed: () =>
                                 Get.find<QuizController>()

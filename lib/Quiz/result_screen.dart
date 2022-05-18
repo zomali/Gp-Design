@@ -11,7 +11,8 @@ class ResultScreen extends StatelessWidget {
   static const routeName = '/result_screen';
   final int id;
   Map<int,int> student_answers={};
-  ResultScreen(this.id,this.student_answers);
+  List<Question_>questions;
+  ResultScreen(this.id,this.student_answers,this.questions);
   late QuizController controller;
   late student std;
 
@@ -104,7 +105,7 @@ class ResultScreen extends StatelessWidget {
                         SizedBox(height: 20,),
                         viewAnswersButton(
                             onPressed: () =>  Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => QuizResults(id,controller.get_answred())))),
+                                MaterialPageRoute(builder: (context) => QuizResults(id,controller.get_answred(),questions)))),
                         const SizedBox(
                           height: 5,
                         ),

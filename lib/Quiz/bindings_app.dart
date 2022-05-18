@@ -11,13 +11,14 @@ import 'quiz_controller.dart';
 import 'result_screen.dart';
 
 class BilndingsApp implements Bindings {
-  Map<QuestionModel,int> stuednt_asnwered={};
+  Map<Question_,int> stuednt_asnwered={};
   final int id;
   String stat;
   List<int>weakness_topics=[];
-  BilndingsApp(this.id,this.stat,this.weakness_topics);
+  List<Question_> questions;
+  BilndingsApp(this.id,this.stat,this.weakness_topics, this.questions);
   @override
   void dependencies() {
-    Get.lazyPut(() => QuizController(id,stat,weakness_topics));
+    Get.lazyPut(() => QuizController(id,stat,weakness_topics, questions));
   }
 }

@@ -346,6 +346,8 @@ class DatabaseManager {
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     final snapshot = await ref.child('quiz_question').orderByChild('topic_complexity').equalTo(topicID.toString()+'_'+complexity).once();
     List<Question_> questions = [];
+    if(snapshot.value != null)
+    {
     var ques = snapshot.value;
     var quesK = ques.keys;
     for (var question in quesK) {
@@ -365,6 +367,8 @@ class DatabaseManager {
     }
 
     return questions;
+    }
+    return[];
   }
 
   void insertNewStudent(student std) {

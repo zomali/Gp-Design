@@ -9,7 +9,7 @@ import 'custom_button.dart';
 import 'quiz__screen.dart';
 import 'quiz_controller.dart';
 import 'result_screen.dart';
-void main() {
+/*void main() {
   runApp(Start_Level_Quiz());
 }
 
@@ -25,27 +25,29 @@ class Start_Level_Quiz extends StatelessWidget {
       home:  WelcomeScreen(0,"level",weakness_topic),
       getPages: [
         GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen(0,"level",weakness_topic)),
-        GetPage(name: QuizScreen.routeName, page: () =>  QuizScreen(0,"level",weakness_topic)),
+        GetPage(name: QuizScreen.routeName, p`age: () =>  QuizScreen(0,"level",weakness_topic)),
         GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen(0,student_answered)),
       ],
     );
   }
-}
+}*/
 class WelcomeScreen extends StatefulWidget {
   final int id;
   String stat;
   List<int>weakness_topic;
-  WelcomeScreen(this.id, this.stat,this.weakness_topic);
+  List<Question_>questions;
+  WelcomeScreen(this.id, this.stat,this.weakness_topic,this.questions);
   static const routeName = '/welcome_screen';
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState(id,stat,weakness_topic);
+  State<WelcomeScreen> createState() => _WelcomeScreenState(id,stat,weakness_topic,questions);
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final int id;
   String stat;
   List<int>weakness_topic=[];
-  _WelcomeScreenState(this.id,this.stat,this.weakness_topic);
+  List<Question_>questions;
+  _WelcomeScreenState(this.id,this.stat,this.weakness_topic,this.questions);
   final _nameController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
@@ -56,7 +58,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _formkey.currentState!.save();
     Get.offAndToNamed(QuizScreen.routeName);
     Get.find<QuizController>().startTimer();
-    Get.lazyPut(()=>QuizController(id, stat,weakness_topic));
+    Get.lazyPut(()=>QuizController(id, stat,weakness_topic,questions));
   }
 
   @override

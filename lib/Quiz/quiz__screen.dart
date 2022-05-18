@@ -17,7 +17,8 @@ class QuizScreen extends StatelessWidget {
   final int id;
   final String stat;
   List<int>weakness_topics=[];
-  QuizScreen(this.id,this.stat,this.weakness_topics);
+  List<Question_>questions;
+  QuizScreen(this.id,this.stat,this.weakness_topics,this.questions);
   static const routeName = '/quiz_screen';
   @override
   Widget build(BuildContext context) {
@@ -32,13 +33,13 @@ class QuizScreen extends StatelessWidget {
           ),
           SafeArea(
             child: GetBuilder<QuizController>(
-              init: QuizController(0,stat,weakness_topics),
+              init: QuizController(0,stat,weakness_topics,questions),
 
               builder: (controller) => Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(5.0),
                       child:Container(
                         child:Column(
                           children: [
@@ -50,7 +51,7 @@ class QuizScreen extends StatelessWidget {
                                   .copyWith(color: Colors.blue),
                             ),
                             SizedBox(
-                              height: 50,
+                              height: 30,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,7 +61,7 @@ class QuizScreen extends StatelessWidget {
                                       text: 'Question ',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline4!
+                                          .headline5!
                                           .copyWith(color: Colors.blue),
                                       children: [
                                         TextSpan(
@@ -69,19 +70,19 @@ class QuizScreen extends StatelessWidget {
                                                 .toString(),
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline4!
+                                                .headline5!
                                                 .copyWith(color: Colors.blue)),
                                         TextSpan(
                                             text: '/',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline5!
+                                                .headline4!
                                                 .copyWith(color: Colors.blue)),
                                         TextSpan(
                                             text: controller.countOfQuestion.toString(),
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline5!
+                                                .headline6!
                                                 .copyWith(color: Colors.blue)),
                                       ]),
                                 ),
@@ -93,10 +94,10 @@ class QuizScreen extends StatelessWidget {
                       )
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 5,
                   ),
                   SizedBox(
-                    height: 450,
+                    height: 400,
                     child: PageView.builder(
                       scrollDirection: Axis.horizontal,
                       physics: const NeverScrollableScrollPhysics(),
@@ -108,7 +109,7 @@ class QuizScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                 ],
               ),
@@ -117,11 +118,11 @@ class QuizScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: GetBuilder<QuizController>(
-          init: QuizController(0,stat,weakness_topics),
+          init: QuizController(0,stat,weakness_topics,questions),
           builder: (controller) =>
               Row(
                 children: [
-                    SizedBox(width: 30,),
+                    SizedBox(width: 25,),
                   backButton(
                       onPressed: () =>
                           controller.previousQuestion(),

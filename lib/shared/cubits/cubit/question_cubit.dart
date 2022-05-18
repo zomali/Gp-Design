@@ -18,7 +18,7 @@ class QuestionCubit extends Cubit<QuestionState> {
     List<Question_> easyQuestions = [];
     List<Question_> mediumQuestions = [];
     List<Question_> hardQuestions = [];
-
+    allQuestions = [];
     easyQuestions = await db.getTopicQuestions(topicID, "easy");
     mediumQuestions = await db.getTopicQuestions(topicID, "medium");
     hardQuestions = await db.getTopicQuestions(topicID, "hard");
