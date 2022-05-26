@@ -10,394 +10,15 @@ import 'package:gp/classes/classes.dart';
 class QuizController extends GetxController{
   final int id;
   String? stat;
-   List<int> weakness_topics;
-   List<Question_> questions;
+  List<int> weakness_topics;
+  List<Question_> questions;
   QuizController(this.id,this.stat,this.weakness_topics, this.questions);
   //QuizController();
   String name = '';
   String status = '';
   //list of all questions
-    //contain all question of level
+  //contain all question of level
   List<Question_> get questionsList => [...questions];
-  /*final List<QuestionModel> _questionList = [
-    
-    //topic 1 questions
-    QuestionModel(
-      id: 1,
-      question: "1-A ",
-      answer: 2,
-      options: ['Sec it', 'Sec it developer', 'sec it developers', 'mesh sec it '],
-      complexity: "easy",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 2,
-      question: "1-B ",
-      answer: 1,
-      options: ['BloC', 'GetX', 'Provider', 'riverPod'],
-      complexity: "easy",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-
-    QuestionModel(
-      id: 5,
-      question: "1-E",
-      answer: 3,
-      options: ['Eljoker', 'Abyu', 'R3', 'All of the above'],
-      complexity: "medium",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 3,
-      question: "1-C",
-      answer: 2,
-      options: ['sherif', 'sherif ahmed', 'ahmed sherif', 'doc sherif'],
-      complexity: "medium",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 4,
-      question: "1-D",
-      answer: 1,
-      options: ['eng', 'Doc', 'eng/Doc', 'Doc/Eng'],
-      complexity: "hard",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 6,
-      question: "1-F",
-      answer: 2,
-      options: ['ahmed sherif', 'sherif', 'Haytham', 'NONE OF ABOVE'],
-      complexity: "hard",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    //questions on topic 2
-    QuestionModel(
-      id: 8,
-      question: "2-H",
-      answer: 3,
-      options: ['hello', 'hi', 'hola', 'Suiiiiiiiiiiii'],
-      complexity: "easy",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 7,
-      question: "2-G",
-      answer: 3,
-      options: ['Pharma', 'Micro', 'Medicnal', 'NONE OF ABOVE'],
-      complexity: "easy",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 9,
-      question:
-      "2-I ",
-      answer: 0,
-      options: ['true', 'false'],
-      complexity: "hard",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 10,
-      question: "2-K ",
-      answer: 1,
-      options: ['true', 'false'],
-      complexity: "hard",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 11,
-      question:
-      "2-K",
-      answer: 3,
-      options: ['Eljoker', 'Abyu', 'R3', 'All of the above'],
-      complexity: "medium",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 12,
-      question: "2-M",
-      answer: 2,
-      options: ['ahmed sherif', 'sherif', 'Haytham', 'NONE OF ABOVE'],
-      complexity: "medium",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    //questions on topic 3
-    QuestionModel(
-      id: 13,
-      question: "3-N",
-      answer: 3,
-      options: ['Pharma', 'Micro', 'Medicnal', 'NONE OF ABOVE'],
-      complexity: "hard",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 14,
-      question: "3-V",
-      answer: 3,
-      options: ['hello', 'hi', 'hola', 'Suiiiiiiiiiiii'],
-      complexity: "easy",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 15,
-      question:
-      "3-Y",
-      answer: 0,
-      options: ['true', 'false'],
-      complexity: "hard",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 16,
-      question: "3-U ",
-      answer: 1,
-      options: ['true', 'false'],
-      complexity: "easy",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 17,
-      question:
-      "3-z",
-      answer: 0,
-      options: ['true', 'false'],
-      complexity: "medium",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 18,
-      question: "3-w ",
-      answer: 1,
-      options: ['true', 'false'],
-      complexity: "medium",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 19,
-      question: "1-A ",
-      answer: 2,
-      options: ['Sec it', 'Sec it developer', 'sec it developers', 'mesh sec it '],
-      complexity: "easy",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 20,
-      question: "1-B ",
-      answer: 1,
-      options: ['BloC', 'GetX', 'Provider', 'riverPod'],
-      complexity: "easy",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-
-    QuestionModel(
-      id: 21,
-      question: "1-E",
-      answer: 3,
-      options: ['Eljoker', 'Abyu', 'R3', 'All of the above'],
-      complexity: "medium",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 22,
-      question: "1-C",
-      answer: 2,
-      options: ['sherif', 'sherif ahmed', 'ahmed sherif', 'doc sherif'],
-      complexity: "medium",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 23,
-      question: "1-D",
-      answer: 1,
-      options: ['eng', 'Doc', 'eng/Doc', 'Doc/Eng'],
-      complexity: "hard",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 24,
-      question: "1-F",
-      answer: 2,
-      options: ['ahmed sherif', 'sherif', 'Haytham', 'NONE OF ABOVE'],
-      complexity: "hard",
-      topic_id: 1,
-      points: 2,
-      level_id: 1,
-    ),
-    //questions on topic 2
-    QuestionModel(
-      id: 25,
-      question: "2-H",
-      answer: 3,
-      options: ['hello', 'hi', 'hola', 'Suiiiiiiiiiiii'],
-      complexity: "easy",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 26,
-      question: "2-G",
-      answer: 3,
-      options: ['Pharma', 'Micro', 'Medicnal', 'NONE OF ABOVE'],
-      complexity: "easy",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 27,
-      question:
-      "2-I ",
-      answer: 0,
-      options: ['true', 'false'],
-      complexity: "hard",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 28,
-      question: "2-K ",
-      answer: 1,
-      options: ['true', 'false'],
-      complexity: "hard",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 29,
-      question:
-      "2-K",
-      answer: 3,
-      options: ['Eljoker', 'Abyu', 'R3', 'All of the above'],
-      complexity: "medium",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 30,
-      question: "2-M",
-      answer: 2,
-      options: ['ahmed sherif', 'sherif', 'Haytham', 'NONE OF ABOVE'],
-      complexity: "medium",
-      topic_id: 2,
-      points: 2,
-      level_id: 1,
-    ),
-    //questions on topic 3
-    QuestionModel(
-      id: 31,
-      question: "3-N",
-      answer: 3,
-      options: ['Pharma', 'Micro', 'Medicnal', 'NONE OF ABOVE'],
-      complexity: "hard",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 32,
-      question: "3-V",
-      answer: 3,
-      options: ['hello', 'hi', 'hola', 'Suiiiiiiiiiiii'],
-      complexity: "easy",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 33,
-      question:
-      "3-Y",
-      answer: 0,
-      options: ['true', 'false'],
-      complexity: "hard",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 34,
-      question: "3-U ",
-      answer: 1,
-      options: ['true', 'false'],
-      complexity: "easy",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    QuestionModel(
-      id: 35,
-      question:
-      "3-z",
-      answer: 0,
-      options: ['true', 'false'],
-      complexity: "medium",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-    Question_(
-      id: 36,
-      question: "3-w ",
-      answer: 1,
-      options: ['true', 'false'],
-      complexity: "medium",
-      topic_id: 3,
-      points: 2,
-      level_id: 1,
-    ),
-  ];
-  */
   //contain all question of level
   //get quiz question for every student
   final List<Question_> quiz_question=[];
@@ -415,8 +36,8 @@ class QuizController extends GetxController{
     final random = new Random();
     int count =0;
     int easy_count = 0,
-          meduim_count = 0,
-          hard_count = 0;
+        meduim_count = 0,
+        hard_count = 0;
     //if stat=topic
     while(quiz_question.length!=10) {
       int index = random.nextInt(questionsList.length-1);
@@ -447,81 +68,82 @@ class QuizController extends GetxController{
     final random = new Random();
     bool all_weakness=false;
     int topic_count=1,i=-1;
-    int easy_count = 0, meduim_count = 0, hard_count = 0;
     if(weakness_topics.length==levels[id-1].topics_id.length) {
       all_weakness = true;
     }
     if(all_weakness!=true)
     {
       while(topic_count!=levels[id-1].topics_id.length &&i<levels[id-1].topics_id.length-1)
+      {
+        i++;
+        int easy_count = 0, meduim_count = 0, hard_count = 0;
+        if(weakness_topics.contains(levels[id-1].topics_id[i]))
         {
-          i++;
-          if(weakness_topics.contains(levels[id-1].topics_id[i]))
-            {
-              while ((easy_count + meduim_count + hard_count) != 4) {
-                int index = random.nextInt(questionsList.length-1);
-                if (questionsList[index].topic_id ==levels[id-1].topics_id[i] && !quiz_question.contains(questionsList[index])) {
-                  if (questionsList[index].complexity == "easy") {
-                    if (easy_count < 1) {
-                      quiz_question.add(questionsList[index]);
-                      easy_count++;
-                      topic_count++;
-                    }
-                  }
-                  if (questionsList[index].complexity == "medium") {
-                    if (meduim_count < 2) {
-                      quiz_question.add(questionsList[index]);
-                      meduim_count++;
-                      topic_count++;
-                    }
-                  }
-                  if (questionsList[index].complexity == "hard") {
-                    if (hard_count < 1) {
-                      quiz_question.add(questionsList[index]);
-                      hard_count++;
-                      topic_count++;
-                    }
-                  }
+          while ((easy_count + meduim_count + hard_count) != 4) {
+            int index = random.nextInt(questionsList.length-1);
+            if (questionsList[index].topic_id ==levels[id-1].topics_id[i] && !quiz_question.contains(questionsList[index])) {
+              if (questionsList[index].complexity == "easy") {
+                if (easy_count < 1) {
+                  quiz_question.add(questionsList[index]);
+                  easy_count++;
+                  topic_count++;
+                }
+              }
+              if (questionsList[index].complexity == "medium") {
+                if (meduim_count < 2) {
+                  quiz_question.add(questionsList[index]);
+                  meduim_count++;
+                  topic_count++;
+                }
+              }
+              if (questionsList[index].complexity == "hard") {
+                if (hard_count < 1) {
+                  quiz_question.add(questionsList[index]);
+                  hard_count++;
+                  topic_count++;
                 }
               }
             }
-          else
-            {
-              while ((easy_count + meduim_count + hard_count) != 3) {
-                int index = random.nextInt(questionsList.length-1);
-                if (questionsList[index].topic_id == levels[id-1].topics_id[i] && !quiz_question.contains(questionsList[index])) {
-                  if (questionsList[index].complexity == "easy") {
-                    if (easy_count < 1) {
-                      quiz_question.add(questionsList[index]);
-                      easy_count++;
-                      topic_count++;
-                      continue;
-                    }
-                  }
-                  if (questionsList[index].complexity == "medium") {
-                    if (meduim_count < 1) {
-                      quiz_question.add(questionsList[index]);
-                      meduim_count++;
-                      topic_count++;
-                      continue;
-                    }
-                  }
-                  if (questionsList[index].complexity == "hard") {
-                    if (hard_count < 1) {
-                      quiz_question.add(questionsList[index]);
-                      hard_count++;
-                      topic_count++;
-                      continue;
-                    }
-                  }
-                }
-              }
-            }
+          }
         }
+        else
+        {
+          while ((easy_count + meduim_count + hard_count) != 3) {
+            int index = random.nextInt(questionsList.length-1);
+            if (questionsList[index].topic_id == levels[id-1].topics_id[i] && !quiz_question.contains(questionsList[index])) {
+              if (questionsList[index].complexity == "easy") {
+                if (easy_count < 1) {
+                  quiz_question.add(questionsList[index]);
+                  easy_count++;
+                  topic_count++;
+                  continue;
+                }
+              }
+              if (questionsList[index].complexity == "medium") {
+                if (meduim_count < 1) {
+                  quiz_question.add(questionsList[index]);
+                  meduim_count++;
+                  topic_count++;
+                  continue;
+                }
+              }
+              if (questionsList[index].complexity == "hard") {
+                if (hard_count < 1) {
+                  quiz_question.add(questionsList[index]);
+                  hard_count++;
+                  topic_count++;
+                  continue;
+                }
+              }
+            }
+          }
+        }
+      }
     }
     else {
       int weak_topics_count=0;
       while (weak_topics_count<=levels[id-1].topics_id.length-1) {
+        int easy_count = 0, meduim_count = 0, hard_count = 0;
         while ((easy_count + meduim_count + hard_count) != 4) {
           int index = random.nextInt(questionsList.length-1);
           if (!quiz_question.contains(questionsList[index]) && questionsList[index].topic_id==levels[id-1].topics_id[weak_topics_count]) {
@@ -563,8 +185,10 @@ class QuizController extends GetxController{
   int? _correctAnswer;
   int _countOfCorrectAnswers = 0;
   int get countOfCorrectAnswers => _countOfCorrectAnswers;
+  late int start_quiz_time;
   //map for check if the question has been answered
   static final Map<int, int?> _questionSelectedAnswerd = {};
+  List<Quiz_Analysis> quiz_analysis=[];
   //page view controller
   late PageController pageController;
   //timer
@@ -575,21 +199,25 @@ class QuizController extends GetxController{
   final RxInt _min = 15.obs;
   RxInt get min => _min;
   int quesId=0;
-  //return quiz questions 
+  //return quiz questions
   List<Question_> get student_quiz => [...quiz_question];
   @override
   void onInit() {
     pageController = PageController(initialPage: 0);
-    Fluttertoast.showToast(msg: id.toString());
+    DateTime StartTime = DateTime.now();
+    int min=StartTime.minute*60;
+    start_quiz_time=min+StartTime.second;
     if(stat=="topic")
-      {
-        generate_random_quiz_for_topic(id);
-      }
+    {
+      generate_random_quiz_for_topic(id);
+    }
     if(stat=="level")
-      {
-        generate_random_quiz_for_level(id,weakness_topics);
-      }
+    {
+      generate_random_quiz_for_level(id,weakness_topics);
+    }
+    _questionSelectedAnswerd.clear();
     resetAnswer();
+    resetAnalysis();
     super.onInit();
   }
   @override
@@ -601,13 +229,99 @@ class QuizController extends GetxController{
   int get scoreResult {
     return _countOfCorrectAnswers ;;
   }
+  List<int>  get_quiz_analysis()
+  {
+    //lenght of topics in this level
+    int len=levels[id].topics_id.length;
+    //List<int> count_of_each_topic = List.filled(len+1, 0);
+    var count_of_each_topic  = new Map();
+    for(int i=levels[id].topics_id[0];i<len;i++)
+    {
+      count_of_each_topic[i]=0;
+    }
+    if(stat=="topic") {
+      int weakness_count=0;
+      for (int i = 0; i < quiz_analysis.length; i++) {
+        if (quiz_analysis[i].user_answer == "not answer" || quiz_analysis[i].user_answer == "false") {
+          weakness_count++;
+        }
+        else {
+          if (quiz_analysis[i].user_answer == "true") {
+            if (quiz_analysis[i].complexity == "easy") {
+              if (quiz_analysis[i].time_spent > ((maxMin * 60) / quiz_question.length)) {
+                weakness_count++;
+              }
+            }
+            if (quiz_analysis[i].complexity == "medium") {
+              if (quiz_analysis[i].time_spent >
+                  ((maxMin * 60) / quiz_question.length * 2)) {
+                weakness_count++;
+              }
+            }
+            if (quiz_analysis[i].complexity == "hard") {
+              if (quiz_analysis[i].time_spent >
+                  ((maxMin * 60) / quiz_question.length * 3)) {
+                weakness_count++;
+              }
+            }
+          }
+        }
+      }
+      if(weakness_count>(quiz_question.length/3))
+      {
+        weakness_topics.add(quiz_question[0].topic_id);
+      }
+    }
+    else if(stat=="level")
+    {
+      for(int i=0;i<quiz_question.length;i++)
+      {
+        if (quiz_analysis[i].user_answer == "not answer" || quiz_analysis[i].user_answer == "false") {
+          count_of_each_topic[quiz_analysis[i].topic_id]+=1;
+        }
+        else {
+          if (quiz_analysis[i].user_answer == "true") {
+            if (quiz_analysis[i].complexity == "easy") {
+              if (quiz_analysis[i].time_spent > ((maxMin * 60) / quiz_question.length)) {
+                count_of_each_topic[quiz_analysis[i].topic_id]+=1;
+              }
+            }
+            if (quiz_analysis[i].complexity == "medium") {
+              if (quiz_analysis[i].time_spent >
+                  ((maxMin * 60) / quiz_question.length * 2)) {
+                count_of_each_topic[quiz_analysis[i].topic_id]+=1;
+              }
+            }
+            if (quiz_analysis[i].complexity == "hard") {
+              if (quiz_analysis[i].time_spent >
+                  ((maxMin * 60) / quiz_question.length * 3)) {
+                count_of_each_topic[quiz_analysis[i].topic_id]+=1;
+              }
+            }
+          }
+        }
+      }
+      for(int i=levels[id].topics_id[0];i<len;i++) {
+        if (weakness_topics.contains(i)) {
+          if (count_of_each_topic[i] > 3) {
+            weakness_topics.remove(i);
+          }
+        }
+        else if (count_of_each_topic[i]>2)
+        {
+          weakness_topics.add(i);
+        }
+      }
+    }
+    return weakness_topics;
+  }
   int calculate_total_quiz_points()
   {
     int total_score=0;
     for(int i=0;i<quiz_question.length;i++)
-      {
-        total_score+=quiz_question[i].points;
-      }
+    {
+      total_score+=quiz_question[i].points;
+    }
     return total_score;
   }
   void checkStatusOfStudent(){
@@ -644,8 +358,13 @@ class QuizController extends GetxController{
         {
           continue;
         }
-        if (quiz_question[i].answer_id==selected_answer) {
+        else if (quiz_question[i].answer_id==selected_answer) {
           _countOfCorrectAnswers+=quiz_question[i].points;
+          quiz_analysis[i].user_answer="true";
+        }
+        else
+        {
+          quiz_analysis[i].user_answer="false";
         }
       }
     }
@@ -665,6 +384,20 @@ class QuizController extends GetxController{
     return _questionIsAnswerd.entries
         .firstWhere((element) => element.key == quesId)
         .value;
+  }
+  void resetAnalysis()
+  {
+    for(int i=0;i<quiz_question.length;i++)
+    {
+      Quiz_Analysis element=new Quiz_Analysis();
+      element.user_answer="no answer";
+      element.id=quiz_question[i].id;
+      element.topic_id=quiz_question[i].topic_id;
+      element.points=quiz_question[i].points;
+      element.complexity=quiz_question[i].complexity;
+      element.time_spent=0;
+      quiz_analysis.add(element);
+    }
   }
   void resetAnswer() {
     for (var element in questionsList) {
@@ -686,32 +419,44 @@ class QuizController extends GetxController{
         .value;
   }
   void nextQuestion() {
+    DateTime StartTime = DateTime.now();
+    int min=StartTime.minute*60;
+    int SecondTime=min+StartTime.second;
+    int timeStayed = SecondTime - start_quiz_time;
+    quiz_analysis[quesId].time_spent+=timeStayed;
+    start_quiz_time=SecondTime;
     if(quesId >= quiz_question.length-1 || _min.value==0) {
+      if (_isPressed) {
+        Question_ current_question = get_question_model(
+            quiz_question[quesId].id);
+        _questionIsAnswerd.update(current_question.id, (value) => true);
+        _questionSelectedAnswerd[current_question.id] = _pressedAnswer;
+        update();
+      }
       calculate_score();
       checkStatusOfStudent();
+      get_quiz_analysis();
       Get.offAndToNamed(ResultScreen.routeName);
     }
-    else
-    {
-      if(_isPressed)
-      {
-        Question_ current_question =get_question_model(quiz_question[quesId].id);
+    else {
+      if (_isPressed) {
+        Question_ current_question = get_question_model(
+            quiz_question[quesId].id);
         _questionIsAnswerd.update(current_question.id, (value) => true);
-        _questionSelectedAnswerd[current_question.id]=_pressedAnswer;
+        _questionSelectedAnswerd[current_question.id] = _pressedAnswer;
         update();
       }
       quesId++;
-      _isPressed=false;
-      if(checkIsQuestionAnswered(quiz_question[quesId].id) )
-      {
-        Question_ next_question =get_question_model(quiz_question[quesId].id);
-        choiced_answer=get_index_of_selected_answer(next_question);
-        if(choiced_answer!=null) {
+      _isPressed = false;
+      if (checkIsQuestionAnswered(quiz_question[quesId].id)) {
+        Question_ next_question = get_question_model(quiz_question[quesId].id);
+        choiced_answer = get_index_of_selected_answer(next_question);
+        if (choiced_answer != null) {
           marked_answer(next_question, choiced_answer!);
           update();
         }
       }
-      _numberOfQuestion =  quesId+1;
+      _numberOfQuestion = quesId + 1;
       update();
       pageController.nextPage(
           duration: const Duration(milliseconds: 300), curve: Curves.linear);
@@ -719,6 +464,12 @@ class QuizController extends GetxController{
   }
   void previousQuestion() {
     pageController.page?.toInt();
+    DateTime StartTime = DateTime.now();
+    int min=StartTime.minute*60;
+    int SecondTime=min+StartTime.second;
+    int timeStayed = SecondTime - start_quiz_time;
+    quiz_analysis[quesId].time_spent+=timeStayed;
+    start_quiz_time=SecondTime;
     if ((quesId) > 0)
     {
       if (_min.value == 0) {
