@@ -11,12 +11,16 @@ class QuizController extends GetxController{
   final int id;
   String? stat;
    List<int> weakness_topics;
-  QuizController(this.id,this.stat,this.weakness_topics);
+   List<Question_> questions;
+  QuizController(this.id,this.stat,this.weakness_topics, this.questions);
   //QuizController();
   String name = '';
   String status = '';
   //list of all questions
-  final List<QuestionModel> _questionList = [
+    //contain all question of level
+  List<Question_> get questionsList => [...questions];
+  /*final List<QuestionModel> _questionList = [
+    
     //topic 1 questions
     QuestionModel(
       id: 1,
@@ -382,7 +386,7 @@ class QuizController extends GetxController{
       points: 2,
       level_id: 1,
     ),
-    QuestionModel(
+    Question_(
       id: 36,
       question: "3-w ",
       answer: 1,
@@ -393,10 +397,10 @@ class QuizController extends GetxController{
       level_id: 1,
     ),
   ];
+  */
   //contain all question of level
-  List<QuestionModel> get questionsList => [..._questionList];
   //get quiz question for every student
-  final List<QuestionModel> quiz_question=[];
+  final List<Question_> quiz_question=[];
   final List<Levels> levels=[
     Levels(level_id: 1, topics_id: [1,2,3]),
     Levels(level_id: 2, topics_id: [4,5,6]),
@@ -407,16 +411,16 @@ class QuizController extends GetxController{
   //stat= quiz on topic or level
   //id = level id or topic id
   //generate quiz on topic
-  void generate_random_quiz_for_topic<QuestionModel>(int topic_id) {
+  void generate_random_quiz_for_topic<Question_>(int topic_id) {
     final random = new Random();
     int count =0;
-    //if stat=topic
-    while(quiz_question.length!=10) {
-      int easy_count = 0,
+    int easy_count = 0,
           meduim_count = 0,
           hard_count = 0;
+    //if stat=topic
+    while(quiz_question.length!=10) {
       int index = random.nextInt(questionsList.length-1);
-      if (questionsList[index].topic_id == topic_id && !quiz_question.contains(questionsList[index])) {
+      if ( !quiz_question.contains(questionsList[index])) {
         if (questionsList[index].complexity == "easy") {
           if (easy_count < 4) {
             quiz_question.add(questionsList[index]);
@@ -439,10 +443,11 @@ class QuizController extends GetxController{
     }
   }
   //generate quiz on level
-  void generate_random_quiz_for_level<QuestionModel>(int id,List<int> weakness_topics) {
+  void generate_random_quiz_for_level<Question_>(int id,List<int> weakness_topics) {
     final random = new Random();
     bool all_weakness=false;
     int topic_count=1,i=-1;
+    int easy_count = 0, meduim_count = 0, hard_count = 0;
     if(weakness_topics.length==levels[id-1].topics_id.length) {
       all_weakness = true;
     }
@@ -450,7 +455,6 @@ class QuizController extends GetxController{
     {
       while(topic_count!=levels[id-1].topics_id.length &&i<levels[id-1].topics_id.length-1)
         {
-          int easy_count = 0, meduim_count = 0, hard_count = 0;
           i++;
           if(weakness_topics.contains(levels[id-1].topics_id[i]))
             {
@@ -483,7 +487,6 @@ class QuizController extends GetxController{
             }
           else
             {
-              int easy_count = 0, meduim_count = 0, hard_count = 0;
               while ((easy_count + meduim_count + hard_count) != 3) {
                 int index = random.nextInt(questionsList.length-1);
                 if (questionsList[index].topic_id == levels[id-1].topics_id[i] && !quiz_question.contains(questionsList[index])) {
@@ -519,7 +522,6 @@ class QuizController extends GetxController{
     else {
       int weak_topics_count=0;
       while (weak_topics_count<=levels[id-1].topics_id.length-1) {
-        int easy_count = 0, meduim_count = 0, hard_count = 0;
         while ((easy_count + meduim_count + hard_count) != 4) {
           int index = random.nextInt(questionsList.length-1);
           if (!quiz_question.contains(questionsList[index]) && questionsList[index].topic_id==levels[id-1].topics_id[weak_topics_count]) {
@@ -573,6 +575,8 @@ class QuizController extends GetxController{
   final RxInt _min = 15.obs;
   RxInt get min => _min;
   int quesId=0;
+  //return quiz questions 
+  List<Question_> get student_quiz => [...quiz_question];
   @override
   void onInit() {
     pageController = PageController(initialPage: 0);
@@ -594,8 +598,8 @@ class QuizController extends GetxController{
     quiz_question.clear();
     super.onClose();
   }
-  double get scoreResult {
-    return _countOfCorrectAnswers * 100 / quiz_question.length;
+  int get scoreResult {
+    return _countOfCorrectAnswers ;;
   }
   int calculate_total_quiz_points()
   {
@@ -623,7 +627,7 @@ class QuizController extends GetxController{
       status="Not bad, but you should study more";
     }
   }
-  void marked_answer(QuestionModel questionModel,int selectAnswer) {
+  void marked_answer(Question_ questionModel,int selectAnswer) {
     _isPressed=true;
     _pressedAnswer=selectAnswer;
     update();
@@ -640,13 +644,13 @@ class QuizController extends GetxController{
         {
           continue;
         }
-        if (quiz_question[i].answer==selected_answer) {
-          _countOfCorrectAnswers++;
+        if (quiz_question[i].answer_id==selected_answer) {
+          _countOfCorrectAnswers+=quiz_question[i].points;
         }
       }
     }
   }
-  QuestionModel get_question_model(int quesID){
+  Question_ get_question_model(int quesID){
     for(int i=0;i<quiz_question.length;i++)
     {
       if(quiz_question[i].id==quesID)
@@ -671,12 +675,12 @@ class QuizController extends GetxController{
   void get_answer_of_current_question(int quesId) {
     if(checkIsQuestionAnswered(quesId))
     {
-      QuestionModel questionModel=get_question_model(quesId);
+      Question_ questionModel=get_question_model(quesId);
       int? selected_answer=get_index_of_selected_answer(questionModel);
       marked_answer(questionModel, selected_answer!);
     }
   }
-  int? get_index_of_selected_answer(QuestionModel questionModel) {
+  int? get_index_of_selected_answer(Question_ questionModel) {
     return _questionSelectedAnswerd.entries
         .firstWhere((element) => element.key == questionModel.id)
         .value;
@@ -691,7 +695,7 @@ class QuizController extends GetxController{
     {
       if(_isPressed)
       {
-        QuestionModel current_question =get_question_model(quiz_question[quesId].id);
+        Question_ current_question =get_question_model(quiz_question[quesId].id);
         _questionIsAnswerd.update(current_question.id, (value) => true);
         _questionSelectedAnswerd[current_question.id]=_pressedAnswer;
         update();
@@ -700,7 +704,7 @@ class QuizController extends GetxController{
       _isPressed=false;
       if(checkIsQuestionAnswered(quiz_question[quesId].id) )
       {
-        QuestionModel next_question =get_question_model(quiz_question[quesId].id);
+        Question_ next_question =get_question_model(quiz_question[quesId].id);
         choiced_answer=get_index_of_selected_answer(next_question);
         if(choiced_answer!=null) {
           marked_answer(next_question, choiced_answer!);
@@ -724,7 +728,7 @@ class QuizController extends GetxController{
       }
       else
       {
-        QuestionModel current_question =get_question_model(quiz_question[quesId].id);
+        Question_ current_question =get_question_model(quiz_question[quesId].id);
         if(_isPressed)
         {
           _questionIsAnswerd.update(current_question.id, (value) => true);
@@ -734,7 +738,7 @@ class QuizController extends GetxController{
         quesId--;
         _isPressed=false;
         update();
-        QuestionModel prev_question =get_question_model(quiz_question[quesId].id);
+        Question_ prev_question =get_question_model(quiz_question[quesId].id);
         if (checkIsQuestionAnswered(prev_question.id ))
         {
           choiced_answer = get_index_of_selected_answer(prev_question);
@@ -772,10 +776,10 @@ class QuizController extends GetxController{
       }
     });
   }
-  void get_colors_answer(QuestionModel questionModel, int selectAnswer) {
+  void get_colors_answer(Question_ questionModel, int selectAnswer) {
     _isPressed = true;
     _selectAnswer = selectAnswer;
-    _correctAnswer = questionModel.answer;
+    _correctAnswer = questionModel.answer_id;
   }
   //het right and wrong icon
   IconData getIcon(int answerIndex) {

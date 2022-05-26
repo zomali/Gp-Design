@@ -60,3 +60,12 @@ class Instructor_{
   late String department;
   late String contact;
 }
+class Question_{
+  late int id;
+  late int answer_id;
+  late int topic_id;
+  late int points;
+  late String complexity;
+  late String question;
+  late List<String> choices;
+}

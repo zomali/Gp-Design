@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 const KPrimaryColor = Colors.blue;
-
+/*
 class QuestionModel {
   final int id;
   final int answer;
@@ -20,7 +20,7 @@ class QuestionModel {
     required this.topic_id,
     required this.level_id,
   });
-}
+}*/
 class AnsweredQuestion {
   final int questionid;
   final int answer_index;

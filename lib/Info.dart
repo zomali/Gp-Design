@@ -2,15 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/Sidebar/BlockNavigation.dart';
-import 'package:gp/login_screen.dart';
 import 'package:gp/shared/cubits/cubit/course_cubit.dart';
 import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Last_quizes.dart';
 import 'Levels_View.dart';
 import 'package:gp/classes/classes.dart';
 import 'classes/student.dart';
-class INFO extends StatefulWidget with NavigationStates {
+class INFO extends StatefulWidget{
   final student std;
   final String courseCode;
   INFO(this.std, this.courseCode);
@@ -35,11 +33,7 @@ class _INFOState extends State<INFO> {
   void _onItemTapped(int index) {
     setState(
           () {
-
         _selectedIndex = index;
-        // _selectedIndex%=3;
-
-        //   print("index = ${widget.ind} ");
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => moveToPage(index)));
       },
@@ -50,16 +44,16 @@ class _INFOState extends State<INFO> {
 
     return _pages.elementAt(_selectedIndex);
   }
- Widget _selectedCleaning(@required Color color, @required String title, @required String supTitle) {
+ Widget instructor_card(@required Color color, @required String title, @required String supTitle) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10.0),
       padding: const EdgeInsets.only(
-        left: 20,
+        left: 15,
       ),
-      height: 140,
-      width: 280,
+      height: 120,
+      width: 240,
       decoration: BoxDecoration(
-        color: color,
+        border: Border.all(color: color, width: 2),
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Column(
@@ -68,19 +62,38 @@ class _INFOState extends State<INFO> {
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 22, color: Colors.white),
+            style: const TextStyle(fontSize: 20, color: Colors.black),
           ),
           const SizedBox(
             height: 5,
           ),
           Text(
             supTitle,
-            style: const TextStyle(fontSize: 17, color: Colors.white70),
+            style: const TextStyle(fontSize: 16, color: Colors.black54),
           )
         ],
       ),
     );
   }
+ /*Widget random_card(@required Color color_, @required String title, @required String count){
+   return Container(
+     decoration: BoxDecoration(
+       borderRadius: BorderRadius.circular(10),
+       border: Border.all(color: color_, width: 2),
+     ),
+     child: Column(
+       mainAxisAlignment: MainAxisAlignment.center,
+       children: [
+         Container(
+           height: 50,
+           child: Text(count, style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),          
+          ),
+          SizedBox(height: 5,),
+          Text(title, style:TextStyle(fontSize: 17))
+       ],
+     ),
+   );
+ }*/
   //
    ScrollController scrollViewColtroller = ScrollController();
    final ScrollController controllerOne = ScrollController();
@@ -119,7 +132,7 @@ class _INFOState extends State<INFO> {
      super.dispose();
      scrollViewColtroller.dispose();
    }
-
+/*
    _moveUp() {
      scrollViewColtroller.animateTo(scrollViewColtroller.offset - 50,
          curve: Curves.linear, duration: Duration(milliseconds: 500));
@@ -129,116 +142,51 @@ class _INFOState extends State<INFO> {
      scrollViewColtroller.animateTo(scrollViewColtroller.offset + 50,
          curve: Curves.linear, duration: Duration(milliseconds: 500));
    }
-
+*/
 //
    @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context ) {
     addTOList();
 
     return Scaffold(
+      backgroundColor: Colors.blue,
       appBar: AppBar(
-        backgroundColor: Colors.blue[600],
-        title: Text('Info '),
+        backgroundColor: Colors.blue,
+        title: Text('Structured Programming'),
         leading: const Icon(Icons.info),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
 
         selectedItemColor: Colors.blue,
-        selectedFontSize: 16,
+        selectedFontSize: 18,
 
         unselectedItemColor: Colors.grey,
-        // unselectedFontSize: 11,
         unselectedFontSize: 16,
 
-        //    currentIndex: 0,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            //backgroundColor: Colors.blue,
-            //   backgroundColor: Colors.blue,
+            icon: Icon(Icons.info),
+            label: 'Info',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            //  icon: Icon(Icons.up),
+            icon: Icon(Icons.keyboard_double_arrow_up),
             label: 'Levels',
-
-            // backgroundColor: Colors.blue,
-            //     backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.equalizer_outlined),
             label: 'Evaluation',
-            //  backgroundColor: Colors.blue
-            //    backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper),
+            icon: Icon(Icons.quiz),
             label: 'Quizzes',
-            //   backgroundColor: Colors.blue
-            //     backgroundColor: Colors.blue,
           )
         ],
-
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,
       ),
 
-      //
-
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Visibility(
-            visible: _direction,
-            maintainSize: false,
-            child: FloatingActionButton(
-              onPressed: () {
-                _moveUp();
-              },
-              child: RotatedBox(
-                  quarterTurns: 1, child: Icon(Icons.chevron_left)),
-            ),
-          ),
-          Visibility(
-            maintainSize: false,
-            visible: !_direction,
-            child: FloatingActionButton(
-              onPressed: () {
-                _moveDown();
-              },
-              child: RotatedBox(
-                  quarterTurns: 3, child: Icon(Icons.chevron_left)),
-            ),
-          )
-        ],
-      ),
-      //
-      body:  NotificationListener<ScrollUpdateNotification>(
-        onNotification: (ScrollNotification scrollInfo) {
-          if (scrollViewColtroller.position.userScrollDirection ==
-              ScrollDirection.reverse) {
-            print('User is going down');
-            setState(() {
-              message = 'going down';
-              _direction = true;
-            });
-          } else {
-            if (scrollViewColtroller.position.userScrollDirection ==
-                ScrollDirection.forward) {
-              print('User is going up');
-              setState(() {
-                message = 'going up';
-                _direction = false;
-              });
-            }
-          }
-          return true;
-        },
-
-
-      child:Builder(
+      body: Builder(
         builder: (context) {
           CourseCubit.get(context).getCourseData(courseCode);
           return BlocBuilder<CourseCubit, CourseState>(
@@ -247,21 +195,23 @@ class _INFOState extends State<INFO> {
                return Center(child: CircularProgressIndicator());
               }
               else{
-
                 var courseCubit = CourseCubit.get(context);
                 var course = courseCubit.course;
                 return Container(
-                height: 800,
-                width: double.infinity,
-                decoration: const BoxDecoration(
+                child: Container(
+                  height: 800,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30))),
-                child: ListView(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: ListView(
                 //  controller: scrollViewColtroller,
                   children: [
-                    Container(
+                    /*Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 30,
@@ -302,70 +252,115 @@ class _INFOState extends State<INFO> {
                               ],
                             ),
                           ),
+                        ],
+                      ),
+                    ),*/
+                   
+                      Container(
+                      padding: EdgeInsets.symmetric( horizontal: 25, vertical: 10),
+                      height: 120,
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                             Icon(Icons.keyboard_double_arrow_up, color: Colors.orange, size: 27,),
+                             Text("Levels", style: TextStyle(color: Colors.orange, fontSize: 17, fontWeight: FontWeight.bold),),
+                             Padding(padding: EdgeInsets.only(bottom: 3)),
+                             Text("5", style: TextStyle(fontSize: 23),),
+                            ],
+                          ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 5,
-                                    top: 5,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'This course has ' +
-                                         course.levels.length.toString() +
-                                         ' levels', //course code
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )),
-                          )
+                            padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
+                            //height: 80,
+                            child: VerticalDivider(
+                            color: Colors.grey[200],
+                            width: 20,
+                            thickness: 2,
+                            indent: 10,
+                            endIndent: 10,
+                              ),
+                         ),
+                         Column(
+                            children: [
+                             Icon(Icons.topic, color: Colors.indigo[800]!, size: 27,),
+                             Text("Topics", style: TextStyle(color: Colors.indigo[800]!, fontSize: 17, fontWeight: FontWeight.bold),),
+                             Padding(padding: EdgeInsets.only(bottom: 3)),
+                             Text("17", style: TextStyle(fontSize: 23),),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
+                            //height: 80,
+                            child: VerticalDivider(
+                            color: Colors.grey[200],
+                            width: 20,
+                            thickness: 2,
+                            indent: 10,
+                            endIndent: 10,
+                              ),
+                         ),
+                         Column(
+                            children: [
+                             Icon(Icons.quiz, color: Colors.yellowAccent[700]! , size: 27,),
+                             Text("Quizzes", style: TextStyle(color: Colors.yellowAccent[700]!, fontSize: 17, fontWeight: FontWeight.bold),),
+                             Padding(padding: EdgeInsets.only(bottom: 3)),                             
+                             Text("+20", style: TextStyle(fontSize: 23),),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
+                            //height: 80,
+                            child: VerticalDivider(
+                            color: Colors.grey[200],
+                            width: 20,
+                            thickness: 2,
+                            indent: 10,
+                            endIndent: 10,
+                              ),
+                         ),
+                         Column(
+                            children: [
+                             Icon(Icons.document_scanner, color: Colors.green[600]!, size: 27,),
+                             Text("Materials", style: TextStyle(color: Colors.green[600]!, fontSize: 17, fontWeight: FontWeight.bold),),
+                             Padding(padding: EdgeInsets.only(bottom: 3)),
+                             Text("+100", style: TextStyle(fontSize: 23),),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.only(left: 10.0, bottom: 20)),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10.0, right: 20.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: new Container(
-                              margin: const EdgeInsets.only(left: 10.0, right: 20.0),
-                              child: Divider(color: Colors.grey, height: 30, thickness: 2,),)),
-                          Text("Instructors",
+                    /*Padding(padding: EdgeInsets.all(10),
+                    child: Container(
+                    child: Divider(
+                      height: 5,
+                      thickness: 2,
+                      indent: 5,
+                      endIndent:5,
+                      color: Colors.black26,
+                    ),  
+                    ),
+                    ),*/
+                    Padding(padding: EdgeInsets.only(left:30),
+                    child: Text("Instructors",
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black87,
-                          fontWeight: FontWeight.w500,),),
-                          Expanded(
-                            child: new Container(
-                              margin: const EdgeInsets.only(left: 20.0, right: 10.0),
-                              child: Divider(color: Colors.grey, height: 30, thickness: 2,),)),
-                        ],
-                      ),
-                    ),
-
+                          fontWeight: FontWeight.w500,)),),
+                    
                      Padding(
                         padding: const EdgeInsets.only(
                           left: 18,
                           top: 10,
                         ),
                         child: Container(
-                          height: 140,
+                          height: 120,
                           child: ListView.builder(
                       //     controller: scrollViewColtroller,
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             itemCount: course.instructors.length,
                             itemBuilder: (BuildContext context, int index){
-                              return _selectedCleaning(
+                              return instructor_card(
                                 Theme.of(context).colorScheme.secondary,
                                 course.instructors[index].name,
                                 course.instructors[index].contact);
@@ -373,32 +368,12 @@ class _INFOState extends State<INFO> {
                           ),
                         ),
                       ),
-                    const Padding(
-                      padding: EdgeInsets.only(
-                        bottom: 30,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10.0, right: 20.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: new Container(
-                              margin: const EdgeInsets.only(left: 10.0, right: 20.0),
-                              child: Divider(color: Colors.grey, height: 30, thickness: 2,),)),
-                          Text("Learning Outcomes",
+                    Padding(padding: EdgeInsets.only(left:30, top: 30),
+                    child: Text("Learning Outcomes",
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black87,
-                          fontWeight: FontWeight.w500,),),
-                          Expanded(
-                            child: new Container(
-                              margin: const EdgeInsets.only(left: 20.0, right: 10.0),
-                              child: Divider(color: Colors.grey, height: 30, thickness: 2,),)),
-                        ],
-                      ),
-                    ),//learning outcomes
-
+                          fontWeight: FontWeight.w500,)),),
                     Padding(
                       padding: const EdgeInsets.only(
                         left: 18,
@@ -406,8 +381,6 @@ class _INFOState extends State<INFO> {
                         right: 10,
                       ), 
                       child: Container(
-
-
                           child: ListView.builder(
                              controller: scrollViewColtroller,
                            //   physics: BouncingScrollPhysics(),
@@ -440,6 +413,7 @@ class _INFOState extends State<INFO> {
                             ),
                   ],
                 ),
+                ),                
               );
               }
             },
@@ -447,7 +421,7 @@ class _INFOState extends State<INFO> {
 
         }
       ),
-      ));
+      );
 
   }
 }

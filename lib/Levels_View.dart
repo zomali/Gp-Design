@@ -38,9 +38,7 @@ class _levels_view extends State<levels_view> {
   void _onItemTapped(int index) {
     setState(
           () {
-
         _selectedIndex = index;
-
         //   print("index = ${widget.ind} ");
         Navigator.push(context,
             MaterialPageRoute(builder: (context) =>moveToPage(_selectedIndex) ));
@@ -77,39 +75,27 @@ class _levels_view extends State<levels_view> {
           showUnselectedLabels: true,
 
           selectedItemColor: Colors.blue,
-          selectedFontSize: 16,
+          selectedFontSize: 18,
 
           unselectedItemColor: Colors.grey,
-          // unselectedFontSize: 11,
           unselectedFontSize: 16,
 
-          //    currentIndex: 0,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              //backgroundColor: Colors.blue,
-              //   backgroundColor: Colors.blue,
+              icon: Icon(Icons.info),
+              label: 'Info',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              //  icon: Icon(Icons.up),
+              icon: Icon(Icons.keyboard_double_arrow_up),
               label: 'Levels',
-
-              // backgroundColor: Colors.blue,
-              //     backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.equalizer_outlined),
               label: 'Evaluation',
-              //  backgroundColor: Colors.blue
-              //    backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.newspaper),
+              icon: Icon(Icons.quiz),
               label: 'Quizzes',
-              //   backgroundColor: Colors.blue
-              //     backgroundColor: Colors.blue,
             )
           ],
 
@@ -151,7 +137,7 @@ class _levels_view extends State<levels_view> {
                       top: 40,
                       left: 10,
                       child: Row(children: [
-                        Icon(Icons.list,color: Colors.blue,),
+                        Icon(Icons.keyboard_double_arrow_up,color: Colors.blue,),
                         SizedBox(width: 10,),
                         Text(
                           course_name,

@@ -18,7 +18,8 @@ import 'backButton.dart';
 class QuizResults extends StatelessWidget {
   final int id;
   Map<int, int?> student_answers = {};
-  QuizResults(this.id, this.student_answers);
+  List<Question_>questions;
+  QuizResults(this.id, this.student_answers,this.questions);
   String? stat;
   List<int>weakness_topics=[];
   late int score;
@@ -33,13 +34,13 @@ class QuizResults extends StatelessWidget {
           ),
           SafeArea(
             child: GetBuilder<QuizController>(
-              init: QuizController(0,stat,weakness_topics),
+              init: QuizController(0,stat,weakness_topics,questions),
               builder: (controller) =>
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Container(
                             child: Row(
                               children: [
@@ -52,7 +53,7 @@ class QuizResults extends StatelessWidget {
                                       .copyWith(color: Colors.blue),
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 0,
                                 ),
                               ],
                             ),
@@ -72,7 +73,7 @@ class QuizResults extends StatelessWidget {
                                         width: 320,
                                         height: 320,
                                         margin: const EdgeInsets.only(
-                                            top: 15.0, bottom: 15, left: 25),
+                                            top: 5.0, bottom: 5, left: 25),
                                         decoration: BoxDecoration(
                                           color: Colors.blue,
                                           borderRadius: BorderRadius.circular(
@@ -83,45 +84,43 @@ class QuizResults extends StatelessWidget {
                                               left: 10, bottom: 10),
                                           child: Column(
                                             children: [
-                                              SizedBox(height: 10,),
+                                              SizedBox(height: 5,),
                                               Row(
                                                 children: [
                                                   Text(
-                                                    "Question " + controller
-                                                        .questionsList[index].id
-                                                        .toString() + " / " +
+                                                    "Question " + (index+1).toString() + " / " +
                                                         controller.quiz_question
                                                             .length.toString(),
                                                     style: Theme
                                                         .of(context)
                                                         .textTheme
-                                                        .headline5
+                                                        .headline6
                                                         ?.copyWith(
                                                         color: Colors.white),
                                                   ),
                                                   SizedBox(width: 50,),
                                                   get_score(controller
-                                                      .questionsList[index]
-                                                      .answer,
+                                                      .quiz_question[index]
+                                                      .answer_id,
                                                       student_answers[index +
-                                                          1])
+                                                          1],controller.quiz_question[index].points)
                                                 ],
                                               ),
 
-                                              SizedBox(height: 10,),
+                                              SizedBox(height: 50,),
                                               Text(
-                                                controller.questionsList[index]
+                                                controller.quiz_question[index]
                                                     .question,
-                                                style: TextStyle(fontSize: 20,
+                                                style: TextStyle(fontSize: 15,
                                                     color: Colors.white,
                                                     fontWeight: FontWeight
                                                         .bold),
                                               ),
                                               SizedBox(
-                                                height: 20,
+                                                height: 5,
                                               ),
                                               condition(controller
-                                                  .questionsList[index],
+                                                  .quiz_question[index],
                                                   student_answers[index + 1])
                                              ,
                                             ],
@@ -134,7 +133,7 @@ class QuizResults extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 5,
                       ),
                     ],
                   ),
@@ -145,9 +144,9 @@ class QuizResults extends StatelessWidget {
     );
   }
 }
-  Widget condition(QuestionModel questionModel, int? selected_answer) {
+  Widget condition(Question_ questionModel, int? selected_answer) {
     Widget widget;
-    if(questionModel.options.length==2)
+    if(questionModel.choices.length==2)
       {
          widget = Column(
           children: [
@@ -163,7 +162,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (1).toString() + ". " + questionModel.options[0],
+                    (1).toString() + ". " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -180,7 +179,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (2).toString() + ". " + questionModel.options[1],
+                    (2).toString() + ". " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -190,7 +189,7 @@ class QuizResults extends StatelessWidget {
          //if not selected answer return right answer
          if(selected_answer==null)
          {
-           if(questionModel.answer==0)
+           if(questionModel.answer_id==0)
            {
              return  Column(
                  children: [
@@ -207,7 +206,7 @@ class QuizResults extends StatelessWidget {
                          padding: const EdgeInsets.only(
                              left: 30, top: 5.0, bottom: 5),
                          child:Text(
-                           (1).toString()+". "+questionModel.options[0],
+                           (1).toString()+". "+questionModel.choices[0],
                            style: TextStyle(fontSize: 20,color: Colors.white),
                          ),
                        )),
@@ -224,14 +223,14 @@ class QuizResults extends StatelessWidget {
                          padding: const EdgeInsets.only(
                              left: 30, top: 5.0, bottom: 5),
                          child:Text(
-                           (2).toString()+". "+questionModel.options[1],
+                           (2).toString()+". "+questionModel.choices[1],
                            style: TextStyle(fontSize: 20,color: Colors.blue),
                          ),
                        )),
                    SizedBox(height: 10,),
                  ]);
            }
-           if(questionModel.answer==1)
+           if(questionModel.answer_id==1)
            {
              return Column(
                  children: [
@@ -248,7 +247,7 @@ class QuizResults extends StatelessWidget {
                          padding: const EdgeInsets.only(
                              left: 30, top: 5.0, bottom: 5),
                          child:Text(
-                           (1).toString()+". "+questionModel.options[0],
+                           (1).toString()+". "+questionModel.choices[0],
                            style: TextStyle(fontSize: 20,color: Colors.blue),
                          ),
                        )),
@@ -265,7 +264,7 @@ class QuizResults extends StatelessWidget {
                          padding: const EdgeInsets.only(
                              left: 30, top: 5.0, bottom: 5),
                          child:Text(
-                           (2).toString()+". "+questionModel.options[1],
+                           (2).toString()+". "+questionModel.choices[1],
                            style: TextStyle(fontSize: 20,color: Colors.white),
                          ),
                        )),
@@ -275,9 +274,9 @@ class QuizResults extends StatelessWidget {
          }
          //if selected answer
          else {
-           switch (questionModel.answer == selected_answer) {
+           switch (questionModel.answer_id == selected_answer) {
              case true:
-               switch (questionModel.answer) {
+               switch (questionModel.answer_id) {
                  case 0:
                    return get_correct_widget_len_2(0, questionModel);
                  case 1:
@@ -289,7 +288,7 @@ class QuizResults extends StatelessWidget {
            }
          }
       }
-    if(questionModel.options.length==4)
+    if(questionModel.choices.length==4)
       {
         widget = Column(
           children: [
@@ -305,7 +304,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (1).toString() + ". " + questionModel.options[0],
+                    (1).toString() + ". " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -322,7 +321,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (2).toString() + ". " + questionModel.options[1],
+                    (2).toString() + ". " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -339,7 +338,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (3).toString() + ". " + questionModel.options[2],
+                    (3).toString() + ". " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -356,7 +355,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (4).toString() + ". " + questionModel.options[3],
+                    (4).toString() + ". " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -366,7 +365,7 @@ class QuizResults extends StatelessWidget {
         //if not selected answer return right answer
         if(selected_answer==null)
         {
-          if(questionModel.answer==0)
+          if(questionModel.answer_id==0)
           {
             return  Column(
                 children: [
@@ -382,7 +381,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (1).toString()+". "+questionModel.options[0],
+                          (1).toString()+". "+questionModel.choices[0],
                           style: TextStyle(fontSize: 20,color: Colors.white),
                         ),
                       )),
@@ -399,7 +398,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (2).toString()+". "+questionModel.options[1],
+                          (2).toString()+". "+questionModel.choices[1],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -416,7 +415,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (3).toString()+". "+questionModel.options[2],
+                          (3).toString()+". "+questionModel.choices[2],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -433,14 +432,14 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (4).toString()+". "+questionModel.options[3],
+                          (4).toString()+". "+questionModel.choices[3],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
                   SizedBox(height: 10,),
                 ]);
           }
-          if(questionModel.answer==1)
+          if(questionModel.answer_id==1)
           {
             return Column(
                 children: [
@@ -456,7 +455,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (1).toString()+". "+questionModel.options[0],
+                          (1).toString()+". "+questionModel.choices[0],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -473,7 +472,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (2).toString()+". "+questionModel.options[1],
+                          (2).toString()+". "+questionModel.choices[1],
                           style: TextStyle(fontSize: 20,color: Colors.white),
                         ),
                       )),
@@ -490,7 +489,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (3).toString()+". "+questionModel.options[2],
+                          (3).toString()+". "+questionModel.choices[2],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -507,14 +506,14 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (4).toString()+". "+questionModel.options[3],
+                          (4).toString()+". "+questionModel.choices[3],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
                   SizedBox(height: 10,),
                 ]);
           }
-          if(questionModel.answer==2)
+          if(questionModel.answer_id==2)
           {
             return Column(
                 children: [
@@ -530,7 +529,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (1).toString()+". "+questionModel.options[0],
+                          (1).toString()+". "+questionModel.choices[0],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -547,7 +546,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (2).toString()+". "+questionModel.options[1],
+                          (2).toString()+". "+questionModel.choices[1],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -564,7 +563,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (3).toString()+". "+questionModel.options[2],
+                          (3).toString()+". "+questionModel.choices[2],
                           style: TextStyle(fontSize: 20,color: Colors.white),
                         ),
                       )),
@@ -581,14 +580,14 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (4).toString()+". "+questionModel.options[3],
+                          (4).toString()+". "+questionModel.choices[3],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
                   SizedBox(height: 10,),
                 ]);
           }
-          if(questionModel.answer==3)
+          if(questionModel.answer_id==3)
           {
             return Column(
                 children: [
@@ -604,7 +603,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (1).toString()+". "+questionModel.options[0],
+                          (1).toString()+". "+questionModel.choices[0],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -621,7 +620,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (2).toString()+". "+questionModel.options[1],
+                          (2).toString()+". "+questionModel.choices[1],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -638,7 +637,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (3).toString()+". "+questionModel.options[2],
+                          (3).toString()+". "+questionModel.choices[2],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -655,7 +654,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (4).toString()+". "+questionModel.options[3],
+                          (4).toString()+". "+questionModel.choices[3],
                           style: TextStyle(fontSize: 20,color: Colors.white),
                         ),
                       )),
@@ -665,9 +664,9 @@ class QuizResults extends StatelessWidget {
         }
         //if selected answer
         else {
-          switch (questionModel.answer == selected_answer) {
+          switch (questionModel.answer_id == selected_answer) {
             case true:
-              switch (questionModel.answer) {
+              switch (questionModel.answer_id) {
                 case 0:
                   return get_correct_widget(0, questionModel);
                 case 1:
@@ -699,7 +698,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (1).toString() + ". " + questionModel.options[0],
+                    (1).toString() + ". " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -716,7 +715,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (2).toString() + ". " + questionModel.options[1],
+                    (2).toString() + ". " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -733,7 +732,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (3).toString() + ". " + questionModel.options[2],
+                    (3).toString() + ". " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -750,7 +749,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (4).toString() + ". " + questionModel.options[3],
+                    (4).toString() + ". " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -761,12 +760,12 @@ class QuizResults extends StatelessWidget {
     return widget;
   }
   //get score of each question
-  Widget get_score(int right_answer, int? selected_answer) {
+  Widget get_score(int right_answer, int? selected_answer,int points) {
     Widget widget;
     switch (right_answer == selected_answer) {
       case true:
         widget = Text(
-          10.toString() + " / 10",
+          points.toString() + " / " + points.toString(),
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -776,7 +775,7 @@ class QuizResults extends StatelessWidget {
         break;
       case false:
         widget = Text(
-          0.toString() + " / 10",
+          0.toString() + " / "+points.toString(),
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -790,7 +789,7 @@ class QuizResults extends StatelessWidget {
     return widget;
   }
   //if mcq question
-  Widget get_correct_widget(int index, QuestionModel questionModel) {
+  Widget get_correct_widget(int index, Question_ questionModel) {
     Widget widget= Column(
           children: [
             Container(
@@ -805,7 +804,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child:Text(
-                    (2).toString()+". "+questionModel.options[0],
+                    (2).toString()+". "+questionModel.choices[0],
                     style: TextStyle(fontSize: 20,color: Colors.blue),
                   ),
                 )),
@@ -822,7 +821,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child:Text(
-                    (2).toString()+". "+questionModel.options[1],
+                    (2).toString()+". "+questionModel.choices[1],
                     style: TextStyle(fontSize: 20,color: Colors.blue),
                   ),
                 )),
@@ -839,7 +838,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child:Text(
-                    (3).toString()+". "+questionModel.options[2],
+                    (3).toString()+". "+questionModel.choices[2],
                     style: TextStyle(fontSize: 20,color: Colors.blue),
                   ),
                 )),
@@ -856,7 +855,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child:Text(
-                    (4).toString()+". "+questionModel.options[3],
+                    (4).toString()+". "+questionModel.choices[3],
                     style: TextStyle(fontSize: 20,color: Colors.blue),
                   ),
                 )),
@@ -878,7 +877,7 @@ class QuizResults extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (1).toString()+". "+questionModel.options[0],
+                      (1).toString()+". "+questionModel.choices[0],
                       style: TextStyle(fontSize: 20,color: Colors.white),
                     ),
                   )),
@@ -895,7 +894,7 @@ class QuizResults extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (2).toString()+". "+questionModel.options[1],
+                      (2).toString()+". "+questionModel.choices[1],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -912,7 +911,7 @@ class QuizResults extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (3).toString()+". "+questionModel.options[2],
+                      (3).toString()+". "+questionModel.choices[2],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -929,7 +928,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child:Text(
-                        (4).toString()+". "+questionModel.options[3],
+                        (4).toString()+". "+questionModel.choices[3],
                         style: TextStyle(fontSize: 20,color: Colors.blue),
                       ),
                     )),
@@ -953,7 +952,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child:Text(
-                        (1).toString()+". "+questionModel.options[0],
+                        (1).toString()+". "+questionModel.choices[0],
                         style: TextStyle(fontSize: 20,color: Colors.blue),
                       ),
                     )),
@@ -970,7 +969,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child:Text(
-                        (2).toString()+". "+questionModel.options[1],
+                        (2).toString()+". "+questionModel.choices[1],
                         style: TextStyle(fontSize: 20,color: Colors.white),
                       ),
                     )),
@@ -987,7 +986,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child:Text(
-                        (3).toString()+". "+questionModel.options[2],
+                        (3).toString()+". "+questionModel.choices[2],
                         style: TextStyle(fontSize: 20,color: Colors.blue),
                       ),
                     )),
@@ -1004,7 +1003,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child:Text(
-                        (4).toString()+". "+questionModel.options[3],
+                        (4).toString()+". "+questionModel.choices[3],
                         style: TextStyle(fontSize: 20,color: Colors.blue),
                       ),
                     )),
@@ -1030,7 +1029,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (1).toString()+". "+questionModel.options[0],
+                          (1).toString()+". "+questionModel.choices[0],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -1047,7 +1046,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (2).toString()+". "+questionModel.options[1],
+                          (2).toString()+". "+questionModel.choices[1],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -1064,7 +1063,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (3).toString()+". "+questionModel.options[2],
+                          (3).toString()+". "+questionModel.choices[2],
                           style: TextStyle(fontSize: 20,color: Colors.white),
                         ),
                       )),
@@ -1081,7 +1080,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (4).toString()+". "+questionModel.options[3],
+                          (4).toString()+". "+questionModel.choices[3],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -1108,7 +1107,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (1).toString()+". "+questionModel.options[0],
+                          (1).toString()+". "+questionModel.choices[0],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -1125,7 +1124,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (2).toString()+". "+questionModel.options[1],
+                          (2).toString()+". "+questionModel.choices[1],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -1142,7 +1141,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (3).toString()+". "+questionModel.options[2],
+                          (3).toString()+". "+questionModel.choices[2],
                           style: TextStyle(fontSize: 20,color: Colors.blue),
                         ),
                       )),
@@ -1159,7 +1158,7 @@ class QuizResults extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 30, top: 5.0, bottom: 5),
                         child:Text(
-                          (4).toString()+". "+questionModel.options[3],
+                          (4).toString()+". "+questionModel.choices[3],
                           style: TextStyle(fontSize: 20,color: Colors.white),
                         ),
                       )),
@@ -1170,7 +1169,7 @@ class QuizResults extends StatelessWidget {
       }
     return widget;
   }
-  Widget get_wrong_widget(QuestionModel questionModel,selected_answer_index) {
+  Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
     Widget widget= Column(
         children: [
           Container(
@@ -1185,7 +1184,7 @@ class QuizResults extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
                 child:Text(
-                  (2).toString()+". "+questionModel.options[0],
+                  (2).toString()+". "+questionModel.choices[0],
                   style: TextStyle(fontSize: 20,color: Colors.blue),
                 ),
               )),
@@ -1202,7 +1201,7 @@ class QuizResults extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
                 child:Text(
-                  (2).toString()+". "+questionModel.options[1],
+                  (2).toString()+". "+questionModel.choices[1],
                   style: TextStyle(fontSize: 20,color: Colors.blue),
                 ),
               )),
@@ -1219,7 +1218,7 @@ class QuizResults extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
                 child:Text(
-                  (3).toString()+". "+questionModel.options[2],
+                  (3).toString()+". "+questionModel.choices[2],
                   style: TextStyle(fontSize: 20,color: Colors.blue),
                 ),
               )),
@@ -1236,14 +1235,14 @@ class QuizResults extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
                 child:Text(
-                  (4).toString()+". "+questionModel.options[3],
+                  (4).toString()+". "+questionModel.choices[3],
                   style: TextStyle(fontSize: 20,color: Colors.blue),
                 ),
               )),
           SizedBox(height: 10,),
         ]);
       //if correct answer is 0
-      if (questionModel.answer == 0) {
+      if (questionModel.answer_id == 0) {
         if (selected_answer_index == 1) {
           return Column(
               children: [
@@ -1259,7 +1258,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1276,7 +1275,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1293,7 +1292,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1310,7 +1309,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1332,7 +1331,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1349,7 +1348,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1366,7 +1365,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1383,7 +1382,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1405,7 +1404,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1422,7 +1421,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1439,7 +1438,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1456,7 +1455,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1465,7 +1464,7 @@ class QuizResults extends StatelessWidget {
         }
       }
       //if correct answer is 1
-      else if (questionModel.answer == 1) {
+      else if (questionModel.answer_id == 1) {
         if (selected_answer_index == 0) {
           return Column(
               children: [
@@ -1481,7 +1480,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1498,7 +1497,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1515,7 +1514,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1532,7 +1531,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1554,7 +1553,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1571,7 +1570,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1588,7 +1587,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1605,7 +1604,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1627,7 +1626,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1644,7 +1643,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1661,7 +1660,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1678,7 +1677,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1686,7 +1685,7 @@ class QuizResults extends StatelessWidget {
               ]);
         }
       }
-      else if (questionModel.answer == 2) {
+      else if (questionModel.answer_id == 2) {
         if (selected_answer_index == 0) {
           return Column(
               children: [
@@ -1702,7 +1701,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1719,7 +1718,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1736,7 +1735,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1753,7 +1752,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1775,7 +1774,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1792,7 +1791,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1809,7 +1808,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1826,7 +1825,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1848,7 +1847,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1865,7 +1864,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1882,7 +1881,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1899,7 +1898,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1907,7 +1906,7 @@ class QuizResults extends StatelessWidget {
               ]);
         }
       }
-      else if (questionModel.answer == 3) {
+      else if (questionModel.answer_id == 3) {
         if (selected_answer_index == 0) {
           return Column(
               children: [
@@ -1923,7 +1922,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1940,7 +1939,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1957,7 +1956,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -1974,7 +1973,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -1996,7 +1995,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -2013,7 +2012,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -2030,7 +2029,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -2047,7 +2046,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -2069,7 +2068,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (1).toString() + ". " + questionModel.options[0],
+                        (1).toString() + ". " + questionModel.choices[0],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -2086,7 +2085,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (2).toString() + ". " + questionModel.options[1],
+                        (2).toString() + ". " + questionModel.choices[1],
                         style: TextStyle(fontSize: 20, color: Colors.blue),
                       ),
                     )),
@@ -2103,7 +2102,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (3).toString() + ". " + questionModel.options[2],
+                        (3).toString() + ". " + questionModel.choices[2],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -2120,7 +2119,7 @@ class QuizResults extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, top: 5.0, bottom: 5),
                       child: Text(
-                        (4).toString() + ". " + questionModel.options[3],
+                        (4).toString() + ". " + questionModel.choices[3],
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     )),
@@ -2131,7 +2130,7 @@ class QuizResults extends StatelessWidget {
     return widget;
   }
   //if true or false question
-  Widget get_correct_widget_len_2(int index, QuestionModel questionModel) {
+  Widget get_correct_widget_len_2(int index, Question_ questionModel) {
   Widget widget= Column(
       children: [
         SizedBox(height: 40,),
@@ -2147,7 +2146,7 @@ class QuizResults extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child:Text(
-                (2).toString()+". "+questionModel.options[0],
+                (2).toString()+". "+questionModel.choices[0],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
               ),
             )),
@@ -2164,7 +2163,7 @@ class QuizResults extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child:Text(
-                (2).toString()+". "+questionModel.options[1],
+                (2).toString()+". "+questionModel.choices[1],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
               ),
             )),
@@ -2187,7 +2186,7 @@ class QuizResults extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
                 child:Text(
-                  (1).toString()+". "+questionModel.options[0],
+                  (1).toString()+". "+questionModel.choices[0],
                   style: TextStyle(fontSize: 20,color: Colors.white),
                 ),
               )),
@@ -2204,7 +2203,7 @@ class QuizResults extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
                 child:Text(
-                  (2).toString()+". "+questionModel.options[1],
+                  (2).toString()+". "+questionModel.choices[1],
                   style: TextStyle(fontSize: 20,color: Colors.blue),
                 ),
               )),
@@ -2229,7 +2228,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child:Text(
-                    (1).toString()+". "+questionModel.options[0],
+                    (1).toString()+". "+questionModel.choices[0],
                     style: TextStyle(fontSize: 20,color: Colors.blue),
                   ),
                 )),
@@ -2246,7 +2245,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child:Text(
-                    (2).toString()+". "+questionModel.options[1],
+                    (2).toString()+". "+questionModel.choices[1],
                     style: TextStyle(fontSize: 20,color: Colors.white),
                   ),
                 )),
@@ -2256,7 +2255,7 @@ class QuizResults extends StatelessWidget {
   }
   return widget;
 }
-  Widget get_wrong_widget_len_2(QuestionModel questionModel,selected_answer_index) {
+  Widget get_wrong_widget_len_2(Question_ questionModel,selected_answer_index) {
   Widget widget= Column(
       children: [
         SizedBox(height: 40,),
@@ -2272,7 +2271,7 @@ class QuizResults extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child:Text(
-                (2).toString()+". "+questionModel.options[0],
+                (2).toString()+". "+questionModel.choices[0],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
               ),
             )),
@@ -2289,14 +2288,14 @@ class QuizResults extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child:Text(
-                (2).toString()+". "+questionModel.options[1],
+                (2).toString()+". "+questionModel.choices[1],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
               ),
             )),
         SizedBox(height: 10,),
       ]);
   //if correct answer is 0
-  if (questionModel.answer == 0) {
+  if (questionModel.answer_id == 0) {
     if (selected_answer_index == 1) {
       return Column(
           children: [
@@ -2313,7 +2312,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (1).toString() + ". " + questionModel.options[0],
+                    (1).toString() + ". " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 )),
@@ -2330,7 +2329,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (2).toString() + ". " + questionModel.options[1],
+                    (2).toString() + ". " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 )),
@@ -2339,7 +2338,7 @@ class QuizResults extends StatelessWidget {
     }
   }
   //if correct answer is 1
-  else if (questionModel.answer == 1) {
+  else if (questionModel.answer_id == 1) {
     if (selected_answer_index == 0) {
       return Column(
           children: [
@@ -2356,7 +2355,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (1).toString() + ". " + questionModel.options[0],
+                    (1).toString() + ". " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 )),
@@ -2373,7 +2372,7 @@ class QuizResults extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (2).toString() + ". " + questionModel.options[1],
+                    (2).toString() + ". " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 )),

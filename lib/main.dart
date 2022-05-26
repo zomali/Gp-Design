@@ -11,9 +11,9 @@ import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
+import 'package:gp/shared/cubits/cubit/question_cubit.dart';
 import 'package:gp/signup%20screen.dart';
 import 'Home.dart';
-import 'classes/classes.dart';
 import 'classes/student.dart';
 import 'Quiz/Start_Quiz.dart';
 
@@ -25,8 +25,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  late final Level_ level;
-  List<int>weakness_topics=[1,2,3];
   @override
   Widget build(BuildContext context) {
 
@@ -47,11 +45,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => TopicCubit(),
         ),
+        BlocProvider(
+          create: (context) => QuestionCubit(),
+        ),
       ],
+      
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         //home: Edit_Proile_Screen(),
-        //home:Start_Quiz(0,"level",weakness_topics),
+        //home:Start_Quiz("1"),
         //home:QuizResults("1"),
         // home: MyProfileScreen(),
         home: Login_screen(),

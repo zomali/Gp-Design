@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                       Column(
                         children: [
                           Text(
-                            "Hi," + std.name.toString().split(" ").first,
+                            "Hi, " + std.name.toString().split(" ").first,
                             style: TextStyle(
                               letterSpacing: 2,
 
@@ -185,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                             height: 3,
                           ),
                           Text(
-                            "Level:- " + std.level.toString(),
+                            "Academic Year: " + std.level.toString(),
                             style: TextStyle(
                               fontSize: 13,
                               //       color : Colors.blueGrey,
