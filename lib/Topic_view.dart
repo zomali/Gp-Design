@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gp/Levels_View.dart';
+import 'package:gp/Quiz/go_to_quiz.dart';
 import 'Quiz/Start_Quiz.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/classes.dart';
@@ -46,19 +47,7 @@ class _topic_view extends State<topic_view> {
 
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Builder(
-          builder: (context) {
-            QuestionCubit.get(context).getLevelQuestions(level);
-            return BlocBuilder<QuestionCubit, QuestionState>(
-              builder: (context, state) {
-                if(state is QuestionLoading)
-                {
-                  return Center(child: CircularProgressIndicator());
-                }
-                else {
-                  var questionCubit = QuestionCubit.get(context);
-                  List<Question_> questions = questionCubit.allQuestions;
-                  return Column(children: [
+        body: Column(children: [
                   Container(
                     height: 100,
                     decoration: BoxDecoration(
@@ -117,10 +106,10 @@ class _topic_view extends State<topic_view> {
                                 if (index == topicsPlusQuiz.length - 1) {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
-                                          Start_Quiz(level.id,"level",weakness_topics, questions)));
+                                          go_to_quiz(1,"topic",weakness_topics)));
                                 } else {
                                   //action on tap
-                                  Fluttertoast.showToast(msg:level.id.toString());
+                                  //Fluttertoast.showToast(msg:level.id.toString());
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
                                           types(std, level, level.topics[index])));
@@ -189,12 +178,8 @@ class _topic_view extends State<topic_view> {
                       ),
                     ),
                   ),
-                ]);
-                }
-              }
-            );
-          }
-        ));
+                ])         
+        );
   }
 }
 

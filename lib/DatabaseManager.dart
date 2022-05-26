@@ -365,7 +365,7 @@ class DatabaseManager {
       //q.choices = ques[question]['choices'];
       q.choices = [];
       for (var choice in ques[question]['choices']) {
-        q.choices.add(choice);
+        q.choices.add(choice.toString());
       }
       q.answer_id = ques[question]['answer_id'];
       q.topic_id = ques[question]['topic_id'];

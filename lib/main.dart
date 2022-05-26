@@ -1,10 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/Courses_evaluations_Screen.dart';
-import 'package:gp/Quiz/quiz_result.dart';
-import 'package:gp/Sidebar/Menu.dart';
-import 'package:gp/Sidebar/sidebar_layout.dart';
 import 'package:gp/login_screen.dart';
 import 'package:gp/shared/cubits/cubit/course_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
@@ -12,10 +8,6 @@ import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/shared/cubits/cubit/question_cubit.dart';
-import 'package:gp/signup%20screen.dart';
-import 'Home.dart';
-import 'classes/student.dart';
-import 'Quiz/Start_Quiz.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +43,7 @@ class MyApp extends StatelessWidget {
       ],
       
       child: MaterialApp(
+        title: 'Personalized E-Learning System',
         debugShowCheckedModeBanner: false,
         //home: Edit_Proile_Screen(),
         //home:Start_Quiz("1"),

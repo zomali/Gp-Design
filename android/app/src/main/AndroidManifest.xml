@@ -4,7 +4,7 @@
     package="com.example.gp">
 
    <application
-        android:label="gp"
+        android:label="Personalized E-Learning System"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

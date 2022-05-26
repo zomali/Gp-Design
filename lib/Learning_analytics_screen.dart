@@ -30,34 +30,9 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
     "Image": 4,
   };
 
-  void addTOList() {
-    _pages.add(levels_view(std));
-    _pages.add(Learning_analytics_screen(std));
-    _pages.add(Course_evual_categories(std, "CSW150"));
-    _pages.add(MyProfileScreen(std));
-  }
-
-  void _onItemTapped(int index) {
-    setState(
-          () {
-            index%=4;
-        _selectedIndex = index;
-
-        //   print("index = ${widget.ind} ");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => moveToPage(index)));
-      },
-    );
-  }
-
-  Widget moveToPage(int index) {
-    _selectedIndex%=4;
-    return _pages.elementAt(_selectedIndex);
-  }
-
+  
   @override
   Widget build(BuildContext context) {
-    addTOList();
     List<List<Color>> gradientList;
     gradientList = <List<Color>>[
       [
@@ -92,56 +67,7 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
           },
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
-
-        selectedItemColor: Colors.blue,
-        selectedFontSize: 16,
-
-        unselectedItemColor: Colors.grey,
-        // unselectedFontSize: 11,
-        unselectedFontSize: 16,
-
-        //    currentIndex: 0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            //backgroundColor: Colors.blue,
-            //   backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_outlined),
-            //  icon: Icon(Icons.up),
-            label: 'Analytics',
-
-            // backgroundColor: Colors.blue,
-            //     backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.equalizer_outlined),
-            label: 'Evaluation',
-            //  backgroundColor: Colors.blue
-            //    backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_rounded),
-            label: 'Dashboard',
-            //   backgroundColor: Colors.blue
-            //     backgroundColor: Colors.blue,
-          )
-        ],
-        // onTap: (index){
-        //   print("index = ${widget.ind} ");
-        //   Navigator.push(context,
-        //       MaterialPageRoute(builder: (context)=>moveToPage(index)));
-        //
-        //
-        //
-        // },
-        currentIndex: _selectedIndex, //New
-        onTap: _onItemTapped,
-      ),
+     
       body: SingleChildScrollView(
         child: Center(
           child: Column(

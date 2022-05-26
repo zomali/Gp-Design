@@ -21,7 +21,7 @@ class QuestionCubit extends Cubit<QuestionState> {
     allQuestions = [];
     easyQuestions = await db.getTopicQuestions(topicID, "easy");
     mediumQuestions = await db.getTopicQuestions(topicID, "medium");
-    hardQuestions = await db.getTopicQuestions(topicID, "hard");
+    hardQuestions = await db .getTopicQuestions(topicID, "hard");
     
     allQuestions = easyQuestions + mediumQuestions + hardQuestions;
 
@@ -44,5 +44,14 @@ class QuestionCubit extends Cubit<QuestionState> {
 
     emit(QuestionLoaded());
   } 
+  Future<void> getQuestions(String type, int ID) async {
+    if(type == "topic")
+    getTopicQuestions(ID);
+    else if(type == "level")
+    {
+      Level_ level = await db.getLevelData(ID);
+      getLevelQuestions(level);
+    }
+  }
 
 }
