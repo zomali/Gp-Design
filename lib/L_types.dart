@@ -134,7 +134,7 @@ class _typesState extends State<types> {
                     try {
                       topic = topicCubit.topic;
                       weight = topicCubit.weight;
-                      weight[2] = 1000;
+                      weight[1] = 1000;
                       setContentType(weight);
                     } catch (e) {
                       topic = topicCubit.topic;

@@ -181,27 +181,6 @@ class DatabaseManager {
     return arrDouble;
   }
 
-  Future<List<double>> set_prefered_content_type(
-      studentBehavior std, List<int> ar) async {
-    List<double> arr = [];
-    var video_time_weight = ar[0] * 0.6;
-    var audio_time_weight = ar[1] * 0.6;
-    var text_time_weight = ar[2] * 0.6;
-    var image_time_weight = ar[3] * 0.6;
-
-    var video_click_weight = std.forVideo.NumberOfVisitedPage * 0.4;
-    var audio_click_weight = std.forAudio.NumberOfVisitedPage * 0.4;
-    var image_click_weight = std.forImage.NumberOfVisitedPage * 0.4;
-    var text_click_weight = std.forText.NumberOfVisitedPage * 0.4;
-
-    arr.add(video_time_weight + video_click_weight);
-    arr.add(audio_time_weight + audio_click_weight);
-    arr.add(image_time_weight + image_click_weight);
-    arr.add(text_time_weight + text_click_weight);
-
-    return arr;
-  }
-
   Future<List<int>> getTimeTokenForEachLevel(student std) async {
     List<int> arr = [];
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
@@ -350,33 +329,38 @@ class DatabaseManager {
     }
     return level;
   }
-  Future<List<Question_>> getTopicQuestions(int topicID, String complexity) async {
-    DatabaseReference ref = FirebaseDatabase.instance.reference();
-    final snapshot = await ref.child('quiz_question').orderByChild('topic_complexity').equalTo(topicID.toString()+'_'+complexity).once();
-    List<Question_> questions = [];
-    if(snapshot.value != null)
-    {
-    var ques = snapshot.value;
-    var quesK = ques.keys;
-    for (var question in quesK) {
-      Question_ q = Question_();
-      q.id = int.parse(question);
-      q.question = ques[question]['question'];
-      //q.choices = ques[question]['choices'];
-      q.choices = [];
-      for (var choice in ques[question]['choices']) {
-        q.choices.add(choice.toString());
-      }
-      q.answer_id = ques[question]['answer_id'];
-      q.topic_id = ques[question]['topic_id'];
-      q.complexity = ques[question]['complexity'];
-      q.points = ques[question]['points'];
-      questions.add(q);
-    }
 
-    return questions;
+  Future<List<Question_>> getTopicQuestions(
+      int topicID, String complexity) async {
+    DatabaseReference ref = FirebaseDatabase.instance.reference();
+    final snapshot = await ref
+        .child('quiz_question')
+        .orderByChild('topic_complexity')
+        .equalTo(topicID.toString() + '_' + complexity)
+        .once();
+    List<Question_> questions = [];
+    if (snapshot.value != null) {
+      var ques = snapshot.value;
+      var quesK = ques.keys;
+      for (var question in quesK) {
+        Question_ q = Question_();
+        q.id = int.parse(question);
+        q.question = ques[question]['question'];
+        //q.choices = ques[question]['choices'];
+        q.choices = [];
+        for (var choice in ques[question]['choices']) {
+          q.choices.add(choice.toString());
+        }
+        q.answer_id = ques[question]['answer_id'];
+        q.topic_id = ques[question]['topic_id'];
+        q.complexity = ques[question]['complexity'];
+        q.points = ques[question]['points'];
+        questions.add(q);
+      }
+
+      return questions;
     }
-    return[];
+    return [];
   }
 
   void insertNewStudent(student std) {
