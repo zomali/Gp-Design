@@ -52,6 +52,7 @@ class _login_screenState extends State<Login_screen> {
 
   @override
   Widget build(BuildContext context) {
+    db.update2();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[500],
@@ -90,8 +91,8 @@ class _login_screenState extends State<Login_screen> {
                           height: 90,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage(
-                                  'proj_images/Ain_Shams_logo.png'),
+                              image:
+                                  AssetImage('proj_images/Ain_Shams_logo.png'),
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -296,7 +297,7 @@ class _login_screenState extends State<Login_screen> {
                           child: MaterialButton(
                             onPressed: () async {
                               try {
-                                 //  await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                                //  await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
                                 if (studentExist(email, password, list)) {
                                   student std = studentLevel(email, list);

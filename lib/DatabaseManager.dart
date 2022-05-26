@@ -8,7 +8,8 @@ import 'package:gp/classes/classes.dart';
 class DatabaseManager {
   Future<Course_> getCourseData(String courseCode) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
-    final response = await firebaseDatabase.child('courses').child(courseCode).get();
+    final response =
+        await firebaseDatabase.child('courses').child(courseCode).get();
     //var keys = response.value.keys;
     var values = response.value;
     Course_ c = new Course_();
@@ -18,18 +19,15 @@ class DatabaseManager {
     //get learning outcomes
     c.learning_outcomes = <String>[];
     var outcomes = values['learning_outcomes'];
-    for(var outcome in outcomes)
-    {
-      if(outcome == null)
-      continue;
+    for (var outcome in outcomes) {
+      if (outcome == null) continue;
       String o = outcome['outcome'];
       c.learning_outcomes.add(o);
-    }//get instructors
+    } //get instructors
     c.instructors = <Instructor_>[];
     var instructors = values['instructors'];
     for (var instructor in instructors) {
-      if(instructor == null)
-      continue;
+      if (instructor == null) continue;
       Instructor_ i = Instructor_();
       i.name = instructor['name'];
       i.contact = instructor['contact'];
@@ -40,13 +38,11 @@ class DatabaseManager {
     c.levels = <Level_>[];
     var levels = values['levels'];
     for (var level in levels) {
-      if(level == null)
-      continue;
+      if (level == null) continue;
       Level_ l = Level_();
       l.id = level['level_id'];
       l.name = level['level_name'];
       c.levels.add(l);
-
     }
     return c;
   }
@@ -72,7 +68,9 @@ class DatabaseManager {
     }
     return list;
   }
-  Future<List<int>> getTimeTokenForEachContentType(student std) async {
+
+  Future<List<double>> getTimeTokenForEachContentType(
+      student std, studentBehavior stdBehavior) async {
     List<int> arr = [];
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase
@@ -81,7 +79,7 @@ class DatabaseManager {
         .get();
     //var keys = response.value.keys;
     var values = response.value;
- //   int type = 1;
+    //   int type = 1;
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
       var audio_time = 0;
@@ -91,8 +89,7 @@ class DatabaseManager {
 
       if (Level > std.level) {
         arr.add(0);
-      }
-      else {
+      } else {
         int startTopic = 0;
         if (Level == 1) {
           startTopic = 1;
@@ -154,41 +151,53 @@ class DatabaseManager {
                   image_time -= 60;
                 }
               }
-              arr.add(timeInMinetesVideo);//arr[0]=video_time_spent
-              arr.add(timeInMinetesAudio);//arr[1]=audio_time_spent
-              arr.add(timeInMinetesImage);//arr[2]=image_time_spent
-              arr.add(timeInMinetesText);//arr[3]=text_time_spent
+              arr.add(timeInMinetesVideo); //arr[0]=video_time_spent
+              arr.add(timeInMinetesAudio); //arr[1]=audio_time_spent
+              arr.add(timeInMinetesImage); //arr[2]=image_time_spent
+              arr.add(timeInMinetesText); //arr[3]=text_time_spent
               //print(time);
+
             }
           }
         }
       }
     }
-          return arr;
+    List<double> arrDouble = [];
+    var video_time_weight = arr[0] * 0.6;
+    var audio_time_weight = arr[1] * 0.6;
+    var text_time_weight = arr[2] * 0.6;
+    var image_time_weight = arr[3] * 0.6;
+
+    var video_click_weight = stdBehavior.forVideo.NumberOfVisitedPage * 0.4;
+    var audio_click_weight = stdBehavior.forAudio.NumberOfVisitedPage * 0.4;
+    var image_click_weight = stdBehavior.forImage.NumberOfVisitedPage * 0.4;
+    var text_click_weight = stdBehavior.forText.NumberOfVisitedPage * 0.4;
+
+    arrDouble.add(video_time_weight + video_click_weight);
+    arrDouble.add(audio_time_weight + audio_click_weight);
+    arrDouble.add(image_time_weight + image_click_weight);
+    arrDouble.add(text_time_weight + text_click_weight);
+
+    return arrDouble;
   }
 
-
-
-  Future<List<double>> set_prefered_content_type(studentBehavior std,List<int> ar) async {
+  Future<List<double>> set_prefered_content_type(
+      studentBehavior std, List<int> ar) async {
     List<double> arr = [];
-    var video_time_weight=ar[0]*0.6;
-    var audio_time_weight=ar[1]*0.6;
-    var text_time_weight=ar[2]*0.6;
-    var image_time_weight=ar[3]*0.6;
+    var video_time_weight = ar[0] * 0.6;
+    var audio_time_weight = ar[1] * 0.6;
+    var text_time_weight = ar[2] * 0.6;
+    var image_time_weight = ar[3] * 0.6;
 
+    var video_click_weight = std.forVideo.NumberOfVisitedPage * 0.4;
+    var audio_click_weight = std.forAudio.NumberOfVisitedPage * 0.4;
+    var image_click_weight = std.forImage.NumberOfVisitedPage * 0.4;
+    var text_click_weight = std.forText.NumberOfVisitedPage * 0.4;
 
-
-    var video_click_weight=std.forVideo.NumberOfVisitedPage*0.4;
-    var audio_click_weight=std.forAudio.NumberOfVisitedPage*0.4;
-    var image_click_weight=std.forImage.NumberOfVisitedPage*0.4;
-    var text_click_weight=std.forText.NumberOfVisitedPage*0.4;
-
-    arr.add(video_time_weight+video_click_weight);
-    arr.add(audio_time_weight+audio_click_weight);
-    arr.add(image_time_weight+image_click_weight);
-    arr.add(text_time_weight+text_click_weight);
-
-
+    arr.add(video_time_weight + video_click_weight);
+    arr.add(audio_time_weight + audio_click_weight);
+    arr.add(image_time_weight + image_click_weight);
+    arr.add(text_time_weight + text_click_weight);
 
     return arr;
   }
@@ -208,8 +217,7 @@ class DatabaseManager {
       var time = 0;
       if (Level > std.level) {
         arr.add(0);
-      }
-      else {
+      } else {
         int startTopic = 0;
         if (Level == 1) {
           startTopic = 1;
@@ -1677,6 +1685,7 @@ class DatabaseManager {
         }
       }
     }
+
     for (var key in keys) {
       if (key == std.id) {
         continue;
@@ -1796,12 +1805,11 @@ class DatabaseManager {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     firebaseDatabase
         .child('students')
-        .child('2018170064')
+        .child('2018170135')
         .child('courses')
         .child('CSW150')
-        .update({
-      'current_topic': 2,
-    });
+        .child('quizes')
+        .update({'0': 100, '1': 90, '2': 80, '3': 100, '4': 70});
   }
 
   Future<String> getCurrentTopicPercet(student std) async {

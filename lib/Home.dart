@@ -47,12 +47,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   student std;
   _HomePageState(this.std);
 
   DatabaseManager db = DatabaseManager();
-
 
   Widget _selectedCleaning(@required Color color, @required String title,
       @required String supTitle) {
@@ -128,8 +126,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Material(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -139,8 +135,6 @@ class _HomePageState extends State<HomePage> {
           title: const Text("Personalized E-learning System"),
           leading: const Icon(Icons.home),
         ),
-
-
         body: SingleChildScrollView(
           child: Container(
             height: 800,

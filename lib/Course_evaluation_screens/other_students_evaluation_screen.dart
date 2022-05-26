@@ -132,7 +132,8 @@ class _Other_students_evaluation_screenState
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => Course_evual_categories(std, "CSW150")));
+                    builder: (context) =>
+                        Course_evual_categories(std, "CSW150")));
           },
         ),
       ),
@@ -161,6 +162,7 @@ class _Other_students_evaluation_screenState
                   listForAllGrades.add(1);
                 }
               }
+
               return SingleChildScrollView(
                 child: Center(
                   child: Column(

@@ -24,6 +24,7 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   late String percent;
   late List<int> gradesStudent;
   late List<int> gradesAllStudent;
+  late List<double> weight;
 
   Future<void> fetchAllStudentGrades(student std) async {
     emit(StudentBehaviorLoading());
@@ -58,6 +59,13 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   Future<void> getTimeSpendEveryOnce(var ID, var Level, var Topic) async {
     emit(StudentBehaviorLoading());
     value = await db.fetchTimeSpendEveryOnce(ID, Level, Topic);
+    emit(StudentBehaviorLoaded());
+  }
+
+  Future<void> getTimeTokenForEachContentType(
+      student std, studentBehavior stdBehavior) async {
+    emit(StudentBehaviorLoading());
+    weight = await db.getTimeTokenForEachContentType(std, stdBehavior);
     emit(StudentBehaviorLoaded());
   }
 
