@@ -28,19 +28,25 @@ class QuestionCubit extends Cubit<QuestionState> {
     emit(QuestionLoaded());
   }  
    Future<void> getLevelQuestions(Level_ level) async{
-    emit(QuestionLoading());
+    //emit(QuestionLoading());
     
     List<Question_> easyQuestions = [];
     List<Question_> mediumQuestions = [];
     List<Question_> hardQuestions = [];
     allQuestions = [];
-    for(var topic in level.topics)
+
+  
+
+    for(int y=0; y<level.topics.length; y++)
     {
-    easyQuestions = await db.getTopicQuestions(topic.id, "easy");
-    mediumQuestions = await db.getTopicQuestions(topic.id, "medium");
-    hardQuestions = await db.getTopicQuestions(topic.id, "hard");
-    allQuestions += easyQuestions + mediumQuestions + hardQuestions;
-    }
+    easyQuestions = await db.getTopicQuestions(level.topics[y].id, "easy");
+    mediumQuestions = await db.getTopicQuestions(level.topics[y].id, "medium");
+    hardQuestions = await db.getTopicQuestions(level.topics[y].id, "hard");
+    if(y==0)
+        allQuestions = easyQuestions + mediumQuestions + hardQuestions;
+    else
+        allQuestions += easyQuestions + mediumQuestions + hardQuestions;
+  }
 
     emit(QuestionLoaded());
   } 
@@ -49,6 +55,7 @@ class QuestionCubit extends Cubit<QuestionState> {
     getTopicQuestions(ID);
     else if(type == "level")
     {
+      emit(QuestionLoading());
       Level_ level = await db.getLevelData(ID);
       getLevelQuestions(level);
     }
