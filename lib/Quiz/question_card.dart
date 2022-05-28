@@ -15,14 +15,14 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-          height: 450,
+          height: 550,
           margin: const EdgeInsets.symmetric(horizontal: 20.0),
           decoration: BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.circular(25.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -49,7 +49,7 @@ class QuestionCard extends StatelessWidget {
                                 .marked_answer(questionModel,index),
                         ),
                         const SizedBox(
-                          height: 15,
+                          height: 5,
                         )
                       ],
                     )),

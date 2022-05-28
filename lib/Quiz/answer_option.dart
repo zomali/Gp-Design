@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'backButton.dart';
@@ -19,6 +21,7 @@ class AnswerOption extends StatelessWidget {
   final Function() onPressed;
   @override
   Widget build(BuildContext context) {
+    List<String>chars=['A','B','C','D'];
     return GetBuilder<QuizController>(
       init: Get.find<QuizController>(),
       builder: (controller) => InkWell(
@@ -32,12 +35,12 @@ class AnswerOption extends StatelessWidget {
                 Border.all(width: 3, color: controller.getColor(index))),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Wrap(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RichText(
                     text: TextSpan(
-                        text: '${index + 1}. ',
+                        text: '${chars[index]}. ',
                         style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.white),
                         children: [
                           TextSpan(
@@ -50,8 +53,8 @@ class AnswerOption extends StatelessWidget {
                       controller.selectAnswer == index)
                     Container(
                         width: 30,
-                        height: 30,
-                        padding: EdgeInsets.zero,
+                        height: 60,
+                        padding: EdgeInsets.only(left: 10,right: 10),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             color: controller.getColor(index),

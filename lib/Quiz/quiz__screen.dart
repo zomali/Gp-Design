@@ -97,7 +97,7 @@ class QuizScreen extends StatelessWidget {
                     height: 5,
                   ),
                   SizedBox(
-                    height: 400,
+                    height: 600,
                     child: PageView.builder(
                       scrollDirection: Axis.horizontal,
                       physics: const NeverScrollableScrollPhysics(),

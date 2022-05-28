@@ -70,7 +70,7 @@ class QuizResults extends StatelessWidget {
                                     children: <Widget>[
                                       Container(
                                         width: 320,
-                                        height: 320,
+                                        height: 500,
                                         margin: const EdgeInsets.only(
                                             top: 5.0, bottom: 5, left: 25),
                                         decoration: BoxDecoration(
@@ -105,7 +105,7 @@ class QuizResults extends StatelessWidget {
                                                 ],
                                               ),
 
-                                              SizedBox(height: 50,),
+                                              SizedBox(height: 20,),
                                               Text(
                                                 controller.quiz_question[index]
                                                     .question,
@@ -115,7 +115,7 @@ class QuizResults extends StatelessWidget {
                                                         .bold),
                                               ),
                                               SizedBox(
-                                                height: 5,
+                                                height: 20,
                                               ),
                                               condition(controller.quiz_question[index],student_answers[controller.quiz_question[index].id])
                                             ],
@@ -146,7 +146,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
     widget = Column(
       children: [
         Container(
-            width: 260,
+            width: 280,
             height: 35,
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             decoration: BoxDecoration(
@@ -155,10 +155,10 @@ Widget condition(Question_ questionModel, int? selected_answer) {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 30, top: 5.0, bottom: 5),
+                  left: 10, top: 5.0, bottom: 5, right:10),
               child: Text(
-                (1).toString() + ". " + questionModel.choices[0],
-                style: TextStyle(fontSize: 20, color: Colors.blue),
+                "A. " + questionModel.choices[0],
+                style: TextStyle(fontSize: 15, color: Colors.blue),
               ),
             )),
         SizedBox(height: 10,),
@@ -172,10 +172,10 @@ Widget condition(Question_ questionModel, int? selected_answer) {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 30, top: 5.0, bottom: 5),
+                  left: 10, top: 5.0, bottom: 5,right:10),
               child: Text(
-                (2).toString() + ". " + questionModel.choices[1],
-                style: TextStyle(fontSize: 20, color: Colors.blue),
+                "B. " + questionModel.choices[1],
+                style: TextStyle(fontSize: 15, color: Colors.blue),
               ),
             )),
         SizedBox(height: 10,),
@@ -199,10 +199,10 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 30, top: 5.0, bottom: 5),
+                        left: 10, top: 5.0, bottom: 5,right:10),
                     child:Text(
-                      (1).toString()+". "+questionModel.choices[0],
-                      style: TextStyle(fontSize: 20,color: Colors.white),
+                      "A. "+questionModel.choices[0],
+                      style: TextStyle(fontSize: 15,color: Colors.white),
                     ),
                   )),
               SizedBox(height: 20,),
@@ -216,10 +216,10 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 30, top: 5.0, bottom: 5),
+                        left: 10, top: 5.0, bottom: 5,right:10),
                     child:Text(
-                      (2).toString()+". "+questionModel.choices[1],
-                      style: TextStyle(fontSize: 20,color: Colors.blue),
+                      "B. "+questionModel.choices[1],
+                      style: TextStyle(fontSize: 15,color: Colors.blue),
                     ),
                   )),
               SizedBox(height: 10,),
@@ -240,10 +240,10 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 30, top: 5.0, bottom: 5),
+                        left: 10, top: 5.0, bottom: 5, right:10),
                     child:Text(
-                      (1).toString()+". "+questionModel.choices[0],
-                      style: TextStyle(fontSize: 20,color: Colors.blue),
+                      "A. "+questionModel.choices[0],
+                      style: TextStyle(fontSize: 15,color: Colors.blue),
                     ),
                   )),
               SizedBox(height: 20,),
@@ -257,10 +257,10 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 30, top: 5.0, bottom: 5),
+                        left: 10, top: 5.0, bottom: 5,right:10),
                     child:Text(
-                      (2).toString()+". "+questionModel.choices[1],
-                      style: TextStyle(fontSize: 20,color: Colors.white),
+                      "B. "+questionModel.choices[1],
+                      style: TextStyle(fontSize: 15,color: Colors.white),
                     ),
                   )),
               SizedBox(height: 10,),
@@ -287,9 +287,10 @@ Widget condition(Question_ questionModel, int? selected_answer) {
   {
     widget = Column(
       children: [
+
         Container(
             width: 260,
-            height: 35,
+            height: 65,
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -297,16 +298,16 @@ Widget condition(Question_ questionModel, int? selected_answer) {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 30, top: 5.0, bottom: 5),
+                  left: 10, top: 5.0, bottom: 5, right:10),
               child: Text(
-                (1).toString() + ". " + questionModel.choices[0],
-                style: TextStyle(fontSize: 20, color: Colors.blue),
+                "A. " + questionModel.choices[0],
+                style: TextStyle(fontSize: 15, color: Colors.blue),
               ),
             )),
         SizedBox(height: 10,),
         Container(
             width: 260,
-            height: 35,
+            height: 65,
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -314,16 +315,16 @@ Widget condition(Question_ questionModel, int? selected_answer) {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 30, top: 5.0, bottom: 5),
+                  left: 10, top: 5.0, bottom: 5,right:10),
               child: Text(
-                (2).toString() + ". " + questionModel.choices[1],
-                style: TextStyle(fontSize: 20, color: Colors.blue),
+                 "B. " + questionModel.choices[1],
+                style: TextStyle(fontSize: 15, color: Colors.blue),
               ),
             )),
         SizedBox(height: 10,),
         Container(
             width: 260,
-            height: 35,
+            height: 65,
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -331,16 +332,16 @@ Widget condition(Question_ questionModel, int? selected_answer) {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 30, top: 5.0, bottom: 5),
+                  left: 10,right:10, top: 5.0, bottom: 5),
               child: Text(
-                (3).toString() + ". " + questionModel.choices[2],
-                style: TextStyle(fontSize: 20, color: Colors.blue),
+                 "C. " + questionModel.choices[2],
+                style: TextStyle(fontSize: 15, color: Colors.blue),
               ),
             )),
         SizedBox(height: 10,),
         Container(
             width: 260,
-            height: 35,
+            height: 65,
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -348,10 +349,10 @@ Widget condition(Question_ questionModel, int? selected_answer) {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 30, top: 5.0, bottom: 5),
+                  left: 10, right:10,top: 5.0, bottom: 5),
               child: Text(
-                (4).toString() + ". " + questionModel.choices[3],
-                style: TextStyle(fontSize: 20, color: Colors.blue),
+                 "D. " + questionModel.choices[3],
+                style: TextStyle(fontSize: 15, color: Colors.blue),
               ),
             )),
         SizedBox(height: 10,),
@@ -376,7 +377,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (1).toString()+". "+questionModel.choices[0],
+                      "A. "+questionModel.choices[0],
                       style: TextStyle(fontSize: 20,color: Colors.white),
                     ),
                   )),
@@ -393,7 +394,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (2).toString()+". "+questionModel.choices[1],
+                     "B. "+questionModel.choices[1],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -410,7 +411,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (3).toString()+". "+questionModel.choices[2],
+                      "C. "+questionModel.choices[2],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -427,7 +428,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (4).toString()+". "+questionModel.choices[3],
+                      "D. "+questionModel.choices[3],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -450,7 +451,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (1).toString()+". "+questionModel.choices[0],
+                      "A. "+questionModel.choices[0],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -467,7 +468,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (2).toString()+". "+questionModel.choices[1],
+                     "B. "+questionModel.choices[1],
                       style: TextStyle(fontSize: 20,color: Colors.white),
                     ),
                   )),
@@ -484,7 +485,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (3).toString()+". "+questionModel.choices[2],
+                      "C. "+questionModel.choices[2],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -501,7 +502,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (4).toString()+". "+questionModel.choices[3],
+                      "D. "+questionModel.choices[3],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -524,7 +525,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (1).toString()+". "+questionModel.choices[0],
+                      "A. "+questionModel.choices[0],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -541,7 +542,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (2).toString()+". "+questionModel.choices[1],
+                      "B. "+questionModel.choices[1],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -558,7 +559,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (3).toString()+". "+questionModel.choices[2],
+                     "C. "+questionModel.choices[2],
                       style: TextStyle(fontSize: 20,color: Colors.white),
                     ),
                   )),
@@ -575,7 +576,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (4).toString()+". "+questionModel.choices[3],
+                      "D. "+questionModel.choices[3],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -598,7 +599,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (1).toString()+". "+questionModel.choices[0],
+                      "A. "+questionModel.choices[0],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -615,7 +616,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (2).toString()+". "+questionModel.choices[1],
+                      "B. "+questionModel.choices[1],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -632,7 +633,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (3).toString()+". "+questionModel.choices[2],
+                      "C. "+questionModel.choices[2],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
                     ),
                   )),
@@ -649,7 +650,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
                     child:Text(
-                      (4).toString()+". "+questionModel.choices[3],
+                      "D. "+questionModel.choices[3],
                       style: TextStyle(fontSize: 20,color: Colors.white),
                     ),
                   )),
@@ -693,7 +694,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child: Text(
-                (1).toString() + ". " + questionModel.choices[0],
+                 "A. " + questionModel.choices[0],
                 style: TextStyle(fontSize: 20, color: Colors.blue),
               ),
             )),
@@ -710,7 +711,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child: Text(
-                (2).toString() + ". " + questionModel.choices[1],
+                 "B. " + questionModel.choices[1],
                 style: TextStyle(fontSize: 20, color: Colors.blue),
               ),
             )),
@@ -727,7 +728,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child: Text(
-                (3).toString() + ". " + questionModel.choices[2],
+                 "C. " + questionModel.choices[2],
                 style: TextStyle(fontSize: 20, color: Colors.blue),
               ),
             )),
@@ -744,7 +745,7 @@ Widget condition(Question_ questionModel, int? selected_answer) {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child: Text(
-                (4).toString() + ". " + questionModel.choices[3],
+                 "D. " + questionModel.choices[3],
                 style: TextStyle(fontSize: 20, color: Colors.blue),
               ),
             )),
@@ -798,10 +799,14 @@ Widget get_correct_widget(int index, Question_ questionModel) {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
-              child:Text(
-                (2).toString()+". "+questionModel.choices[0],
-                style: TextStyle(fontSize: 20,color: Colors.blue),
-              ),
+              child:Wrap(
+                children: [
+                  Text(
+                    "A. "+questionModel.choices[0],
+                    style: TextStyle(fontSize: 20,color: Colors.blue),
+                  ),
+                ],
+              )
             )),
         SizedBox(height: 10,),
         Container(
@@ -815,10 +820,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
-              child:Text(
-                (2).toString()+". "+questionModel.choices[1],
+              child:Wrap(
+                children: [
+              Text(
+                "B. "+questionModel.choices[1],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
-              ),
+              ),]),
             )),
         SizedBox(height: 10,),
         Container(
@@ -832,10 +839,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
-              child:Text(
-                (3).toString()+". "+questionModel.choices[2],
+              child:Wrap(
+                children: [
+              Text(
+                "C. "+questionModel.choices[2],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
-              ),
+              ),]),
             )),
         SizedBox(height: 10,),
         Container(
@@ -849,10 +858,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
-              child:Text(
-                (4).toString()+". "+questionModel.choices[3],
+              child:Wrap(
+                children: [
+              Text(
+                "D. "+questionModel.choices[3],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
-              ),
+              ),]),
             )),
         SizedBox(height: 10,),
       ]);
@@ -862,7 +873,7 @@ Widget get_correct_widget(int index, Question_ questionModel) {
         children: [
           Container(
               width: 260,
-              height: 35,
+              height: 65,
               margin: const EdgeInsets.symmetric(horizontal: 10.0),
               decoration: BoxDecoration(
                 color: Colors.green,
@@ -870,11 +881,32 @@ Widget get_correct_widget(int index, Question_ questionModel) {
               ),
               child: Padding(
                 padding: const EdgeInsets.only(
-                    left: 30, top: 5.0, bottom: 5),
-                child:Text(
-                  (1).toString()+". "+questionModel.choices[0],
-                  style: TextStyle(fontSize: 20,color: Colors.white),
-                ),
+                    left: 10,right:10, top: 5.0, bottom: 5),
+                child:Wrap(
+                  children: [
+                Text(
+                  "A. "+questionModel.choices[0],
+                  style: TextStyle(fontSize: 15,color: Colors.white),
+                ),]),
+              )),
+          SizedBox(height: 10,),
+          Container(
+              width: 260,
+              height: 65,
+              margin: const EdgeInsets.symmetric(horizontal: 10.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 10,right:10, top: 5.0, bottom: 5),
+                child:Wrap(
+                  children: [
+                Text(
+                  "B. "+questionModel.choices[1],
+                  style: TextStyle(fontSize: 15,color: Colors.blue),
+                ),]),
               )),
           SizedBox(height: 10,),
           Container(
@@ -888,10 +920,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
               child: Padding(
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
-                child:Text(
-                  (2).toString()+". "+questionModel.choices[1],
+                child:Wrap(
+                  children: [
+                Text(
+                  "C. "+questionModel.choices[2],
                   style: TextStyle(fontSize: 20,color: Colors.blue),
-                ),
+                ),]),
               )),
           SizedBox(height: 10,),
           Container(
@@ -905,27 +939,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
               child: Padding(
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
-                child:Text(
-                  (3).toString()+". "+questionModel.choices[2],
+                child:Wrap(
+                  children: [
+                Text(
+                  "D. "+questionModel.choices[3],
                   style: TextStyle(fontSize: 20,color: Colors.blue),
-                ),
-              )),
-          SizedBox(height: 10,),
-          Container(
-              width: 260,
-              height: 35,
-              margin: const EdgeInsets.symmetric(horizontal: 10.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 30, top: 5.0, bottom: 5),
-                child:Text(
-                  (4).toString()+". "+questionModel.choices[3],
-                  style: TextStyle(fontSize: 20,color: Colors.blue),
-                ),
+                ),]),
               )),
           SizedBox(height: 10,),
         ]);
@@ -946,10 +965,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child:Text(
-                    (1).toString()+". "+questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "A. "+questionModel.choices[0],
                     style: TextStyle(fontSize: 20,color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -963,10 +984,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child:Text(
-                    (2).toString()+". "+questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "B. "+questionModel.choices[1],
                     style: TextStyle(fontSize: 20,color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -980,10 +1003,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child:Text(
-                    (3).toString()+". "+questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "C. "+questionModel.choices[2],
                     style: TextStyle(fontSize: 20,color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -997,10 +1022,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child:Text(
-                    (4).toString()+". "+questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "D. "+questionModel.choices[3],
                     style: TextStyle(fontSize: 20,color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1023,10 +1050,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
-                    child:Text(
-                      (1).toString()+". "+questionModel.choices[0],
+                    child:Wrap(
+                      children: [
+                    Text(
+                      "A. "+questionModel.choices[0],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
-                    ),
+                    ),]),
                   )),
               SizedBox(height: 10,),
               Container(
@@ -1040,10 +1069,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
-                    child:Text(
-                      (2).toString()+". "+questionModel.choices[1],
+                    child:Wrap(
+                      children: [
+                   Text(
+                      "B. "+questionModel.choices[1],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
-                    ),
+                    ),]),
                   )),
               SizedBox(height: 10,),
               Container(
@@ -1057,10 +1088,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
-                    child:Text(
-                      (3).toString()+". "+questionModel.choices[2],
+                    child:Wrap(
+                      children: [
+                    Text(
+                      "C. "+questionModel.choices[2],
                       style: TextStyle(fontSize: 20,color: Colors.white),
-                    ),
+                    ),]),
                   )),
               SizedBox(height: 10,),
               Container(
@@ -1074,10 +1107,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
-                    child:Text(
-                      (4).toString()+". "+questionModel.choices[3],
+                    child:Wrap(
+                      children: [
+                    Text(
+                      "D. "+questionModel.choices[3],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
-                    ),
+                    ),]),
                   )),
               SizedBox(height: 10,),
             ]);
@@ -1101,10 +1136,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
-                    child:Text(
-                      (1).toString()+". "+questionModel.choices[0],
+                    child:Wrap(
+                      children: [
+                    Text(
+                      "A. "+questionModel.choices[0],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
-                    ),
+                    ),]),
                   )),
               SizedBox(height: 10,),
               Container(
@@ -1118,10 +1155,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
-                    child:Text(
-                      (2).toString()+". "+questionModel.choices[1],
+                    child:Wrap(
+                      children: [
+                    Text(
+                      "B. "+questionModel.choices[1],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
-                    ),
+                    ),]),
                   )),
               SizedBox(height: 10,),
               Container(
@@ -1135,10 +1174,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
-                    child:Text(
-                      (3).toString()+". "+questionModel.choices[2],
+                    child:Wrap(
+                      children: [
+                    Text(
+                      "C. "+questionModel.choices[2],
                       style: TextStyle(fontSize: 20,color: Colors.blue),
-                    ),
+                    ),]),
                   )),
               SizedBox(height: 10,),
               Container(
@@ -1152,10 +1193,12 @@ Widget get_correct_widget(int index, Question_ questionModel) {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 30, top: 5.0, bottom: 5),
-                    child:Text(
-                      (4).toString()+". "+questionModel.choices[3],
+                    child:Wrap(
+                      children: [
+                    Text(
+                      "D. "+questionModel.choices[3],
                       style: TextStyle(fontSize: 20,color: Colors.white),
-                    ),
+                    ),]),
                   )),
               SizedBox(height: 10,),
             ]);
@@ -1179,7 +1222,7 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child:Text(
-                (2).toString()+". "+questionModel.choices[0],
+                "A. "+questionModel.choices[0],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
               ),
             )),
@@ -1196,7 +1239,7 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child:Text(
-                (2).toString()+". "+questionModel.choices[1],
+                "B. "+questionModel.choices[1],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
               ),
             )),
@@ -1213,7 +1256,7 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child:Text(
-                (3).toString()+". "+questionModel.choices[2],
+                "C. "+questionModel.choices[2],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
               ),
             )),
@@ -1230,7 +1273,7 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
               child:Text(
-                (4).toString()+". "+questionModel.choices[3],
+               "D. "+questionModel.choices[3],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
               ),
             )),
@@ -1252,10 +1295,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                  Text(
+                     "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1269,10 +1314,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1286,10 +1333,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1303,10 +1352,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1326,7 +1377,7 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                    "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 )),
@@ -1342,10 +1393,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1359,10 +1412,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1376,10 +1431,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1398,10 +1455,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1415,10 +1474,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1432,10 +1493,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1449,10 +1512,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1475,7 +1540,7 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                     "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 )),
@@ -1491,10 +1556,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1508,10 +1575,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1525,10 +1594,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1547,10 +1618,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1564,10 +1637,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1581,10 +1656,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1598,10 +1675,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1621,7 +1700,7 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
                   child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                     "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
                   ),
                 )),
@@ -1637,10 +1716,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1654,10 +1735,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1671,10 +1754,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1695,10 +1780,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                      Text(
+                    "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1712,10 +1799,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1729,10 +1818,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1746,10 +1837,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1768,10 +1861,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                   Text(
+                      "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1785,10 +1880,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1802,10 +1899,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                   Text(
+                   "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1819,10 +1918,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1841,10 +1942,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1858,10 +1961,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1875,10 +1980,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                  Text(
+                     "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1892,10 +1999,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1916,10 +2025,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1933,10 +2044,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1950,10 +2063,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -1967,10 +2082,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                  Text(
+                     "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -1989,10 +2106,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -2006,10 +2125,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                  Text(
+                     "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -2023,10 +2144,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                  Text(
+                     "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -2040,10 +2163,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -2062,10 +2187,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                  Text(
+                     "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -2079,10 +2206,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -2096,10 +2225,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (3).toString() + ". " + questionModel.choices[2],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "C. " + questionModel.choices[2],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
             Container(
@@ -2113,10 +2244,12 @@ Widget get_wrong_widget(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (4).toString() + ". " + questionModel.choices[3],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "D. " + questionModel.choices[3],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -2140,10 +2273,12 @@ Widget get_correct_widget_len_2(int index, Question_ questionModel) {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
-              child:Text(
-                (2).toString()+". "+questionModel.choices[0],
+              child:Wrap(
+                children: [
+              Text(
+                "A. "+questionModel.choices[0],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
-              ),
+              ),]),
             )),
         SizedBox(height: 20,),
         Container(
@@ -2157,10 +2292,12 @@ Widget get_correct_widget_len_2(int index, Question_ questionModel) {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
-              child:Text(
-                (2).toString()+". "+questionModel.choices[1],
+              child:Wrap(
+                children: [
+              Text(
+                "B. "+questionModel.choices[1],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
-              ),
+              ),]),
             )),
         SizedBox(height: 10,),
       ]);
@@ -2180,10 +2317,12 @@ Widget get_correct_widget_len_2(int index, Question_ questionModel) {
               child: Padding(
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
-                child:Text(
-                  (1).toString()+". "+questionModel.choices[0],
+                child:Wrap(
+                  children: [
+                Text(
+                  "A. "+questionModel.choices[0],
                   style: TextStyle(fontSize: 20,color: Colors.white),
-                ),
+                ),]),
               )),
           SizedBox(height: 20,),
           Container(
@@ -2197,10 +2336,12 @@ Widget get_correct_widget_len_2(int index, Question_ questionModel) {
               child: Padding(
                 padding: const EdgeInsets.only(
                     left: 30, top: 5.0, bottom: 5),
-                child:Text(
-                  (2).toString()+". "+questionModel.choices[1],
+                child:Wrap(
+                  children: [
+                Text(
+                  "B. "+questionModel.choices[1],
                   style: TextStyle(fontSize: 20,color: Colors.blue),
-                ),
+                ),]),
               )),
           SizedBox(height: 10,),
         ]);
@@ -2222,10 +2363,12 @@ Widget get_correct_widget_len_2(int index, Question_ questionModel) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child:Text(
-                    (1).toString()+". "+questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "A. "+questionModel.choices[0],
                     style: TextStyle(fontSize: 20,color: Colors.blue),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 20,),
             Container(
@@ -2239,10 +2382,12 @@ Widget get_correct_widget_len_2(int index, Question_ questionModel) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child:Text(
-                    (2).toString()+". "+questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                  Text(
+                    "B. "+questionModel.choices[1],
                     style: TextStyle(fontSize: 20,color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -2265,10 +2410,12 @@ Widget get_wrong_widget_len_2(Question_ questionModel,selected_answer_index) {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
-              child:Text(
-                (2).toString()+". "+questionModel.choices[0],
+              child:Wrap(
+                children: [
+              Text(
+                "A. "+questionModel.choices[0],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
-              ),
+              ),]),
             )),
         SizedBox(height: 20,),
         Container(
@@ -2282,10 +2429,12 @@ Widget get_wrong_widget_len_2(Question_ questionModel,selected_answer_index) {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 30, top: 5.0, bottom: 5),
-              child:Text(
-                (2).toString()+". "+questionModel.choices[1],
+              child:Wrap(
+                children: [
+             Text(
+                "B. "+questionModel.choices[1],
                 style: TextStyle(fontSize: 20,color: Colors.blue),
-              ),
+              ),]),
             )),
         SizedBox(height: 10,),
       ]);
@@ -2306,10 +2455,12 @@ Widget get_wrong_widget_len_2(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 20,),
             Container(
@@ -2323,10 +2474,12 @@ Widget get_wrong_widget_len_2(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                    "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 10,),
           ]);
@@ -2349,10 +2502,12 @@ Widget get_wrong_widget_len_2(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (1).toString() + ". " + questionModel.choices[0],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "A. " + questionModel.choices[0],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
             SizedBox(height: 20,),
             Container(
@@ -2366,10 +2521,12 @@ Widget get_wrong_widget_len_2(Question_ questionModel,selected_answer_index) {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 30, top: 5.0, bottom: 5),
-                  child: Text(
-                    (2).toString() + ". " + questionModel.choices[1],
+                  child:Wrap(
+                    children: [
+                   Text(
+                     "B. " + questionModel.choices[1],
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  ),]),
                 )),
           ]);
     }

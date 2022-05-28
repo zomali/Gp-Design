@@ -232,10 +232,10 @@ class QuizController extends GetxController{
   List<int>  get_quiz_analysis()
   {
     //lenght of topics in this level
-    int len=levels[id].topics_id.length;
+    int len=levels[id-1].topics_id.length;
     //List<int> count_of_each_topic = List.filled(len+1, 0);
     var count_of_each_topic  = new Map();
-    for(int i=levels[id].topics_id[0];i<len;i++)
+    for(int i=levels[id-1].topics_id[0];i<(levels[id-1].topics_id[0]+len);i++)
     {
       count_of_each_topic[i]=0;
     }
