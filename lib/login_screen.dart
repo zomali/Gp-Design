@@ -301,11 +301,11 @@ class _login_screenState extends State<Login_screen> {
 
                                 if (studentExist(email, password, list)) {
                                   student std = studentLevel(email, list);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              side_layout(std)));
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => side_layout(std)),
+                                        (Route<dynamic> route) => false,
+                                  );
                                 } else {
                                   Fluttertoast.showToast(
                                       msg: "not exist",
