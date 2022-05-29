@@ -10,11 +10,12 @@ import 'quiz_controller.dart';
 class ResultScreen extends StatelessWidget {
   static const routeName = '/result_screen';
   final int id;
+  final String stat;
   Map<int,int> student_answers={};
   List<Question_>questions;
-  ResultScreen(this.id,this.student_answers,this.questions);
-  late QuizController controller;
+  ResultScreen(this.id,this.student_answers,this.questions,this.stat);
   late student std;
+  late QuizController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +106,7 @@ class ResultScreen extends StatelessWidget {
                         SizedBox(height: 20,),
                         viewAnswersButton(
                             onPressed: () =>  Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => QuizResults(id,controller.get_answred(),questions)))),
+                                MaterialPageRoute(builder: (context) => QuizResults(id,controller.get_answred(),questions,stat)))),
                         const SizedBox(
                           height: 5,
                         ),

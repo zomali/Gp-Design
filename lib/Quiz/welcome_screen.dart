@@ -129,7 +129,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child:Column(
                   children: [
                     Text(
-                      "Level "+(id).toString(),
+                      stat+" "+(id).toString(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 32,
@@ -140,7 +140,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       height: 20,
                     ),
                     Text(
-                      "-The quiz consists of 10 questions. \n-Time of quiz is 15 minutes.\n-Read the question carefully before answering.\n-The quiz was created by Dr. Sally and Dr. Salsabil.",
+                      "-The quiz consists of "+get_questions_len(stat, weakness_topic.length, id)+" questions. \n-Time of quiz is 15 minutes.\n-Read the question carefully before answering.\n-The quiz was created by Dr. Sally and Dr. Salsabil.",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22,
@@ -188,4 +188,99 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       ),
     );
   }
+}
+String get_questions_len(String stat,int len,int level)
+{
+  int count=0;
+  if(stat=="Topic")
+    {
+      return "10";
+    }
+  else if(stat=="Level")
+    {
+      if(level==1)
+        {
+          if(len==1)
+            {
+              count=(2*3)+(4);
+            }
+          else if(len==2)
+            {
+              count=(2*4)+3;
+            }
+          else if(len==3)
+          {
+            count=3*4;
+          }
+        }
+      else if(level==2)
+        {
+          if(len==1)
+          {
+            count=(2*3)+(4);
+          }
+          else if(len==2)
+          {
+            count=(2*4)+3;
+          }
+          else if(len==3)
+          {
+            count=3*4;
+          }
+        }
+      else if(level==3)
+      {
+        if(len==1)
+        {
+          count=(2*3)+(4);
+        }
+        else if(len==2)
+        {
+          count=(2*4)+3;
+        }
+        else if(len==3)
+        {
+          count=(3*4)+3;
+        }
+        else if(len==4)
+        {
+          count=4*4;
+        }
+      }
+      else if(level==4)
+      {
+        if(len==1)
+        {
+          count=(2*3)+(4);
+        }
+        else if(len==2)
+        {
+          count=(2*4)+3;
+        }
+        else if(len==3)
+        {
+          count=3*4;
+        }
+      }
+      else if(level==4)
+      {
+        if(len==1)
+        {
+          count=(2*3)+(4);
+        }
+        else if(len==2)
+        {
+          count=(2*4)+3;
+        }
+        else if(len==3)
+        {
+          count=(3*4)+3;
+        }
+        else if(len==4)
+        {
+          count=4*4;
+        }
+      }
+    }
+  return count.toString();
 }

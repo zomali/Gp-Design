@@ -207,11 +207,11 @@ class QuizController extends GetxController{
     DateTime StartTime = DateTime.now();
     int min=StartTime.minute*60;
     start_quiz_time=min+StartTime.second;
-    if(stat=="topic")
+    if(stat=="Topic")
     {
       generate_random_quiz_for_topic(id);
     }
-    if(stat=="level")
+    if(stat=="Level")
     {
       generate_random_quiz_for_level(id,weakness_topics);
     }
@@ -239,7 +239,7 @@ class QuizController extends GetxController{
     {
       count_of_each_topic[i]=0;
     }
-    if(stat=="topic") {
+    if(stat=="Topic") {
       int weakness_count=0;
       for (int i = 0; i < quiz_analysis.length; i++) {
         if (quiz_analysis[i].user_answer == "not answer" || quiz_analysis[i].user_answer == "false") {
@@ -272,7 +272,7 @@ class QuizController extends GetxController{
         weakness_topics.add(quiz_question[0].topic_id);
       }
     }
-    else if(stat=="level")
+    else if(stat=="Level")
     {
       for(int i=0;i<quiz_question.length;i++)
       {

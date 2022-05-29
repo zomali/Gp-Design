@@ -51,9 +51,9 @@ class QuestionCubit extends Cubit<QuestionState> {
     emit(QuestionLoaded());
   } 
   Future<void> getQuestions(String type, int ID) async {
-    if(type == "topic")
+    if(type == "Topic")
     getTopicQuestions(ID);
-    else if(type == "level")
+    else if(type == "Level")
     {
       emit(QuestionLoading());
       Level_ level = await db.getLevelData(ID);

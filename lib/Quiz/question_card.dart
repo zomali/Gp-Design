@@ -30,7 +30,7 @@ class QuestionCard extends StatelessWidget {
               children: [
                 Text(
                   questionModel.question,
-                  style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.white),
                 ),
                 //const SizedBox(height: 15),
                 const Spacer(

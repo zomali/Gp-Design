@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../classes/classes.dart';
+import '../classes/student.dart';
+import '../signup screen.dart';
 import 'question__model.dart';
 import 'quiz__screen.dart';
 import 'result_screen.dart';
@@ -27,7 +29,7 @@ class Start_Quiz extends StatelessWidget {
       getPages: [
         GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen(id,stat,weakness_topics,questions)),
         GetPage(name: QuizScreen.routeName, page: () =>  QuizScreen(id,stat,weakness_topics,questions)),
-        GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen(id,student_answered,questions)),
+        GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen(id,student_answered,questions,stat)),
       ],
     );
   }

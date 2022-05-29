@@ -44,7 +44,7 @@ class QuizScreen extends StatelessWidget {
                         child:Column(
                           children: [
                             Text(
-                              " Quiz On Level "+(id).toString(),
+                              " Quiz On "+stat+" "+(id).toString(),
                               style: Theme.of(context)
                                   .textTheme
                                   .headline4!

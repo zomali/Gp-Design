@@ -106,7 +106,7 @@ class _topic_view extends State<topic_view> {
                                 if (index == topicsPlusQuiz.length - 1) {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
-                                          go_to_quiz(level.id,"level",weakness_topics)));
+                                          go_to_quiz(level.id,"Topic",weakness_topics)));
                                 } else {
                                   //action on tap
                                   //Fluttertoast.showToast(msg:level.id.toString());
