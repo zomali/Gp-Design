@@ -330,8 +330,7 @@ class DatabaseManager {
     return level;
   }
 
-  Future<List<Question_>> getTopicQuestions(
-      int topicID, String complexity) async {
+  Future<List<Question_>> getTopicQuestions(int topicID, String complexity) async {
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     final snapshot = await ref
         .child('quiz_question')
@@ -362,7 +361,44 @@ class DatabaseManager {
     }
     return [];
   }
+  Future<Quiz_> get_quiz(int quiz_id) async{
+      DatabaseReference ref = FirebaseDatabase.instance.reference();
+      final snapshot = await ref.child('quizzes').child(quiz_id.toString()).get();
 
+      Quiz_ quiz = Quiz_();
+      quiz.course_code = snapshot.value['course_id'];
+      quiz.level_id = snapshot.value['level_id'];
+      quiz.topic_id = snapshot.value['topic_id'];
+      quiz.student_score = snapshot.value['student_score'];
+      quiz.total_score = snapshot.value['total_score'];
+      quiz.questions = [];
+      for(var question in snapshot.value['questions'])
+      {
+        Q_Question_ q = Q_Question_();
+        
+
+      }
+      return quiz;
+  }
+
+  Future<List<Quiz_>> get_student_quizzes(String std_id, String course_code) async{
+    List<Quiz_> quizzes = [];
+
+    //get quizzes IDs from Student's collection
+    DatabaseReference ref = FirebaseDatabase.instance.reference();
+    final snapshot = await ref.child('students').child(std_id).child(course_code).child('quizzes').get();
+
+    for(var quiz in snapshot.value)
+    {
+
+    }
+
+    //get quizzes from quizzes collection using their IDs
+
+    //final snapshot2 = await ref.child('quizzes').child(quiz_id).get();
+    
+    return quizzes;
+  }
   void insertNewStudent(student std) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     firebaseDatabase.child('students').child(std.id).set({
@@ -370,7 +406,7 @@ class DatabaseManager {
         'CSW150': {
           'current_level': 1,
           'current_topic': 1,
-          'quizes': {'1': 'level_id'},
+          'quizzes': {'1': 'level_id'},
           'topics_of_weakness': {'1': 'number_of_wrong_answered_questions'}
         }
       },
@@ -1690,7 +1726,7 @@ class DatabaseManager {
     arr.add(0);
     for (var key in keys) {
       for (int i = 0; i < 5; i++) {
-        if (values[key]['courses']['CSW150']['quizes'][i] == 0) {
+        if (values[key]['courses']['CSW150']['quizzes'][i] == 0) {
           continue;
         } else {
           length[i]++;
@@ -1703,7 +1739,7 @@ class DatabaseManager {
         continue;
       } else {
         for (int i = 0; i < 5; i++) {
-          arr[i] += values[key]['courses']['CSW150']['quizes'][i] as int;
+          arr[i] += values[key]['courses']['CSW150']['quizzes'][i] as int;
         }
       }
     }
@@ -1721,7 +1757,7 @@ class DatabaseManager {
         .child(std.id)
         .child('courses')
         .child('CSW150')
-        .child('quizes')
+        .child('quizzes')
         .get();
     for (int i = 0; i < 5; i++) {
       arr.add(response.value[i]);
@@ -1820,7 +1856,7 @@ class DatabaseManager {
         .child('2018170135')
         .child('courses')
         .child('CSW150')
-        .child('quizes')
+        .child('quizzes')
         .update({'0': 100, '1': 90, '2': 80, '3': 100, '4': 70});
   }
 

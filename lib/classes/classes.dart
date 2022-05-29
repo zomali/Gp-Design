@@ -69,3 +69,17 @@ class Question_{
   late String question;
   late List<String> choices;
 }
+class Q_Question_ extends Question_{
+  late int student_answer_id;
+  late int time_to_answer;
+}
+class Quiz_{
+  late List<Q_Question_> questions;
+  late int quiz_id;
+  late String course_code;
+  late int level_id;
+  late int topic_id;
+  late int total_score;
+  late int student_score;
+
+}
