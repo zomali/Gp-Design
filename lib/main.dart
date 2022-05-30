@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gp/Last_quizes.dart';
 import 'package:gp/login_screen.dart';
 import 'package:gp/shared/cubits/cubit/course_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
@@ -9,6 +10,8 @@ import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/shared/cubits/cubit/question_cubit.dart';
 import 'package:gp/shared/cubits/cubit/quiz_cubit.dart';
+
+import 'Subject_lastQuizes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,6 +57,7 @@ class MyApp extends StatelessWidget {
         //home:QuizResults("1"),
         // home: MyProfileScreen(),
         home: Login_screen(),
+
         //home: side_layout(),
         //home: Menu_SideBar(),
         // home: Home(0),

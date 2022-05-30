@@ -52,286 +52,197 @@ class _lastQuizesState extends State<lastQuizes> {
 
   @override
   Widget build(BuildContext context) {
+    int countOfLevels = 4;
+    int countOfTopics = 7;
+    int vv = 0;
+    int vvv = 0;
     addTOList();
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text("Quizzes History"),
-        leading: Icon(Icons.quiz),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text('Quizes Answer'),
+          bottom: TabBar(
 
-        selectedItemColor: Colors.blue,
-        selectedFontSize: 18,
-
-        unselectedItemColor: Colors.grey,
-        unselectedFontSize: 16,
-
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'Info',
+            indicatorColor: Colors.white,
+            indicatorWeight: 5,
+            tabs: [
+              Tab(icon: Icon(Icons.quiz),text: 'Last Quiazes'),
+              Tab(icon: Icon(Icons.question_answer),text: 'Topics Quiazes'),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.keyboard_double_arrow_up),
-            label: 'Levels',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.equalizer_outlined),
-            label: 'Evaluation',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.quiz),
-            label: 'Quizzes',
-          )
-        ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          showUnselectedLabels: true,
 
-        currentIndex: _selectedIndex, //New
-        onTap: _onItemTapped,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
+          selectedItemColor: Colors.blue,
+          selectedFontSize: 18,
 
-          children: [
-            GestureDetector(
-              onTap: (){print('clicked 1');},
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius:BorderRadiusDirectional.only(
-                      topEnd: Radius.circular(
-                          20.0
-                      ),
-                    ),
+          unselectedItemColor: Colors.grey,
+          unselectedFontSize: 16,
 
-
-                  ),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Image(image: NetworkImage('https://wallpapercave.com/wp/wp2555194.png'),
-                        height: 150,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Colors.black.withOpacity(.6),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-
-                        ),
-                        child: Text(
-                          'The First Quize',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-
-                          ),
-
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info),
+              label: 'Info',
             ),
-            GestureDetector(
-              onTap: (){print('clicked 2');},
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius:BorderRadiusDirectional.only(
-                      topEnd: Radius.circular(
-                          20.0
-                      ),
-                    ),
-
-
-                  ),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Image(image: NetworkImage('https://wallpapercave.com/wp/wp2555194.png'),
-                        height: 150,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Colors.black.withOpacity(.6),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-
-                        ),
-                        child: Text(
-                          'The Second Quize',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-
-                          ),
-
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.keyboard_double_arrow_up),
+              label: 'Levels',
             ),
-            GestureDetector(
-              onTap: (){print('clicked 3 ');},
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius:BorderRadiusDirectional.only(
-                      topEnd: Radius.circular(
-                          20.0
-                      ),
-                    ),
-
-
-                  ),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Image(image: NetworkImage('https://wallpapercave.com/wp/wp2555194.png'),
-                        height: 150,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Colors.black.withOpacity(.6),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-
-                        ),
-                        child: Text(
-                          'The Third Quize',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-
-                          ),
-
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.equalizer_outlined),
+              label: 'Evaluation',
             ),
-            GestureDetector(
-              onTap: (){print('clicked 4');},
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius:BorderRadiusDirectional.only(
-                      topEnd: Radius.circular(
-                          20.0
-                      ),
-                    ),
-
-
-                  ),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Image(image: NetworkImage('https://wallpapercave.com/wp/wp2555194.png'),
-                        height: 150,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Colors.black.withOpacity(.6),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-
-                        ),
-                        child: Text(
-                          'The Fourth Quize',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-
-                          ),
-
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: (){print('clicked 5');},
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius:BorderRadiusDirectional.only(
-                      topEnd: Radius.circular(
-                          20.0
-                      ),
-                    ),
-
-
-                  ),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Image(image: NetworkImage('https://wallpapercave.com/wp/wp2555194.png'),
-                        height: 150,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Colors.black.withOpacity(.6),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-                        ),
-                        child: Text(
-                          'The Fifth Quize',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-
-                          ),
-
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
+            BottomNavigationBarItem(
+              icon: Icon(Icons.quiz),
+              label: 'Quizzes',
+            )
           ],
 
+          currentIndex: _selectedIndex, //New
+          onTap: _onItemTapped,
         ),
+        body: TabBarView(
+          children: [
+           ListView.builder(
+
+             itemCount: countOfLevels,
+             itemBuilder: (context, index) {
+               if(vv == countOfLevels)
+               {
+                 vv = 0;
+               }
+               vv++;
+
+
+               return GestureDetector(
+
+               onTap: ()
+             {
+
+               print('clicked');},
+               child: Padding(
+                 padding: const EdgeInsets.all(5.0),
+                 child: Container(
+                   decoration: BoxDecoration(
+                     borderRadius:BorderRadiusDirectional.only(
+                       topEnd: Radius.circular(
+                           20.0
+                       ),
+                     ),
+                   ),
+                   clipBehavior: Clip.antiAliasWithSaveLayer,
+                   child: Stack(
+                     alignment: Alignment.bottomCenter,
+                     children: [
+                       Image(image: NetworkImage('https://wallpapercave.com/wp/wp2555194.png'),
+                         height: 150,
+                         width: double.infinity,
+                         fit: BoxFit.cover,
+                       ),
+                       Container(
+                         width: double.infinity,
+                         color: Colors.black.withOpacity(.6),
+                         padding: EdgeInsets.symmetric(
+                           vertical: 10.0,
+
+                         ),
+
+                         child: Text(
+
+                           'Level $vv',
+                           textAlign: TextAlign.center,
+                           style: TextStyle(
+                             fontSize: 20.0,
+                             color: Colors.white,
+
+                           ),
+
+                         ),
+                       ),
+                     ],
+                   ),
+                 ),
+               ),
+
+             );
+
+             },
+
+           ),
+            ListView.builder(
+
+              itemCount: countOfTopics,
+              itemBuilder: (context, index) {
+                if(vvv == countOfTopics)
+                {
+                  vvv = 0;
+                }
+                vvv++;
+                return GestureDetector(
+
+                  onTap: ()
+                  {
+                    print('clicked');},
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:BorderRadiusDirectional.only(
+                          topEnd: Radius.circular(
+                              20.0
+                          ),
+                        ),
+                      ),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Image(image: NetworkImage('https://media.istockphoto.com/photos/abstract-background-wallpaper-picture-id952039286?k=20&m=952039286&s=612x612&w=0&h=sTcINLuW0VnUx1tGNiJsqZnEMauIjdYXsmy4DJZEqmo='),
+                            height: 150,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            color: Colors.black.withOpacity(.6),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10.0,
+
+                            ),
+
+                            child: Text(
+
+                              'topic $vvv',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.white,
+
+                              ),
+
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                );
+
+              },
+
+            ),
+
+
+          ],
+        ),
+
+
+
       ),
-
-
-
-
     );
   }
 }

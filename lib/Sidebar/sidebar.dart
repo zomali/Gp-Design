@@ -155,19 +155,7 @@ class _sidebarState extends State<sidebar>
                           titleColor: Colors.white,
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          BlocProvider.of<Navigationn>(context)
-                              .add(NavigationEvents.profile);
-                          oniconpress();
-                        },
-                        child: Menu_SideBar(
-                          icon: Icons.person,
-                          iconColor: Colors.cyan,
-                          title: "Profile",
-                          titleColor: Colors.white,
-                        ),
-                      ),
+
                       GestureDetector(
                         onTap: () {
                           BlocProvider.of<Navigationn>(context)
