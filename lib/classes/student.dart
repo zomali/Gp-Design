@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 class student {
   var id;
   var name;
+  var academic_year;
   var level;
   var password;
   var profile_picture;

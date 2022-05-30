@@ -463,6 +463,7 @@ class _signup_screenState extends State<signup_screen> {
                         std.name = usernameController.text;
                         std.email = emailController.text;
                         std.password = passwordController.text;
+                        std.academic_year =1;
                         std.profile_picture = 'proj_images/login_image.jpeg';
                         std.birthdate = d;
                         db.insertNewStudent(std);

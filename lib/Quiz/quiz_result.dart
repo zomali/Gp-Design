@@ -44,7 +44,7 @@ class QuizResults extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "  Results Of Quiz "+stat! +" "+ id.toString(),
+                                  "  Results Of Quiz "+stat +" "+ id.toString(),
                                   style: Theme
                                       .of(context)
                                       .textTheme

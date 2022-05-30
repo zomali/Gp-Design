@@ -185,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                             height: 3,
                           ),
                           Text(
-                            "Academic Year: " + std.level.toString(),
+                            "Academic Year: " + std.academic_year.toString(),
                             style: TextStyle(
                               fontSize: 13,
                               //       color : Colors.blueGrey,
