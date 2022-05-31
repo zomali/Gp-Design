@@ -35,10 +35,7 @@ class _lastQuizesState extends State<lastQuizes> {
   void _onItemTapped(int index) {
     setState(
           () {
-
         _selectedIndex = index;
-
-        //   print("index = ${widget.ind} ");
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => moveToPage(index)));
       },
@@ -52,7 +49,7 @@ class _lastQuizesState extends State<lastQuizes> {
 
   @override
   Widget build(BuildContext context) {
-    int countOfLevels = 4;
+    int countOfLevels = 5;
     int countOfTopics = 7;
     int vv = 0;
     int vvv = 0;
@@ -62,14 +59,14 @@ class _lastQuizesState extends State<lastQuizes> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Quizes Answer'),
+          title: Text('Quizzes'),
           bottom: TabBar(
 
             indicatorColor: Colors.white,
             indicatorWeight: 5,
             tabs: [
-              Tab(icon: Icon(Icons.quiz),text: 'Last Quiazes'),
-              Tab(icon: Icon(Icons.question_answer),text: 'Topics Quiazes'),
+              Tab(icon: Icon(Icons.keyboard_double_arrow_up),text: 'Levels Quizzes'),
+              Tab(icon: Icon(Icons.topic),text: 'Topics Quizzes'),
             ],
           ),
         ),

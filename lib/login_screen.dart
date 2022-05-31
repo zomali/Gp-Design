@@ -12,7 +12,6 @@ import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/signup%20screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 import 'DatabaseManager.dart';
 
