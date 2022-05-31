@@ -87,5 +87,6 @@ class TopicOfWeakness_{
   late int level_id;
   late int topic_id;
   late int number_of_wrong_questions;
+  late int number_of_not_answered_question;
   late int number_of_late_questions;
 }

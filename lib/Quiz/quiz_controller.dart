@@ -194,7 +194,7 @@ class QuizController extends GetxController{
   //timer
   Timer? _timer;
   //min to display quiz to stident
-  final maxMin = 15;
+  final int maxMin = 15;
   //time in progress time design must equal maxMin variable
   final RxInt _min = 15.obs;
   RxInt get min => _min;
@@ -229,91 +229,132 @@ class QuizController extends GetxController{
   int get scoreResult {
     return _countOfCorrectAnswers ;;
   }
-  List<int>  get_quiz_analysis()
+  List<TopicOfWeakness_>  get_quiz_analysis()
   {
-    //lenght of topics in this level
-    int len=levels[id-1].topics_id.length;
-    //List<int> count_of_each_topic = List.filled(len+1, 0);
-    var count_of_each_topic  = new Map();
-    for(int i=levels[id-1].topics_id[0];i<(levels[id-1].topics_id[0]+len);i++)
-    {
-      count_of_each_topic[i]=0;
-    }
+    List<TopicOfWeakness_> weakness_list  = [];
+    double sec=(maxMin * 60) / quiz_question.length ;
     if(stat=="Topic") {
       int weakness_count=0;
+      TopicOfWeakness_ weakness_=new TopicOfWeakness_();
+      weakness_.number_of_late_questions=0;
+      weakness_.number_of_not_answered_question=0;
+      weakness_.number_of_wrong_questions=0;
+      weakness_.level_id=get_level_id(id);
+      weakness_.topic_id=id;
       for (int i = 0; i < quiz_analysis.length; i++) {
-        if (quiz_analysis[i].user_answer == "not answer" || quiz_analysis[i].user_answer == "false") {
-          weakness_count++;
+        if ( quiz_analysis[i].user_answer == "false") {
+          weakness_.number_of_wrong_questions+=1;
         }
+        else if(quiz_analysis[i].user_answer == "no answer")
+          {
+           weakness_.number_of_not_answered_question+=1;
+          }
         else {
-          if (quiz_analysis[i].user_answer == "true") {
-            if (quiz_analysis[i].complexity == "easy") {
-              if (quiz_analysis[i].time_spent > ((maxMin * 60) / quiz_question.length)) {
-                weakness_count++;
+          if (quiz_analysis[i].complexity == "easy") {
+              if (quiz_analysis[i].time_spent > sec) {
+                weakness_.number_of_late_questions+=1;
               }
             }
-            if (quiz_analysis[i].complexity == "medium") {
-              if (quiz_analysis[i].time_spent >
-                  ((maxMin * 60) / quiz_question.length * 2)) {
-                weakness_count++;
+            else if (quiz_analysis[i].complexity == "medium") {
+              if (quiz_analysis[i].time_spent > (sec * 2)) {
+                weakness_.number_of_late_questions+=1;
               }
             }
-            if (quiz_analysis[i].complexity == "hard") {
-              if (quiz_analysis[i].time_spent >
-                  ((maxMin * 60) / quiz_question.length * 3)) {
-                weakness_count++;
-              }
+            else if (quiz_analysis[i].complexity == "hard") {
+              if (quiz_analysis[i].time_spent > (sec* 3)) {
+                weakness_.number_of_late_questions+=1;
             }
           }
         }
       }
+      weakness_count=weakness_.number_of_late_questions+weakness_.number_of_not_answered_question+weakness_.number_of_wrong_questions;
       if(weakness_count>(quiz_question.length/3))
       {
-        weakness_topics.add(quiz_question[0].topic_id);
+        weakness_list.add(weakness_);
       }
     }
     else if(stat=="Level")
     {
+      int len=levels[id-1].topics_id.length;
+      for(int i=levels[id-1].topics_id[0];i<(levels[id-1].topics_id[0]+len);i++)
+      {
+        TopicOfWeakness_ topicOfWeakness_=new TopicOfWeakness_();
+        topicOfWeakness_.number_of_not_answered_question=0;
+        topicOfWeakness_.number_of_wrong_questions=0;
+        topicOfWeakness_.number_of_late_questions=0;
+        topicOfWeakness_.topic_id=i;
+        topicOfWeakness_.level_id=id;
+        weakness_list.add(topicOfWeakness_);
+      }
       for(int i=0;i<quiz_question.length;i++)
       {
-        if (quiz_analysis[i].user_answer == "not answer" || quiz_analysis[i].user_answer == "false") {
-          count_of_each_topic[quiz_analysis[i].topic_id]+=1;
+        if ( quiz_analysis[i].user_answer == "false") {
+          for(var item in weakness_list)
+            {
+              if(item.topic_id==quiz_analysis[i].topic_id)
+                {
+                  item.number_of_wrong_questions+=1;
+                  break;
+                }
+            }
         }
+        else if(quiz_analysis[i].user_answer == "no answer")
+          {
+            for(var item in weakness_list)
+            {
+              if(item.topic_id==quiz_analysis[i].topic_id)
+              {
+                item.number_of_not_answered_question+=1;
+                break;
+              }
+            }
+          }
         else {
-          if (quiz_analysis[i].user_answer == "true") {
-            if (quiz_analysis[i].complexity == "easy") {
-              if (quiz_analysis[i].time_spent > ((maxMin * 60) / quiz_question.length)) {
-                count_of_each_topic[quiz_analysis[i].topic_id]+=1;
-              }
+          if (quiz_analysis[i].complexity == "easy") {
+              if (quiz_analysis[i].time_spent > sec) {
+                for(var item in weakness_list)
+                {
+                  if(item.topic_id==quiz_analysis[i].topic_id)
+                  {
+                    item.number_of_late_questions+=1;
+                    break;
+                  }
+                }              }
             }
-            if (quiz_analysis[i].complexity == "medium") {
-              if (quiz_analysis[i].time_spent >
-                  ((maxMin * 60) / quiz_question.length * 2)) {
-                count_of_each_topic[quiz_analysis[i].topic_id]+=1;
-              }
+            else if (quiz_analysis[i].complexity == "medium") {
+              if (quiz_analysis[i].time_spent > (sec *2)) {
+                for(var item in weakness_list)
+                {
+                  if(item.topic_id==quiz_analysis[i].topic_id)
+                  {
+                    item.number_of_late_questions+=1;
+                    break;
+                  }
+                }                }
             }
-            if (quiz_analysis[i].complexity == "hard") {
-              if (quiz_analysis[i].time_spent >
-                  ((maxMin * 60) / quiz_question.length * 3)) {
-                count_of_each_topic[quiz_analysis[i].topic_id]+=1;
-              }
+           else if (quiz_analysis[i].complexity == "hard") {
+              if (quiz_analysis[i].time_spent > (sec * 3)) {
+                for(var item in weakness_list)
+                {
+                  if(item.topic_id==quiz_analysis[i].topic_id)
+                  {
+                    item.number_of_late_questions+=1;
+                    break;
+                  }
+                }                }
             }
+          }
+      }
+      
+      for(int i=0;i<weakness_list.length;i++) {
+        int count=weakness_list[i].number_of_late_questions+weakness_list[i].number_of_not_answered_question+weakness_list[i].number_of_wrong_questions;
+          if (count < 3) {
+            weakness_list.removeAt(i);
+            i--;
           }
         }
       }
-      for(int i=levels[id].topics_id[0];i<len;i++) {
-        if (weakness_topics.contains(i)) {
-          if (count_of_each_topic[i] > 3) {
-            weakness_topics.remove(i);
-          }
-        }
-        else if (count_of_each_topic[i]>2)
-        {
-          weakness_topics.add(i);
-        }
-      }
-    }
-    return weakness_topics;
+    return weakness_list;
   }
   int calculate_total_quiz_points()
   {
@@ -325,7 +366,8 @@ class QuizController extends GetxController{
     return total_score;
   }
   void checkStatusOfStudent(){
-    if(scoreResult>80)
+    int total=calculate_total_quiz_points();
+    if(scoreResult>total*.8)
     {
       status="Congratulations";
     }
@@ -333,7 +375,7 @@ class QuizController extends GetxController{
     {
       status="Very frustrating. You have to change the way you study";
     }
-    else if(scoreResult<50)
+    else if(scoreResult<total*.5)
     {
       status="You Must Study Well, You Will Repeat This Level";
     }
@@ -546,4 +588,14 @@ class QuizController extends GetxController{
   }
   void resetTimer() => _min.value = maxMin;
   void stopTimer() => _timer!.cancel();
+  int get_level_id(int topic_id) {
+    for (int l = 0; l < levels.length; l++) {
+      for (int j = 0; j < levels[l].topics_id.length; j++) {
+        if (levels[l].topics_id[j] == topic_id) {
+          return levels[l].level_id;
+        }
+      }
+    }
+    return 0;
+  }
 }

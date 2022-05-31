@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:gp/Last_quizes.dart';
 import 'package:gp/login_screen.dart';
 import 'package:gp/shared/cubits/cubit/course_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
@@ -51,21 +51,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Personalized E-Learning System',
         debugShowCheckedModeBanner: false,
-        home: AnimatedSplashScreen(
-        splash:Container(
-          child: Column(
-            children: [
-              Image.asset('proj_images/Ain_Shams_logo.png'),
-              Image.asset('proj_images/faculty_logo.png')
-            ],
-          ),
-        ),
-        splashTransition: SplashTransition.slideTransition,
-        //pageTransitionType: PageTransitionType.scale,
-        duration: 1500,
-        nextScreen: Login_screen()),
-        //home: Login_screen(),
+        //home: Edit_Proile_Screen(),
+        //home:Start_Quiz("1"),
+        //home:QuizResults("1"),
+        // home: MyProfileScreen(),
+        home: Login_screen(),
 
+        //home: side_layout(),
+        //home: Menu_SideBar(),
+        // home: Home(0),
+        //home: Courses_evaluations_Screen(new student()),
+        //home: signup_screen(),
       ),
     );
   }

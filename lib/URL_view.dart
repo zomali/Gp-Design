@@ -63,13 +63,10 @@ class _url_view extends State<url_view> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          urls[index].title,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
+                         RichText(text: TextSpan(children:<TextSpan>[
+                          TextSpan(text: urls[index].title,
+                            style: TextStyle(fontSize: 15,color: Colors.blue,fontWeight: FontWeight.bold),),
+                        ]),
                         ),
                         SizedBox(
                           height: 10,

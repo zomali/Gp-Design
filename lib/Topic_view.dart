@@ -24,7 +24,7 @@ class _topic_view extends State<topic_view> {
   student std;
   Level_ level;
   _topic_view(this.std, this.level);
-  List<int>weakness_topics=[1,2,3];
+  List<int>weakness_topics=[1];
   List<TopicsPlusQuiz> topicsPlusQuiz = <TopicsPlusQuiz>[];
   @override
   void initState() {

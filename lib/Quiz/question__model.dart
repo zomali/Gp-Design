@@ -23,5 +23,5 @@ class Quiz_Analysis
   late int topic_id;
   late int points;
   late String complexity;
-  late int time_spent;
+  late double time_spent;
 }
