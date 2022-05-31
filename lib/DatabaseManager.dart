@@ -387,7 +387,7 @@ class DatabaseManager {
       return q;
   }
 
-  Future<Quiz_> get_quiz(int quiz_id) async{
+ /* Future<Quiz_> get_quiz(int quiz_id) async{
       DatabaseReference ref = FirebaseDatabase.instance.reference();
 //      final snapshot = await ref.child('quizzes').child(quiz_id.toString()).get();
       final snapshot = await ref.child('quizzes').child('1').get();
@@ -408,9 +408,9 @@ class DatabaseManager {
         quiz.questions.add(q);
       }
       return quiz;
-  }
+  }*/
 
-  Future<List<Quiz_>> get_student_quizzes(int std_id, String course_code) async{
+ /* Future<List<Quiz_>> get_student_quizzes(int std_id, String course_code) async{
     //get quizzes IDs from Student's collection
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     final snapshot = await ref.child('students').child(std_id.toString()).child('courses').child(course_code).child('quizzes').get();
@@ -425,8 +425,42 @@ class DatabaseManager {
       quizzes.add(q);
     }
     return quizzes;
-  }
+  }*/
   
+  Future<List<Quiz_>> get_quizzes(int std_id, String type) async{
+    DatabaseReference ref = FirebaseDatabase.instance.reference();
+    final snapshot = await ref.child('quizzes').child(std_id.toString()).child(type).get();
+    List<Quiz_> quizzes = [];
+
+    if(snapshot.value != null)
+    {
+      var values = snapshot.value;
+      var keys = snapshot.value.keys;
+    for(var key in keys)
+    {
+      if(values[key] == null)
+      continue;
+      Quiz_ q = Quiz_();
+      q.quiz_id = int.parse(key);
+      q.course_code = values[key]['course_id'];
+      q.level_id = values[key]['level_id'];
+      q.topic_id = values[key]['topic_id'];
+      q.student_score = values[key]['student_score'];
+      q.total_score = values[key]['total_score'];
+      q.questions = [];
+      for(var question in values[key]['questions'])
+      {
+        Q_Question_ que = await get_quiz_question(int.parse(question['question_id']));
+        que.student_answer_id = question['answer_id'];
+        que.time_to_answer = question['time_to_answer'];
+        q.questions.add(que);
+      }
+      quizzes.add(q);
+    }
+    }
+    return quizzes;
+  }
+
   void insertNewStudent(student std) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     firebaseDatabase.child('students').child(std.id).set({
@@ -1054,8 +1088,7 @@ class DatabaseManager {
     });
   }
 
-  Future<studentBehavior> fetchStudentBehavior(
-      var id, var level, var topic) async {
+  Future<studentBehavior> fetchStudentBehavior(var id, var level, var topic) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase
         .child('student_behavior_model')

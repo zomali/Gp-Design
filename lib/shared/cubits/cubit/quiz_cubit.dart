@@ -11,12 +11,15 @@ class QuizCubit extends Cubit<QuizState> {
    static QuizCubit get(context){
     return BlocProvider.of(context);
   }
-  late List<Quiz_> quizzes;
+  late List<Quiz_> topicQuizzes;
+  late List<Quiz_> levelQuizzes;
+
   final DatabaseManager db = DatabaseManager();
 
    Future<void> getStudentQuizzes(int std_id, String course_code) async{
     emit(QuizLoading());
-    quizzes = await db.get_student_quizzes(std_id, course_code);
+    topicQuizzes = await db.get_quizzes(std_id, 'Topic');
+    levelQuizzes = await db.get_quizzes(std_id, 'Level');
     emit(QuizLoaded());
   }  
 

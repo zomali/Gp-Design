@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gp/Info.dart';
 import 'package:gp/classes/classes.dart';
-
 import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Learning_analytics_screen.dart';
 import 'Levels_View.dart';
@@ -17,7 +16,6 @@ class lastQuizes extends StatefulWidget{
 }
 
 class _lastQuizesState extends State<lastQuizes> {
-
   student std;
   String courseCode;
   _lastQuizesState(this.std, this.courseCode);
