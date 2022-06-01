@@ -25,7 +25,7 @@ class _Courses_evaluations_ScreenState
 
   void addTOList() {
     _pages.add(Home(std));
-    _pages.add(Learning_analytics_screen(std));
+  //  _pages.add(Learning_analytics_screen(std));
     _pages.add(Courses_evaluations_Screen(std));
     _pages.add(MyProfileScreen(std));
   }

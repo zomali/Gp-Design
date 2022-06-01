@@ -76,8 +76,7 @@ class DatabaseManager {
     return list;
   }
 
-  Future<List<double>> getTimeTokenForEachContentType(
-      student std, studentBehavior stdBehavior) async {
+  Future<List<double>> getTimeTokenForEachContentType( student std, studentBehavior stdBehavior) async {
     List<int> arr = [];
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase
@@ -186,6 +185,102 @@ class DatabaseManager {
     arrDouble.add(text_time_weight + text_click_weight);
 
     return arrDouble;
+  }
+  Future<List<int>> getTimeTokenForEachContentType2( student std) async {
+    List<int> arr = [];
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('student_behavior_model')
+        .child(std.id)
+        .get();
+    //var keys = response.value.keys;
+    var values = response.value;
+    //   int type = 1;
+    int topic = 3;
+    for (int Level = 1; Level < 6; Level++) {
+      var audio_time = 0;
+      var video_time = 0;
+      var image_time = 0;
+      var text_time = 0;
+
+      if (Level > std.level) {
+        arr.add(0);
+      } else {
+        int startTopic = 0;
+        if (Level == 1) {
+          startTopic = 1;
+        } else if (Level == 2) {
+          startTopic = 4;
+          topic += 3;
+        } else if (Level == 3) {
+          startTopic = 7;
+          topic += 4;
+        } else if (Level == 4) {
+          startTopic = 11;
+          topic += 3;
+        } else if (Level == 5) {
+          startTopic = 14;
+          topic += 4;
+        }
+        //print(values[1][1]['audio']['time_spent']);
+        for (int t = startTopic; t <= topic; t++) {
+          audio_time += values[Level][t]['audio']['time_spent'] as int;
+          text_time += values[Level][t]['text']['time_spent'] as int;
+          video_time += values[Level][t]['video']['time_spent'] as int;
+          image_time += values[Level][t]['image']['time_spent'] as int;
+        }
+        //print(time);
+        //time = time / 60 as int;
+        int timeInMinetesAudio = 0;
+        int timeInMinetesVideo = 0;
+        int timeInMinetesText = 0;
+        int timeInMinetesImage = 0;
+        if (video_time < 60) {
+          timeInMinetesVideo = 1;
+        } else {
+          while (video_time >= 60) {
+            timeInMinetesVideo++;
+            video_time -= 60;
+          }
+
+          if (audio_time < 60) {
+            timeInMinetesAudio = 1;
+          } else {
+            while (audio_time >= 60) {
+              timeInMinetesAudio++;
+              audio_time -= 60;
+            }
+
+            if (text_time < 60) {
+              timeInMinetesText = 1;
+            } else {
+              while (text_time >= 60) {
+                timeInMinetesText++;
+                text_time -= 60;
+              }
+
+              if (image_time < 60) {
+                timeInMinetesImage = 1;
+              } else {
+                while (image_time >= 60) {
+                  timeInMinetesImage++;
+                  image_time -= 60;
+                }
+              }
+              arr.add(timeInMinetesVideo); //arr[0]=video_time_spent
+              arr.add(timeInMinetesAudio); //arr[1]=audio_time_spent
+              arr.add(timeInMinetesImage); //arr[2]=image_time_spent
+              arr.add(timeInMinetesText); //arr[3]=text_time_spent
+              //print(time);
+
+            }
+          }
+        }
+      }
+    }
+
+
+    return arr;
   }
 
   Future<List<int>> getTimeTokenForEachLevel(student std) async {
@@ -1140,8 +1235,7 @@ class DatabaseManager {
     return std;
   }
 
-  Future<studentBehavior> fetchTimeSpendEveryOnce(
-      var id, var level, var topic) async {
+  Future<studentBehavior> fetchTimeSpendEveryOnce(var id, var level, var topic) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase
         .child('student_behavior_model')
@@ -1152,7 +1246,7 @@ class DatabaseManager {
     var value = response.value;
     studentBehavior std = studentBehavior();
 
-    std.last_time_entered = value['last_time_enterd'];
+    std.last_time_entered = value['last_time_entered'];
 
     std.forAudio.NumberOfVisitedPage = value['audio']['number_of_visits'];
     std.forAudio.PopUpQuastion = value['audio']['popUpQuestion'];
@@ -1183,8 +1277,7 @@ class DatabaseManager {
     return std;
   }
 
-  void updateStudentBehavior(int time, int clicks, String type, var id,
-      var Level, var Topic, var arr, var last_time) {
+  void updateStudentBehavior(int time, int clicks, String type, var id, var Level, var Topic, var arr, var last_time) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     firebaseDatabase
         .child('student_behavior_model')

@@ -40,7 +40,7 @@ class _typesState extends State<types> {
   DatabaseManager db = DatabaseManager();
   List<double> weight = [];
   //late TypesForStudent list;
-  var cupit;
+  var cubit;
   bool _video_1st = true;
 // bool _video_1st=false;
 
@@ -120,6 +120,7 @@ class _typesState extends State<types> {
             } else {
               var behaviorCubit = StudentBehaviorCubit.get(context);
               stdBehavior = behaviorCubit.value;
+
               TopicCubit.get(context)
                   .getTimeTokenForEachContentType(std, stdBehavior);
               TopicCubit.get(context).getTopicData(topic.id);
@@ -134,7 +135,7 @@ class _typesState extends State<types> {
                     try {
                       topic = topicCubit.topic;
                       weight = topicCubit.weight;
-                      weight[1] = 1000;
+                   //   weight[1] = 1000;
                       setContentType(weight);
                     } catch (e) {
                       topic = topicCubit.topic;
@@ -768,7 +769,8 @@ class _typesState extends State<types> {
               );
             }
           });
-        }));
+        })
+    );
   }
 }
 
