@@ -9,12 +9,12 @@ import 'custom_button.dart';
 import 'quiz_controller.dart';
 class ResultScreen extends StatelessWidget {
   static const routeName = '/result_screen';
+  final student std;
   final int id;
   final String stat;
   Map<int,int> student_answers={};
   List<Question_>questions;
-  ResultScreen(this.id,this.student_answers,this.questions,this.stat);
-  late student std;
+  ResultScreen(this.std, this.id,this.student_answers,this.questions,this.stat);
   late QuizController controller;
 
   @override

@@ -4,7 +4,7 @@ import 'package:gp/Course_evaluation_screens/other_students_evaluation_screen.da
 
 import '../Home.dart';
 import '../Info.dart';
-import '../Last_quizes.dart';
+import '../Last_quizzes.dart';
 import '../Learning_analytics_screen.dart';
 import '../Levels_View.dart';
 import '../classes/student.dart';
@@ -33,7 +33,7 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
     _pages.add(INFO(std, courseCode));
     _pages.add(levels_view(std));
     _pages.add(Course_evual_categories(std, courseCode));
-    _pages.add(lastQuizes(std, courseCode));
+    _pages.add(lastQuizzes(std, courseCode));
   }
 
   void _onItemTapped(int index) {

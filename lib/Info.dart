@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/shared/cubits/cubit/course_cubit.dart';
 import 'Course_evaluation_screens/Courses_evaluations.dart';
-import 'Last_quizes.dart';
+import 'Last_quizzes.dart';
 import 'Levels_View.dart';
 import 'package:gp/classes/classes.dart';
 import 'classes/student.dart';
@@ -27,7 +27,7 @@ class _INFOState extends State<INFO> {
     _pages.add(INFO(std, courseCode));
     _pages.add(levels_view(std));
     _pages.add(Course_evual_categories(std, courseCode));
-    _pages.add(lastQuizes(std, courseCode));
+    _pages.add(lastQuizzes(std, courseCode));
   }
 
   void _onItemTapped(int index) {
@@ -132,18 +132,6 @@ class _INFOState extends State<INFO> {
      super.dispose();
      scrollViewColtroller.dispose();
    }
-/*
-   _moveUp() {
-     scrollViewColtroller.animateTo(scrollViewColtroller.offset - 50,
-         curve: Curves.linear, duration: Duration(milliseconds: 500));
-   }
-
-   _moveDown() {
-     scrollViewColtroller.animateTo(scrollViewColtroller.offset + 50,
-         curve: Curves.linear, duration: Duration(milliseconds: 500));
-   }
-*/
-//
    @override
   Widget build(BuildContext context ) {
     addTOList();
@@ -210,52 +198,7 @@ class _INFOState extends State<INFO> {
                   ),
                   child: ListView(
                 //  controller: scrollViewColtroller,
-                  children: [
-                    /*Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 30,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Row(
-                              children: [
-                                Text(
-                                  course.code,
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                Container(
-                                  height: 40,
-                                  child: VerticalDivider(
-                                    color: Colors.grey[200],
-                                    width: 20,
-                                    thickness: 2,
-                                    indent: 10,
-                                    endIndent: 10,
-                                  ),
-                                ),
-                                Text(
-                                  course.name,
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),*/
-                   
+                  children: [                   
                       Container(
                       padding: EdgeInsets.symmetric( horizontal: 25, vertical: 10),
                       height: 120,
@@ -329,17 +272,7 @@ class _INFOState extends State<INFO> {
                         ],
                       ),
                     ),
-                    /*Padding(padding: EdgeInsets.all(10),
-                    child: Container(
-                    child: Divider(
-                      height: 5,
-                      thickness: 2,
-                      indent: 5,
-                      endIndent:5,
-                      color: Colors.black26,
-                    ),  
-                    ),
-                    ),*/
+                    
                     Padding(padding: EdgeInsets.only(left:30),
                     child: Text("Instructors",
                         style: TextStyle(

@@ -12,7 +12,7 @@ import 'package:gp/classes/student.dart';
 import 'Course_evaluation_screens/Courses_evaluations.dart';
 import 'Dashboard_screen.dart';
 import 'Home.dart';
-import 'Last_quizes.dart';
+import 'Last_quizzes.dart';
 import 'Learning_analytics_screen.dart';
 import 'myprofile_screen.dart';
 
@@ -32,7 +32,7 @@ class _levels_view extends State<levels_view> {
     _pages.add(INFO(std, "CSW150"));
     _pages.add(levels_view(std));
     _pages.add(Course_evual_categories(std, "CSW150"));
-    _pages.add(lastQuizes(std, "CSW150"));
+    _pages.add(lastQuizzes(std, "CSW150"));
   }
 
   void _onItemTapped(int index) {

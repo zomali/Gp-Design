@@ -6,6 +6,7 @@ import 'package:gp/classes/studentBehavior.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:path/path.dart';
+import 'Quiz/go_to_quiz.dart';
 import 'dialogs/languageDialog.dart';
 import 'Topic_View.dart';
 import 'classes/student.dart';
@@ -39,6 +40,7 @@ class _typesState extends State<types> {
   late studentBehavior stdBehavior;
   DatabaseManager db = DatabaseManager();
   List<double> weight = [];
+  List<int> quiz = [];
   //late TypesForStudent list;
   var cubit;
   bool _video_1st = true;
@@ -757,6 +759,36 @@ class _typesState extends State<types> {
                                   ],
                                 ),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 30),
+                                child: Container(
+                                  width: double.infinity,
+                                  child: MaterialButton(
+                                    onPressed: () async {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              //builder: (context) => Levels(1, std))),
+                                              builder: (context) => go_to_quiz(
+                                                  std,
+                                                  topic.id,
+                                                  "Topic",
+                                                  quiz)));
+                                    },
+                                    child: Text(
+                                      "Quiz for Topic",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.blue[500],
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(25.0))),
+                                ),
+                              ), //
 
                               //),
                             ],
