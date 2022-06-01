@@ -15,10 +15,11 @@ void main() {
 }*/
 class Start_Quiz extends StatelessWidget {
   final int id;
+  final student std;
    String stat;
    List<int> weakness_topics;
    List<Question_> questions;
-  Start_Quiz(this.id,this.stat,this.weakness_topics, this.questions);
+  Start_Quiz(this.std, this.id,this.stat,this.weakness_topics, this.questions);
   Map<int,int> student_answered={};
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class Start_Quiz extends StatelessWidget {
       getPages: [
         GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen(id,stat,weakness_topics,questions)),
         GetPage(name: QuizScreen.routeName, page: () =>  QuizScreen(id,stat,weakness_topics,questions)),
-        GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen(id,student_answered,questions,stat)),
+        GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen(std, id,student_answered,questions,stat)),
       ],
     );
   }

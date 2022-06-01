@@ -76,8 +76,7 @@ class DatabaseManager {
     return list;
   }
 
-  Future<List<double>> getTimeTokenForEachContentType(
-      student std, studentBehavior stdBehavior) async {
+  Future<List<double>> getTimeTokenForEachContentType(student std, studentBehavior stdBehavior) async {
     List<int> arr = [];
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase
@@ -387,46 +386,6 @@ class DatabaseManager {
       return q;
   }
 
- /* Future<Quiz_> get_quiz(int quiz_id) async{
-      DatabaseReference ref = FirebaseDatabase.instance.reference();
-//      final snapshot = await ref.child('quizzes').child(quiz_id.toString()).get();
-      final snapshot = await ref.child('quizzes').child('1').get();
-
-      Quiz_ quiz = Quiz_();
-      quiz.quiz_id = quiz_id;
-      quiz.course_code = snapshot.value['course_id'];
-      quiz.level_id = snapshot.value['level_id'];
-      quiz.topic_id = snapshot.value['topic_id'];
-      quiz.student_score = snapshot.value['student_score'];
-      quiz.total_score = snapshot.value['total_score'];
-      quiz.questions = [];
-      for(var question in snapshot.value['questions'])
-      {
-        Q_Question_ q = await get_quiz_question(int.parse(question['question_id']));
-        q.student_answer_id = question['answer_id'];
-        q.time_to_answer = question['time_to_answer'];
-        quiz.questions.add(q);
-      }
-      return quiz;
-  }*/
-
- /* Future<List<Quiz_>> get_student_quizzes(int std_id, String course_code) async{
-    //get quizzes IDs from Student's collection
-    DatabaseReference ref = FirebaseDatabase.instance.reference();
-    final snapshot = await ref.child('students').child(std_id.toString()).child('courses').child(course_code).child('quizzes').get();
-
-    List<Quiz_> quizzes = [];
-    for(var quiz in snapshot.value)
-    {
-      if(quiz == null)
-      continue;
-      Quiz_ q = Quiz_();
-      q = await get_quiz(quiz);
-      quizzes.add(q);
-    }
-    return quizzes;
-  }*/
-  
   Future<List<Quiz_>> get_quizzes(int std_id, String type) async{
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     final snapshot = await ref.child('quizzes').child(std_id.toString()).child(type).get();
@@ -459,6 +418,24 @@ class DatabaseManager {
     }
     }
     return quizzes;
+  }
+
+  Future<List<TopicOfWeakness_>> get_weakness_topics(int std_id, int level_id) async{
+    DatabaseReference ref = FirebaseDatabase.instance.reference();
+    final snapshot = await ref.child('students').child(std_id.toString()).child('courses/CSW150/topics_of_weakness').orderByChild('level_id').equalTo(level_id).once();
+    
+    List<TopicOfWeakness_> topicsOfWeakness = [];
+    for(var topic in snapshot.value)
+    {
+      TopicOfWeakness_ t = TopicOfWeakness_();
+      t.level_id = topic['level_id'];
+      t.topic_id = topic['topic_id'];
+      t.number_of_late_questions = topic['late_questions'];
+      t.number_of_wrong_questions = topic['wrong_questions'];
+      t.number_of_not_answered_question = topic['not_answered_questions'];
+      topicsOfWeakness.add(t);
+    }
+    return topicsOfWeakness;
   }
 
   void insertNewStudent(student std) {
@@ -1140,8 +1117,7 @@ class DatabaseManager {
     return std;
   }
 
-  Future<studentBehavior> fetchTimeSpendEveryOnce(
-      var id, var level, var topic) async {
+  Future<studentBehavior> fetchTimeSpendEveryOnce(var id, var level, var topic) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase
         .child('student_behavior_model')
@@ -1183,8 +1159,7 @@ class DatabaseManager {
     return std;
   }
 
-  void updateStudentBehavior(int time, int clicks, String type, var id,
-      var Level, var Topic, var arr, var last_time) {
+  void updateStudentBehavior(int time, int clicks, String type, var id, var Level, var Topic, var arr, var last_time) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     firebaseDatabase
         .child('student_behavior_model')
