@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp/Last_quizes.dart';
+//import 'package:gp/Last_quizes.dart';
 import 'package:gp/login_screen.dart';
 import 'package:gp/shared/cubits/cubit/course_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
@@ -10,7 +10,6 @@ import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/shared/cubits/cubit/question_cubit.dart';
 import 'package:gp/shared/cubits/cubit/quiz_cubit.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -47,7 +45,6 @@ class MyApp extends StatelessWidget {
           create: (context) => QuizCubit(),
         ),
       ],
-      
       child: MaterialApp(
         title: 'Personalized E-Learning System',
         debugShowCheckedModeBanner: false,
