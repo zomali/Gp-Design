@@ -34,7 +34,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   void addTOList() {
     _pages.add(levels_view(std));
-  //  _pages.add(Learning_analytics_screen(std));
+    _pages.add(Learning_analytics_screen(std));
     _pages.add(Course_evual_categories(std, "CSW150"));
     _pages.add(MyProfileScreen(std));
   }
@@ -326,7 +326,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   textAlign: TextAlign.end,
                   decoration: InputDecoration(
                     prefixIcon: Text(
-                      "Level",
+                      "Academic Year",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -340,7 +340,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       // fontStyle: FontStyle.italic,
                     ),
                     //alignLabelWithHint: ,
-                    hintText: std.level.toString(),
+                    hintText: std.academic_year.toString(),
                     //alignLabelWithHint:true,
                   ),
                 ),

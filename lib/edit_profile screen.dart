@@ -49,7 +49,7 @@ class _Edit_Proile_ScreenState extends State<Edit_Proile_Screen> {
               alignment: AlignmentDirectional.bottomEnd,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('proj_images/me.jpg'),
+                  backgroundImage: NetworkImage(std.profile_picture),
                   //  backgroundImage: NetworkImage('https://png.pngtree.com/element_our/png_detail/20181208/male-student-icon-png_265268.jpg'),
                   radius: 60,
                 ),
