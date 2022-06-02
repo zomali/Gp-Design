@@ -19,20 +19,25 @@ import 'classes/studentBehavior.dart';
 
 class Learning_analytics_screen extends StatefulWidget with NavigationStates  {
   final student std;
- // Level_ level;
- // Topic_ topic;
+  // Level_ level;
+  // Topic_ topic;
   Learning_analytics_screen(this.std);
   @override
   _Learning_analytics_screenState createState() =>
       _Learning_analytics_screenState(std);
 }
 List<int> times = [];
+int video_time=0;
+int audio_time=0;
+int text_time=0;
+int image_time=0;
+
 class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
   int _selectedIndex = 1;
   final student std;
 
- // Level_ level;
- //  Topic_ topic;
+  // Level_ level;
+  //  Topic_ topic;
   _Learning_analytics_screenState(this.std);
   late studentBehavior stdBehavior;
   DatabaseManager db = DatabaseManager();
@@ -85,23 +90,29 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
 
 
 
-      appBar: AppBar(
-        title: const Text("Learning Analytics"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Home(std)));
-            _selectedIndex -= 1;
-          },
+        appBar: AppBar(
+          title: const Text("Learning Analytics"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_outlined),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Home(std)));
+              _selectedIndex -= 1;
+            },
+          ),
         ),
-      ),
 
-      body: Builder(builder: (context) {
-        StudentBehaviorCubit.get(context).getTimeTokenForEachContentType2(std);
+        body: Builder(builder: (context) {
+          //  StudentBehaviorCubit.get(context).getTimeTokenForEachContentType2(std);
+          StudentBehaviorCubit.get(context).getTimeTokenInVideo(std);
+          StudentBehaviorCubit.get(context).getTimeTokenInAudio(std);
+          StudentBehaviorCubit.get(context).getTimeTokenInText(std);
+          StudentBehaviorCubit.get(context).getTimeTokenInImage(std);
 
 
-        return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
+
+
+          return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
             builder: (context, state) {
               if (state is StudentBehaviorLoading) {
                 return Center(child: CircularProgressIndicator());
@@ -109,93 +120,111 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
               else {
                 var behaviorCubit = StudentBehaviorCubit.get(context);
 
-                 times=behaviorCubit.time;
-                var map=get_data_map(times[0].toDouble(), times[1].toDouble(), times[2].toDouble(), times[3].toDouble());
+                //    times=behaviorCubit.time;
+                video_time=behaviorCubit.Video_time;
+                audio_time=behaviorCubit.Audio_time;
+                text_time=behaviorCubit.Text_time;
+                image_time=behaviorCubit.Image_time;
+                //  print(video_time.toString()+"    "+ audio_time.toString()+"    "+ text_time.toString()+"    "+image_time.toString()+"    ");
+                var map ;
+                // print("////////"+times[0].toString()+"/////////"+times[0].toString());
+                try {
+                  //    if(VIdeo_time==0&&audio_time==0&&text_time==0&&image_time==0)
+                  //     map = get_data_map(5,5,5,5);
+
+                  //        else
+                  map = get_data_map(video_time.toDouble(), audio_time.toDouble(), text_time.toDouble(), image_time.toDouble());
+
+
+                }
+                catch(e){
+                  map = get_data_map(1,1,1,1);
+                }
                 // print(times[0]);
-                      //stdBehavior = behaviorCubit.std;
-                      return SingleChildScrollView(
-                        child: Center(
-                          child: Column(
-                            children: [
-                              SizedBox(height: 50,),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(
-                                  "Time Taken For Each Type Of Content (in minutes)",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric( horizontal: 50),
-                                child: Container(
-                                    height: 300,
-                                    width: double.infinity,
-                                    child: CustomRoundedBars.withSampleData()
-                                ),
-                              ),//levels time chart
-
-
-                              SizedBox(height: 50,),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-
-                                child: PieChart(dataMap:map,gradientList: gradientList,
-                               // child: PieChart(dataMap: CustomRoundedBars.g(),gradientList: gradientList,
-                                  emptyColorGradient: [
-                                    Color(0xff6c5ce7),
-                                    Colors.blue,
-                                  ],baseChartColor: Colors.grey,
-                                  chartValuesOptions: ChartValuesOptions(
-                                    showChartValuesInPercentage: true,
-                                    showChartValueBackground: false,
-                                    decimalPlaces: 0,
-                                  ),
-                                ),
-                              ),
-                              // PieChart(
-                              //   dataMap: dataMap,
-                              //   animationDuration: Duration(milliseconds: 800),
-                              //   chartLegendSpacing: 32,
-                              //   chartRadius: MediaQuery.of(context).size.width / 3.2,
-                              //  // colorList: ,
-                              //   initialAngleInDegree: 0,
-                              //   chartType: ChartType.ring,
-                              //   ringStrokeWidth: 32,
-                              //   centerText: "HYBRID",
-                              //   legendOptions: LegendOptions(
-                              //     showLegendsInRow: false,
-                              //     legendPosition: LegendPosition.right,
-                              //     showLegends: true,
-                              //  //   legendShape: _BoxShape.circle,
-                              //     legendTextStyle: TextStyle(
-                              //       fontWeight: FontWeight.bold,
-                              //     ),
-                              //   ),
-                              //   chartValuesOptions: ChartValuesOptions(
-                              //     showChartValueBackground: true,
-                              //     showChartValues: true,
-                              //     showChartValuesInPercentage: false,
-                              //     showChartValuesOutside: false,
-                              //     decimalPlaces: 1,
-                              //   ),
-                              //   // gradientList: ---To add gradient colors---
-                              //   // emptyColorGradient: ---Empty Color gradient---
-                              // )
-
-                            ],
+                //stdBehavior = behaviorCubit.std;
+                return SingleChildScrollView(
+                  child: Center(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 50,),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            "Time Taken For Each Type Of Content (in minutes)",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                  },
+                        ),//caption of graph_1
+                        Padding(
+                          padding: const EdgeInsets.symmetric( horizontal: 50),
+                          child: Container(
+                              height: 300,
+                              width: double.infinity,
+                              child: CustomRoundedBars.withSampleData()
+                          ),
+                        ),//levels time chart
+
+
+                        SizedBox(height: 50,),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+
+                          child: PieChart(dataMap:map,gradientList: gradientList,
+                            // child: PieChart(dataMap: CustomRoundedBars.g(),gradientList: gradientList,
+                            emptyColorGradient: [
+                              Color(0xff6c5ce7),
+                              Colors.blue,
+                            ],baseChartColor: Colors.grey,
+                            chartValuesOptions: ChartValuesOptions(
+                              showChartValuesInPercentage: true,
+                              showChartValueBackground: false,
+                              decimalPlaces: 0,
+                            ),
+                          ),
+                        ),//graph_2
+                        // PieChart(
+                        //   dataMap: dataMap,
+                        //   animationDuration: Duration(milliseconds: 800),
+                        //   chartLegendSpacing: 32,
+                        //   chartRadius: MediaQuery.of(context).size.width / 3.2,
+                        //  // colorList: ,
+                        //   initialAngleInDegree: 0,
+                        //   chartType: ChartType.ring,
+                        //   ringStrokeWidth: 32,
+                        //   centerText: "HYBRID",
+                        //   legendOptions: LegendOptions(
+                        //     showLegendsInRow: false,
+                        //     legendPosition: LegendPosition.right,
+                        //     showLegends: true,
+                        //  //   legendShape: _BoxShape.circle,
+                        //     legendTextStyle: TextStyle(
+                        //       fontWeight: FontWeight.bold,
+                        //     ),
+                        //   ),
+                        //   chartValuesOptions: ChartValuesOptions(
+                        //     showChartValueBackground: true,
+                        //     showChartValues: true,
+                        //     showChartValuesInPercentage: false,
+                        //     showChartValuesOutside: false,
+                        //     decimalPlaces: 1,
+                        //   ),
+                        //   // gradientList: ---To add gradient colors---
+                        //   // emptyColorGradient: ---Empty Color gradient---
+                        // )
+
+                      ],
+                    ),
+                  ),
                 );
               }
+            },
+          );
+        }
 
-            )
-      );
+        )
+    );
 
 
   }
@@ -203,12 +232,7 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
 class CustomRoundedBars extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
- static Map<String, double> dataMap = {
-    "Video": 10,
-    "Audio": times[1].toDouble(),
-    "Text": times[2].toDouble(),
-    "Image": times[3].toDouble(),
-  };
+
   CustomRoundedBars(this.seriesList, {required this.animate});
 
   /// Creates a [BarChart] with custom rounded bars.
@@ -219,9 +243,9 @@ class CustomRoundedBars extends StatelessWidget {
       animate: false,
     );
   }
- static Map<String, double> g(){
-    return dataMap;
-  }
+  // static Map<String, double> g(){
+  //   return dataMap;
+  // }
 
 
 
@@ -241,12 +265,14 @@ class CustomRoundedBars extends StatelessWidget {
 
   /// Create one series with sample hard coded data.
   static List<charts.Series<level_time, String>> _createSampleData() {
+    // print(video_time.toString()+"    "+ audio_time.toString()+"    "+ text_time.toString()+"    "+image_time.toString()+"    ");
+
     final data = [
 
-      new level_time('Video', times[0]),
-      new level_time('Audio', times[1]),
-      new level_time('Text', times[2]),
-      new level_time('Image', times[3]),
+      new level_time('Video', video_time),
+      new level_time('Audio', audio_time),
+      new level_time('Text', text_time),
+      new level_time('Image', image_time),
 
 
     ];
@@ -262,35 +288,7 @@ class CustomRoundedBars extends StatelessWidget {
       )
     ];
   }
-  static Map<String, double> get_data_map(double v,double a,double t,double i) {
-    try {
-      Map<String, double> data = {
 
-        "Video": 10,
-        "Audio": 10,
-        "Text": 20,
-        "Image": 20,
-
-
-      };
-
-      return data;
-    }
-    catch (e)
-    {
-      Map<String, double> data = {
-
-        "Video": 10,
-        "Audio": 10,
-        "Text": 10,
-        "Image": 10,
-
-
-      };
-
-      return data;
-    }
-  }
 
 }
 class level_time {

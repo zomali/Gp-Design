@@ -9,7 +9,7 @@ class DatabaseManager {
   Future<Course_> getCourseData(String courseCode) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response =
-        await firebaseDatabase.child('courses').child(courseCode).get();
+    await firebaseDatabase.child('courses').child(courseCode).get();
     //var keys = response.value.keys;
     var values = response.value;
     Course_ c = new Course_();
@@ -76,8 +76,7 @@ class DatabaseManager {
     return list;
   }
 
-  void insertQuiz(String StudentId, String typeOfQuiz, int levelId, int TopicId,
-      List<question_For_DB> List_ques, int student_score, int total_score) {
+  void insertQuiz(String StudentId, String typeOfQuiz, int levelId, int TopicId, List<question_For_DB> List_ques, int student_score, int total_score) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     List<int?> student_answer_id = [];
     List<int> time_to_answer = [];
@@ -130,9 +129,36 @@ class DatabaseManager {
     }
   }
 
-  Future<List<double>> getTimeTokenForEachContentType(
-      student std, studentBehavior stdBehavior) async {
+
+  Future<List<double>> getTimeTokenForEachContentType( student std, studentBehavior stdBehavior) async {
+    // List<int> arr = [];
+    int timeInMinetesVideo = getTimeTokenInVideo(std) as int;
+    int timeInMinetesAudio = getTimeTokenInAudio(std) as int;
+    int timeInMinetesText = getTimeTokenInText(std) as int;
+    int timeInMinetesImage = getTimeTokenInImage(std) as int;
+
+    List<double> arrDouble = [];
+    var video_time_weight = timeInMinetesVideo * 0.6;
+    var audio_time_weight =timeInMinetesAudio * 0.6;
+    var text_time_weight = timeInMinetesText* 0.6;
+    var image_time_weight = timeInMinetesImage * 0.6;
+
+    var video_click_weight = stdBehavior.forVideo.NumberOfVisitedPage * 0.4;
+    var audio_click_weight = stdBehavior.forAudio.NumberOfVisitedPage * 0.4;
+    var image_click_weight = stdBehavior.forImage.NumberOfVisitedPage * 0.4;
+    var text_click_weight = stdBehavior.forText.NumberOfVisitedPage * 0.4;
+
+    arrDouble.add(video_time_weight + video_click_weight);
+    arrDouble.add(audio_time_weight + audio_click_weight);
+    arrDouble.add(image_time_weight + image_click_weight);
+    arrDouble.add(text_time_weight + text_click_weight);
+
+    return arrDouble;
+  }
+
+  Future<int> getTimeTokenInVideo(student std) async {
     List<int> arr = [];
+    int timeInMinetes = 0;
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase
         .child('student_behavior_model')
@@ -140,15 +166,70 @@ class DatabaseManager {
         .get();
     //var keys = response.value.keys;
     var values = response.value;
-    //   int type = 1;
+    int type = 1;
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
-      var audio_time = 0;
-      var video_time = 0;
-      var image_time = 0;
-      var text_time = 0;
-
+      var time = 0;
       if (Level > std.level) {
+        arr.add(0);
+
+        //return timeInMinetes;
+      } else {
+        int startTopic = 0;
+        if (Level == 1) {
+          startTopic = 1;
+        } else if (Level == 2) {
+          startTopic = 4;
+          topic += 3;
+        } else if (Level == 3) {
+          startTopic = 7;
+          topic += 4;
+        } else if (Level == 4) {
+          startTopic = 11;
+          topic += 3;
+        } else if (Level == 5) {
+          startTopic = 14;
+          topic += 4;
+        }
+        //print(values[1][1]['audio']['time_spent']);
+        for (int t = startTopic; t <= topic; t++) {
+          time += values[Level][t]['video']['time_spent'] as int;
+
+        }
+        //print(time);
+        //time = time / 60 as int;
+
+        if (time < 60) {
+          timeInMinetes = 1;
+        } else {
+          while (time >= 60) {
+            timeInMinetes++;
+            time -= 60;
+          }
+        }
+        arr.add(timeInMinetes);
+        // print(timeInMinetes);
+        return timeInMinetes;
+      }
+    }
+    return timeInMinetes;
+  }
+  Future<int> getTimeTokenInAudio(student std) async {
+    List<int> arr = [];
+    int timeInMinetes = 0;
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('student_behavior_model')
+        .child(std.id)
+        .get();
+    //var keys = response.value.keys;
+    var values = response.value;
+    int type = 1;
+    int topic = 3;
+    for (int Level = 1; Level < 6; Level++) {
+      var time = 0;
+      if (Level > std.level) {
+        //return timeInMinetes;
         arr.add(0);
       } else {
         int startTopic = 0;
@@ -169,77 +250,137 @@ class DatabaseManager {
         }
         //print(values[1][1]['audio']['time_spent']);
         for (int t = startTopic; t <= topic; t++) {
-          audio_time += values[Level][t]['audio']['time_spent'] as int;
-          text_time += values[Level][t]['text']['time_spent'] as int;
-          video_time += values[Level][t]['video']['time_spent'] as int;
-          image_time += values[Level][t]['image']['time_spent'] as int;
+          time += values[Level][t]['audio']['time_spent'] as int;
+
         }
         //print(time);
         //time = time / 60 as int;
-        int timeInMinetesAudio = 0;
-        int timeInMinetesVideo = 0;
-        int timeInMinetesText = 0;
-        int timeInMinetesImage = 0;
-        if (video_time < 60) {
-          timeInMinetesVideo = 1;
+
+        if (time < 60) {
+          timeInMinetes = 1;
         } else {
-          while (video_time >= 60) {
-            timeInMinetesVideo++;
-            video_time -= 60;
-          }
-
-          if (audio_time < 60) {
-            timeInMinetesAudio = 1;
-          } else {
-            while (audio_time >= 60) {
-              timeInMinetesAudio++;
-              audio_time -= 60;
-            }
-
-            if (text_time < 60) {
-              timeInMinetesText = 1;
-            } else {
-              while (text_time >= 60) {
-                timeInMinetesText++;
-                text_time -= 60;
-              }
-
-              if (image_time < 60) {
-                timeInMinetesImage = 1;
-              } else {
-                while (image_time >= 60) {
-                  timeInMinetesImage++;
-                  image_time -= 60;
-                }
-              }
-              arr.add(timeInMinetesVideo); //arr[0]=video_time_spent
-              arr.add(timeInMinetesAudio); //arr[1]=audio_time_spent
-              arr.add(timeInMinetesImage); //arr[2]=image_time_spent
-              arr.add(timeInMinetesText); //arr[3]=text_time_spent
-              //print(time);
-
-            }
+          while (time >= 60) {
+            timeInMinetes++;
+            time -= 60;
           }
         }
+        arr.add(timeInMinetes);
+        //   print(timeInMinetes);
       }
     }
-    List<double> arrDouble = [];
-    var video_time_weight = arr[0] * 0.6;
-    var audio_time_weight = arr[1] * 0.6;
-    var text_time_weight = arr[2] * 0.6;
-    var image_time_weight = arr[3] * 0.6;
+    return timeInMinetes;
+  }
+  Future<int> getTimeTokenInText(student std) async {
+    List<int> arr = [];
+    int timeInMinetes = 0;
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('student_behavior_model')
+        .child(std.id)
+        .get();
+    //var keys = response.value.keys;
+    var values = response.value;
+    int type = 1;
+    int topic = 3;
+    for (int Level = 1; Level < 6; Level++) {
+      var time = 0;
+      if (Level > std.level) {
+        //return timeInMinetes;
+        arr.add(0);
+      } else {
+        int startTopic = 0;
+        if (Level == 1) {
+          startTopic = 1;
+        } else if (Level == 2) {
+          startTopic = 4;
+          topic += 3;
+        } else if (Level == 3) {
+          startTopic = 7;
+          topic += 4;
+        } else if (Level == 4) {
+          startTopic = 11;
+          topic += 3;
+        } else if (Level == 5) {
+          startTopic = 14;
+          topic += 4;
+        }
+        //print(values[1][1]['audio']['time_spent']);
+        for (int t = startTopic; t <= topic; t++) {
+          time += values[Level][t]['text']['time_spent'] as int;
 
-    var video_click_weight = stdBehavior.forVideo.NumberOfVisitedPage * 0.4;
-    var audio_click_weight = stdBehavior.forAudio.NumberOfVisitedPage * 0.4;
-    var image_click_weight = stdBehavior.forImage.NumberOfVisitedPage * 0.4;
-    var text_click_weight = stdBehavior.forText.NumberOfVisitedPage * 0.4;
+        }
+        //print(time);
+        //time = time / 60 as int;
 
-    arrDouble.add(video_time_weight + video_click_weight);
-    arrDouble.add(audio_time_weight + audio_click_weight);
-    arrDouble.add(image_time_weight + image_click_weight);
-    arrDouble.add(text_time_weight + text_click_weight);
+        if (time < 60) {
+          timeInMinetes = 1;
+        } else {
+          while (time >= 60) {
+            timeInMinetes++;
+            time -= 60;
+          }
+        }
+        arr.add(timeInMinetes);
+        //  print(timeInMinetes);
+      }
+    }
+    return timeInMinetes;
+  }
+  Future<int> getTimeTokenInImage(student std) async {
+    List<int> arr = [];
+    int timeInMinetes = 0;
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('student_behavior_model')
+        .child(std.id)
+        .get();
+    //var keys = response.value.keys;
+    var values = response.value;
+    int type = 1;
+    int topic = 3;
+    for (int Level = 1; Level < 6; Level++) {
+      var time = 0;
+      if (Level > std.level) {
+        arr.add(0);
+        // return timeInMinetes;
+      } else {
+        int startTopic = 0;
+        if (Level == 1) {
+          startTopic = 1;
+        } else if (Level == 2) {
+          startTopic = 4;
+          topic += 3;
+        } else if (Level == 3) {
+          startTopic = 7;
+          topic += 4;
+        } else if (Level == 4) {
+          startTopic = 11;
+          topic += 3;
+        } else if (Level == 5) {
+          startTopic = 14;
+          topic += 4;
+        }
+        //print(values[1][1]['audio']['time_spent']);
+        for (int t = startTopic; t <= topic; t++) {
+          time += values[Level][t]['image']['time_spent'] as int;
 
-    return arrDouble;
+        }
+        //print(time);
+        //time = time / 60 as int;
+
+        if (time < 60) {
+          timeInMinetes = 1;
+        } else {
+          while (time >= 60) {
+            timeInMinetes++;
+            time -= 60;
+          }
+        }
+        arr.add(timeInMinetes);
+        //  print(timeInMinetes);
+      }
+    }
+    return timeInMinetes;
   }
 
   Future<List<int>> getTimeTokenForEachLevel(student std) async {
@@ -302,7 +443,7 @@ class DatabaseManager {
   Future<Topic_> getTopicData(int topicID) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response =
-        await firebaseDatabase.child('topics').child(topicID.toString()).get();
+    await firebaseDatabase.child('topics').child(topicID.toString()).get();
     var values = response.value;
     Topic_ topic = Topic_();
     //get name & ID
@@ -370,7 +511,7 @@ class DatabaseManager {
   Future<Level_> getLevelData(int levelID) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response =
-        await firebaseDatabase.child('levels').child(levelID.toString()).get();
+    await firebaseDatabase.child('levels').child(levelID.toString()).get();
     Level_ level = Level_();
     var value = response.value;
     //get ID & name
@@ -426,7 +567,7 @@ class DatabaseManager {
   Future<Q_Question_> get_quiz_question(int question_id) async {
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     final snapshot =
-        await ref.child('quiz_question').child(question_id.toString()).get();
+    await ref.child('quiz_question').child(question_id.toString()).get();
 
     Q_Question_ q = Q_Question_();
     q.id = question_id;
@@ -446,7 +587,7 @@ class DatabaseManager {
   Future<List<Quiz_>> get_quizzes(int std_id, String type) async {
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     final snapshot =
-        await ref.child('quizzes').child(std_id.toString()).child(type).get();
+    await ref.child('quizzes').child(std_id.toString()).child(type).get();
     List<Quiz_> quizzes = [];
 
     if (snapshot.value != null) {
@@ -464,7 +605,7 @@ class DatabaseManager {
         q.questions = [];
         for (var question in values[key]['questions']) {
           Q_Question_ que =
-              await get_quiz_question(int.parse(question['question_id']));
+          await get_quiz_question(int.parse(question['question_id']));
           que.student_answer_id = question['answer_id'];
           que.time_to_answer = question['time_to_answer'];
           q.questions.add(que);
@@ -1160,22 +1301,22 @@ class DatabaseManager {
       for (int j = startTopic; j < topic; j++) {
         //for video
         std.forVideo.NumberOfVisitedPage +=
-            value[i][j]['video']['number_of_visits'];
+        value[i][j]['video']['number_of_visits'];
         std.forVideo.TimeSpendInPage += value[i][j]['video']['time_spent'];
 
         //for audio
         std.forAudio.NumberOfVisitedPage +=
-            value[i][j]['audio']['number_of_visits'];
+        value[i][j]['audio']['number_of_visits'];
         std.forAudio.TimeSpendInPage += value[i][j]['audio']['time_spent'];
 
         //for Image
         std.forImage.NumberOfVisitedPage +=
-            value[i][j]['image']['number_of_visits'];
+        value[i][j]['image']['number_of_visits'];
         std.forImage.TimeSpendInPage += value[i][j]['image']['time_spent'];
 
         //for Text
         std.forText.NumberOfVisitedPage +=
-            value[i][j]['text']['number_of_visits'];
+        value[i][j]['text']['number_of_visits'];
         std.forText.TimeSpendInPage += value[i][j]['text']['time_spent'];
       }
     }
@@ -1202,14 +1343,14 @@ class DatabaseManager {
     std.forAudio.TimeSpendInPage = value['audio']['time_spent'];
     std.forAudio.Time_progress_ratio = value['audio']['Time_progress_ratio'];
     std.forAudio.Time_spent_every_once =
-        value['audio']['time_spent_every_once'];
+    value['audio']['time_spent_every_once'];
 
     std.forImage.NumberOfVisitedPage = value['image']['number_of_visits'];
     std.forImage.PopUpQuastion = value['image']['popUpQuestion'];
     std.forImage.TimeSpendInPage = value['image']['time_spent'];
     std.forImage.Time_progress_ratio = value['image']['Time_progress_ratio'];
     std.forImage.Time_spent_every_once =
-        value['image']['time_spent_every_once'];
+    value['image']['time_spent_every_once'];
 
     std.forText.NumberOfVisitedPage = value['text']['number_of_visits'];
     std.forText.PopUpQuastion = value['text']['popUpQuestion'];
@@ -1222,7 +1363,7 @@ class DatabaseManager {
     std.forVideo.TimeSpendInPage = value['video']['time_spent'];
     std.forVideo.Time_progress_ratio = value['video']['Time_progress_ratio'];
     std.forVideo.Time_spent_every_once =
-        value['video']['time_spent_every_once'];
+    value['video']['time_spent_every_once'];
     return std;
   }
 
@@ -1874,7 +2015,7 @@ class DatabaseManager {
     List<int> arr = [];
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response =
-        await firebaseDatabase.child('student_behavior_model').get();
+    await firebaseDatabase.child('student_behavior_model').get();
     var keys = response.value.keys;
     var values = response.value;
     int length = 0;
@@ -1914,24 +2055,24 @@ class DatabaseManager {
           if (Level == 1) {
             for (int t = startTopic; t <= topic; t++) {
               arr[Level - 1] +=
-                  values[key][Level][t]['audio']['time_spent'] as int;
+              values[key][Level][t]['audio']['time_spent'] as int;
               arr[Level - 1] +=
-                  values[key][Level][t]['text']['time_spent'] as int;
+              values[key][Level][t]['text']['time_spent'] as int;
               arr[Level - 1] +=
-                  values[key][Level][t]['video']['time_spent'] as int;
+              values[key][Level][t]['video']['time_spent'] as int;
               arr[Level - 1] +=
-                  values[key][Level][t]['image']['time_spent'] as int;
+              values[key][Level][t]['image']['time_spent'] as int;
             }
           } else {
             for (int t = startTopic; t <= topic; t++) {
               arr[Level - 1] += values[key][Level][t.toString()]['audio']
-                  ['time_spent'] as int;
+              ['time_spent'] as int;
               arr[Level - 1] +=
-                  values[key][Level][t.toString()]['text']['time_spent'] as int;
+              values[key][Level][t.toString()]['text']['time_spent'] as int;
               arr[Level - 1] += values[key][Level][t.toString()]['video']
-                  ['time_spent'] as int;
+              ['time_spent'] as int;
               arr[Level - 1] += values[key][Level][t.toString()]['image']
-                  ['time_spent'] as int;
+              ['time_spent'] as int;
             }
           }
         }

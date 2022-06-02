@@ -20,12 +20,15 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   late studentBehavior std;
   late studentBehavior value;
   late List<int> times;
+  late int Audio_time;
+  late int Video_time;
+  late int Image_time;
+  late int Text_time;
   late List<int> timesForStudents;
   late String percent;
   late List<int> gradesStudent;
   late List<int> gradesAllStudent;
   late List<double> weight;
-  late List<int> time;
 
   Future<void> fetchAllStudentGrades(student std) async {
     emit(StudentBehaviorLoading());
@@ -42,6 +45,26 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   Future<void> getTimeTokenForEachLevelForAllStudents(student std) async {
     emit(StudentBehaviorLoading());
     timesForStudents = await db.getTimeTokenForEachLevelForAllStudents(std);
+    emit(StudentBehaviorLoaded());
+  }
+  Future<void> getTimeTokenInVideo(student std) async {
+    emit(StudentBehaviorLoading());
+    Video_time = await db.getTimeTokenInVideo(std);
+    emit(StudentBehaviorLoaded());
+  }
+  Future<void> getTimeTokenInAudio(student std) async {
+    emit(StudentBehaviorLoading());
+    Audio_time = await db.getTimeTokenInAudio(std);
+    emit(StudentBehaviorLoaded());
+  }
+  Future<void> getTimeTokenInText(student std) async {
+    emit(StudentBehaviorLoading());
+    Text_time = await db.getTimeTokenInText(std);
+    emit(StudentBehaviorLoaded());
+  }
+  Future<void> getTimeTokenInImage(student std) async {
+    emit(StudentBehaviorLoading());
+    Image_time = await db.getTimeTokenInImage(std);
     emit(StudentBehaviorLoaded());
   }
 
@@ -67,13 +90,6 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
       student std, studentBehavior stdBehavior) async {
     emit(StudentBehaviorLoading());
     weight = await db.getTimeTokenForEachContentType(std, stdBehavior);
-    emit(StudentBehaviorLoaded());
-  }
-
-  Future<void> getTimeTokenForEachContentType2(
-      student std) async {
-    emit(StudentBehaviorLoading());
-    time = await db.getTimeTokenForEachContentType2(std);
     emit(StudentBehaviorLoaded());
   }
 
