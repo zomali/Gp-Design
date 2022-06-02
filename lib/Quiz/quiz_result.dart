@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gp/classes/classes.dart';
+import 'package:gp/classes/student.dart';
 import 'question__model.dart';
 import 'bindings_app.dart';
 import 'custom_button.dart';
@@ -16,10 +17,11 @@ import 'backButton.dart';
 //import 'quiz_selected_controller.dart';
 class QuizResults extends StatelessWidget {
   final int id;
+  final student std;
   Map<int, int?> student_answers = {};
   List<Question_>questions;
   String stat;
-  QuizResults(this.id, this.student_answers,this.questions,this.stat);
+  QuizResults(this.id, this.std, this.student_answers,this.questions,this.stat);
   List<int>weakness_topics=[];
   late int score;
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class QuizResults extends StatelessWidget {
           ),
           SafeArea(
             child: GetBuilder<QuizController>(
-              init: QuizController(0,stat,weakness_topics,questions),
+              init: QuizController(0,std,stat,weakness_topics,questions),
               builder: (controller) =>
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:gp/L_types.dart';
+import 'package:gp/classes/student.dart';
 import '../classes/classes.dart';
 import 'question__model.dart';
 import 'bindings_app.dart';
@@ -33,21 +34,23 @@ class Start_Level_Quiz extends StatelessWidget {
 }*/
 class WelcomeScreen extends StatefulWidget {
   final int id;
+  final student std;
   String stat;
   List<int>weakness_topic;
   List<Question_>questions;
-  WelcomeScreen(this.id, this.stat,this.weakness_topic,this.questions);
+  WelcomeScreen(this.id, this.std,this.stat,this.weakness_topic,this.questions);
   static const routeName = '/welcome_screen';
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState(id,stat,weakness_topic,questions);
+  State<WelcomeScreen> createState() => _WelcomeScreenState(id,std,stat,weakness_topic,questions);
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final int id;
+  final student std;
   String stat;
   List<int>weakness_topic=[];
   List<Question_>questions;
-  _WelcomeScreenState(this.id,this.stat,this.weakness_topic,this.questions);
+  _WelcomeScreenState(this.id,this.std,this.stat,this.weakness_topic,this.questions);
   final _nameController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
@@ -58,7 +61,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _formkey.currentState!.save();
     Get.offAndToNamed(QuizScreen.routeName);
     Get.find<QuizController>().startTimer();
-    Get.lazyPut(()=>QuizController(id, stat,weakness_topic,questions));
+    Get.lazyPut(()=>QuizController(id,std, stat,weakness_topic,questions));
   }
 
   @override

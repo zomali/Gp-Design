@@ -15,10 +15,11 @@ import 'package:gp/classes/student.dart';
 import 'package:gp/classes/classes.dart';
 class QuizScreen extends StatelessWidget {
   final int id;
+  final student std;
   final String stat;
   List<int>weakness_topics=[];
   List<Question_>questions;
-  QuizScreen(this.id,this.stat,this.weakness_topics,this.questions);
+  QuizScreen(this.std, this.id,this.stat,this.weakness_topics,this.questions);
   static const routeName = '/quiz_screen';
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class QuizScreen extends StatelessWidget {
           ),
           SafeArea(
             child: GetBuilder<QuizController>(
-              init: QuizController(0,stat,weakness_topics,questions),
+              init: QuizController(0,std,stat,weakness_topics,questions),
 
               builder: (controller) => Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -118,7 +119,7 @@ class QuizScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: GetBuilder<QuizController>(
-          init: QuizController(0,stat,weakness_topics,questions),
+          init: QuizController(0,std,stat,weakness_topics,questions),
           builder: (controller) =>
               Row(
                 children: [

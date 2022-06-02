@@ -96,6 +96,7 @@ class _lastQuizzesState extends State<lastQuizzes> {
             itemCount: root.children.length,
             itemBuilder: (context, index){
               return ListTile(
+                leading: Icon(Icons.quiz, color: Colors.amber[200+index],),
                 title: Text('Attempt ' +(index+1).toString()),
                 onTap: (){
                   //go to result screen?

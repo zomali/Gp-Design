@@ -11,10 +11,11 @@ import 'package:gp/classes/classes.dart';
 
 class QuizController extends GetxController {
   final int id;
+  final student std;
   String? stat;
   List<int> weakness_topics;
   List<Question_> questions;
-  QuizController(this.id, this.stat, this.weakness_topics, this.questions);
+  QuizController(this.id, this.std, this.stat, this.weakness_topics, this.questions);
   //QuizController();
   String name = '';
   String status = '';
@@ -466,11 +467,11 @@ class QuizController extends GetxController {
           get_quiz_question_for_DB(quiz_analysis, get_answred());
       if (stat == "Topic") {
         int level_id = get_level_id(id);
-        db.insertQuiz("2018170065", stat!, level_id, id, list_ques,
+        db.insertQuiz(std.id.toString(), stat!, level_id, id, list_ques,
             student_score, total_score);
       } else if (stat == "Level") {
         db.insertQuiz(
-            "2018170065", stat!, id, 0, list_ques, student_score, total_score);
+            std.id.toString(), stat!, id, 0, list_ques, student_score, total_score);
       }
 
       Get.offAndToNamed(ResultScreen.routeName);

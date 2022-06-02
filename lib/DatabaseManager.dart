@@ -602,16 +602,20 @@ class DatabaseManager {
       for (var key in keys) {
         if (values[key] == null) continue;
         Quiz_ q = Quiz_();
-        q.quiz_id = int.parse(key);
+        q.quiz_id = key;
         q.course_code = values[key]['course_id'];
+        if(type == "Level")
         q.level_id = values[key]['level_id'];
+        else
         q.topic_id = values[key]['topic_id'];
         q.student_score = values[key]['student_score'];
         q.total_score = values[key]['total_score'];
         q.questions = [];
         for (var question in values[key]['questions']) {
+          if(question == null)
+          continue;
           Q_Question_ que =
-              await get_quiz_question(int.parse(question['question_id']));
+              await get_quiz_question(question['question_id']);
           que.student_answer_id = question['answer_id'];
           que.time_to_answer = question['time_to_answer'];
           q.questions.add(que);
@@ -645,7 +649,25 @@ class DatabaseManager {
     }
     return topicsOfWeakness;
   }
-
+  
+ void insert_weaknessTopic(String StudentId, String course_code, List<TopicOfWeakness_> topics) {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    for(var topic in topics){
+      firebaseDatabase
+          .child('students')
+          .child(StudentId)
+          .child('courses')
+          .child(course_code)
+          .child('topics_of_weakness')
+          .set({
+        "late_questions": topic.number_of_late_questions,
+        "level_id": topic.level_id,
+        "not_answered_questions": topic.number_of_not_answered_question,
+        "topic_id": topic.topic_id,
+        "wrong_questions": topic.number_of_wrong_questions,
+      });
+    }
+  }
   void insertNewStudent(student std) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     firebaseDatabase.child('students').child(std.id).set({

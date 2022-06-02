@@ -106,7 +106,7 @@ class ResultScreen extends StatelessWidget {
                         SizedBox(height: 20,),
                         viewAnswersButton(
                             onPressed: () =>  Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => QuizResults(id,controller.get_answred(),questions,stat)))),
+                                MaterialPageRoute(builder: (context) => QuizResults(id, std,controller.get_answred(),questions,stat)))),
                         const SizedBox(
                           height: 5,
                         ),

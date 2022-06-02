@@ -25,11 +25,11 @@ class Start_Quiz extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialBinding: BilndingsApp(id,stat,weakness_topics,questions),
-      home:  WelcomeScreen(id,stat,weakness_topics,questions),
+      initialBinding: BilndingsApp(std,id,stat,weakness_topics,questions),
+      home:  WelcomeScreen(id,std,stat,weakness_topics,questions),
       getPages: [
-        GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen(id,stat,weakness_topics,questions)),
-        GetPage(name: QuizScreen.routeName, page: () =>  QuizScreen(id,stat,weakness_topics,questions)),
+        GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen(id,std,stat,weakness_topics,questions)),
+        GetPage(name: QuizScreen.routeName, page: () =>  QuizScreen(std,id,stat,weakness_topics,questions)),
         GetPage(name: ResultScreen.routeName, page: () =>  ResultScreen(std, id,student_answered,questions,stat)),
       ],
     );

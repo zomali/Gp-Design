@@ -91,7 +91,7 @@ class question_For_DB {
 
 class Quiz_ {
   late List<Q_Question_> questions;
-  late int quiz_id;
+  late String quiz_id;
   late String course_code;
   late int level_id;
   late int topic_id;
