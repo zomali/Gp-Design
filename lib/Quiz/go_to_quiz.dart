@@ -5,6 +5,7 @@ import 'package:gp/classes/classes.dart';
 import 'package:gp/shared/cubits/cubit/question_cubit.dart';
 
 import '../classes/student.dart';
+import '../shared/cubits/cubit/weakness_topics_cubit.dart';
 
 class go_to_quiz extends StatefulWidget {
   final student std;

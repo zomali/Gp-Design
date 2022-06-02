@@ -569,7 +569,35 @@ class DatabaseManager {
     }
     return [];
   }
+void insert_weaknessTopic(String StudentId, String course_code, List<TopicOfWeakness_> topics) {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+   for (var topic in topics)
+   {
+    String Key = firebaseDatabase
+        .child('students')
+        .child(StudentId)
+        .child('courses')
+        .child(course_code)
+        .child('topics_of_weakness')
+        .push()
+        .key;
 
+      firebaseDatabase
+          .child('quizzes')
+          .child(StudentId)
+          .child('courses')
+          .child(course_code)
+          .child('topics_of_weakness')
+          .child(Key)
+          .set({
+        "late_questions": topic.number_of_late_questions,
+        "level_id": topic.level_id,
+        "not_answered_questions": topic.number_of_not_answered_question,
+        "topic_id": topic.topic_id,
+        "wrong_questions": topic.number_of_wrong_questions,
+  });
+}
+}
   Future<Q_Question_> get_quiz_question(int question_id) async {
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     final snapshot =
@@ -648,25 +676,6 @@ class DatabaseManager {
       topicsOfWeakness.add(t);
     }
     return topicsOfWeakness;
-  }
-  
- void insert_weaknessTopic(String StudentId, String course_code, List<TopicOfWeakness_> topics) {
-    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
-    for(var topic in topics){
-      firebaseDatabase
-          .child('students')
-          .child(StudentId)
-          .child('courses')
-          .child(course_code)
-          .child('topics_of_weakness')
-          .set({
-        "late_questions": topic.number_of_late_questions,
-        "level_id": topic.level_id,
-        "not_answered_questions": topic.number_of_not_answered_question,
-        "topic_id": topic.topic_id,
-        "wrong_questions": topic.number_of_wrong_questions,
-      });
-    }
   }
   void insertNewStudent(student std) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();

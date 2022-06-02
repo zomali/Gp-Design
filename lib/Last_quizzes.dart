@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Course_evaluation_screens/My_Evaluation_screen.dart';
 import 'package:gp/Info.dart';
+import 'package:gp/view_quiz.dart';
 import 'package:gp/classes/classes.dart';
 import 'package:gp/shared/cubits/cubit/quiz_cubit.dart';
 import 'Course_evaluation_screens/Courses_evaluations.dart';
@@ -48,7 +49,7 @@ class _lastQuizzesState extends State<lastQuizzes> {
     return _pages.elementAt(_selectedIndex);
   }
 
-  Widget build_card(Entry root, String urlImage)
+  Widget build_card(Entry root, String urlImage, Color children_color)
   {
     return Padding(
       padding: EdgeInsets.all(10.0),
@@ -84,7 +85,7 @@ class _lastQuizzesState extends State<lastQuizzes> {
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 20.0,
-                                        color: Colors.white,
+                                        color: children_color,
         
                                       ),
                                     ),
@@ -96,10 +97,13 @@ class _lastQuizzesState extends State<lastQuizzes> {
             itemCount: root.children.length,
             itemBuilder: (context, index){
               return ListTile(
-                leading: Icon(Icons.quiz, color: Colors.amber[200+index],),
-                title: Text('Attempt ' +(index+1).toString()),
+                leading: Icon(Icons.quiz, color: children_color,),
+                title: Text('Attempt ' +(index+1).toString(), style: TextStyle(color: children_color,),),
                 onTap: (){
-                  //go to result screen?
+                   Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                            QuizResults(int.parse(root.id), std, get_answers(root.children[index]), get_questions(root.children[index]) ,root.type)
+             ));
                 },
               );
             }),
@@ -181,13 +185,13 @@ class _lastQuizzesState extends State<lastQuizzes> {
                     ListView.builder(
                       itemCount: levelEntries.length,
                       itemBuilder: (context, index){
-                        return build_card(levelEntries[index], 'https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/6151529/3005/2000/m1/fpnw/wm0/quiz-1-.jpg?1553762089&s=9b9ad3d167a8d446dd625dabd9ef4ea0');                      },
+                        return build_card(levelEntries[index], 'https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/6151529/3005/2000/m1/fpnw/wm0/quiz-1-.jpg?1553762089&s=9b9ad3d167a8d446dd625dabd9ef4ea0', Colors.amber[300]!);                      },
                       
                       ),
                     ListView.builder(
                       itemCount: topicEntries.length,
                       itemBuilder: (context, index){
-                        return build_card(topicEntries[index], 'https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/6151529/3005/2000/m1/fpnw/wm0/quiz-1-.jpg?1553762089&s=9b9ad3d167a8d446dd625dabd9ef4ea0');
+                        return build_card(topicEntries[index], 'https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/6151529/3005/2000/m1/fpnw/wm0/quiz-1-.jpg?1553762089&s=9b9ad3d167a8d446dd625dabd9ef4ea0', Colors.green[300]!);
                       },
                       ),        
                   ],
@@ -201,13 +205,41 @@ class _lastQuizzesState extends State<lastQuizzes> {
     );
   }
 }
+
+Map<int,int>get_answers(Quiz_ quiz)
+{
+  Map<int,int> answers = new Map();
+     for(var question in quiz.questions)
+     {
+       answers[question.id]=question.student_answer_id;
+
+     }
+     return answers;
+}
+List<Question_>get_questions(Quiz_ quiz)
+{
+  List<Question_> questions = [];
+     for(var question in quiz.questions)
+     {
+       Question_ q = Question_();
+       q.id = question.id;
+       q.question = question.question;
+       q.choices = question.choices;
+       q.complexity = question.complexity;
+       q.points = question.points;
+       q.answer_id = question.answer_id;
+       q.topic_id =  question.topic_id;
+       questions.add(q);
+     }
+     return questions;
+}
 List<Entry> prepare_level_entries(List<Quiz_> quizzes){
   List<Entry> entries = [];
-  Entry level1 = Entry("Level 1","1", []);
-  Entry level2 = Entry("Level 2","2", []);
-  Entry level3 = Entry("Level 3","3", []);
-  Entry level4 = Entry("Level 4","4", []);
-  Entry level5 = Entry("Level 5","5", []);
+  Entry level1 = Entry("Level 1","1","Level", []);
+  Entry level2 = Entry("Level 2","2","Level", []);
+  Entry level3 = Entry("Level 3","3", "Level", []);
+  Entry level4 = Entry("Level 4","4", "Level", []);
+  Entry level5 = Entry("Level 5","5", "Level", []);
   for(var quiz in quizzes)
   {
     switch(quiz.level_id)
@@ -249,16 +281,16 @@ List<Entry> prepare_level_entries(List<Quiz_> quizzes){
 }
 List<Entry> prepare_topic_entries(List<Quiz_> quizzes){
   List<Entry> entries = [];
-  Entry topic1 = Entry("Topic 1","1", []);
-  Entry topic2 = Entry("Topic 2","2", []);
-  Entry topic3 = Entry("Topic 3","3", []);
-  Entry topic4 = Entry("Topic 4","4", []);
-  Entry topic5 = Entry("Topic 5","5", []);
-  Entry topic6 = Entry("Topic 6","5", []);
-  Entry topic7 = Entry("Topic 7","5", []);
-  Entry topic8 = Entry("Topic 8","5", []);
-  Entry topic9 = Entry("Topic 9","5", []);
-  Entry topic10 = Entry("Topic 10","5", []);
+  Entry topic1 = Entry("Topic 1","1", "Topic", []);
+  Entry topic2 = Entry("Topic 2","2","Topic", []);
+  Entry topic3 = Entry("Topic 3","3","Topic", []);
+  Entry topic4 = Entry("Topic 4","4","Topic", []);
+  Entry topic5 = Entry("Topic 5","5","Topic", []);
+  Entry topic6 = Entry("Topic 6","6","Topic", []);
+  Entry topic7 = Entry("Topic 7","7","Topic", []);
+  Entry topic8 = Entry("Topic 8","8","Topic", []);
+  Entry topic9 = Entry("Topic 9","9","Topic", []);
+  Entry topic10 = Entry("Topic 10","10","Topic", []);
   for(var quiz in quizzes)
   {
     switch(quiz.topic_id)
@@ -331,6 +363,7 @@ List<Entry> prepare_topic_entries(List<Quiz_> quizzes){
 class Entry{
   final String title;
   final String id;
+  final String type;
   List<Quiz_> children;
-  Entry(this.title, this.id, [this.children = const <Quiz_>[]]);
+  Entry(this.title, this.id, this.type, [this.children = const <Quiz_>[]]);
 }
