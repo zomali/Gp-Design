@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Course_evaluation_screens/My_Evaluation_screen.dart';
 import 'package:gp/Info.dart';
-import 'package:gp/view_quiz.dart';
+import 'package:gp/quiz_view.dart';
 import 'package:gp/classes/classes.dart';
 import 'package:gp/shared/cubits/cubit/quiz_cubit.dart';
 import 'Course_evaluation_screens/Courses_evaluations.dart';
@@ -24,9 +24,8 @@ class _lastQuizzesState extends State<lastQuizzes> {
   String courseCode;
   _lastQuizzesState(this.std, this.courseCode);
   int _selectedIndex = 3;
-  // int _selectedIndex = 2;
   static List<Widget> _pages = <Widget>[];
-
+ 
   void addTOList() {
     _pages.add(INFO(std, courseCode));
     _pages.add(levels_view(std));
@@ -52,7 +51,7 @@ class _lastQuizzesState extends State<lastQuizzes> {
   Widget build_card(Entry root, String urlImage, Color children_color)
   {
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(5.0),
       child: Card(
         child: ExpandablePanel(
           header: Container(
@@ -68,7 +67,7 @@ class _lastQuizzesState extends State<lastQuizzes> {
                                 alignment: Alignment.bottomCenter,
                                 children: [
                                   Image(image: NetworkImage(urlImage),
-                                    height: 150,
+                                    height: 130,
                                     width: double.infinity,
                                     fit: BoxFit.cover,
                                   ),
@@ -76,7 +75,7 @@ class _lastQuizzesState extends State<lastQuizzes> {
                                     width: double.infinity,
                                     color: Colors.black.withOpacity(.6),
                                     padding: EdgeInsets.symmetric(
-                                      vertical: 10.0,
+                                      vertical: 5.0,
         
                                     ),
         
@@ -100,9 +99,10 @@ class _lastQuizzesState extends State<lastQuizzes> {
                 leading: Icon(Icons.quiz, color: children_color,),
                 title: Text('Attempt ' +(index+1).toString(), style: TextStyle(color: children_color,),),
                 onTap: (){
+                  String title = root.title +" Attempt " + (index+1).toString() + " Quiz";
                    Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>
-                                            QuizResults(int.parse(root.id), std, get_answers(root.children[index]), get_questions(root.children[index]) ,root.type)
+                                           QuizResults(int.parse(root.id), std,root.type, root.children[index].questions, title)
              ));
                 },
               );
@@ -138,11 +138,11 @@ class _lastQuizzesState extends State<lastQuizzes> {
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
+                  leading: Icon(Icons.quiz),
                   title: Text('Quizzes'),
                   bottom: TabBar(
-        
                     indicatorColor: Colors.white,
-                    indicatorWeight: 5,
+                    indicatorWeight: 2,
                     tabs: [
                       Tab(icon: Icon(Icons.keyboard_double_arrow_up),text: 'Levels Quizzes'),
                       Tab(icon: Icon(Icons.topic),text: 'Topics Quizzes'),
@@ -205,159 +205,38 @@ class _lastQuizzesState extends State<lastQuizzes> {
     );
   }
 }
-
-Map<int,int>get_answers(Quiz_ quiz)
-{
-  Map<int,int> answers = new Map();
-     for(var question in quiz.questions)
-     {
-       answers[question.id]=question.student_answer_id;
-
-     }
-     return answers;
-}
-List<Question_>get_questions(Quiz_ quiz)
-{
-  List<Question_> questions = [];
-     for(var question in quiz.questions)
-     {
-       Question_ q = Question_();
-       q.id = question.id;
-       q.question = question.question;
-       q.choices = question.choices;
-       q.complexity = question.complexity;
-       q.points = question.points;
-       q.answer_id = question.answer_id;
-       q.topic_id =  question.topic_id;
-       questions.add(q);
-     }
-     return questions;
-}
 List<Entry> prepare_level_entries(List<Quiz_> quizzes){
-  List<Entry> entries = [];
-  Entry level1 = Entry("Level 1","1","Level", []);
-  Entry level2 = Entry("Level 2","2","Level", []);
-  Entry level3 = Entry("Level 3","3", "Level", []);
-  Entry level4 = Entry("Level 4","4", "Level", []);
-  Entry level5 = Entry("Level 5","5", "Level", []);
+    List<Entry> entries = [];
+  for(int i = 0; i< 5; i++)
+  {
+    String id = (i+1).toString();
+    String type = "Level";
+    String title = type +" "+ id;
+    Entry level = Entry(title,id, type, []);
+    entries.add(level);
+  }
   for(var quiz in quizzes)
   {
-    switch(quiz.level_id)
-    {
-      case 1:
-      {
-        level1.children.add(quiz);
-        break;
-      }
-      case 2:
-      {
-        level2.children.add(quiz);
-        break;
-      }
-      case 3:
-      {
-        level3.children.add(quiz);
-        break;
-      }
-      case 4:
-      {
-        level4.children.add(quiz);
-        break;
-      }
-      case 5:
-      {
-        level5.children.add(quiz);
-        break;
-      }
-    }
-
+    entries[quiz.level_id-1].children.add(quiz);
   }
-  entries.add(level1);
-  entries.add(level2);
-  entries.add(level3);
-  entries.add(level4);
-  entries.add(level5);
+
   return entries;
 }
 List<Entry> prepare_topic_entries(List<Quiz_> quizzes){
   List<Entry> entries = [];
-  Entry topic1 = Entry("Topic 1","1", "Topic", []);
-  Entry topic2 = Entry("Topic 2","2","Topic", []);
-  Entry topic3 = Entry("Topic 3","3","Topic", []);
-  Entry topic4 = Entry("Topic 4","4","Topic", []);
-  Entry topic5 = Entry("Topic 5","5","Topic", []);
-  Entry topic6 = Entry("Topic 6","6","Topic", []);
-  Entry topic7 = Entry("Topic 7","7","Topic", []);
-  Entry topic8 = Entry("Topic 8","8","Topic", []);
-  Entry topic9 = Entry("Topic 9","9","Topic", []);
-  Entry topic10 = Entry("Topic 10","10","Topic", []);
+  for(int i = 0; i< 17; i++)
+  {
+    String id = (i+1).toString();
+    String type = "Topic";
+    String title = type +" "+ id;
+    Entry topic = Entry(title,id, type, []);
+    entries.add(topic);
+  }
   for(var quiz in quizzes)
   {
-    switch(quiz.topic_id)
-    {
-      case 1:
-      {
-        topic1.children.add(quiz);
-        break;
-      }
-      case 2:
-      {
-        topic2.children.add(quiz);
-        break;
-      }
-      case 3:
-      {
-        topic3.children.add(quiz);
-        break;
-      }
-      case 4:
-      {
-        topic4.children.add(quiz);
-        break;
-      }
-      case 5:
-      {
-        topic5.children.add(quiz);
-        break;
-      }
-      case 6:
-      {
-        topic6.children.add(quiz);
-        break;
-      }
-      case 7:
-      {
-        topic7.children.add(quiz);
-        break;
-      }
-      case 8:
-      {
-        topic8.children.add(quiz);
-        break;
-      }
-      case 9:
-      {
-        topic9.children.add(quiz);
-        break;
-      }
-      case 10:
-      {
-        topic10.children.add(quiz);
-        break;
-      }
-    }
-
+    entries[quiz.topic_id-1].children.add(quiz);
   }
-  entries.add(topic1);
-  entries.add(topic2);
-  entries.add(topic3);
-  entries.add(topic4);
-  entries.add(topic5);
-  entries.add(topic6);
-  entries.add(topic7);
-  entries.add(topic8);
-  entries.add(topic9);
-  entries.add(topic10);
+
   return entries;
 }
 class Entry{

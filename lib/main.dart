@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Personalized E-Learning System',
         debugShowCheckedModeBanner: false,
-        home: AnimatedSplashScreen(
+       /* home: AnimatedSplashScreen(
           centered : true,
         splash: Center(
           child: Padding(
@@ -115,8 +115,8 @@ class MyApp extends StatelessWidget {
         splashTransition: SplashTransition.fadeTransition,
         //pageTransitionType: PageTransitionType.scale,
         duration: 2500,
-        nextScreen: Login_screen()),
-        //home: Login_screen(),
+        nextScreen: Login_screen()),*/
+        home: Login_screen(),
 
       ),
     );

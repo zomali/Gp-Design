@@ -463,15 +463,15 @@ class QuizController extends GetxController {
       get_quiz_analysis();
       int total_score = calculate_total_quiz_points();
       int student_score = scoreResult;
-      List<question_For_DB> list_ques =
+      List<Q_Question_> list_ques =
           get_quiz_question_for_DB(quiz_analysis, get_answred());
       if (stat == "Topic") {
         int level_id = get_level_id(id);
-        db.insertQuiz(std.id.toString(), stat!, level_id, id, list_ques,
-            student_score, total_score);
+        db.insertQuiz(std.id.toString(), stat!, level_id, id, list_ques,student_score, total_score);
+        List<TopicOfWeakness_> topics = get_quiz_analysis();
+        db.insert_weaknessTopic(std.id, 'CSW150', topics);
       } else if (stat == "Level") {
-        db.insertQuiz(
-            std.id.toString(), stat!, id, 0, list_ques, student_score, total_score);
+        db.insertQuiz(std.id.toString(), stat!, id, 0, list_ques, student_score, total_score);
       }
 
       Get.offAndToNamed(ResultScreen.routeName);
@@ -584,12 +584,12 @@ class QuizController extends GetxController {
 
   void resetTimer() => _min.value = maxMin;
   void stopTimer() => _timer!.cancel();
-  List<question_For_DB> get_quiz_question_for_DB(
+  List<Q_Question_> get_quiz_question_for_DB(
       List<Quiz_Analysis> quiz_analysis, Map<int, int?> student_answer) {
-    List<question_For_DB> question_For_DB_list = [];
+    List<Q_Question_> question_For_DB_list = [];
     for (int i = 0; i < quiz_analysis.length; i++) {
-      question_For_DB item = new question_For_DB();
-      item.question_Id = quiz_analysis[i].id;
+      Q_Question_ item = new Q_Question_();
+      item.id= quiz_analysis[i].id;
       item.time_to_answer = quiz_analysis[i].time_spent;
       item.student_answer_id = student_answer[quiz_analysis[i].id];
       question_For_DB_list.add(item);

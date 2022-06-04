@@ -1,127 +1,148 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:gp/classes/classes.dart';
 import 'package:gp/classes/student.dart';
+import 'package:gp/shared/cubits/cubit/question_cubit.dart';
 //import 'quiz_selected_controller.dart';
 class QuizResults extends StatelessWidget {
   final int id;
   final student std;
-  Map<int, int?> student_answers = {};
-  List<Question_>questions;
-  String stat;
-  QuizResults(this.id, this.std, this.student_answers,this.questions,this.stat);
+  final List<Q_Question_> quizQuestions;
+  final String title;
+  final String stat;
+  QuizResults(this.id, this.std,this.stat, this.quizQuestions, this.title);
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-                color: Colors.white),
-          ),
-          Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 40.0),
-                                  child: Text(
-                                  "  Results Of Quiz "+stat +" "+ id.toString(),
-                                  style: Theme
-                                      .of(context)
-                                      .textTheme
-                                      .headline5!
-                                      .copyWith(color: Colors.blue),
-                                ),
-                                ),
-                                SizedBox(
-                                  height: 0,
-                                ),
-                              ],
-                            ),
-                          )
-                      ),
-                      Expanded(
-                        child: MediaQuery.removePadding(
-                          context: context,
-                          removeTop: true,
-                          child: ListView.builder(
-                            itemCount: questions.length,
-                            itemBuilder: (context, index) {
-                              return Card(
-                                child: Row(
-                                    children: <Widget>[
-                                      Container(
-                                        width: 320,
-                                        margin: const EdgeInsets.only(
-                                            top: 5.0, bottom: 5, left: 25),
-                                        decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius: BorderRadius.circular(
-                                              25.0),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10, bottom: 10),
-                                          child: Column(
-                                            children: [
-                                              SizedBox(height: 5,),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Question " + (index+1).toString() + " / " +
-                                                        questions
-                                                         .length.toString(),
-                                                    style: Theme
-                                                        .of(context)
-                                                        .textTheme
-                                                        .headline5
-                                                        ?.copyWith(
-                                                        color: Colors.white),
-                                                  ),
-                                                  SizedBox(width: 50,),
-                                                  get_score(questions[index]
-                                                      .answer_id,
-                                                      student_answers[questions[index].id],questions[index].points)
-                                                ],
-                                              ),
-
-                                              SizedBox(height: 20,),
-                                              Text(
-                                               questions[index]
-                                                    .question,
-                                                style: TextStyle(fontSize: 20,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight
-                                                        .bold),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-
-                                                  condition(questions[index],student_answers[questions[index].id]),
-
-                                            ],
-                                          ),
-                                        ),)
-                                    ]),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                    ],
+      body: Builder(
+        builder: (context) {
+          QuestionCubit.get(context).get_list_of_questions(getIDs(quizQuestions));
+          return BlocBuilder<QuestionCubit, QuestionState>(
+            builder: (context, state) {
+              if(state is QuestionLoading)
+              {
+                return Center(child: CircularProgressIndicator());
+              }
+              else {
+                var questionCubit = QuestionCubit.get(context);
+                //var Questions = questionCubit.quizQuestions;
+                Map<int, int?> student_answers = get_answers(quizQuestions);
+                List<Question_>questions = get_questions(questionCubit.quizQuestions);
+                return Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                        color: Colors.white),
                   ),
-        ],
+                  Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Container(
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 40.0, left: 40.0),
+                                          child: Text(
+                                          title,
+                                          style: Theme
+                                              .of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(color: Colors.blue),
+                                        ),
+                                        ),
+                                        SizedBox(
+                                          height: 0,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                              ),
+                              Expanded(
+                                child: MediaQuery.removePadding(
+                                  context: context,
+                                  removeTop: true,
+                                  child: ListView.builder(
+                                    itemCount: questions.length,
+                                    itemBuilder: (context, index) {
+                                      return Card(
+                                        child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                width: 320,
+                                                margin: const EdgeInsets.only(
+                                                    top: 5.0, bottom: 5, left: 25),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.blue,
+                                                  borderRadius: BorderRadius.circular(
+                                                      25.0),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 10, bottom: 10),
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(height: 5,),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Question " + (index+1).toString() + " / " +
+                                                                questions
+                                                                 .length.toString(),
+                                                            style: Theme
+                                                                .of(context)
+                                                                .textTheme
+                                                                .headline5
+                                                                ?.copyWith(
+                                                                color: Colors.white),
+                                                          ),
+                                                          SizedBox(width: 50,),
+                                                          get_score(questions[index]
+                                                              .answer_id,
+                                                              student_answers[questions[index].id],questions[index].points)
+                                                        ],
+                                                      ),
+          
+                                                      SizedBox(height: 20,),
+                                                      Text(
+                                                       questions[index]
+                                                            .question,
+                                                        style: TextStyle(fontSize: 20,
+                                                            color: Colors.white,
+                                                            fontWeight: FontWeight
+                                                                .bold),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 20,
+                                                      ),
+          
+                                                          condition(questions[index],student_answers[questions[index].id]),
+          
+                                                    ],
+                                                  ),
+                                                ),)
+                                            ]),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                            ],
+                          ),
+                ],
+              );
+              }
+            }
+          );
+        }
       ),
     );
   }
@@ -2382,44 +2403,39 @@ Widget get_wrong_widget_len_2(Question_ questionModel,selected_answer_index) {
   }
   return widget;
 }
-/*String get_title(String stat,int id)
+
+List<int> getIDs(List<Q_Question_> quizQuestions)
 {
-  final List<Levels> levels=[
-    Levels(level_id: 1, topics_id: [1,2,3]),
-    Levels(level_id: 2, topics_id: [4,5,6]),
-    Levels(level_id: 3, topics_id: [7,8,9,10]),
-    Levels(level_id: 4, topics_id: [11,12,13]),
-    Levels(level_id: 5, topics_id: [14,15,16,17]),
-  ];
-  String title="";
-  if(stat=="level")
-    {
-      title="Level"+id.toString();
-    }
-  else if(stat=="topic")
-    {
-      int level=0;
-      if(id==1 ||id==2||id==3)
-        {
-          level=1;
-        }
-      if(id==4 ||id==5||id==6)
-      {
-        level=2;
-      }
-      if(id==7 ||id==8||id==9||id==10)
-      {
-        level=3;
-      }
-      if(id==11 ||id==12 || id==13)
-      {
-        level=4;
-      }
-      if(id==15 ||id==16||id==17||id==18)
-      {
-        level=5;
-      }
-      title="Level "+level.toString()+" Topic "+id.toString();
-    }
-  return title;
-}*/
+  List<int> IDs = [];
+  for(var question in quizQuestions)
+  IDs.add(question.id);
+
+  return IDs;
+}
+Map<int,int>get_answers(List<Q_Question_> quizQuestions)
+{
+  Map<int,int> answers = new Map();
+     for(var question in quizQuestions)
+     {
+       answers[question.id]=question.student_answer_id!;
+
+     }
+     return answers;
+}
+List<Question_>get_questions(List<Q_Question_> quizQuestions)
+{
+  List<Question_> questions = [];
+     for(var question in quizQuestions)
+     {
+       Question_ q = Question_();
+       q.id = question.id;
+       q.question = question.question;
+       q.choices = question.choices;
+       q.complexity = question.complexity;
+       q.points = question.points;
+       q.answer_id = question.answer_id;
+       q.topic_id =  question.topic_id;
+       questions.add(q);
+     }
+     return questions;
+}

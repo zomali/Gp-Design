@@ -10,9 +10,9 @@ class QuestionCubit extends Cubit<QuestionState> {
     return BlocProvider.of(context);
 }
   late List<Question_> allQuestions;
-  
+  late List<Q_Question_> quizQuestions;
   final DatabaseManager db = DatabaseManager();
-   Future<void> getTopicQuestions(int topicID) async{
+  Future<void> getTopicQuestions(int topicID) async{
     emit(QuestionLoading());
     
     List<Question_> easyQuestions = [];
@@ -27,8 +27,8 @@ class QuestionCubit extends Cubit<QuestionState> {
 
     emit(QuestionLoaded());
   }  
-   Future<void> getLevelQuestions(Level_ level) async{
-    //emit(QuestionLoading());
+  Future<void> getLevelQuestions(Level_ level) async{
+    emit(QuestionLoading());
     
     List<Question_> easyQuestions = [];
     List<Question_> mediumQuestions = [];
@@ -61,4 +61,16 @@ class QuestionCubit extends Cubit<QuestionState> {
     }
   }
 
+
+  Future<void> get_list_of_questions(List<int> IDs) async{
+    emit(QuestionLoading());
+    quizQuestions = [];
+    for(var ID in IDs)
+    {
+      Q_Question_ question = Q_Question_();
+      question = await db.get_quiz_question(ID);
+      quizQuestions.add(question);
+    }
+    emit(QuestionLoaded());
+  }
 }
