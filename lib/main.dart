@@ -11,7 +11,6 @@ import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/shared/cubits/cubit/question_cubit.dart';
 import 'package:gp/shared/cubits/cubit/quiz_cubit.dart';
-import 'package:gp/shared/cubits/cubit/weakness_topics_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,9 +46,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => QuizCubit(),
         ),
-        BlocProvider(
-          create: (context) => WeaknessTopicsCubit(),
-        ),
+        
       ],
       
       child: MaterialApp(

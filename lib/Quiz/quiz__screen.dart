@@ -17,7 +17,7 @@ class QuizScreen extends StatelessWidget {
   final int id;
   final student std;
   final String stat;
-  List<int>weakness_topics=[];
+  List<TopicOfWeakness_>weakness_topics=[];
   List<Question_>questions;
   QuizScreen(this.std, this.id,this.stat,this.weakness_topics,this.questions);
   static const routeName = '/quiz_screen';

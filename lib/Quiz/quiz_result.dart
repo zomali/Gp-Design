@@ -22,7 +22,7 @@ class QuizResults extends StatelessWidget {
   List<Question_>questions;
   String stat;
   QuizResults(this.id, this.std, this.student_answers,this.questions,this.stat);
-  List<int>weakness_topics=[];
+  List<TopicOfWeakness_>weakness_topics=[];
   late int score;
   Widget build(BuildContext context) {
     return Scaffold(

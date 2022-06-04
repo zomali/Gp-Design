@@ -17,7 +17,7 @@ class Start_Quiz extends StatelessWidget {
   final int id;
   final student std;
    String stat;
-   List<int> weakness_topics;
+   List<TopicOfWeakness_> weakness_topics;
    List<Question_> questions;
   Start_Quiz(this.std, this.id,this.stat,this.weakness_topics, this.questions);
   Map<int,int> student_answered={};

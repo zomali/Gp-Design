@@ -16,7 +16,7 @@ class BilndingsApp implements Bindings {
   final int id;
   final student std;
   String stat;
-  List<int>weakness_topics=[];
+  List<TopicOfWeakness_>weakness_topics=[];
   List<Question_> questions;
   BilndingsApp(this.std, this.id,this.stat,this.weakness_topics, this.questions);
   @override

@@ -619,7 +619,7 @@ class DatabaseManager {
               Q_Question_ que= Q_Question_();
               que.id = question['question_id'];
               que.student_answer_id = question['answer_id'];
-              que.time_to_answer = question['time_to_answer'];
+              que.time_to_answer = question['time_to_answer'].toDouble();
               q.questions.add(que);
         }
         quizzes.add(q);
@@ -629,17 +629,19 @@ class DatabaseManager {
   }
 
   Future<List<TopicOfWeakness_>> get_weakness_topics(
-      int std_id, int level_id) async {
+      String std_id, int level_id) async {
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     final snapshot = await ref
         .child('students')
-        .child(std_id.toString())
+        .child(std_id)
         .child('courses/CSW150/topics_of_weakness')
         .orderByChild('level_id')
         .equalTo(level_id)
         .once();
 
     List<TopicOfWeakness_> topicsOfWeakness = [];
+    if(snapshot.value != null)
+    {
     for (var topic in snapshot.value) {
       TopicOfWeakness_ t = TopicOfWeakness_();
       t.level_id = topic['level_id'];
@@ -648,6 +650,7 @@ class DatabaseManager {
       t.number_of_wrong_questions = topic['wrong_questions'];
       t.number_of_not_answered_question = topic['not_answered_questions'];
       topicsOfWeakness.add(t);
+    }
     }
     return topicsOfWeakness;
   }

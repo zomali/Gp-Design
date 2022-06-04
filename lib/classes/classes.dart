@@ -82,13 +82,6 @@ class Q_Question_ extends Question_ {
   late int? student_answer_id;
   late double time_to_answer;
 }
-/*
-class question_For_DB {
-  late int? student_answer_id;
-  late double time_to_answer;
-  late int? question_Id;
-}
-*/
 class Quiz_ {
   late List<Q_Question_> questions;
   late String quiz_id;

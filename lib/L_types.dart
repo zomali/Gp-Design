@@ -40,7 +40,6 @@ class _typesState extends State<types> {
   late studentBehavior stdBehavior;
   DatabaseManager db = DatabaseManager();
   List<double> weight = [];
-  List<int> quiz = [];
   //late TypesForStudent list;
   var cupit;
   bool _video_1st = true;
@@ -772,8 +771,7 @@ class _typesState extends State<types> {
                                               builder: (context) => go_to_quiz(
                                                   std,
                                                   topic.id,
-                                                  "Topic",
-                                                  quiz)));
+                                                  "Topic")));
                                     },
                                     child: Text(
                                       "Quiz for Topic",

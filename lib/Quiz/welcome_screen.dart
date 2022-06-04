@@ -36,7 +36,7 @@ class WelcomeScreen extends StatefulWidget {
   final int id;
   final student std;
   String stat;
-  List<int>weakness_topic;
+  List<TopicOfWeakness_>weakness_topic;
   List<Question_>questions;
   WelcomeScreen(this.id, this.std,this.stat,this.weakness_topic,this.questions);
   static const routeName = '/welcome_screen';
@@ -48,7 +48,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   final int id;
   final student std;
   String stat;
-  List<int>weakness_topic=[];
+  List<TopicOfWeakness_>weakness_topic=[];
   List<Question_>questions;
   _WelcomeScreenState(this.id,this.std,this.stat,this.weakness_topic,this.questions);
   final _nameController = TextEditingController();

@@ -13,7 +13,7 @@ class QuizController extends GetxController {
   final int id;
   final student std;
   String? stat;
-  List<int> weakness_topics;
+  List<TopicOfWeakness_> weakness_topics;
   List<Question_> questions;
   QuizController(this.id, this.std, this.stat, this.weakness_topics, this.questions);
   //QuizController();
@@ -68,7 +68,7 @@ class QuizController extends GetxController {
 
   //generate quiz on level
   void generate_random_quiz_for_level<Question_>(
-      int id, List<int> weakness_topics) {
+      int id, List<TopicOfWeakness_> weakness_topics) {
     final random = new Random();
     bool all_weakness = false;
     int topic_count = 1, i = -1;
