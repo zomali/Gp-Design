@@ -12,17 +12,19 @@ import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/signup%20screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
+import 'analysis_controller.dart';
 import 'DatabaseManager.dart';
 
 class Login_screen extends StatefulWidget with NavigationStates {
   const Login_screen({Key? key}) : super(key: key);
-
+  
   @override
   _login_screenState createState() => _login_screenState();
 }
 
+
 class _login_screenState extends State<Login_screen> {
+  
   String email = "";
   String password = "";
   final _auth = FirebaseAuth.instance;
@@ -48,10 +50,13 @@ class _login_screenState extends State<Login_screen> {
     }
     return std;
   }
+  analysis_controller ss = new analysis_controller();
 
   @override
   Widget build(BuildContext context) {
-    db.update2();
+    
+    ss.cluster_performence('2018170065');
+    //db.update2();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[500],
