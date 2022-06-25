@@ -23,7 +23,7 @@ class QuizScreen extends StatelessWidget {
   static const routeName = '/quiz_screen';
   @override
   Widget build(BuildContext context) {
-    String text;
+    double height = MediaQuery.of(context).size.height/3*2;
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -44,6 +44,9 @@ class QuizScreen extends StatelessWidget {
                       child:Container(
                         child:Column(
                           children: [
+                            SizedBox(
+                              height: 10,
+                            ),
                             Text(
                               " Quiz On "+stat+" "+(id).toString(),
                               style: Theme.of(context)
@@ -52,7 +55,7 @@ class QuizScreen extends StatelessWidget {
                                   .copyWith(color: Colors.blue),
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 15,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +101,7 @@ class QuizScreen extends StatelessWidget {
                     height: 5,
                   ),
                   SizedBox(
-                    height: 600,
+                    height: height,
                     child: PageView.builder(
                       scrollDirection: Axis.horizontal,
                       physics: const NeverScrollableScrollPhysics(),
@@ -108,9 +111,6 @@ class QuizScreen extends StatelessWidget {
                       controller: controller.pageController,
                       itemCount: controller.quiz_question.length,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 5,
                   ),
                 ],
               ),
@@ -132,7 +132,7 @@ class QuizScreen extends StatelessWidget {
                     width: 70,
                   ),
                   nextButton(
-                      onPressed: () => controller.nextQuestion()),
+                      onPressed: () => controller.nextQuestion(), total: controller.countOfQuestion, id:controller.numberOfQuestion ,),
                 ],
               )
       ),

@@ -12,13 +12,15 @@ import 'package:gp/classes/classes.dart';
 class QuizController extends GetxController {
   final int id;
   final student std;
-  String? stat;
+  String stat;
   List<TopicOfWeakness_> weakness_topics;
   List<Question_> questions;
   QuizController(this.id, this.std, this.stat, this.weakness_topics, this.questions);
   //QuizController();
   String name = '';
   String status = '';
+  int number_of_correct_answer=0;
+  int number_of_wronge_answer=0;
   //list of all questions
   //contain all question of level
   List<Question_> get questionsList => [...questions];
@@ -198,10 +200,15 @@ class QuizController extends GetxController {
   //timer
   Timer? _timer;
   //min to display quiz to stident
-  final int maxMin = 15;
+  final int maxMin = 14;
+  final int maxSec=60;
   //time in progress time design must equal maxMin variable
-  final RxInt _min = 15.obs;
+  final RxInt _min = 14.obs;
+  final RxInt _sec=60.obs;
   RxInt get min => _min;
+  RxInt get sec=> _sec;
+  int get correct=>number_of_correct_answer;
+  int get wrong=>number_of_wronge_answer;
   int quesId = 0;
   //return quiz questions
   List<Question_> get student_quiz => [...quiz_question];
@@ -232,7 +239,7 @@ class QuizController extends GetxController {
 
   int get scoreResult {
     return _countOfCorrectAnswers;
-    ;
+
   }
 
   List<TopicOfWeakness_> get_quiz_analysis() {
@@ -361,7 +368,7 @@ class QuizController extends GetxController {
     } else if (scoreResult == 0) {
       status = "Very frustrating. You have to change the way you study";
     } else if (scoreResult < total * .5) {
-      status = "You Must Study Well, You Will Repeat This Level";
+      status = "You must study well, you will repeat this level";
     } else {
       status = "Not bad, but you should study more";
     }
@@ -386,8 +393,10 @@ class QuizController extends GetxController {
         } else if (quiz_question[i].answer_id == selected_answer) {
           _countOfCorrectAnswers += quiz_question[i].points;
           quiz_analysis[i].user_answer = "true";
+          number_of_correct_answer++;
         } else {
           quiz_analysis[i].user_answer = "false";
+          number_of_wronge_answer++;
         }
       }
     }
@@ -552,13 +561,18 @@ class QuizController extends GetxController {
 
   void startTimer() {
     resetTimer();
-    _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
-      if (_min.value > 1) {
-        _min.value--;
-      } else {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_sec.value > 1 && _min.value>-1) {
+        _sec.value--;
+      }
+      else if(_sec.value==1 && _min.value>-1)
+        {
+          _sec.value=60;
+          _min.value--;
+        }
+      else {
         stopTimer();
         Get.offAndToNamed(ResultScreen.routeName);
-        //nextQuestion();
       }
     });
   }
