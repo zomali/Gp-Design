@@ -184,6 +184,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               key: _formkey,
               child: GetBuilder<QuizController>(
                 init: Get.find<QuizController>(),
+          
                 builder: (controller) => Row(),
               ),)
           ],
@@ -215,6 +216,10 @@ String get_questions_len(String stat,int len,int level)
           {
             count=3*4;
           }
+          else if (len ==0)
+        {
+          count=3*3;
+        }
         }
       else if(level==2)
         {
@@ -230,6 +235,10 @@ String get_questions_len(String stat,int len,int level)
           {
             count=3*4;
           }
+          else if (len ==0)
+        {
+          count=3*3;
+        }
         }
       else if(level==3)
       {
@@ -249,6 +258,10 @@ String get_questions_len(String stat,int len,int level)
         {
           count=4*4;
         }
+        else if (len ==0)
+        {
+          count=3*4;
+        }
       }
       else if(level==4)
       {
@@ -263,6 +276,10 @@ String get_questions_len(String stat,int len,int level)
         else if(len==3)
         {
           count=3*4;
+        }
+        else if (len ==0)
+        {
+          count=3*3;
         }
       }
       else if(level==4)
@@ -282,6 +299,10 @@ String get_questions_len(String stat,int len,int level)
         else if(len==4)
         {
           count=4*4;
+        }
+        else if (len ==0)
+        {
+          count=3*4;
         }
       }
     }

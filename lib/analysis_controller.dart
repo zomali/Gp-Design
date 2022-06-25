@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'dart:math';
-
+import 'package:gp/DatabaseManager.dart';
+import 'package:gp/classes/student.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class Student_perf  {
@@ -200,7 +201,6 @@ class analysis_controller {
 
 return std;
   }
-
   void collebretive_filtering(String id) async {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase.child('quizzes').get();
@@ -287,4 +287,105 @@ return std;
     }
     String RelativeUserID = IDs[index];
   }
+bool compare_centroids(Map<String, String> new_centroids, Map<String, String> old_centroids)
+  {
+    bool different_centroids = false;
+
+    for(var centroid in new_centroids.keys)
+    {
+      if(!old_centroids.containsKey(centroid))
+      {
+        different_centroids = true;
+        break;
+      }
+    }
+    return different_centroids;
+  }
+ 
+ Map<String, String> calculate_centroids(Map<String,String>centroids, Map<String, String>student_cluster, Map<String,String>student_VAR)
+ {
+  Map<String, String> new_centroids = {};
+  for(var centroid in centroids.keys)
+  {
+    int totalV = 0;
+    int totalA = 0;
+    int totalR = 0;
+    int totalStudents = 0;
+    for(var student in student_cluster.keys)
+    {
+      if(student_cluster[student] == centroid)
+      {
+        List<String> VAR = student_VAR[student]!.split(",");
+        totalV += int.parse(VAR[0]);
+        totalA += int.parse(VAR[1]);
+        totalR += int.parse(VAR[2]);
+        totalStudents+=1;
+      }
+    }
+    new_centroids[centroid] = (totalV/totalStudents).toString()+','+(totalA/totalStudents).toString()+','+(totalR/totalStudents).toString();
+  }
+  return new_centroids;
+ }
+ 
+ Future<Map<String, String>> cluster_students_by_behavior(int k) async
+ {
+  
+  //get average time spent in each content type
+  DatabaseManager db = DatabaseManager();
+  List<student> students = await db.fetchStudents();
+  
+  //prepare data points
+  Map<String, String> student_VAR = {};//ID:'V,A,R/W'
+  for(var std in students)
+  {
+    int V = await db.getTimeTokenInVideo(std)+ await db.getTimeTokenInImage(std);
+    int A = await db.getTimeTokenInAudio(std);
+    int R = await db.getTimeTokenInText(std);
+    student_VAR[std.id] = (V/std.current_topic).toString()+','+(A/std.current_topic).toString()+','+(R/std.current_topic).toString();
+  }
+ 
+  
+  //select 3 random clusters
+  Map<String, String> current_centroids = {};
+  Map<String, String> new_centroids = {};
+  new_centroids.addAll({'1': student_VAR[students[0].id]!,'2': student_VAR[students[1].id]!, '3': student_VAR[students[2].id]!});
+  
+
+ Map<String, String> student_cluster = {};//ID:cluster
+ do
+ {
+  student_cluster.clear();
+  current_centroids.clear();
+  current_centroids.addAll(new_centroids);
+  //assign the student to the clusters
+  for(var student in student_VAR.keys)
+  {
+    List<String> V_A_Rs = student_VAR[student]!.split(',');
+    Map<String, double> distance = {};
+    for(var centroid in current_centroids.keys)
+    {
+      List<String> V_A_Rc = current_centroids[centroid]!.split(',');
+      //sqr((Vc-Vs)^2+(Ac-As)^2+(Rc-Rs)^2)
+      distance[centroid] = sqrt(pow(int.parse(V_A_Rc[0])-int.parse(V_A_Rs[0]), 2)+pow(int.parse(V_A_Rc[1])-int.parse(V_A_Rs[1]), 2)+pow(int.parse(V_A_Rc[2])-int.parse(V_A_Rs[2]), 2));
+    }
+    double min_dist = -1;
+    String min_cent = "";
+    for(var cent in distance.keys)
+    {
+      if(distance[cent]!<min_dist)
+      {
+        min_dist = distance[cent]!;
+        min_cent = cent;
+      }
+    }
+    student_cluster[student] = min_cent;
+  }
+  //re-calculate centroids
+  new_centroids = calculate_centroids(current_centroids, student_cluster, student_VAR);
+ }
+ while(compare_centroids(new_centroids, current_centroids));
+ 
+  
+ return student_cluster;
+ }
 }
