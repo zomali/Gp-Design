@@ -8,7 +8,8 @@ class Student_perf  {
   int NoOfCluster =0;
   int IndexInCluster =0;
   double ValueOfPerformance =0.0;
-
+  List<String> UserIds = [];
+  List<double> UsersGrades = [];
 }
 class analysis_controller {
   Future<Student_perf> cluster_performence( String idd ) async {
@@ -168,6 +169,8 @@ class analysis_controller {
            std.NoOfCluster = noOfCluster;
            std.IndexInCluster = ind;
            std.ValueOfPerformance = cluster11[ind];
+           std.UserIds = cluster1;
+           std.UsersGrades = cluster11;
          }
 
     if(noOfCluster ==2)
@@ -178,6 +181,8 @@ class analysis_controller {
       std.NoOfCluster = noOfCluster;
       std.IndexInCluster = ind;
       std.ValueOfPerformance = cluster22[ind];
+      std.UserIds = cluster2;
+      std.UsersGrades = cluster22;
     }
 
     if(noOfCluster ==3)
@@ -188,6 +193,8 @@ class analysis_controller {
       std.NoOfCluster = noOfCluster;
       std.IndexInCluster = ind;
       std.ValueOfPerformance = cluster33[ind];
+      std.UserIds = cluster3;
+      std.UsersGrades = cluster33;
     }
 
 
