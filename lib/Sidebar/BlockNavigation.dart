@@ -14,7 +14,7 @@ enum NavigationEvents {
   HomePageClickedEvent,
   analytics,
   profile,
-  dashboard,
+ // dashboard,
   logout,
 }
 
@@ -41,9 +41,9 @@ class Navigationn extends Bloc<NavigationEvents, NavigationStates> {
       case NavigationEvents.analytics:
         yield Learning_analytics_screen(std);
         break;
-      case NavigationEvents.dashboard:
-        yield Dashboard_screen(std);
-        break;
+      // case NavigationEvents.dashboard:
+      //   yield Dashboard_screen(std);
+      //   break;
       case NavigationEvents.profile:
         yield MyProfileScreen(std);
         break;  

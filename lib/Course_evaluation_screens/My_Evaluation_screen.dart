@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Course_evaluation_screens/Courses_evaluations.dart';
+import 'package:gp/Dashboard_screen.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -21,7 +22,7 @@ class _My_EvaluationState extends State<My_Evaluation> {
   final student std;
   _My_EvaluationState(this.std);
   static List<String> topics = <String>[
-    "Nested Structures ",
+    "Nested Structures",
     "Arrays",
   ];
 
@@ -39,7 +40,7 @@ class _My_EvaluationState extends State<My_Evaluation> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => Course_evual_categories(std, "CSW150")));
+                    builder: (context) => Dashboard_screen(std)));
           },
         ),
       ),

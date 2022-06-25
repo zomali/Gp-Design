@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gp/Courses_evaluations_Screen.dart';
+import 'package:gp/Dashboard_screen.dart';
 import 'package:gp/DatabaseManager.dart';
 import 'package:gp/Info.dart';
 import 'package:gp/Learning_analytics_screen.dart';
 import 'package:gp/Sidebar/BlockNavigation.dart';
 import 'package:gp/Sidebar/Menu.dart';
+
 import 'package:gp/myprofile_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -241,9 +243,8 @@ class _HomePageState extends State<HomePage> {
                         onTap: () => {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  //builder: (context) => Levels(1, std))),
-                                  builder: (context) => INFO(std, "CSW150"))),
+                              MaterialPageRoute(builder: (context) => Dashboard_screen( std))),
+                              //    builder: (context) => INFO(std, "CSW150"))),
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 25),

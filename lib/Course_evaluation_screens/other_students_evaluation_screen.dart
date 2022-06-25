@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Course_evaluation_screens/Courses_evaluations.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:gp/Dashboard_screen.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import '../classes/student.dart';
 
@@ -17,10 +18,12 @@ List<int> listForAll = [];
 List<int> listForOne = [];
 List<int> listForOneGrades = [];
 List<int> listForAllGrades = [];
+List<rank>listForRank=[];
 
 class _Other_students_evaluation_screenState
     extends State<Other_students_evaluation_screen> {
   student std;
+
   _Other_students_evaluation_screenState(this.std);
 
   Text yourProgress(List<int> you, List<int> other) {
@@ -133,7 +136,7 @@ class _Other_students_evaluation_screenState
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        Course_evual_categories(std, "CSW150")));
+                        Dashboard_screen(std)));
           },
         ),
       ),
@@ -148,12 +151,24 @@ class _Other_students_evaluation_screenState
             if (state is StudentBehaviorLoading)
               return Center(child: CircularProgressIndicator());
             else {
+              listForRank=[
+                rank("Adham Bekair", 250, std.profile_picture),
+                rank("Hazem Ali", 200, std.profile_picture),
+                rank("Hossam Abdelnaby", 190, std.profile_picture),
+                rank("Hazem Ali", 170, std.profile_picture),
+                rank("Adham Bekair", 150, std.profile_picture),
+                rank( "Hazem Ali", 130, std.profile_picture),
+                rank("Hossam Abdelnaby", 120, std.profile_picture),
+                rank( "Hazem Ali", 80, std.profile_picture),
+              ];
               var studentCubit = StudentBehaviorCubit.get(context);
               try {
                 listForAll = studentCubit.timesForStudents;
                 listForOne = studentCubit.times;
                 listForOneGrades = studentCubit.gradesStudent;
                 listForAllGrades = studentCubit.gradesAllStudent;
+
+
               } catch (e) {
                 for (int i = 0; i < 5; i++) {
                   listForAll.add(1);
@@ -167,6 +182,280 @@ class _Other_students_evaluation_screenState
                 child: Center(
                   child: Column(
                     children: [
+                      SizedBox(
+                      height: 40,
+                    ),
+
+                      Text(
+                        "Score Of Students",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                        ),
+                      ),//Score Of Students
+                      SizedBox(
+                        height: 40,
+                      ),
+
+                      Row(
+                        children: [
+                          SizedBox(width: 20,),
+                         // Spacer(),
+                         // SizedBox(width: 30,),
+                     //     Spacer(),
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 40,
+                                backgroundImage: NetworkImage(listForRank[2].pic),
+                                //image
+                              ),
+                              Container(
+                                height: 20,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                child: Text(
+                                  "3rd",
+
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                //   fontWeight: FontWeight.bold,
+                                    color:Colors.white,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 5,),
+                              Text(
+                                listForRank[2].name,
+
+
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold
+                              ),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    listForRank[2].score.toString(),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                       fontWeight: FontWeight.w400
+                                    ),
+                                  ),
+                                  CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage:
+                                    AssetImage('proj_images/p.jfif'),
+                                  ), //
+
+                                ],
+                              ),
+
+                            ],
+                          ),//3rd info
+                          Spacer(),
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 75,
+                                backgroundColor:Colors.green,
+                                child: CircleAvatar(
+
+                                  radius: 70,
+                                  backgroundImage: NetworkImage(listForRank[0].pic),
+                                  //image
+                                ),
+                              ),
+                              Container(
+                                height: 20,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                child: Text(
+                                  "1st",
+
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    //   fontWeight: FontWeight.bold,
+                                    color:Colors.white,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 5,),
+                              Text(
+                                listForRank[0].name,
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    listForRank[0].score.toString(),
+                                    style: TextStyle(
+                                        fontSize: 20,
+
+                                        fontWeight: FontWeight.w600
+                                    ),
+                                  ),
+                                  CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor: Colors.white,
+
+                                    backgroundImage:
+                                    AssetImage('proj_images/p.jfif'),
+                                  ), //
+
+                                ],
+                              ),
+
+                            ],
+                          ),//1st info
+                          Spacer(),
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 40,
+                                backgroundImage: NetworkImage(listForRank[1].pic),
+                                //image
+                              ),
+                              Container(
+                                height: 20,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                child: Text(
+                                  "2nd",
+
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    //   fontWeight: FontWeight.bold,
+                                    color:Colors.white,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 5,),
+                              Text(
+                                listForRank[1].name,
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    listForRank[1].score.toString(),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400
+                                    ),
+                                  ),
+                                  CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage:
+                                    AssetImage('proj_images/p.jfif'),
+                                  ), //
+
+                                ],
+                              ),
+
+                            ],
+                          ),//2nd info
+                         // Spacer(),
+                          SizedBox(width: 20,),
+                        ],
+                      ),//first 3
+
+
+                      Container(
+                        height: 180,
+                       // width: 500,
+                        child: ListView.builder(
+                          itemCount: listForRank.length-3,
+                            itemBuilder: (context,index){
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical:10.0),
+                              child: Row(
+                              children: [
+                                SizedBox(width: 15,),
+                                Text(
+                                  (index+4).toString(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16
+                                  ),
+
+                                ),
+                                SizedBox(width: 10),
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundImage: NetworkImage(listForRank[index+3].pic),
+                                  //image
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    listForRank[index+3].name,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 18
+                                    ),
+                                  ),
+                                ),
+                                Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    listForRank[index+3].score.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 18
+                                    ),
+                                  ),
+                                ),
+                                CircleAvatar(
+                                  radius: 13,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage:
+                                  AssetImage('proj_images/p.jfif'),
+                                ), //
+                                SizedBox(width: 20),
+                              ],
+
+                              ),
+                            );
+
+                            }
+
+                        ),
+                      ),//score list
+
+
+
+
+
+
+
+
+
+
+
+
+
                       SizedBox(
                         height: 70,
                       ),
@@ -282,7 +571,11 @@ class _Other_students_evaluation_screenState
                       SizedBox(
                         height: 50,
                       ),
+
+
+
                     ],
+
                   ),
                 ),
               );
@@ -438,4 +731,12 @@ class compare_progress {
   final int compelted;
 
   compare_progress(this.level, this.compelted);
+}
+
+class rank{
+  //int id;
+  String name;
+  int score;
+  String pic;
+  rank(this.name,this.score,this.pic);
 }

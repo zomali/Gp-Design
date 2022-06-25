@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Course_evaluation_screens/Courses_evaluations.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:gp/Dashboard_screen.dart';
 import '../classes/student.dart';
 import '../shared/cubits/cubit/student_behavior_cubit.dart';
 
@@ -31,7 +32,7 @@ class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        Course_evual_categories(std, "CSW150")));
+                        Dashboard_screen(std)));
           },
         ),
       ),

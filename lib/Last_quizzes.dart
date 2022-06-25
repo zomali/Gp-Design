@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Course_evaluation_screens/My_Evaluation_screen.dart';
+import 'package:gp/Dashboard_screen.dart';
 import 'package:gp/Info.dart';
 import 'package:gp/quiz_view.dart';
 import 'package:gp/classes/classes.dart';
@@ -23,20 +24,24 @@ class _lastQuizzesState extends State<lastQuizzes> {
   student std;
   String courseCode;
   _lastQuizzesState(this.std, this.courseCode);
-  int _selectedIndex = 3;
+  int _selectedIndex = 2;
   static List<Widget> _pages = <Widget>[];
  
   void addTOList() {
-    _pages.add(INFO(std, courseCode));
+    _pages.add(Dashboard_screen(std));
     _pages.add(levels_view(std));
-    _pages.add(Course_evual_categories(std, courseCode));
+  //  _pages.add(Course_evual_categories(std, courseCode));
     _pages.add(lastQuizzes(std, courseCode));
+    _pages.add(INFO(std, courseCode));
+
+
   }
 
   void _onItemTapped(int index) {
     setState(
           () {
         _selectedIndex = index;
+        _selectedIndex%=5;
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => moveToPage(index)));
       },
@@ -151,32 +156,38 @@ class _lastQuizzesState extends State<lastQuizzes> {
                 ),
                 bottomNavigationBar: BottomNavigationBar(
                   showUnselectedLabels: true,
-        
+
                   selectedItemColor: Colors.blue,
                   selectedFontSize: 18,
-        
+
                   unselectedItemColor: Colors.grey,
                   unselectedFontSize: 16,
-        
+
                   items: const [
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.info),
-                      label: 'Info',
+                      icon: Icon(Icons.dashboard),
+                      label: 'Dashboard',
+                      //   backgroundColor: Colors.blue
+                      //     backgroundColor: Colors.blue,
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.keyboard_double_arrow_up),
                       label: 'Levels',
                     ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.equalizer_outlined),
-                      label: 'Evaluation',
-                    ),
+                    // BottomNavigationBarItem(
+                    //   icon: Icon(Icons.equalizer_outlined),
+                    //   label: 'Evaluation',
+                    // ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.quiz),
                       label: 'Quizzes',
-                    )
+                    ),
+
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.info),
+                      label: 'Info',
+                    ),
                   ],
-        
                   currentIndex: _selectedIndex, //New
                   onTap: _onItemTapped,
                 ),

@@ -29,10 +29,13 @@ class _levels_view extends State<levels_view> {
   int _selectedIndex = 1;
   static List<Widget> _pages = <Widget>[];
   void addTOList() {
-    _pages.add(INFO(std, "CSW150"));
+    _pages.add(Dashboard_screen(std));
+
     _pages.add(levels_view(std));
-    _pages.add(Course_evual_categories(std, "CSW150"));
+  //  _pages.add(Course_evual_categories(std, "CSW150"));
     _pages.add(lastQuizzes(std, "CSW150"));
+    _pages.add(INFO(std, "CSW150"));
+
   }
 
   void _onItemTapped(int index) {
@@ -82,23 +85,29 @@ class _levels_view extends State<levels_view> {
 
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.info),
-              label: 'Info',
+              icon: Icon(Icons.dashboard),
+              label: 'Dashboard',
+              //   backgroundColor: Colors.blue
+              //     backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.keyboard_double_arrow_up),
               label: 'Levels',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.equalizer_outlined),
-              label: 'Evaluation',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.equalizer_outlined),
+            //   label: 'Evaluation',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(Icons.quiz),
               label: 'Quizzes',
-            )
-          ],
+            ),
 
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info),
+              label: 'Info',
+            ),
+          ],
           currentIndex: _selectedIndex, //New
           onTap: _onItemTapped,
         ),

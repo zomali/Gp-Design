@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gp/Course_evaluation_screens/My_Evaluation_screen.dart';
 import 'package:gp/Course_evaluation_screens/other_students_evaluation_screen.dart';
 
+import '../Dashboard_screen.dart';
 import '../Home.dart';
 import '../Info.dart';
 import '../Last_quizzes.dart';
@@ -30,10 +31,12 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
   static List<Widget> _pages = <Widget>[];
 
   void addTOList() {
-    _pages.add(INFO(std, courseCode));
+    _pages.add(Dashboard_screen(std));
     _pages.add(levels_view(std));
-    _pages.add(Course_evual_categories(std, courseCode));
+ //   _pages.add(Course_evual_categories(std, courseCode));
     _pages.add(lastQuizzes(std, courseCode));
+    _pages.add(INFO(std, courseCode));
+
   }
 
   void _onItemTapped(int index) {
@@ -62,45 +65,43 @@ class _Course_evual_categoriesState extends State<Course_evual_categories> {
         title: const Text("Course Evaluation"),
         leading: Icon(Icons.equalizer_outlined),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
-
-        selectedItemColor: Colors.blue,
-        selectedFontSize: 18,
-
-        unselectedItemColor: Colors.grey,
-        unselectedFontSize: 16,
-
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'Info',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.keyboard_double_arrow_up),
-            label: 'Levels',
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.equalizer_outlined),
-            label: 'Evaluation',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.quiz),
-            label: 'Quizzes',
-          )
-        ],
-        // onTap: (index){
-        //   print("index = ${widget.ind} ");
-        //   Navigator.push(context,
-        //       MaterialPageRoute(builder: (context)=>moveToPage(index)));
-        //
-        //
-        //
-        // },
-        currentIndex: _selectedIndex, //New
-        onTap: _onItemTapped,
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   showUnselectedLabels: true,
+      //
+      //   selectedItemColor: Colors.blue,
+      //   selectedFontSize: 18,
+      //
+      //   unselectedItemColor: Colors.grey,
+      //   unselectedFontSize: 16,
+      //
+      //   items: const [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.dashboard),
+      //       label: 'Dashboard',
+      //       //   backgroundColor: Colors.blue
+      //       //     backgroundColor: Colors.blue,
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.keyboard_double_arrow_up),
+      //       label: 'Levels',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.equalizer_outlined),
+      //       label: 'Evaluation',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.quiz),
+      //       label: 'Quizzes',
+      //     ),
+      //
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.info),
+      //       label: 'Info',
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex, //New
+      //   onTap: _onItemTapped,
+      // ),
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,

@@ -47,8 +47,7 @@ class DatabaseManager {
     return c;
   }
 
-  Future<List<student>> fetchStudents() async {
-    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+  Future<List<student>> fetchStudents() async {DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase.child('students').get();
     /*DatabaseReference ref = FirebaseDatabase.instance.reference();
     final response = await ref

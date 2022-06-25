@@ -134,7 +134,7 @@ class _sidebarState extends State<sidebar>
                             backgroundImage: NetworkImage(std.profile_picture),
                           ),
                         ),*/
-                      ),
+                      ),//profile_pic
                       Divider(
                         height: 64,
                         thickness: 0.5,
@@ -154,21 +154,9 @@ class _sidebarState extends State<sidebar>
                           title: "Home",
                           titleColor: Colors.white,
                         ),
-                      ),
+                      ),// Home_btn
 
-                      GestureDetector(
-                        onTap: () {
-                          BlocProvider.of<Navigationn>(context)
-                              .add(NavigationEvents.dashboard);
-                          oniconpress();
-                        },
-                        child: Menu_SideBar(
-                          icon: Icons.dashboard,
-                          iconColor: Colors.cyan,
-                          title: "Dashboard",
-                          titleColor: Colors.white,
-                        ),
-                      ),
+
                       GestureDetector(
                         onTap: () {
                           BlocProvider.of<Navigationn>(context)
@@ -181,7 +169,20 @@ class _sidebarState extends State<sidebar>
                           title: "Analytics",
                           titleColor: Colors.white,
                         ),
-                      ),
+                      ),//Analytics_btn
+                      GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<Navigationn>(context)
+                              .add(NavigationEvents.profile);
+                          oniconpress();
+                        },
+                        child: Menu_SideBar(
+                          icon: Icons.person_rounded,
+                          iconColor: Colors.cyan,
+                          title: "Profile",
+                          titleColor: Colors.white,
+                        ),
+                      ),//Profile_btn
                       Divider(
                         height: 64,
                         thickness: 0.5,
