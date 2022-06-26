@@ -152,8 +152,8 @@ class _Other_students_evaluation_screenState
               return Center(child: CircularProgressIndicator());
             else {
               listForRank=[
-                rank("Adham Bekair", 250, std.profile_picture),
-                rank("Hazem Ali", 200, std.profile_picture),
+                rank("Hossam Abdelnaby", 250, std.profile_picture),
+                rank("Hossam Abdelnaby", 200, std.profile_picture),
                 rank("Hossam Abdelnaby", 190, std.profile_picture),
                 rank("Hazem Ali", 170, std.profile_picture),
                 rank("Adham Bekair", 150, std.profile_picture),
@@ -203,175 +203,203 @@ class _Other_students_evaluation_screenState
                          // Spacer(),
                          // SizedBox(width: 30,),
                      //     Spacer(),
-                          Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 40,
-                                backgroundImage: NetworkImage(listForRank[2].pic),
-                                //image
-                              ),
-                              Container(
-                                height: 20,
-                                width: 70,
-                                decoration: BoxDecoration(
-                                    color: Colors.blue,
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                child: Text(
-                                  "3rd",
-
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                //   fontWeight: FontWeight.bold,
-                                    color:Colors.white,
-                                    fontSize: 18.0,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 5,),
-                              Text(
-                                listForRank[2].name,
-
-
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold
-                              ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    listForRank[2].score.toString(),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                       fontWeight: FontWeight.w400
-                                    ),
-                                  ),
-                                  CircleAvatar(
-                                    radius: 15,
-                                    backgroundColor: Colors.white,
-                                    backgroundImage:
-                                    AssetImage('proj_images/p.jfif'),
-                                  ), //
-
-                                ],
-                              ),
-
-                            ],
-                          ),//3rd info
-                          Spacer(),
-                          Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 75,
-                                backgroundColor:Colors.green,
-                                child: CircleAvatar(
-
-                                  radius: 70,
-                                  backgroundImage: NetworkImage(listForRank[0].pic),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage: NetworkImage(listForRank[2].pic),
                                   //image
                                 ),
-                              ),
-                              Container(
-                                height: 20,
-                                width: 70,
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                child: Text(
-                                  "1st",
+                                Container(
+                                  height: 20,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(15.0)),
+                                  child: FittedBox(
+                                    child: Text(
+                                      "3rd",
 
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
                                     //   fontWeight: FontWeight.bold,
-                                    color:Colors.white,
-                                    fontSize: 20.0,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 5,),
-                              Text(
-                                listForRank[0].name,
-                                style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    listForRank[0].score.toString(),
-                                    style: TextStyle(
-                                        fontSize: 20,
-
-                                        fontWeight: FontWeight.w600
+                                        color:Colors.white,
+                                        fontSize: 20.0,
+                                      ),
                                     ),
                                   ),
-                                  CircleAvatar(
-                                    radius: 15,
-                                    backgroundColor: Colors.white,
-
-                                    backgroundImage:
-                                    AssetImage('proj_images/p.jfif'),
-                                  ), //
-
-                                ],
-                              ),
-
-                            ],
-                          ),//1st info
-                          Spacer(),
-                          Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 40,
-                                backgroundImage: NetworkImage(listForRank[1].pic),
-                                //image
-                              ),
-                              Container(
-                                height: 20,
-                                width: 70,
-                                decoration: BoxDecoration(
-                                    color: Colors.blue,
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                child: Text(
-                                  "2nd",
-
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    //   fontWeight: FontWeight.bold,
-                                    color:Colors.white,
-                                    fontSize: 18.0,
-                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 5,),
-                              Text(
-                                listForRank[1].name,
-                                style: TextStyle(
+                                SizedBox(height: 5,),
+                                FittedBox(
+                                 fit: BoxFit.cover,
+                                  child: Text(
+                                    listForRank[2].name,
+
+
+                                  style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold
+                                  ),
+                                  ),
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    listForRank[1].score.toString(),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400
+                                FittedBox(
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        listForRank[2].score.toString(),
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                           fontWeight: FontWeight.w400
+                                        ),
+                                      ),
+                                      CircleAvatar(
+                                        radius: 15,
+                                        backgroundColor: Colors.white,
+                                        backgroundImage:
+                                        AssetImage('proj_images/p.jfif'),
+                                      ), //
+
+                                    ],
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          ),//3rd info
+                          //Spacer(),
+                         Column(
+                              children: [
+                                CircleAvatar(
+                                  radius: 75,
+                                  backgroundColor:Colors.green,
+                                  child: CircleAvatar(
+
+                                    radius: 70,
+                                    backgroundImage: NetworkImage(listForRank[0].pic),
+                                    //image
+                                  ),
+                                ),
+                                Container(
+                                  height: 20,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(15.0)),
+                                  child: FittedBox(
+                                    child: Text(
+                                      "1st",
+
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        //   fontWeight: FontWeight.bold,
+                                        color:Colors.white,
+                                        fontSize: 20.0,
+                                      ),
                                     ),
                                   ),
-                                  CircleAvatar(
-                                    radius: 15,
-                                    backgroundColor: Colors.white,
-                                    backgroundImage:
-                                    AssetImage('proj_images/p.jfif'),
-                                  ), //
+                                ),
+                                SizedBox(height: 5,),
+                                
+                                FittedBox(
+                                 // fit: BoxFit.fill,
+                                  child: Text(
 
-                                ],
-                              ),
+                                    listForRank[0].name,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                FittedBox(
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        listForRank[0].score.toString(),
+                                        style: TextStyle(
+                                            fontSize: 20,
 
-                            ],
+                                            fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                      CircleAvatar(
+                                        radius: 15,
+                                        backgroundColor: Colors.white,
+
+                                        backgroundImage:
+                                        AssetImage('proj_images/p.jfif'),
+                                      ), //
+
+                                    ],
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          //1st info
+                         // Spacer(),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage: NetworkImage(listForRank[1].pic),
+                                  //image
+                                ),
+                                Container(
+                                  height: 20,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(15.0)),
+                                  child: FittedBox(
+                                    child: Text(
+                                      "2nd",
+
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        //   fontWeight: FontWeight.bold,
+                                        color:Colors.white,
+                                        fontSize: 20.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Text(
+                                    listForRank[1].name,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                FittedBox(
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        listForRank[1].score.toString(),
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400
+                                        ),
+                                      ),
+                                      CircleAvatar(
+                                        radius: 15,
+                                        backgroundColor: Colors.white,
+                                        backgroundImage:
+                                        AssetImage('proj_images/p.jfif'),
+                                      ), //
+
+                                    ],
+                                  ),
+                                ),
+
+                              ],
+                            ),
                           ),//2nd info
                          // Spacer(),
                           SizedBox(width: 20,),

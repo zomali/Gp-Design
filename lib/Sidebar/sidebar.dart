@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gp/Login_scrn.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/login_screen.dart';
 import 'package:rxdart/rxdart.dart';
@@ -192,10 +193,12 @@ class _sidebarState extends State<sidebar>
                       ),                      
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
+                     //     MyLogin()
+                          Navigator.pushReplacement<void, void>(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => Login_screen()),
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => const MyLogin(),
+                            ),
                           );
                         },
                         child: Menu_SideBar(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:get/get.dart';
+import 'package:gp/Login_scrn.dart';
 import 'package:gp/login_screen.dart';
 import 'package:gp/shared/cubits/cubit/course_cubit.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
@@ -113,7 +114,8 @@ class MyApp extends StatelessWidget {
         //pageTransitionType: PageTransitionType.scale,
         duration: 2500,
         nextScreen: Login_screen()),*/
-        home: Login_screen(),
+       //home: Login_screen(),
+       home: MyLogin(),
 
       ),
     );
