@@ -358,7 +358,7 @@ class analysis_controller {
     return new_centroids;
   }
 
-  Future<Map<String, String>> cluster_students_by_behavior(int k) async {
+  Future<List<String>> cluster_students_by_behavior(int k, student std) async {
     //get average time spent in each content type
     DatabaseManager db = DatabaseManager();
     List<student> students = await db.fetchStudents();
@@ -418,6 +418,15 @@ class analysis_controller {
           calculate_centroids(current_centroids, student_cluster, student_VAR);
     } while (compare_centroids(new_centroids, current_centroids));
 
-    return student_cluster;
+    List<String> similar_students = [];
+    String sCent = student_cluster[std.id]!;
+    for(var s in student_cluster.keys)
+    {
+      if(student_cluster[s]! == sCent)
+      {
+        similar_students.add(s);
+      }
+    }
+    return similar_students;
   }
 }
