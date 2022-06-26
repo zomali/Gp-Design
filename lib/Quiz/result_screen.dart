@@ -7,16 +7,18 @@ import '../classes/classes.dart';
 import 'question__model.dart';
 import 'custom_button.dart';
 import 'quiz_controller.dart';
+
 class ResultScreen extends StatelessWidget {
   static const routeName = '/result_screen';
   final student std;
   final int id;
   final String stat;
-  Map<int,int> student_answers={};
-  List<Question_>questions;
-  ResultScreen(this.std, this.id,this.student_answers,this.questions,this.stat);
+  Map<int, int> student_answers = {};
+  List<Question_> questions;
+  ResultScreen(
+      this.std, this.id, this.student_answers, this.questions, this.stat);
   late QuizController controller;
-  bool isVisible=true;
+  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class ResultScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Spacer(),//image
+                              Spacer(), //image
                               CircleAvatar(
                                 radius: 40,
                                 backgroundColor: Colors.transparent,
@@ -63,30 +65,32 @@ class ResultScreen extends StatelessWidget {
                                   height: 60,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: AssetImage('proj_images/faculty_logo.png'),
+                                      image: AssetImage(
+                                          'proj_images/faculty_logo.png'),
                                       fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
                               ), //image
-                            ]
-                        ),
-                        Column(
-                            children:[
-                              Text(
-                                'Structured Programming',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 35,color: Colors.blue,fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(height: 10,),
-                              Text(
-                                '${controller.stat}'+' : '+'${controller.id}',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 25,color:Colors.white),
-                              ),
-                            ]
-
-                        ),
+                            ]),
+                        Column(children: [
+                          Text(
+                            'Structured Programming',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 35,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '${controller.stat}' + ' : ' + '${controller.id}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 25, color: Colors.white),
+                          ),
+                        ]),
                         /*ClipRRect(
 
                           borderRadius: BorderRadius.circular(5),
@@ -96,17 +100,20 @@ class ResultScreen extends StatelessWidget {
                         ),*/
 
                         Text(
-                          'Your Score is : '+'${controller.scoreResult.round()} /${controller.calculate_total_quiz_points()}',
-                          style: Theme.of(context).textTheme.headline4!.copyWith(
-                            color: Stat_Color(),
-                          ),
+                          'Your Score is : ' +
+                              '${controller.scoreResult.round()} /${controller.calculate_total_quiz_points()}',
+                          style:
+                              Theme.of(context).textTheme.headline4!.copyWith(
+                                    color: Stat_Color(),
+                                  ),
                         ),
                         Text(
                           '${controller.status.characters}',
-                          textAlign:TextAlign.center,
-                          style: Theme.of(context).textTheme.headline5!.copyWith(
-                            color: Colors.blue,
-                          ),
+                          textAlign: TextAlign.center,
+                          style:
+                              Theme.of(context).textTheme.headline5!.copyWith(
+                                    color: Colors.blue,
+                                  ),
                         ),
                         /*Container(
                           width: 320,
@@ -143,39 +150,55 @@ class ResultScreen extends StatelessWidget {
                           ),
                         ),*/
                         viewAnswersButton(
-                            onPressed: () =>  Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => QuizResults(id, std,controller.get_answred(),questions,stat)))),
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => QuizResults(
+                                        id,
+                                        std,
+                                        controller.get_answred(),
+                                        questions,
+                                        stat)))),
                         currentLevelButton(
-                            onPressed: () =>  Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => levels_view(std))), text: controller.stat,),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => levels_view(std)));
+                          },
+                          text: controller.stat,
+                        ),
                         Visibility(
                           visible: get_stat(controller),
                           child: newLevelButton(
-                              onPressed: () =>  Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => levels_view(std))), text: controller.stat,),),
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => levels_view(std))),
+                            text: controller.stat,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ],
             )));
-
   }
-  bool get_stat(QuizController controller)
-  {
-    if(controller.scoreResult.round()> controller.calculate_total_quiz_points()/2)
-      {
-        return true;
-      }
-    else
+
+  bool get_stat(QuizController controller) {
+    if (controller.scoreResult.round() >
+        controller.calculate_total_quiz_points() / 2) {
+      return true;
+    } else
       return false;
   }
-  Color Stat_Color()
-  {
-    if(controller.scoreResult.round()> controller.calculate_total_quiz_points()/2)
-    {
+
+  Color Stat_Color() {
+    if (controller.scoreResult.round() >
+        controller.calculate_total_quiz_points() / 2) {
       return Colors.green;
-    }
-    else
-      return Colors.red;  }
+    } else
+      return Colors.red;
+  }
 }

@@ -47,7 +47,8 @@ class DatabaseManager {
     return c;
   }
 
-  Future<List<student>> fetchStudents() async {DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+  Future<List<student>> fetchStudents() async {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     final response = await firebaseDatabase.child('students').get();
     /*DatabaseReference ref = FirebaseDatabase.instance.reference();
     final response = await ref
@@ -603,23 +604,22 @@ class DatabaseManager {
         Quiz_ q = Quiz_();
         q.quiz_id = key;
         q.course_code = values[key]['course_id'];
-        if(type == "Level")
-        q.level_id = values[key]['level_id'];
+        if (type == "Level")
+          q.level_id = values[key]['level_id'];
         else
-        q.topic_id = values[key]['topic_id'];
+          q.topic_id = values[key]['topic_id'];
         q.student_score = values[key]['student_score'];
         q.total_score = values[key]['total_score'];
         q.questions = [];
         for (var question in values[key]['questions']) {
-          if(question == null)
-          continue;
+          if (question == null) continue;
           /*Q_Question_ que =
               await get_quiz_question(question['question_id']);*/
-              Q_Question_ que= Q_Question_();
-              que.id = question['question_id'];
-              que.student_answer_id = question['answer_id'];
-              que.time_to_answer = question['time_to_answer'].toDouble();
-              q.questions.add(que);
+          Q_Question_ que = Q_Question_();
+          que.id = question['question_id'];
+          que.student_answer_id = question['answer_id'];
+          que.time_to_answer = question['time_to_answer'].toDouble();
+          q.questions.add(que);
         }
         quizzes.add(q);
       }
@@ -639,33 +639,32 @@ class DatabaseManager {
         .once();
 
     List<TopicOfWeakness_> topicsOfWeakness = [];
-    if(snapshot.value != null)
-    {
-    for (var topic in snapshot.value) {
-      TopicOfWeakness_ t = TopicOfWeakness_();
-      t.level_id = topic['level_id'];
-      t.topic_id = topic['topic_id'];
-      t.number_of_late_questions = topic['late_questions'];
-      t.number_of_wrong_questions = topic['wrong_questions'];
-      t.number_of_not_answered_question = topic['not_answered_questions'];
-      topicsOfWeakness.add(t);
-    }
+    if (snapshot.value != null) {
+      for (var topic in snapshot.value) {
+        TopicOfWeakness_ t = TopicOfWeakness_();
+        t.level_id = topic['level_id'];
+        t.topic_id = topic['topic_id'];
+        t.number_of_late_questions = topic['late_questions'];
+        t.number_of_wrong_questions = topic['wrong_questions'];
+        t.number_of_not_answered_question = topic['not_answered_questions'];
+        topicsOfWeakness.add(t);
+      }
     }
     return topicsOfWeakness;
   }
-  
-  void insert_weaknessTopic(String StudentId, String course_code, List<TopicOfWeakness_> topics) { 
+
+  void insert_weaknessTopic(
+      String StudentId, String course_code, List<TopicOfWeakness_> topics) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
-   for (var topic in topics)
-   {
-    String Key = firebaseDatabase
-        .child('students')
-        .child(StudentId)
-        .child('courses')
-        .child(course_code)
-        .child('topics_of_weakness')
-        .push()
-        .key;
+    for (var topic in topics) {
+      String Key = firebaseDatabase
+          .child('students')
+          .child(StudentId)
+          .child('courses')
+          .child(course_code)
+          .child('topics_of_weakness')
+          .push()
+          .key;
 
       firebaseDatabase
           .child('quizzes')
@@ -680,10 +679,10 @@ class DatabaseManager {
         "not_answered_questions": topic.number_of_not_answered_question,
         "topic_id": topic.topic_id,
         "wrong_questions": topic.number_of_wrong_questions,
-  });
-}
-}
-  
+      });
+    }
+  }
+
   void insertNewStudent(student std) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
     firebaseDatabase.child('students').child(std.id).set({

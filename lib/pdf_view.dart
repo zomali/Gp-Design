@@ -135,7 +135,7 @@ class _pdf_view extends State<pdf_view> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => types(std, level, topic)));
+                    builder: (context) => types(std, level, topic, false)));
             // _selectedIndex-=2;
           },
         ),

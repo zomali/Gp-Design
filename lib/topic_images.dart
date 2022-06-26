@@ -95,8 +95,10 @@ class _image_view extends State<image_view> {
                 topic.id,
                 times,
                 last_time);
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => types(std, level, topic)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => types(std, level, topic, false)));
             // _selectedIndex-=2;
           },
         ),

@@ -130,7 +130,7 @@ class _audio_player_state extends State<audio_player> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => types(std, level, topic)));
+                    builder: (context) => types(std, level, topic, false)));
             _player.pause();
           },
         ),
