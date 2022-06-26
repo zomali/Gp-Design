@@ -13,9 +13,11 @@ class QuestionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height=50;
+     height = MediaQuery.of(context).size.height/3*2;
     return SingleChildScrollView(
       child: Container(
-          height: 550,
+          height: height,
           margin: const EdgeInsets.symmetric(horizontal: 20.0),
           decoration: BoxDecoration(
             color: Colors.blue,
@@ -28,34 +30,34 @@ class QuestionCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  questionModel.question,
-                  style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.white),
-                ),
-                //const SizedBox(height: 15),
-                const Spacer(
-                  flex: 1,
-                ),
+
+                   SingleChildScrollView(
+                    //for horizontal scrolling
+                    scrollDirection: Axis.vertical,
+                    child: Text(
+                      questionModel.question,
+                      style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.white),
+                    ),
+                  ),
+                SizedBox(height: 70,),
                 ...List.generate(
                     questionModel.choices.length,
-                        (index) => Column(
-                      children: [
-                        AnswerOption(
-                            questionId: questionModel.id,
-                            text: questionModel.choices[index],
-                            index: index,
-                            onPressed: () =>
-                                Get.find<QuizController>()
-                                .marked_answer(questionModel,index),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        )
-                      ],
-                    )),
-                const Spacer(
-                  flex: 1,
-                ),
+                        (index) =>
+                        Column(
+                          children: [
+                            AnswerOption(
+                              questionId: questionModel.id,
+                              text: questionModel.choices[index],
+                              index: index,
+                              onPressed: () =>
+                                  Get.find<QuizController>()
+                                      .marked_answer(questionModel,index),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            )
+                          ],
+                        )),
               ],
             ),
           )),

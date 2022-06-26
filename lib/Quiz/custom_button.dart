@@ -10,15 +10,17 @@ import 'quiz__screen.dart';
 import 'quiz_controller.dart';
 import 'result_screen.dart';
 class nextButton extends StatelessWidget {
-  const nextButton({
+   nextButton({
     Key? key,
     required this.onPressed,
-    this.width=140,
+    required this.id,
+     required this.total,
+     this.width=140,
   }) : super(key: key);
   final Function() onPressed;
   final double width;
-
-  @override
+int id,total;
+@override
   Widget build(BuildContext context) {
     return Container(
       width: width,
@@ -30,7 +32,7 @@ class nextButton extends StatelessWidget {
         icon: Icon(Icons.arrow_forward_ios),
         onPressed: onPressed,
         label: Text(
-          "Next",
+          get_text(id, total),
           style: Theme.of(context)
               .textTheme
               .headline6!
@@ -39,16 +41,24 @@ class nextButton extends StatelessWidget {
       ),
     );
   }
+  String get_text(int id,int total)
+  {
+    if(id==total)
+      return "Submit";
+    else
+      return "Next";
+  }
 }
 class newLevelButton extends StatelessWidget {
-  const newLevelButton({
+   newLevelButton({
     Key? key,
     required this.onPressed,
+     required this.text,
     this.width=280,
   }) : super(key: key);
   final Function() onPressed;
   final double width;
-
+  String text="";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,10 +68,10 @@ class newLevelButton extends StatelessWidget {
       ),
       child: FloatingActionButton.extended(
         backgroundColor: KPrimaryColor,
-        icon: Icon(Icons.lock_rounded),
+        icon: Icon(Icons.lock_open),
         onPressed: onPressed,
         label: Text(
-          "Open Next Level",
+          "Open Next "+ text,
           style: Theme.of(context)
               .textTheme
               .headline6!
@@ -72,9 +82,12 @@ class newLevelButton extends StatelessWidget {
   }
 }
 class currentLevelButton extends StatelessWidget {
-  const currentLevelButton({
+  String text;
+
+   currentLevelButton({
     Key? key,
     required this.onPressed,
+    required this.text,
     this.width=280,
   }) : super(key: key);
   final Function() onPressed;
@@ -92,7 +105,7 @@ class currentLevelButton extends StatelessWidget {
         icon: Icon(Icons.lock_open),
         onPressed: onPressed,
         label: Text(
-          "Return to Current Level",
+          "Return to Current "+text,
           style: Theme.of(context)
               .textTheme
               .headline6!

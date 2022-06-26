@@ -143,7 +143,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       height: 20,
                     ),
                     Text(
-                      "-The quiz consists of "+get_questions_len(stat, weakness_topic.length, id)+" questions. \n-Time of quiz is 15 minutes.\n-Read the question carefully before answering.\n-The quiz was created by Dr. Sally and Dr. Salsabil.",
+                      "-The quiz consists of "+get_questions_len(stat, weakness_topic.length, id)+" questions. \n-Time of quiz is 15 minutes.\n-Read the question carefully before answering.\n-The quiz was created by Dr. Sally Saad and Dr. Salsabil Amin.",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22,
@@ -184,7 +184,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               key: _formkey,
               child: GetBuilder<QuizController>(
                 init: Get.find<QuizController>(),
-          
                 builder: (controller) => Row(),
               ),)
           ],
@@ -216,10 +215,6 @@ String get_questions_len(String stat,int len,int level)
           {
             count=3*4;
           }
-          else if (len ==0)
-        {
-          count=3*3;
-        }
         }
       else if(level==2)
         {
@@ -235,10 +230,6 @@ String get_questions_len(String stat,int len,int level)
           {
             count=3*4;
           }
-          else if (len ==0)
-        {
-          count=3*3;
-        }
         }
       else if(level==3)
       {
@@ -258,10 +249,6 @@ String get_questions_len(String stat,int len,int level)
         {
           count=4*4;
         }
-        else if (len ==0)
-        {
-          count=3*4;
-        }
       }
       else if(level==4)
       {
@@ -276,10 +263,6 @@ String get_questions_len(String stat,int len,int level)
         else if(len==3)
         {
           count=3*4;
-        }
-        else if (len ==0)
-        {
-          count=3*3;
         }
       }
       else if(level==4)
@@ -299,10 +282,6 @@ String get_questions_len(String stat,int len,int level)
         else if(len==4)
         {
           count=4*4;
-        }
-        else if (len ==0)
-        {
-          count=3*4;
         }
       }
     }

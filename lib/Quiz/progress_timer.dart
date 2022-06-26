@@ -11,25 +11,25 @@ class ProgressTimer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
           () => SizedBox(
-        height: 50,
-        width: 50,
+        height: 70,
+        width: 70,
         child: Stack(
           alignment: Alignment.center,
           fit: StackFit.expand,
           children: [
             CircularProgressIndicator(
-              value: 1 - (controller.min.value / 15),
-              color: KPrimaryColor,
+              value: 1 - (controller.min.value / 14),
+              color: get_color(controller.min.value),
               backgroundColor: Colors.white,
               strokeWidth: 8,
             ),
             Center(
               child: Text(
-                '${controller.min.value}',
+                '${controller.min.value}'+':'+'${controller.sec.value}',
                 style: Theme.of(context)
                     .textTheme
                     .headline6!
-                    .copyWith(color: Colors.blue),
+                    .copyWith(color: get_color(controller.min.value)),
               ),
             ),
           ],
@@ -37,4 +37,11 @@ class ProgressTimer extends StatelessWidget {
       ),
     );
   }
+}
+Color get_color(int min)
+{
+  if(min>4)
+    return Colors.green;
+  else 
+    return Colors.red;
 }
