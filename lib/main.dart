@@ -49,75 +49,121 @@ class MyApp extends StatelessWidget {
         ),
         
       ],
-      
-      child: MaterialApp(
-        title: 'Personalized E-Learning System',
-        debugShowCheckedModeBanner: false,
-       /* home: AnimatedSplashScreen(
-          centered : true,
-        splash: Center(
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Container(
-            child: Column(
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.white,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image:
-                                  AssetImage('proj_images/Ain_Shams_logo.png'),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                            padding: EdgeInsets.all(5),
-                            //height: 60,
-                            child: VerticalDivider(
-                            color: Colors.blueGrey[200],
-                            width: 20,
-                            thickness: 2,
-                            indent: 5,
-                            endIndent: 5,
-                              ),
-                         ),
-                      CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.white,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image:
-                                  AssetImage('proj_images/fcis.png'),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                      ),
-                ],
-              ),
-              SizedBox(height: 60,),
-              Text('Personalized E-learning System', style: TextStyle(color: Colors.blueGrey, ),),
-              Text('2022', style: TextStyle(color: Colors.blueGrey[200], ),)
-            ],
-          ),
-        ),
-          ),
-        ),
-        splashTransition: SplashTransition.fadeTransition,
-        //pageTransitionType: PageTransitionType.scale,
-        duration: 2500,
-        nextScreen: Login_screen()),*/
-       //home: Login_screen(),
-       home: MyLogin(),
+      // child: MaterialApp(
+      //   debugShowCheckedModeBanner: false,
+      //   home: AnimatedSplashScreen(
+      //     splash: Center(
+      //       child: Column(
+      //         children: [
+      //                                  CircleAvatar(
+      //                                    radius: 50,
+      //                                    child: Container(
+      //                                    //  width: MediaQuery.of(context).size.width,
+      //                                 //    height: MediaQuery.of(context).size.height,
+      //                                     decoration: BoxDecoration(
+      //                                       image: DecorationImage(
+      //                                         image:
+      //                                             AssetImage('proj_images/photo.jpg'),
+      //                                         fit: BoxFit.fill,
+      //                                       ),
+      //                                     ),
+      //                                 ),
+      //                                  ),
+      //         ],
+      //       ),
+      //     ), splashTransition: SplashTransition.fadeTransition,
+      //            //pageTransitionType: PageTransitionType.scale,
+      //            duration: 10000,
+      //           nextScreen: MyLogin()
+      //   ),
+      //   ),
+      //),
+      // child: MaterialApp(
+      //  // title: 'Personalized E-Learning System',
+      //   debugShowCheckedModeBanner: false,
+      //   home: SingleChildScrollView(
+      //     child: Container(
+      //       color: Colors.white,
+      //       height:700,
+      //       width: double.infinity,
+      //       child: AnimatedSplashScreen(
+      //       //  centered : true,
+      //       splash: Column(
+      //        // mainAxisAlignment: MainAxisAlignment.start,
+      //          // crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: [
+      //             Row(
+      //               children: [
+      //                Spacer(),
+      //                 CircleAvatar(
+      //                       radius: 40,
+      //                       backgroundColor: Colors.white,
+      //                       child: Container(
+      //                         height: 100,
+      //                          width: 100,
+      //                         decoration: BoxDecoration(
+      //                           image: DecorationImage(
+      //                             image:
+      //                                 AssetImage('proj_images/Ain_Shams_logo.png'),
+      //                             fit: BoxFit.fill,
+      //                           ),
+      //                         ),
+      //                       ),
+      //                     ),
+      //                     // Padding(
+      //                     //       padding: EdgeInsets.all(5),
+      //                     //       //height: 60,
+      //                     //       child: VerticalDivider(
+      //                     //       color: Colors.blueGrey[200],
+      //                     //       width: 20,
+      //                     //       thickness: 2,
+      //                     //       indent: 5,
+      //                     //       endIndent: 5,
+      //                     //         ),
+      //                     //    ),
+      //               //  Spacer(),
+      //                 SizedBox(width: 40,),
+      //                     CircleAvatar(
+      //                       radius: 40,
+      //                       backgroundColor: Colors.white,
+      //                       child: Container(
+      //                         width:150,
+      //                         height: 150,
+      //                         decoration: BoxDecoration(
+      //                           image: DecorationImage(
+      //                             image:
+      //                                 AssetImage('proj_images/fcis.png'),
+      //                             fit: BoxFit.fill,
+      //                           ),
+      //                         ),
+      //                       ),
+      //                     ),
+      //                 Spacer(),
+      //
+      //               ],
+      //             ),
+      //             //Spacer(),
+      //             SizedBox(height: 60,),
+      //             Text('Personalized E-learning System', style: TextStyle(color: Colors.blueGrey, ),),
+      //             Text('2022', style: TextStyle(color: Colors.blueGrey[200], ),),
+      //             Spacer(),
+      //           ],
+      //         ),
+      //
+      //
+      //
+      //    // splashTransition: SplashTransition.fadeTransition,
+      //       //pageTransitionType: PageTransitionType.scale,
+      //       duration: 5000,
+      //       nextScreen: MyLogin()),
+      //     ),
+      //   ),
+      //  //home: Login_screen(),
+      //  //
+      // ),
+      child: MyLogin(),
 
-      ),
     );
+
   }
 }
