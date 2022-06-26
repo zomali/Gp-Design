@@ -17,7 +17,8 @@ class ResultScreen extends StatelessWidget {
   List<Question_> questions;
   ResultScreen(
       this.std, this.id, this.student_answers, this.questions, this.stat);
-  late QuizController controller;
+  final controller = Get.find<QuizController>();
+  //test
   bool isVisible = true;
 
   @override
