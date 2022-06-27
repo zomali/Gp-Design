@@ -1998,58 +1998,106 @@ class DatabaseManager {
 
   Future<List<int>> fetchAllStudentGrades(student std) async {
     List<int> arr = [];
+    List<int> totalScore = [];
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    totalScore.add(0);
+    totalScore.add(0);
+    totalScore.add(0);
+    totalScore.add(0);
+    totalScore.add(0);
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
-    final response = await firebaseDatabase.child('students').get();
+    final response = await firebaseDatabase.child('quizzes').get();
     var keys = response.value.keys;
     var values = response.value;
-    List<int> length = [];
-    length.add(0);
-    length.add(0);
-    length.add(0);
-    length.add(0);
-    length.add(0);
-    arr.add(0);
-    arr.add(0);
-    arr.add(0);
-    arr.add(0);
-    arr.add(0);
+    int score = 0;
+    int total = 0;
+    int levelID = 1;
+    int index = 0;
     for (var key in keys) {
-      for (int i = 0; i < 5; i++) {
-        if (values[key]['courses']['CSW150']['quizzes'][i] == 0) {
-          continue;
-        } else {
-          length[i]++;
+      if (key != std.id) {
+        if (values[key]["Level"] != null) {
+          for (var k in values[key]["Level"].keys) {
+            if (values[key]["Level"][k]["level_id"] == 1) {
+              arr[0] += values[key]["Level"][k]["student_score"] as int;
+              totalScore[0] += values[key]["Level"][k]["total_score"] as int;
+            } else if (values[key]["Level"][k]["level_id"] == 2) {
+              arr[1] += values[key]["Level"][k]["student_score"] as int;
+              totalScore[1] += values[key]["Level"][k]["total_score"] as int;
+            } else if (values[key]["Level"][k]["level_id"] == 3) {
+              arr[2] += values[key]["Level"][k]["student_score"] as int;
+              totalScore[2] += values[key]["Level"][k]["total_score"] as int;
+            } else if (values[key]["Level"][k]["level_id"] == 4) {
+              arr[3] += values[key]["Level"][k]["student_score"] as int;
+              totalScore[3] += values[key]["Level"][k]["total_score"] as int;
+            } else {
+              arr[4] += values[key]["Level"][k]["student_score"] as int;
+              totalScore[4] += values[key]["Level"][k]["total_score"] as int;
+            }
+          }
         }
       }
     }
-
-    for (var key in keys) {
-      if (key == std.id) {
-        continue;
-      } else {
-        for (int i = 0; i < 5; i++) {
-          arr[i] += values[key]['courses']['CSW150']['quizzes'][i] as int;
-        }
-      }
-    }
+    double val = 0;
+    String str;
     for (int i = 0; i < 5; i++) {
-      arr[i] = (arr[i] / (length[i] - 1)).round();
+      val = (arr[i] / totalScore[i]) * 100;
+      str = val.toString();
+      if (str != "NaN") {
+        arr[i] = int.parse(str[0]);
+        arr[i] *= 10;
+        arr[i] += int.parse(str[1]);
+      }
     }
     return arr;
   }
 
   Future<List<int>> fetchStudentGrades(student std) async {
     List<int> arr = [];
+    List<int> total = [];
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    arr.add(0);
+    total.add(0);
+    total.add(0);
+    total.add(0);
+    total.add(0);
+    total.add(0);
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
-    final response = await firebaseDatabase
-        .child('students')
-        .child(std.id)
-        .child('courses')
-        .child('CSW150')
-        .child('quizzes')
-        .get();
-    for (int i = 0; i < 5; i++) {
-      arr.add(response.value[i]);
+    final response =
+        await firebaseDatabase.child('quizzes').child(std.id).get();
+    var value = response.value;
+    List<double> student_score = [];
+    if (value["Level"] == null) {
+      return arr;
+    } else {
+      int LevelId = 1;
+      for (var k in value['Level'].keys) {
+        if (value["Level"][k]["level_id"] == LevelId) {
+          arr[LevelId - 1] += value["Level"][k]["student_score"] as int;
+          total[LevelId - 1] += value["Level"][k]["total_score"] as int;
+        } else {
+          LevelId++;
+          arr[LevelId - 1] += value["Level"][k]["student_score"] as int;
+          total[LevelId - 1] += value["Level"][k]["total_score"] as int;
+        }
+      }
+      double val = 0;
+      String str;
+      for (int i = 0; i < 5; i++) {
+        val = (arr[i] / total[i]) * 100;
+        str = val.toString();
+        if (str != "NaN") {
+          arr[i] = int.parse(str[0]);
+          arr[i] *= 10;
+          arr[i] += int.parse(str[1]);
+        }
+      }
     }
     return arr;
   }
