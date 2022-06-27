@@ -130,6 +130,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                  height: 120,
                  child: Row(
                    children: [
+                     Spacer(),
                      Column(
                        children: [
                          Icon(Icons.keyboard_double_arrow_up, color: Colors.orange, size: 27,),
@@ -195,6 +196,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                          Text("+100", style: TextStyle(fontSize: 23),),
                        ],
                      ),
+                     Spacer(),
                    ],
                  ),
                ),//info

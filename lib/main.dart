@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+//import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:gp/Login_scrn.dart';
 import 'package:gp/login_screen.dart';
@@ -12,6 +12,7 @@ import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'package:gp/shared/cubits/cubit/level_cubit.dart';
 import 'package:gp/shared/cubits/cubit/question_cubit.dart';
 import 'package:gp/shared/cubits/cubit/quiz_cubit.dart';
+import 'package:gp/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -161,7 +162,11 @@ class MyApp extends StatelessWidget {
       //  //home: Login_screen(),
       //  //
       // ),
-      child: MyLogin(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: splash_screen(),
+      ),
+      //child: MyLogin(),
 
     );
 

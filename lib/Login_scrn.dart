@@ -99,6 +99,7 @@ class _MyLoginState extends State<MyLogin> {
                         ],
                       ),
                       SingleChildScrollView(
+
                         child: Container(
                           padding: EdgeInsets.only(
                               top: MediaQuery.of(context).size.height * 0.5),
