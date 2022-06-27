@@ -111,8 +111,8 @@ class _topic_view extends State<topic_view> {
                           //action on tap
                           //Fluttertoast.showToast(msg:level.id.toString());
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => types(
-                                  std, level, level.topics[index], false)));
+                              builder: (context) => types(std, level,
+                                  level.topics[index], std.collabretive)));
                         }
                         //code of locked topics
                         /*if (TopicList[index].id <= std.courses['CSW150']['current_level']) {

@@ -98,7 +98,8 @@ class _image_view extends State<image_view> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => types(std, level, topic, false)));
+                    builder: (context) =>
+                        types(std, level, topic, std.collabretive)));
             // _selectedIndex-=2;
           },
         ),

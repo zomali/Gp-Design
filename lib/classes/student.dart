@@ -14,6 +14,7 @@ class student {
   var email;
   var courses;
   var birthdate;
+  bool collabretive = false;
 }
 
 class Storage {

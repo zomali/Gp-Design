@@ -1379,7 +1379,7 @@ class DatabaseManager {
     var value = response.value;
     studentBehavior std = studentBehavior();
 
-    std.last_time_entered = value['last_time_enterd'];
+    std.last_time_entered = value['last_time_enterd'].toString();
 
     std.forAudio.NumberOfVisitedPage = value['audio']['number_of_visits'];
     std.forAudio.PopUpQuastion = value['audio']['popUpQuestion'];

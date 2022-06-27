@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:gp/Levels_View.dart';
 import 'package:gp/Quiz/quiz_result.dart';
@@ -162,6 +163,41 @@ class ResultScreen extends StatelessWidget {
                                         stat)))),
                         currentLevelButton(
                           onPressed: () {
+                            Widget cancelButton = TextButton(
+                              child: Text("No"),
+                              onPressed: () {
+                                std.collabretive = false;
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop(false); // dismiss dialog
+                              },
+                            );
+                            Widget continueButton = TextButton(
+                              child: Text("YES"),
+                              onPressed: () {
+                                std.collabretive = true;
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop(false); // dismiss dialog
+                              },
+                            );
+
+                            // set up the AlertDialog
+                            AlertDialog alert = AlertDialog(
+                              title: Text("We want to help you :)"),
+                              content: Text(
+                                  "Would you like to learn this level with another learning type like similer student to you?"),
+                              actions: [
+                                cancelButton,
+                                continueButton,
+                              ],
+                            );
+
+                            // show the dialog
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return alert;
+                              },
+                            );
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

@@ -17,14 +17,12 @@ import 'DatabaseManager.dart';
 
 class Login_screen extends StatefulWidget with NavigationStates {
   const Login_screen({Key? key}) : super(key: key);
-  
+
   @override
   _login_screenState createState() => _login_screenState();
 }
 
-
 class _login_screenState extends State<Login_screen> {
-  
   String email = "";
   String password = "";
   final _auth = FirebaseAuth.instance;
@@ -33,7 +31,8 @@ class _login_screenState extends State<Login_screen> {
   final _formKey = GlobalKey<FormState>();
   DatabaseManager db = DatabaseManager();
 
-  bool studentExist(var emailEntered, var passwordEnteres, List<student> listStudents) {
+  bool studentExist(
+      var emailEntered, var passwordEnteres, List<student> listStudents) {
     for (var std in listStudents) {
       // print(std.email + "====" + std.password);
       if (std.email == emailEntered.toString() &&
@@ -49,11 +48,11 @@ class _login_screenState extends State<Login_screen> {
     }
     return std;
   }
+
   analysis_controller ss = new analysis_controller();
 
   @override
   Widget build(BuildContext context) {
-    
     ss.cluster_performence('2018170065');
     //db.update2();
     return Scaffold(
@@ -62,7 +61,6 @@ class _login_screenState extends State<Login_screen> {
         elevation: 30,
         title: Text("Personalized E-learning System"),
       ),
-
       body: Container(
         child: Builder(builder: (context) {
           StudentCubit.get(context).getStudentData();
@@ -96,8 +94,8 @@ class _login_screenState extends State<Login_screen> {
                             height: 90,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image:
-                                    AssetImage('proj_images/Ain_Shams_logo.png'),
+                                image: AssetImage(
+                                    'proj_images/Ain_Shams_logo.png'),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -306,10 +304,13 @@ class _login_screenState extends State<Login_screen> {
 
                                   if (studentExist(email, password, list)) {
                                     student std = studentLevel(email, list);
+                                    std.collabretive = false;
                                     Navigator.pushAndRemoveUntil(
                                       context,
-                                      MaterialPageRoute(builder: (context) => side_layout(std)),
-                                          (Route<dynamic> route) => false,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              side_layout(std)),
+                                      (Route<dynamic> route) => false,
                                     );
                                   } else {
                                     Fluttertoast.showToast(
@@ -377,7 +378,6 @@ class _login_screenState extends State<Login_screen> {
                   ),
                 );
               }
-
             },
           );
         }),

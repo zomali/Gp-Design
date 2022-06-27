@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:gp/L_types.dart';
+import 'package:gp/Sidebar/sidebar_layout.dart';
 import 'package:gp/myprofile_screen.dart';
-import 'package:charts_flutter/flutter.dart'as charts;
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
 import 'package:gp/shared/cubits/cubit/topic_cubit.dart';
 import 'Course_evaluation_screens/Courses_evaluations.dart';
@@ -17,7 +18,7 @@ import 'package:pie_chart/pie_chart.dart';
 
 import 'classes/studentBehavior.dart';
 
-class Learning_analytics_screen extends StatefulWidget with NavigationStates  {
+class Learning_analytics_screen extends StatefulWidget with NavigationStates {
   final student std;
   // Level_ level;
   // Topic_ topic;
@@ -26,11 +27,12 @@ class Learning_analytics_screen extends StatefulWidget with NavigationStates  {
   _Learning_analytics_screenState createState() =>
       _Learning_analytics_screenState(std);
 }
+
 List<int> times = [];
-int video_time=0;
-int audio_time=0;
-int text_time=0;
-int image_time=0;
+int video_time = 0;
+int audio_time = 0;
+int text_time = 0;
+int image_time = 0;
 
 class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
   int _selectedIndex = 1;
@@ -51,15 +53,13 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
   //   "Text": times[2].toDouble(),
   //   "Image": times[3].toDouble(),
   // };
-  static Map<String, double> get_data_map(double v,double a,double t,double i) {
-    Map<String, double>  data = {
-
+  static Map<String, double> get_data_map(
+      double v, double a, double t, double i) {
+    Map<String, double> data = {
       "Video": v,
       "Audio": a,
       "Text": t,
-      "Image":i,
-
-
+      "Image": i,
     };
 
     return data;
@@ -86,22 +86,17 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
 // Pass gradient to PieChart
 
     return Scaffold(
-
-
-
-
         appBar: AppBar(
           title: const Text("Learning Analytics"),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_outlined),
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Home(std)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => side_layout(std)));
               _selectedIndex -= 1;
             },
           ),
         ),
-
         body: Builder(builder: (context) {
           //  StudentBehaviorCubit.get(context).getTimeTokenForEachContentType2(std);
           StudentBehaviorCubit.get(context).getTimeTokenInVideo(std);
@@ -109,36 +104,40 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
           StudentBehaviorCubit.get(context).getTimeTokenInText(std);
           StudentBehaviorCubit.get(context).getTimeTokenInImage(std);
 
-
-
-
           return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
             builder: (context, state) {
               if (state is StudentBehaviorLoading) {
                 return Center(child: CircularProgressIndicator());
-              }
-              else {
+              } else {
                 var behaviorCubit = StudentBehaviorCubit.get(context);
 
                 //    times=behaviorCubit.time;
-                video_time=behaviorCubit.Video_time;
-                audio_time=behaviorCubit.Audio_time;
-                text_time=behaviorCubit.Text_time;
-                image_time=behaviorCubit.Image_time;
+                try {
+                  video_time = behaviorCubit.Video_time;
+                  audio_time = behaviorCubit.Audio_time;
+                  text_time = behaviorCubit.Text_time;
+                  image_time = behaviorCubit.Image_time;
+                } catch (e) {
+                  video_time = 0;
+                  audio_time = 0;
+                  text_time = 0;
+                  image_time = 0;
+                }
                 //  print(video_time.toString()+"    "+ audio_time.toString()+"    "+ text_time.toString()+"    "+image_time.toString()+"    ");
-                var map ;
+                var map;
                 // print("////////"+times[0].toString()+"/////////"+times[0].toString());
                 try {
                   //    if(VIdeo_time==0&&audio_time==0&&text_time==0&&image_time==0)
                   //     map = get_data_map(5,5,5,5);
 
                   //        else
-                  map = get_data_map(video_time.toDouble(), audio_time.toDouble(), text_time.toDouble(), image_time.toDouble());
-
-
-                }
-                catch(e){
-                  map = get_data_map(1,1,1,1);
+                  map = get_data_map(
+                      video_time.toDouble(),
+                      audio_time.toDouble(),
+                      text_time.toDouble(),
+                      image_time.toDouble());
+                } catch (e) {
+                  map = get_data_map(1, 1, 1, 1);
                 }
                 // print(times[0]);
                 //stdBehavior = behaviorCubit.std;
@@ -146,7 +145,9 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
                   child: Center(
                     child: Column(
                       children: [
-                        SizedBox(height: 50,),
+                        SizedBox(
+                          height: 50,
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
@@ -156,34 +157,35 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
                               fontSize: 16.0,
                             ),
                           ),
-                        ),//caption of graph_1
+                        ), //caption of graph_1
                         Padding(
-                          padding: const EdgeInsets.symmetric( horizontal: 50),
+                          padding: const EdgeInsets.symmetric(horizontal: 50),
                           child: Container(
                               height: 300,
                               width: double.infinity,
-                              child: CustomRoundedBars.withSampleData()
-                          ),
-                        ),//levels time chart
+                              child: CustomRoundedBars.withSampleData()),
+                        ), //levels time chart
 
-
-                        SizedBox(height: 50,),
+                        SizedBox(
+                          height: 50,
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-
-                          child: PieChart(dataMap:map,gradientList: gradientList,
+                          child: PieChart(
+                            dataMap: map, gradientList: gradientList,
                             // child: PieChart(dataMap: CustomRoundedBars.g(),gradientList: gradientList,
                             emptyColorGradient: [
                               Color(0xff6c5ce7),
                               Colors.blue,
-                            ],baseChartColor: Colors.grey,
+                            ],
+                            baseChartColor: Colors.grey,
                             chartValuesOptions: ChartValuesOptions(
                               showChartValuesInPercentage: true,
                               showChartValueBackground: false,
                               decimalPlaces: 0,
                             ),
                           ),
-                        ),//graph_2
+                        ), //graph_2
                         // PieChart(
                         //   dataMap: dataMap,
                         //   animationDuration: Duration(milliseconds: 800),
@@ -213,7 +215,6 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
                         //   // gradientList: ---To add gradient colors---
                         //   // emptyColorGradient: ---Empty Color gradient---
                         // )
-
                       ],
                     ),
                   ),
@@ -221,14 +222,10 @@ class _Learning_analytics_screenState extends State<Learning_analytics_screen> {
               }
             },
           );
-        }
-
-        )
-    );
-
-
+        }));
   }
 }
+
 class CustomRoundedBars extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
@@ -247,18 +244,16 @@ class CustomRoundedBars extends StatelessWidget {
   //   return dataMap;
   // }
 
-
-
   @override
   Widget build(BuildContext context) {
     return new charts.BarChart(
       _createSampleData(),
       animate: animate,
       defaultRenderer: new charts.BarRendererConfig(
-        // By default, bar renderer will draw rounded bars with a constant
-        // radius of 100.
-        // To not have any rounded corners, use [NoCornerStrategy]
-        // To change the radius of the bars, use [ConstCornerStrategy]
+          // By default, bar renderer will draw rounded bars with a constant
+          // radius of 100.
+          // To not have any rounded corners, use [NoCornerStrategy]
+          // To change the radius of the bars, use [ConstCornerStrategy]
           cornerStrategy: const charts.ConstCornerStrategy(30)),
     );
   }
@@ -268,13 +263,10 @@ class CustomRoundedBars extends StatelessWidget {
     // print(video_time.toString()+"    "+ audio_time.toString()+"    "+ text_time.toString()+"    "+image_time.toString()+"    ");
 
     final data = [
-
       new level_time('Video', video_time),
       new level_time('Audio', audio_time),
       new level_time('Text', text_time),
       new level_time('Image', image_time),
-
-
     ];
 
     return [
@@ -282,15 +274,13 @@ class CustomRoundedBars extends StatelessWidget {
         id: 'Time',
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
         domainFn: (level_time sales, _) => sales.level,
-
         measureFn: (level_time sales, _) => sales.days,
         data: data,
       )
     ];
   }
-
-
 }
+
 class level_time {
   final String level;
   final int days;
