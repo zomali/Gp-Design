@@ -16,6 +16,44 @@ class quiz_evaluation_screen extends StatefulWidget {
 }
 
 List<int> listForOneGrades = [];
+Text studentGradesView(List<int> listForOneGrades) {
+  if (listForOneGrades[0] == 0) {
+    return Text(
+      "You didn't take any quiz until now",
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16.0,
+      ),
+    );
+  } else if (listForOneGrades[4] != 0) {
+    return Text(
+      "You toke all level's quizzes",
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16.0,
+      ),
+    );
+  } else {
+    for (int i = 0; i < 5; i++) {
+      if (listForOneGrades[i] == 0) {
+        return Text(
+          "You toke only " + i.toString() + " level's quizzes",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+          ),
+        );
+      }
+    }
+  }
+  return Text(
+    "some thing wrong",
+    style: TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 16.0,
+    ),
+  );
+}
 
 class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
   student std;
@@ -28,11 +66,8 @@ class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        Dashboard_screen(std)));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Dashboard_screen(std)));
           },
         ),
       ),
@@ -60,7 +95,7 @@ class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
                       ),
 
                       Text(
-                        "Quiz Scores",
+                        "Average Quiz Scores",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
@@ -72,6 +107,13 @@ class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
                             height: 300,
                             width: double.infinity,
                             child: SimpleBarChart.withSampleData()),
+                      ),
+                      SizedBox(
+                        height: 70,
+                      ),
+                      studentGradesView(listForOneGrades),
+                      SizedBox(
+                        height: 70,
                       ), //quiz chart
                     ],
                   ),
