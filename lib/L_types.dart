@@ -21,11 +21,12 @@ class types extends StatefulWidget {
   final student std;
   final Level_ level;
   final Topic_ topic;
+  final bool collaborative;
 
-  types(this.std, this.level, this.topic);
+  types(this.std, this.level, this.topic, this.collaborative);
 
   @override
-  _typesState createState() => _typesState(std, level, topic);
+  _typesState createState() => _typesState(std, level, topic, collaborative);
 }
 
 class _typesState extends State<types> {
@@ -35,8 +36,9 @@ class _typesState extends State<types> {
   String? selectedLanguage;
   Video_? video_;
   Audio_? audio_;
+  bool collaborative;
 
-  _typesState(this.std, this.level, this.topic);
+  _typesState(this.std, this.level, this.topic, this.collaborative);
   late studentBehavior stdBehavior;
   DatabaseManager db = DatabaseManager();
   List<double> weight = [];
@@ -95,6 +97,7 @@ class _typesState extends State<types> {
 
   @override
   Widget build(BuildContext context) {
+    print(collaborative);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue[400],
@@ -116,332 +119,336 @@ class _typesState extends State<types> {
 
           return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
               builder: (context, state) {
-                if (state is StudentBehaviorLoading) {
-                  return Center(child: CircularProgressIndicator());
-                } else {
-                  var behaviorCubit = StudentBehaviorCubit.get(context);
-                  stdBehavior = behaviorCubit.value;
-                  TopicCubit.get(context)
-                      .getTimeTokenForEachContentType(std, stdBehavior);
-                  TopicCubit.get(context).getTopicData(topic.id);
-                  return BlocBuilder<TopicCubit, TopicState>(
-                    builder: (context, state) {
-                      if (state is TopicLoading)
-                        return Center(child: CircularProgressIndicator());
-                      else {
-                        var topicCubit = TopicCubit.get(context);
-                        Topic_ topic = Topic_();
-                        topic.name = "";
-                        try {
-                          topic = topicCubit.topic;
-                          weight = topicCubit.weight;
-                          weight[1] = 1000;
-                          setContentType(weight);
-                        } catch (e) {
-                          topic = topicCubit.topic;
-                        }
-                        //stdBehavior = behaviorCubit.std;
-                        return Center(
-                          child: Container(
-                            color: Colors.blue[200],
-                            // height: double.infinity,
-                            //  height: 620,
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(top: 10.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 100,
-                                    child: Stack(children: [
-                                      Positioned(
-                                          top: 0,
-                                          right: 0,
-                                          child: Container(
-                                            height: 60,
-                                            width: 140,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(50),
-                                                  bottomLeft: Radius.circular(50),
-                                                )),
-                                            child: Padding(
-                                              padding:
+            if (state is StudentBehaviorLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              var behaviorCubit = StudentBehaviorCubit.get(context);
+              stdBehavior = behaviorCubit.value;
+              if (collaborative == true) {
+                TopicCubit.get(context).collaborative_filtering(
+                    std.id, level.id.toString(), topic.id.toString());
+              } else {
+                TopicCubit.get(context)
+                    .getTimeTokenForEachContentType(std, stdBehavior);
+              }
+              TopicCubit.get(context).getTopicData(topic.id);
+              return BlocBuilder<TopicCubit, TopicState>(
+                builder: (context, state) {
+                  if (state is TopicLoading)
+                    return Center(child: CircularProgressIndicator());
+                  else {
+                    var topicCubit = TopicCubit.get(context);
+                    Topic_ topic = Topic_();
+                    topic.name = "";
+                    try {
+                      topic = topicCubit.topic;
+                      weight = topicCubit.weight;
+                      setContentType(weight);
+                    } catch (e) {
+                      topic = topicCubit.topic;
+                    }
+                    //stdBehavior = behaviorCubit.std;
+                    return Center(
+                      child: Container(
+                        color: Colors.blue[200],
+                        // height: double.infinity,
+                        //  height: 620,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 100,
+                                child: Stack(children: [
+                                  Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: Container(
+                                        height: 60,
+                                        width: 140,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(50),
+                                              bottomLeft: Radius.circular(50),
+                                            )),
+                                        child: Padding(
+                                          padding:
                                               const EdgeInsets.only(left: 10.0),
-                                              child: Column(
-                                                children: [
-                                                  Spacer(),
-                                                  Text(
-                                                    "Last Time Visited: ",
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontStyle: FontStyle.italic,
-                                                        fontWeight: FontWeight.w600,
-                                                        color: Colors.blue),
-                                                  ),
-                                                  Spacer(),
-                                                  Text(
-                                                    stdBehavior.last_time_entered,
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontStyle: FontStyle.italic,
-                                                        fontWeight: FontWeight.w600,
-                                                        color: Colors.blue),
-                                                  ),
-                                                  Spacer(),
-                                                ],
+                                          child: Column(
+                                            children: [
+                                              Spacer(),
+                                              Text(
+                                                "Last Time Visited: ",
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontStyle: FontStyle.italic,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.blue),
                                               ),
-                                            ),
-                                          )),
-                                      Positioned(
-                                          top: 0,
-                                          left: 0,
-                                          child: Container(
-                                            height: 60,
-                                            width: 125,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(50),
-                                                  bottomRight: Radius.circular(50),
-                                                )),
-                                            child: Padding(
-                                              padding:
+                                              Spacer(),
+                                              Text(
+                                                stdBehavior.last_time_entered,
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontStyle: FontStyle.italic,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.blue),
+                                              ),
+                                              Spacer(),
+                                            ],
+                                          ),
+                                        ),
+                                      )),
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                        height: 60,
+                                        width: 125,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(50),
+                                              bottomRight: Radius.circular(50),
+                                            )),
+                                        child: Padding(
+                                          padding:
                                               const EdgeInsets.only(left: 10.0),
-                                              child: Column(
-                                                children: [
-                                                  Spacer(),
-                                                  Text(
-                                                    level.name,
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontStyle: FontStyle.italic,
-                                                        fontWeight: FontWeight.w600,
-                                                        color: Colors.blue),
-                                                  ),
-                                                  Spacer(),
-                                                  Text(
-                                                    topic.name,
-                                                    style: TextStyle(
-                                                        fontSize: 12,
-                                                        fontStyle: FontStyle.italic,
-                                                        fontWeight: FontWeight.w600,
-                                                        color: Colors.blue),
-                                                  ),
-                                                  Spacer(),
-                                                ],
+                                          child: Column(
+                                            children: [
+                                              Spacer(),
+                                              Text(
+                                                level.name,
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontStyle: FontStyle.italic,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.blue),
                                               ),
-                                            ),
-                                          )),
-                                    ]),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () => {
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) =>
-                                              languageDialog()).then((value) {
-                                        print("////" + value + "////");
-                                        if (value == "Arabic") {
-                                          audio_ = topic.audios[1];
-                                          video_ = topic.videos[1];
-                                        } else if (value == "English") {
-                                          audio_ = topic.audios[0];
-                                          video_ = topic.videos[0];
-                                        }
-                                        _video_1st
-                                            ? Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  video_player(
-                                                      std,
-                                                      video_!,
-                                                      stdBehavior.forVideo,
-                                                      level,
-                                                      topic)),
-                                        )
-                                            : _audio_1st
-                                            ? Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  audio_player(
-                                                      std,
-                                                      topic.audios[0],
-                                                      stdBehavior
-                                                          .forAudio,
-                                                      level,
-                                                      topic)),
-                                        )
-                                            : _image_1st
-                                            ? Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  image_view(
-                                                      std,
-                                                      topic.images,
-                                                      stdBehavior
-                                                          .forImage,
-                                                      level,
-                                                      topic)),
-                                        )
-                                            : _text_1st
-                                            ? Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  pdf_view(
-                                                      std,
-                                                      topic.pdf,
-                                                      stdBehavior
-                                                          .forText,
-                                                      level,
-                                                      topic)),
-                                        )
-                                            : _url_1st
-                                            ? Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  url_view(
-                                                      std,
-                                                      topic
-                                                          .urls,
-                                                      level,
-                                                      topic)),
-                                        )
-                                            : Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  audio_player(
-                                                      std,
-                                                      audio_!,
-                                                      stdBehavior
-                                                          .forAudio,
-                                                      level,
-                                                      topic)),
-                                        );
-                                      }),
-                                    },
-                                    child: Container(
-                                      width: 250,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(30.0)),
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      child: Stack(
-                                        alignment: Alignment.bottomCenter,
-                                        children: [
-                                          Image(
-                                            image: _video_1st
-                                                ? AssetImage(
-                                                'proj_images/video.png')
-                                                : _audio_1st
-                                                ? AssetImage(
-                                                'proj_images/audio.png')
-                                                : _image_1st
-                                                ? AssetImage(
-                                                'proj_images\image.png')
-                                                : _text_1st
-                                                ? AssetImage(
-                                                'proj_images\Text.png')
-                                                : _url_1st
-                                                ? AssetImage(
-                                                'proj_images\URL.png')
-                                                : AssetImage(
-                                                'proj_images/video.png'),
-                                            height: 250,
-                                            width: 250,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          Container(
-                                            color: Colors.black.withOpacity(.7),
-                                            width: double.infinity,
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 10.0),
-                                            child: Text(
-                                              _video_1st
-                                                  ? "Video"
-                                                  : _audio_1st
-                                                  ? 'Audio'
-                                                  : _image_1st
-                                                  ? 'Image'
-                                                  : _text_1st
-                                                  ? 'Text'
-                                                  : _url_1st
-                                                  ? 'URL'
-                                                  : 'Video',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white,
+                                              Spacer(),
+                                              Text(
+                                                topic.name,
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontStyle: FontStyle.italic,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.blue),
                                               ),
-                                            ),
+                                              Spacer(),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ), //first_btn
-                                  //new fun
-                                  ////////////////////////////////////////////////////////////////
-                                  //        SingleChildScrollView(
-                                  //       scrollDirection: Axis.horizontal,
-                                  //    child:
-                                  Padding(
-                                    padding:
-                                    const EdgeInsets.only(top: 40, bottom: 20),
-                                    child: Row(
-                                      children: [
-                                        Spacer(),
-                                        GestureDetector(
-                                          onTap: () => {
-                                            showDialog(
-                                                context: context,
-                                                builder: (BuildContext context) =>
-                                                    languageDialog()).then((value) {
-                                              if (value == "Arabic") {
-                                                audio_ = topic.audios[1];
-                                                video_ = topic.videos[1];
-                                              } else if (value == "English") {
-                                                audio_ = topic.audios[0];
-                                                video_ = topic.videos[0];
-                                              }
-                                              // else{
-                                              //   showDialog(
-                                              //       context: context,
-                                              //       builder: (BuildContext context) => languageDialog())
-                                              //       .then((value){
-                                              //     if(value == "Arabic") {
-                                              //       audio_ = topic.audios[0];
-                                              //       video_ = topic.videos[0];
-                                              //     }
-                                              //     else if(value == "English"){
-                                              //       audio_ = topic.audios[1];
-                                              //       video_ = topic.videos[1];
-                                              //     }
-                                              //
-                                              //   });
-                                              // }
-
-                                              _video_1st
-                                                  ? Navigator.push(
+                                        ),
+                                      )),
+                                ]),
+                              ),
+                              GestureDetector(
+                                onTap: () => {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          languageDialog()).then((value) {
+                                    print("////" + value + "////");
+                                    if (value == "Arabic") {
+                                      audio_ = topic.audios[1];
+                                      video_ = topic.videos[1];
+                                    } else if (value == "English") {
+                                      audio_ = topic.audios[0];
+                                      video_ = topic.videos[0];
+                                    }
+                                    _video_1st
+                                        ? Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    video_player(
+                                                        std,
+                                                        video_!,
+                                                        stdBehavior.forVideo,
+                                                        level,
+                                                        topic)),
+                                          )
+                                        : _audio_1st
+                                            ? Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         audio_player(
                                                             std,
-                                                            audio_!,
+                                                            topic.audios[0],
                                                             stdBehavior
                                                                 .forAudio,
                                                             level,
                                                             topic)),
                                               )
-                                                  : Navigator.push(
+                                            : _image_1st
+                                                ? Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            image_view(
+                                                                std,
+                                                                topic.images,
+                                                                stdBehavior
+                                                                    .forImage,
+                                                                level,
+                                                                topic)),
+                                                  )
+                                                : _text_1st
+                                                    ? Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                pdf_view(
+                                                                    std,
+                                                                    topic.pdf,
+                                                                    stdBehavior
+                                                                        .forText,
+                                                                    level,
+                                                                    topic)),
+                                                      )
+                                                    : _url_1st
+                                                        ? Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    url_view(
+                                                                        std,
+                                                                        topic
+                                                                            .urls,
+                                                                        level,
+                                                                        topic)),
+                                                          )
+                                                        : Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    audio_player(
+                                                                        std,
+                                                                        audio_!,
+                                                                        stdBehavior
+                                                                            .forAudio,
+                                                                        level,
+                                                                        topic)),
+                                                          );
+                                  }),
+                                },
+                                child: Container(
+                                  width: 250,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular(30.0)),
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  child: Stack(
+                                    alignment: Alignment.bottomCenter,
+                                    children: [
+                                      Image(
+                                        image: _video_1st
+                                            ? AssetImage(
+                                                'proj_images/video.png')
+                                            : _audio_1st
+                                                ? AssetImage(
+                                                    'proj_images/audio.png')
+                                                : _image_1st
+                                                    ? AssetImage(
+                                                        'proj_images\image.png')
+                                                    : _text_1st
+                                                        ? AssetImage(
+                                                            'proj_images\Text.png')
+                                                        : _url_1st
+                                                            ? AssetImage(
+                                                                'proj_images\URL.png')
+                                                            : AssetImage(
+                                                                'proj_images/video.png'),
+                                        height: 250,
+                                        width: 250,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      Container(
+                                        color: Colors.black.withOpacity(.7),
+                                        width: double.infinity,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 10.0),
+                                        child: Text(
+                                          _video_1st
+                                              ? "Video"
+                                              : _audio_1st
+                                                  ? 'Audio'
+                                                  : _image_1st
+                                                      ? 'Image'
+                                                      : _text_1st
+                                                          ? 'Text'
+                                                          : _url_1st
+                                                              ? 'URL'
+                                                              : 'Video',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ), //first_btn
+                              //new fun
+                              ////////////////////////////////////////////////////////////////
+                              //        SingleChildScrollView(
+                              //       scrollDirection: Axis.horizontal,
+                              //    child:
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 40, bottom: 20),
+                                child: Row(
+                                  children: [
+                                    Spacer(),
+                                    GestureDetector(
+                                      onTap: () => {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                languageDialog()).then((value) {
+                                          if (value == "Arabic") {
+                                            audio_ = topic.audios[1];
+                                            video_ = topic.videos[1];
+                                          } else if (value == "English") {
+                                            audio_ = topic.audios[0];
+                                            video_ = topic.videos[0];
+                                          }
+                                          // else{
+                                          //   showDialog(
+                                          //       context: context,
+                                          //       builder: (BuildContext context) => languageDialog())
+                                          //       .then((value){
+                                          //     if(value == "Arabic") {
+                                          //       audio_ = topic.audios[0];
+                                          //       video_ = topic.videos[0];
+                                          //     }
+                                          //     else if(value == "English"){
+                                          //       audio_ = topic.audios[1];
+                                          //       video_ = topic.videos[1];
+                                          //     }
+                                          //
+                                          //   });
+                                          // }
+
+                                          _video_1st
+                                              ? Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          audio_player(
+                                                              std,
+                                                              audio_!,
+                                                              stdBehavior
+                                                                  .forAudio,
+                                                              level,
+                                                              topic)),
+                                                )
+                                              : Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
@@ -452,311 +459,311 @@ class _typesState extends State<types> {
                                                                   .forVideo,
                                                               level,
                                                               topic)));
-                                            }),
-                                          },
-                                          child: Container(
-                                            //   height: 100,
+                                        }),
+                                      },
+                                      child: Container(
+                                        //   height: 100,
 
-                                            width: 120,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
+                                        width: 120,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
                                                 BorderRadius.circular(10.0)),
-                                            clipBehavior:
+                                        clipBehavior:
                                             Clip.antiAliasWithSaveLayer,
-                                            child: Stack(
-                                              alignment: Alignment.bottomCenter,
-                                              children: [
-                                                Image(
-                                                  image: _video_1st
-                                                      ? AssetImage(
+                                        child: Stack(
+                                          alignment: Alignment.bottomCenter,
+                                          children: [
+                                            Image(
+                                              image: _video_1st
+                                                  ? AssetImage(
                                                       'proj_images/audio.png')
-                                                      : AssetImage(
+                                                  : AssetImage(
                                                       'proj_images/video.png'),
-                                                  height: 110,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                Container(
-                                                  color:
-                                                  Colors.black.withOpacity(.7),
-                                                  width: double.infinity,
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 10.0),
-                                                  child: Text(
-                                                    _video_1st ? "Audio" : 'Video',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontSize: 17,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
+                                              height: 110,
+                                              fit: BoxFit.cover,
                                             ),
-                                          ),
-                                        ), //second_btn
-                                        Spacer(),
-                                        //////////////////////////////////////////////////////////////////////
-                                        GestureDetector(
-                                          onTap: () => {
-                                            _video_1st
-                                                ? Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      image_view(
-                                                          std,
-                                                          topic.images,
-                                                          stdBehavior
-                                                              .forImage,
-                                                          level,
-                                                          topic)),
-                                            )
-                                                : _audio_1st
-                                                ? Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      image_view(
-                                                          std,
-                                                          topic.images,
-                                                          stdBehavior
-                                                              .forImage,
-                                                          level,
-                                                          topic)),
-                                            )
-                                                : Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      audio_player(
-                                                          std,
-                                                          audio_!,
-                                                          stdBehavior
-                                                              .forAudio,
-                                                          level,
-                                                          topic)),
-                                            )
-                                          },
-                                          child: Container(
-                                            //  padding: EdgeInsets.only(top: 10.0),
-                                            width: 120,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius.circular(30.0)),
-                                            clipBehavior:
-                                            Clip.antiAliasWithSaveLayer,
-                                            child: Stack(
-                                              alignment: Alignment.bottomCenter,
-                                              children: [
-                                                Image(
-                                                  image: _video_1st
-                                                      ? AssetImage(
-                                                      'proj_images/image.png')
-                                                      : _audio_1st
-                                                      ? AssetImage(
-                                                      'proj_images/image.png')
-                                                      : AssetImage(
-                                                      'proj_images/audio.png'),
-                                                  //   height: 250,
-                                                  //  width: 250,
-                                                  height: 110,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                Container(
-                                                  color:
+                                            Container(
+                                              color:
                                                   Colors.black.withOpacity(.7),
-                                                  width: double.infinity,
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 10.0),
-                                                  child: Text(
-                                                    _video_1st
-                                                        ? "Image"
-                                                        : _audio_1st
+                                              width: double.infinity,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10.0),
+                                              child: Text(
+                                                _video_1st ? "Audio" : 'Video',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ), //second_btn
+                                    Spacer(),
+                                    //////////////////////////////////////////////////////////////////////
+                                    GestureDetector(
+                                      onTap: () => {
+                                        _video_1st
+                                            ? Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        image_view(
+                                                            std,
+                                                            topic.images,
+                                                            stdBehavior
+                                                                .forImage,
+                                                            level,
+                                                            topic)),
+                                              )
+                                            : _audio_1st
+                                                ? Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            image_view(
+                                                                std,
+                                                                topic.images,
+                                                                stdBehavior
+                                                                    .forImage,
+                                                                level,
+                                                                topic)),
+                                                  )
+                                                : Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            audio_player(
+                                                                std,
+                                                                audio_!,
+                                                                stdBehavior
+                                                                    .forAudio,
+                                                                level,
+                                                                topic)),
+                                                  )
+                                      },
+                                      child: Container(
+                                        //  padding: EdgeInsets.only(top: 10.0),
+                                        width: 120,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0)),
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                        child: Stack(
+                                          alignment: Alignment.bottomCenter,
+                                          children: [
+                                            Image(
+                                              image: _video_1st
+                                                  ? AssetImage(
+                                                      'proj_images/image.png')
+                                                  : _audio_1st
+                                                      ? AssetImage(
+                                                          'proj_images/image.png')
+                                                      : AssetImage(
+                                                          'proj_images/audio.png'),
+                                              //   height: 250,
+                                              //  width: 250,
+                                              height: 110,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            Container(
+                                              color:
+                                                  Colors.black.withOpacity(.7),
+                                              width: double.infinity,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10.0),
+                                              child: Text(
+                                                _video_1st
+                                                    ? "Image"
+                                                    : _audio_1st
                                                         ? 'Image'
                                                         : 'Audio',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontSize: 17,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                  color: Colors.white,
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ), //third_btn
-                                        Spacer(),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
+                                          ],
+                                        ),
+                                      ),
+                                    ), //third_btn
+                                    Spacer(),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
                                     const EdgeInsets.symmetric(vertical: 20),
-                                    child: Row(
-                                      children: [
-                                        Spacer(),
+                                child: Row(
+                                  children: [
+                                    Spacer(),
 
-                                        ///////////////////////////////////////////////////////
-                                        GestureDetector(
-                                          onTap: () => {
-                                            _text_1st
+                                    ///////////////////////////////////////////////////////
+                                    GestureDetector(
+                                      onTap: () => {
+                                        _text_1st
+                                            ? Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        image_view(
+                                                            std,
+                                                            topic.images,
+                                                            stdBehavior
+                                                                .forImage,
+                                                            level,
+                                                            topic)),
+                                              )
+                                            : _url_1st
                                                 ? Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      image_view(
-                                                          std,
-                                                          topic.images,
-                                                          stdBehavior
-                                                              .forImage,
-                                                          level,
-                                                          topic)),
-                                            )
-                                                : _url_1st
-                                                ? Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      image_view(
-                                                          std,
-                                                          topic.images,
-                                                          stdBehavior
-                                                              .forImage,
-                                                          level,
-                                                          topic)),
-                                            )
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            image_view(
+                                                                std,
+                                                                topic.images,
+                                                                stdBehavior
+                                                                    .forImage,
+                                                                level,
+                                                                topic)),
+                                                  )
                                                 : Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      pdf_view(
-                                                          std,
-                                                          topic.pdf,
-                                                          stdBehavior
-                                                              .forText,
-                                                          level,
-                                                          topic)),
-                                            )
-                                          },
-                                          child: Container(
-                                            //  padding: EdgeInsets.only(top: 10.0),
-                                            width: 120,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            pdf_view(
+                                                                std,
+                                                                topic.pdf,
+                                                                stdBehavior
+                                                                    .forText,
+                                                                level,
+                                                                topic)),
+                                                  )
+                                      },
+                                      child: Container(
+                                        //  padding: EdgeInsets.only(top: 10.0),
+                                        width: 120,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
                                                 BorderRadius.circular(30.0)),
-                                            clipBehavior:
+                                        clipBehavior:
                                             Clip.antiAliasWithSaveLayer,
-                                            child: Stack(
-                                              alignment: Alignment.bottomCenter,
-                                              children: [
-                                                Image(
-                                                  image: _text_1st
-                                                      ? AssetImage(
+                                        child: Stack(
+                                          alignment: Alignment.bottomCenter,
+                                          children: [
+                                            Image(
+                                              image: _text_1st
+                                                  ? AssetImage(
                                                       'proj_images/image.png')
-                                                      : _url_1st
+                                                  : _url_1st
                                                       ? AssetImage(
-                                                      'proj_images/image.png')
+                                                          'proj_images/image.png')
                                                       : AssetImage(
-                                                      'proj_images/t.png'),
-                                                  height: 110,
-                                                  // height: 250,
-                                                  //    width: 250,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                Container(
-                                                  color:
+                                                          'proj_images/t.png'),
+                                              height: 110,
+                                              // height: 250,
+                                              //    width: 250,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            Container(
+                                              color:
                                                   Colors.black.withOpacity(.7),
-                                                  width: double.infinity,
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 10.0),
-                                                  child: Text(
-                                                    _text_1st
-                                                        ? "Image"
-                                                        : _url_1st
+                                              width: double.infinity,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10.0),
+                                              child: Text(
+                                                _text_1st
+                                                    ? "Image"
+                                                    : _url_1st
                                                         ? 'Image'
                                                         : 'Text',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontSize: 17,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                  color: Colors.white,
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ), //fourth_btn
-                                        Spacer(),
-                                        GestureDetector(
-                                          onTap: () => {
-                                            _url_1st
-                                                ? Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      pdf_view(
-                                                          std,
-                                                          topic.pdf,
-                                                          stdBehavior.forText,
-                                                          level,
-                                                          topic)),
-                                            )
-                                                : Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      url_view(
-                                                          std,
-                                                          topic.urls,
-                                                          level,
-                                                          topic)),
-                                            )
-                                          },
-                                          child: Container(
-                                            //  padding: EdgeInsets.only(top: 10.0),
-                                            width: 120,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
+                                          ],
+                                        ),
+                                      ),
+                                    ), //fourth_btn
+                                    Spacer(),
+                                    GestureDetector(
+                                      onTap: () => {
+                                        _url_1st
+                                            ? Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        pdf_view(
+                                                            std,
+                                                            topic.pdf,
+                                                            stdBehavior.forText,
+                                                            level,
+                                                            topic)),
+                                              )
+                                            : Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        url_view(
+                                                            std,
+                                                            topic.urls,
+                                                            level,
+                                                            topic)),
+                                              )
+                                      },
+                                      child: Container(
+                                        //  padding: EdgeInsets.only(top: 10.0),
+                                        width: 120,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
                                                 BorderRadius.circular(30.0)),
-                                            clipBehavior:
+                                        clipBehavior:
                                             Clip.antiAliasWithSaveLayer,
-                                            child: Stack(
-                                              alignment: Alignment.bottomCenter,
-                                              children: [
-                                                Image(
-                                                  image: _url_1st
-                                                      ? AssetImage(
+                                        child: Stack(
+                                          alignment: Alignment.bottomCenter,
+                                          children: [
+                                            Image(
+                                              image: _url_1st
+                                                  ? AssetImage(
                                                       'proj_images/t.png')
-                                                      : AssetImage(
+                                                  : AssetImage(
                                                       'proj_images/URL.jpg'),
-                                                  height: 110,
-                                                  // height: 250,
-                                                  //    width: 250,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                Container(
-                                                  color:
-                                                  Colors.black.withOpacity(.7),
-                                                  width: double.infinity,
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 10.0),
-                                                  child: Text(
-                                                    _url_1st ? "Text" : 'URL',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontSize: 17,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
+                                              height: 110,
+                                              // height: 250,
+                                              //    width: 250,
+                                              fit: BoxFit.cover,
                                             ),
-                                          ),
-                                        ), //fifth_btn
-                                        Spacer(),
-                                      ],
-                                    ),
-                                  ),
+                                            Container(
+                                              color:
+                                                  Colors.black.withOpacity(.7),
+                                              width: double.infinity,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10.0),
+                                              child: Text(
+                                                _url_1st ? "Text" : 'URL',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ), //fifth_btn
+                                    Spacer(),
+                                  ],
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 30),
@@ -769,9 +776,7 @@ class _typesState extends State<types> {
                                           MaterialPageRoute(
                                               //builder: (context) => Levels(1, std))),
                                               builder: (context) => go_to_quiz(
-                                                  std,
-                                                  topic.id,
-                                                  "Topic")));
+                                                  std, topic.id, "Topic")));
                                     },
                                     child: Text(
                                       "Quiz for Topic",
@@ -787,17 +792,17 @@ class _typesState extends State<types> {
                                 ),
                               ), //
 
-                                  //),
-                                ],
-                              ),
-                            ),
+                              //),
+                            ],
                           ),
-                        );
-                      }
-                    },
-                  );
-                }
-              });
+                        ),
+                      ),
+                    );
+                  }
+                },
+              );
+            }
+          });
         }));
   }
 }
@@ -811,7 +816,7 @@ showlanguageDialogFunc(context) {
           elevation: 0,
           backgroundColor: Colors.white,
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           child: Container(
             width: 500,
             height: 300,

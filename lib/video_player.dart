@@ -154,7 +154,7 @@ class _video_player_state extends State<video_player> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => types(std, level, topic)));
+                    builder: (context) => types(std, level, topic, false)));
             chewieController!.pause();
           },
         ),
