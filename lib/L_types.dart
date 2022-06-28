@@ -250,7 +250,7 @@ class _typesState extends State<types> {
                                       context: context,
                                       builder: (BuildContext context) =>
                                           languageDialog()).then((value) {
-                                    print("////" + value + "////");
+                                //    print("////" + value + "////");
                                     if (value == "Arabic") {
                                       audio_ = topic.audios[1];
                                       video_ = topic.videos[1];

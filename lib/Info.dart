@@ -9,6 +9,7 @@ import 'Last_quizzes.dart';
 import 'Levels_View.dart';
 import 'package:gp/classes/classes.dart';
 import 'classes/student.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 class INFO extends StatefulWidget{
   final student std;
   final String courseCode;
@@ -223,12 +224,86 @@ class _INFOState extends State<INFO> {
                   //  controller: scrollViewColtroller,
                       children: [
 
-
+                        Container(
+                          padding: EdgeInsets.symmetric( horizontal: 25, vertical: 10),
+                          height: 120,
+                          child: Row(
+                            children: [
+                              Spacer(),
+                              Column(
+                                children: [
+                                  Icon(Icons.keyboard_double_arrow_up, color: Colors.orange, size: 27,),
+                                  Text("Levels", style: TextStyle(color: Colors.orange, fontSize: 17, fontWeight: FontWeight.bold),),
+                                  Padding(padding: EdgeInsets.only(bottom: 3)),
+                                  Text("5", style: TextStyle(fontSize: 23),),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
+                                //height: 80,
+                                child: VerticalDivider(
+                                  color: Colors.grey[200],
+                                  width: 20,
+                                  thickness: 2,
+                                  indent: 10,
+                                  endIndent: 10,
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  Icon(Icons.topic, color: Colors.indigo[800]!, size: 27,),
+                                  Text("Topics", style: TextStyle(color: Colors.indigo[800]!, fontSize: 17, fontWeight: FontWeight.bold),),
+                                  Padding(padding: EdgeInsets.only(bottom: 3)),
+                                  Text("17", style: TextStyle(fontSize: 23),),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
+                                //height: 80,
+                                child: VerticalDivider(
+                                  color: Colors.grey[200],
+                                  width: 20,
+                                  thickness: 2,
+                                  indent: 10,
+                                  endIndent: 10,
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  Icon(Icons.quiz, color: Colors.yellowAccent[700]! , size: 27,),
+                                  Text("Quizzes", style: TextStyle(color: Colors.yellowAccent[700]!, fontSize: 17, fontWeight: FontWeight.bold),),
+                                  Padding(padding: EdgeInsets.only(bottom: 3)),
+                                  Text("+20", style: TextStyle(fontSize: 23),),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
+                                //height: 80,
+                                child: VerticalDivider(
+                                  color: Colors.grey[200],
+                                  width: 20,
+                                  thickness: 2,
+                                  indent: 10,
+                                  endIndent: 10,
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  Icon(Icons.document_scanner, color: Colors.green[600]!, size: 27,),
+                                  Text("Materials", style: TextStyle(color: Colors.green[600]!, fontSize: 17, fontWeight: FontWeight.bold),),
+                                  Padding(padding: EdgeInsets.only(bottom: 3)),
+                                  Text("+100", style: TextStyle(fontSize: 23),),
+                                ],
+                              ),
+                              Spacer(),
+                            ],
+                          ),//course info
+                        ),
                         Padding(
-                          padding: EdgeInsets.only(left:30,top:25),
+                          padding: EdgeInsets.only(left:30,top:25,bottom: 10),
                         child: Text("Instructors",
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 25,
                               color: Colors.black87,
                               fontWeight: FontWeight.w500,)),),
 
@@ -240,20 +315,35 @@ class _INFOState extends State<INFO> {
                             ),
                             child: Container(
                               height: 120,
-                          //    width: 150,
-                              child: ListView.builder(
-                          //     controller: scrollViewColtroller,
-                                controller: scrollViewColtroller,
-                              //  padding:const EdgeInsets.only(left: 20,right: 20) ,
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemCount: course.instructors.length,
-                                itemBuilder: (BuildContext context, int index){
-                                  return instructor_card(
-                                    Theme.of(context).colorScheme.secondary,
-                                    course.instructors[index].name,
-                                    course.instructors[index].contact);
+                              //width: double.infinity,
+                          //     child: ListView.builder(
+                          // //     controller: scrollViewColtroller,
+                          //       controller: scrollViewColtroller,
+                          //     //  padding:const EdgeInsets.only(left: 20,right: 20) ,
+                          //       scrollDirection: Axis.horizontal,
+                          //       shrinkWrap: true,
+                          //       itemCount: course.instructors.length,
+                          //       itemBuilder: (BuildContext context, int index){
+                          //         return instructor_card(
+                          //           Theme.of(context).colorScheme.secondary,
+                          //           course.instructors[index].name,
+                          //           course.instructors[index].contact);
+                          //       },
+                          //     ),
+                              child: CarouselSlider.builder(
+                                  itemCount: course.instructors.length,
+                                  itemBuilder: (ctx, index, realIdx){
+                                      return instructor_card(
+                                             Theme.of(context).colorScheme.secondary,
+                                                course.instructors[index].name,
+                                               course.instructors[index].contact);
                                 },
+                                options: CarouselOptions(
+                                  aspectRatio: 2.0,
+                                  enlargeCenterPage: true,
+                                  autoPlay: true,
+
+                                ),
                               ),
                             ),
                           ),
@@ -262,7 +352,7 @@ class _INFOState extends State<INFO> {
                         Padding(padding: EdgeInsets.only(left:30, top: 30),
                         child: Text("Learning Outcomes",
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 22,
                               color: Colors.black87,
                               fontWeight: FontWeight.w500,)),),
                         Padding(
@@ -271,36 +361,44 @@ class _INFOState extends State<INFO> {
                             top: 10,
                             right: 10,
                           ),
-                          child: Container(
-                              child: ListView.builder(
-                                 controller: scrollViewColtroller,
-                               //   physics: BouncingScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: course.learning_outcomes.length,
-                                itemBuilder: (BuildContext context, int index){
-                                  return Card(
-                                    elevation: 8.0,
-                                    margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(color: Colors.blue),
-                                      child: ListTile(
-                                        contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                                        leading: Container(
-                                          padding: EdgeInsets.only(right: 12.0),
-                                          decoration: new BoxDecoration(
-                                            border: new Border(
-                                              right: new BorderSide(width: 1.0, color: Colors.white24))),
-                                              child: Icon(Icons.checklist_rounded, color: Colors.white),),
-                                              title: Text(
-                                                course.learning_outcomes[index],
-                                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),),
-                                                ),
-                                              ),
-                              );}
-                                      ),
+                          child: Scrollbar(
+                            thickness: 8,
+                            isAlwaysShown: true,
+                            interactive: true,
+                            showTrackOnHover: true,
+                            trackVisibility: true,
+                            child: Container(
 
-                                  ),
+                                child: ListView.builder(
+                                   controller: scrollViewColtroller,
+                                 //   physics: BouncingScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: course.learning_outcomes.length,
+                                  itemBuilder: (BuildContext context, int index){
+                                    return Card(
+                                      elevation: 8.0,
+                                      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(color: Colors.blue),
+                                        child: ListTile(
+                                          contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                                          leading: Container(
+                                            padding: EdgeInsets.only(right: 12.0),
+                                            decoration: new BoxDecoration(
+                                              border: new Border(
+                                                right: new BorderSide(width: 1.0, color: Colors.white24))),
+                                                child: Icon(Icons.checklist_rounded, color: Colors.white),),
+                                                title: Text(
+                                                  course.learning_outcomes[index],
+                                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),),
+                                                  ),
+                                                ),
+                                );}
+                                        ),
+
+                                    ),
+                          ),
                                 ),
                       ],
                   ),

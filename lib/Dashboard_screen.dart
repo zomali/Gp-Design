@@ -14,6 +14,7 @@ import 'Levels_View.dart';
 import 'Sidebar/BlockNavigation.dart';
 import 'classes/student.dart';
 import 'myprofile_screen.dart';
+import 'package:story_view/story_view.dart';
 
 class Dashboard_screen extends StatefulWidget with NavigationStates  {
  // const Dashboard_screen({Key? key}) : super(key: key);
@@ -64,7 +65,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
   @override
   Widget build(BuildContext context) {
     addTOList();
-
+    final StoryController controller = StoryController();
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
@@ -123,83 +124,95 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
            ),
            child: Column(
              //mainAxisAlignment: MainAxisAlignment.start,
-             crossAxisAlignment: CrossAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.start,
              children: [
+
+
+
                Container(
-                 padding: EdgeInsets.symmetric( horizontal: 25, vertical: 10),
-                 height: 120,
-                 child: Row(
-                   children: [
-                     Spacer(),
-                     Column(
-                       children: [
-                         Icon(Icons.keyboard_double_arrow_up, color: Colors.orange, size: 27,),
-                         Text("Levels", style: TextStyle(color: Colors.orange, fontSize: 17, fontWeight: FontWeight.bold),),
-                         Padding(padding: EdgeInsets.only(bottom: 3)),
-                         Text("5", style: TextStyle(fontSize: 23),),
-                       ],
-                     ),
-                     Padding(
-                       padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
-                       //height: 80,
-                       child: VerticalDivider(
-                         color: Colors.grey[200],
-                         width: 20,
-                         thickness: 2,
-                         indent: 10,
-                         endIndent: 10,
+                 margin: EdgeInsets.all(
+                   30,
+                 ),
+                 child: Column(
+                   children: <Widget>[
+                     Container(
+                       height: 300,
+                       child: StoryView(
+                         controller: controller,
+                         storyItems: [
+
+
+                           StoryItem.text(
+                             title:
+                             "Hi "+std.name.toString().split(" ").first+"\n we hope to find you will \n what about taking a journey in the system",
+                             backgroundColor: Colors.blueAccent,
+                             roundedTop: true,
+                           ),
+
+
+                           StoryItem.inlineImage(
+                             url:
+                             "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+                             controller: controller,
+                             caption: Text(
+                               "Hektas, sektas and skatad",
+                               style: TextStyle(
+                                 color: Colors.white,
+                                 backgroundColor: Colors.black54,
+                                 fontSize: 17,
+                               ),
+                             ),
+                           )
+                         ],
+                         onStoryShow: (s) {
+                           print("Showing a story");
+                         },
+                         onComplete: () {
+                           print("Completed a cycle");
+                         },
+                         progressPosition: ProgressPosition.top,
+                         repeat: true,
+                         inline: true,
+
                        ),
                      ),
-                     Column(
-                       children: [
-                         Icon(Icons.topic, color: Colors.indigo[800]!, size: 27,),
-                         Text("Topics", style: TextStyle(color: Colors.indigo[800]!, fontSize: 17, fontWeight: FontWeight.bold),),
-                         Padding(padding: EdgeInsets.only(bottom: 3)),
-                         Text("17", style: TextStyle(fontSize: 23),),
-                       ],
-                     ),
-                     Padding(
-                       padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
-                       //height: 80,
-                       child: VerticalDivider(
-                         color: Colors.grey[200],
-                         width: 20,
-                         thickness: 2,
-                         indent: 10,
-                         endIndent: 10,
+                     Material(
+                       child: InkWell(
+                         onTap: () {
+                           Navigator.of(context).push(
+                               MaterialPageRoute(builder: (context) => MoreStories()));
+                         },
+                         child: Container(
+                         //  height: 300,
+                           //width: 300,
+                           decoration: BoxDecoration(
+                               color: Colors.black54,
+                               borderRadius:
+                               BorderRadius.vertical(bottom: Radius.circular(8))),
+                           padding: EdgeInsets.symmetric(vertical: 8),
+                           child: Row(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                             children: <Widget>[
+                               Text(
+                                 "View more stories",
+                                 style: TextStyle(fontSize: 16, color: Colors.white),
+                               ),
+                               SizedBox(
+                                 width: 16,
+                               ),
+                               Icon(
+                                 Icons.arrow_forward,
+                                 color: Colors.white,
+                               ),
+
+                             ],
+                           ),
+                         ),
                        ),
                      ),
-                     Column(
-                       children: [
-                         Icon(Icons.quiz, color: Colors.yellowAccent[700]! , size: 27,),
-                         Text("Quizzes", style: TextStyle(color: Colors.yellowAccent[700]!, fontSize: 17, fontWeight: FontWeight.bold),),
-                         Padding(padding: EdgeInsets.only(bottom: 3)),
-                         Text("+20", style: TextStyle(fontSize: 23),),
-                       ],
-                     ),
-                     Padding(
-                       padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
-                       //height: 80,
-                       child: VerticalDivider(
-                         color: Colors.grey[200],
-                         width: 20,
-                         thickness: 2,
-                         indent: 10,
-                         endIndent: 10,
-                       ),
-                     ),
-                     Column(
-                       children: [
-                         Icon(Icons.document_scanner, color: Colors.green[600]!, size: 27,),
-                         Text("Materials", style: TextStyle(color: Colors.green[600]!, fontSize: 17, fontWeight: FontWeight.bold),),
-                         Padding(padding: EdgeInsets.only(bottom: 3)),
-                         Text("+100", style: TextStyle(fontSize: 23),),
-                       ],
-                     ),
-                     Spacer(),
                    ],
                  ),
-               ),//info
+               ),
                Padding(
                  padding: const EdgeInsets.only(bottom: 20, top: 30,left: 30),
                  child: Text(
@@ -542,6 +555,82 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
          ),
        ),
      ),
+    );
+  }
+}
+class MoreStories extends StatefulWidget {
+  @override
+  _MoreStoriesState createState() => _MoreStoriesState();
+}
+
+class _MoreStoriesState extends State<MoreStories> {
+  final storyController = StoryController();
+
+
+
+  @override
+  void dispose() {
+    storyController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+       leading: IconButton(
+         icon: Icon(Icons.arrow_back_ios_outlined),
+         onPressed: () {
+
+         },
+       ),
+      ),
+      body: StoryView(
+        storyItems: [
+          StoryItem.text(
+            title: "I guess you'd love to see more of the system. That's great.",
+            backgroundColor: Colors.blue,
+          ),
+          StoryItem.text(
+            title: "Nice!\n\nTap to continue.",
+            backgroundColor: Colors.red,
+            textStyle: TextStyle(
+              fontFamily: 'Dancing',
+              fontSize: 40,
+            ),
+          ),
+          // StoryItem.pageImage(
+          //   url:
+          //   "https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg",
+          //   caption: "Still sampling",
+          //   controller: storyController,
+          // ),
+          StoryItem.pageImage(
+              url: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+              caption: "Working with gifs",
+              controller: storyController),
+          // StoryItem.pageImage(
+          //   url: "https://media.giphy.com/media/XcA8krYsrEAYXKf4UQ/giphy.gif",
+          //   caption: "Hello, from the other side",
+          //   controller: storyController,
+          // ),
+          // StoryItem.pageImage(
+          //
+          //   url: "https://media.giphy.com/media/XcA8krYsrEAYXKf4UQ/giphy.gif",
+          //   caption: "Hello, from the other side2",
+          //   controller: storyController,
+          // ),
+        ],
+        onStoryShow: (s) {
+          print("Showing a story");
+        },
+        onComplete: () {
+          print("Completed a cycle");
+        },
+        progressPosition: ProgressPosition.top,
+        repeat: false,
+        controller: storyController,
+      ),
     );
   }
 }

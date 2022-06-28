@@ -124,7 +124,7 @@ class _Other_students_evaluation_screenState
       );
     }
   }
-
+bool me=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,14 +150,14 @@ class _Other_students_evaluation_screenState
               return Center(child: CircularProgressIndicator());
             else {
               listForRank = [
-                rank("Hossam Abdelnaby", 250, std.profile_picture),
-                rank("Hossam Abdelnaby", 200, std.profile_picture),
-                rank("Hossam Abdelnaby", 190, std.profile_picture),
-                rank("Hazem Ali", 170, std.profile_picture),
-                rank("Adham Bekair", 150, std.profile_picture),
-                rank("Hazem Ali", 130, std.profile_picture),
-                rank("Hossam Abdelnaby", 120, std.profile_picture),
-                rank("Hazem Ali", 80, std.profile_picture),
+                rank(2018170134,"Hossam Abdelnaby", 250, std.profile_picture),
+                rank(2018170132,"Hossam Abdelnaby", 200, std.profile_picture),
+                rank(2018170134,"Hossam Abdelnaby", 190, std.profile_picture),
+                rank(2018170134,"Hazem Ali", 170, std.profile_picture),
+                rank(2018170134,"Adham Bekair", 150, std.profile_picture),
+                rank(2018170135,"Hazem Ali", 130, std.profile_picture),
+                rank(2018170134,"Hossam Abdelnaby", 120, std.profile_picture),
+                rank(2018170132,"Hazem Ali", 80, std.profile_picture),
               ];
               var studentCubit = StudentBehaviorCubit.get(context);
               try {
@@ -196,7 +196,7 @@ class _Other_students_evaluation_screenState
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                         ),
-                      ), //Score Of Students
+                      ), //Score Of Students word
                       SizedBox(
                         height: 40,
                       ),
@@ -243,6 +243,7 @@ class _Other_students_evaluation_screenState
                                 FittedBox(
                                   fit: BoxFit.cover,
                                   child: Text(
+                                    listForRank[2].id==int.parse(std.id.toString())?"Me":
                                     listForRank[2].name,
                                     style: TextStyle(
                                         fontSize: 12,
@@ -253,17 +254,17 @@ class _Other_students_evaluation_screenState
                                   child: Row(
                                     children: [
                                       Text(
-                                        listForRank[2].score.toString(),
+                                        listForRank[2].score.toString()+" pts",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400),
                                       ),
-                                      CircleAvatar(
-                                        radius: 15,
-                                        backgroundColor: Colors.white,
-                                        backgroundImage:
-                                            AssetImage('proj_images/p.jfif'),
-                                      ), //
+                                      // CircleAvatar(
+                                      //   radius: 15,
+                                      //   backgroundColor: Colors.white,
+                                      //   backgroundImage:
+                                      //       AssetImage('proj_images/p.jfif'),
+                                      // ), //
                                     ],
                                   ),
                                 ),
@@ -307,6 +308,7 @@ class _Other_students_evaluation_screenState
                               FittedBox(
                                 // fit: BoxFit.fill,
                                 child: Text(
+                                  listForRank[0].id==int.parse(std.id.toString())?"Me":
                                   listForRank[0].name,
                                   style: TextStyle(
                                       fontSize: 18,
@@ -317,18 +319,18 @@ class _Other_students_evaluation_screenState
                                 child: Row(
                                   children: [
                                     Text(
-                                      listForRank[0].score.toString(),
+                                      listForRank[0].score.toString()+" pts",
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    CircleAvatar(
-                                      radius: 15,
-                                      backgroundColor: Colors.white,
-                                      backgroundImage:
-                                          AssetImage('proj_images/p.jfif'),
-                                    ), //
-                                  ],
+                                  //   CircleAvatar(
+                                  //     radius: 15,
+                                  //     backgroundColor: Colors.white,
+                                  //     backgroundImage:
+                                  //         AssetImage('proj_images/p.jfif'),
+                                  //   ), //
+                                   ],
                                 ),
                               ),
                             ],
@@ -369,6 +371,7 @@ class _Other_students_evaluation_screenState
                                 FittedBox(
                                   fit: BoxFit.fill,
                                   child: Text(
+                                    listForRank[1].id==int.parse(std.id.toString())?"Me":
                                     listForRank[1].name,
                                     style: TextStyle(
                                         fontSize: 18,
@@ -379,17 +382,18 @@ class _Other_students_evaluation_screenState
                                   child: Row(
                                     children: [
                                       Text(
-                                        listForRank[1].score.toString(),
+
+                                        listForRank[1].score.toString()+" pts",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400),
                                       ),
-                                      CircleAvatar(
-                                        radius: 15,
-                                        backgroundColor: Colors.white,
-                                        backgroundImage:
-                                            AssetImage('proj_images/p.jfif'),
-                                      ), //
+                                      // CircleAvatar(
+                                      //   radius: 15,
+                                      //   backgroundColor: Colors.white,
+                                      //   backgroundImage:
+                                      //       AssetImage('proj_images/p.jfif'),
+                                      // ), //
                                     ],
                                   ),
                                 ),
@@ -411,54 +415,61 @@ class _Other_students_evaluation_screenState
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 10.0),
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      (index + 4).toString(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16),
-                                    ),
-                                    SizedBox(width: 10),
-                                    CircleAvatar(
-                                      radius: 20,
-                                      backgroundImage: NetworkImage(
-                                          listForRank[index + 3].pic),
-                                      //image
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        listForRank[index + 3].name,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 18),
+                                    const EdgeInsets.symmetric(vertical: 6.0),
+                                child: Container(
+                                  height:listForRank[index + 3].id==int.parse(std.id.toString())? 65:40,
+                                  decoration: BoxDecoration(
+                                    color:listForRank[index + 3].id==int.parse(std.id.toString())? Colors.cyan:Colors.white,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 15,
                                       ),
-                                    ),
-                                    Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        listForRank[index + 3].score.toString(),
+                                      Text(
+                                        (index + 4).toString(),
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 18),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16),
                                       ),
-                                    ),
-                                    CircleAvatar(
-                                      radius: 13,
-                                      backgroundColor: Colors.white,
-                                      backgroundImage:
-                                          AssetImage('proj_images/p.jfif'),
-                                    ), //
-                                    SizedBox(width: 20),
-                                  ],
+                                      SizedBox(width: 10),
+                                      CircleAvatar(
+                                        radius: 20,
+                                        backgroundImage: NetworkImage(
+                                            listForRank[index + 3].pic),
+                                        //image
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          listForRank[index + 3].id==int.parse(std.id.toString())? "Me"
+                                          : listForRank[index + 3].name,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          listForRank[index + 3].score.toString()+" pts",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                      // CircleAvatar(
+                                      //   radius: 13,
+                                      //   backgroundColor: Colors.white,
+                                      //   backgroundImage:
+                                      //       AssetImage('proj_images/p.jfif'),
+                                      // ), //
+                                      SizedBox(width: 20),
+                                    ],
+                                  ),
                                 ),
                               );
                             }),
@@ -738,9 +749,10 @@ class compare_progress {
 }
 
 class rank {
-  //int id;
+  int id;
   String name;
   int score;
   String pic;
-  rank(this.name, this.score, this.pic);
+
+  rank(this.id,this.name, this.score, this.pic);
 }
