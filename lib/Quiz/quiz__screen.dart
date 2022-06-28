@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gp/Sidebar/BlockNavigation.dart';
 import 'question__model.dart';
 import 'bindings_app.dart';
 import 'custom_button.dart';
@@ -13,7 +14,7 @@ import 'result_screen.dart';
 import 'backButton.dart';
 import 'package:gp/classes/student.dart';
 import 'package:gp/classes/classes.dart';
-class QuizScreen extends StatelessWidget {
+class QuizScreen extends StatelessWidget with NavigationStates {
   final int id;
   final student std;
   final String stat;
