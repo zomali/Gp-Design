@@ -73,7 +73,7 @@ class _sidebarState extends State<sidebar>
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 0),
-                  color: Colors.blue[900]!,
+                  color: Colors.blue[600]!,
                   child: Column(
                     
                     children: <Widget>[
@@ -223,7 +223,7 @@ class _sidebarState extends State<sidebar>
                     child: Container(
                       width: 40,
                       height: 100,
-                      color: Colors.blue[900]!,
+                      color: Colors.blue[700]!,
                       alignment: Alignment.centerLeft,
                       child: AnimatedIcon(
                         progress: _animationController!.view,

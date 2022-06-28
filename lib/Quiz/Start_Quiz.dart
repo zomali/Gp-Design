@@ -24,6 +24,7 @@ class Start_Quiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+
       debugShowCheckedModeBanner: false,
       initialBinding: BilndingsApp(std,id,stat,weakness_topics,questions),
       home:  WelcomeScreen(id,std,stat,weakness_topics,questions),

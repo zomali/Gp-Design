@@ -10,6 +10,11 @@ class Student_perf {
   double ValueOfPerformance = 0.0;
   List<String> UserIds = [];
   List<double> UsersGrades = [];
+  int lengthOfCluster =0;
+  String typeOfStudentCluster = "";
+  String typeOfCluster1 = "";
+  String typeOfCluster2="";
+  String typeOfCluster3 = "";
 }
 
 class analysis_controller {
@@ -76,6 +81,10 @@ class analysis_controller {
     List<double> cluster111 = [];
     List<double> cluster222 = [];
     List<double> cluster333 = [];
+    String typeOfCluster1 = "";
+    String typeOfCluster2="";
+    String typeOfCluster3 = "";
+
 
     bool x = true;
     while (x) {
@@ -137,6 +146,28 @@ class analysis_controller {
       }
     }
     print("Cluster content");
+    if(cluster11[0]>50)
+    typeOfCluster1 ="Fail";
+    else if(cluster11[0]>65)
+       typeOfCluster1 ="Good";
+    else if(cluster11[0]>85)
+      typeOfCluster1 ="Excellent";
+    ////////////////////////////////////////////////
+    if(cluster22[0]>50)
+      typeOfCluster1 ="Fail";
+    else if(cluster22[0]>65)
+      typeOfCluster1 ="Good";
+    else if(cluster22[0]>85)
+      typeOfCluster1 ="Excellent";
+    //////////////////////////////////////////////////
+    if(cluster33[0]>50)
+      typeOfCluster1 ="Fail";
+    else if(cluster33[0]>65)
+      typeOfCluster1 ="Good";
+    else if(cluster33[0]>85)
+      typeOfCluster1 ="Excellent";
+
+
     print(cluster33);
     print(cluster3);
     print("-------------------------------------------------------");
@@ -162,6 +193,8 @@ class analysis_controller {
       std.ValueOfPerformance = cluster11[ind];
       std.UserIds = cluster1;
       std.UsersGrades = cluster11;
+      std.typeOfStudentCluster =  typeOfCluster1;
+      std.lengthOfCluster = cluster11.length;
     }
 
     if (noOfCluster == 2) {
@@ -173,6 +206,8 @@ class analysis_controller {
       std.ValueOfPerformance = cluster22[ind];
       std.UserIds = cluster2;
       std.UsersGrades = cluster22;
+      std.typeOfStudentCluster =  typeOfCluster2;
+      std.lengthOfCluster = cluster22.length;
     }
 
     if (noOfCluster == 3) {
@@ -184,8 +219,22 @@ class analysis_controller {
       std.ValueOfPerformance = cluster33[ind];
       std.UserIds = cluster3;
       std.UsersGrades = cluster33;
+      std.typeOfStudentCluster =  typeOfCluster3;
+      std.lengthOfCluster = cluster33.length;
     }
+    //return
+    // rakam el cluster bta3 el student
+    // el index bta3oh gwa el cluster
+    // el draga bta3to fe el performance
+    // el ID bta3 kol el cluster bta3o (rakam el gloos)
+    // el daragat bta3t kol el cluster
+    // no3 el cluster (type bta3 el cluster shater wla la2)
+    // 3dd kol el fe el cluster
+    // typess kol el clusters
 
+      std.typeOfCluster1=typeOfCluster1;
+      std.typeOfCluster2 = typeOfCluster2;
+      std.typeOfCluster3 = typeOfCluster3;
     return std;
   }
 
