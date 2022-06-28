@@ -22,9 +22,7 @@ class types extends StatefulWidget {
   final Level_ level;
   final Topic_ topic;
   final bool collaborative;
-
   types(this.std, this.level, this.topic, this.collaborative);
-
   @override
   _typesState createState() => _typesState(std, level, topic, collaborative);
 }
@@ -100,11 +98,11 @@ class _typesState extends State<types> {
     print(collaborative);
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue[400],
+          backgroundColor: Colors.blue[800],
           elevation: 30,
-          title: Text("Personalized E-learning System"),
+          title: Text("Personalized E-learning System",style:TextStyle(color: Colors.white),),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_outlined),
+            icon: Icon(Icons.arrow_back_ios_outlined,color: Colors.white,),
             onPressed: () {
               Navigator.push(
                   context,
@@ -186,7 +184,7 @@ class _typesState extends State<types> {
                                                     fontSize: 14,
                                                     fontStyle: FontStyle.italic,
                                                     fontWeight: FontWeight.w600,
-                                                    color: Colors.blue),
+                                                    color: Colors.blue[800]),
                                               ),
                                               Spacer(),
                                               Text(
@@ -195,7 +193,7 @@ class _typesState extends State<types> {
                                                     fontSize: 14,
                                                     fontStyle: FontStyle.italic,
                                                     fontWeight: FontWeight.w600,
-                                                    color: Colors.blue),
+                                                    color: Colors.blue[800]),
                                               ),
                                               Spacer(),
                                             ],
@@ -226,7 +224,7 @@ class _typesState extends State<types> {
                                                     fontSize: 14,
                                                     fontStyle: FontStyle.italic,
                                                     fontWeight: FontWeight.w600,
-                                                    color: Colors.blue),
+                                                    color: Colors.blue[800]),
                                               ),
                                               Spacer(),
                                               Text(
@@ -235,7 +233,7 @@ class _typesState extends State<types> {
                                                     fontSize: 12,
                                                     fontStyle: FontStyle.italic,
                                                     fontWeight: FontWeight.w600,
-                                                    color: Colors.blue),
+                                                    color: Colors.blue[800]),
                                               ),
                                               Spacer(),
                                             ],
@@ -768,7 +766,7 @@ class _typesState extends State<types> {
                                 padding: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 30),
                                 child: Container(
-                                  width: double.infinity,
+                                  width:200,
                                   child: MaterialButton(
                                     onPressed: () async {
                                       Navigator.push(
@@ -786,9 +784,17 @@ class _typesState extends State<types> {
                                     ),
                                   ),
                                   decoration: BoxDecoration(
-                                      color: Colors.blue[500],
+                                      color: Colors.orange,
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0))),
+                                          Radius.circular(25.0)),boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.orange,
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              offset: Offset(-4,-4),
+                                            ),
+
+                                  ])
                                 ),
                               ), //
 
@@ -835,13 +841,14 @@ showlanguageDialogFunc(context) {
                   "Select Language",
                   style: TextStyle(
                       fontSize: 25,
-                      color: Colors.blue,
+                      color: Colors.blue[800],
                       fontWeight: FontWeight.bold),
                 ),
                 Column(
                   children: [
                     Container(
                       width: 200,
+                      color: Colors.blue[800],
                       child: ElevatedButton(
                           onPressed: () {
                             //call arabic type
@@ -850,9 +857,16 @@ showlanguageDialogFunc(context) {
                           child: Text("Arabic",
                               style: TextStyle(
                                   fontSize: 20, color: Colors.white))),
+                        decoration: BoxDecoration(
+                            color: Colors.blue[800],
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(25.0)),boxShadow: [
+
+                        ])
                     ),
                     Container(
                       width: 200,
+                      color: Colors.blue[800],
                       child: ElevatedButton(
                           onPressed: () {
                             //call english type
@@ -862,6 +876,12 @@ showlanguageDialogFunc(context) {
                           child: Text("English",
                               style: TextStyle(
                                   fontSize: 20, color: Colors.white))),
+                        decoration: BoxDecoration(
+                            color: Colors.blue[800],
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(25.0)),boxShadow: [
+
+                        ])
                     )
                   ],
                 )

@@ -20,17 +20,17 @@ class QuestionCard extends StatelessWidget {
           height: height,
           margin: const EdgeInsets.symmetric(horizontal: 20.0),
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Colors.blue[800],
             borderRadius: BorderRadius.circular(25.0),
           ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
+            child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                    SingleChildScrollView(
                     //for horizontal scrolling
                     scrollDirection: Axis.vertical,
@@ -39,7 +39,7 @@ class QuestionCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.white),
                     ),
                   ),
-                SizedBox(height: 70,),
+                SizedBox(height: 20,),
                 ...List.generate(
                     questionModel.choices.length,
                         (index) =>
@@ -61,6 +61,6 @@ class QuestionCard extends StatelessWidget {
               ],
             ),
           )),
-    );
+    ),);
   }
 }

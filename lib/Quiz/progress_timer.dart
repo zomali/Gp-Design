@@ -41,7 +41,7 @@ class ProgressTimer extends StatelessWidget {
 Color get_color(int min)
 {
   if(min>4)
-    return Colors.green;
+    return Colors.orange;
   else 
     return Colors.red;
 }

@@ -34,9 +34,9 @@ class _topic_view extends State<topic_view> {
 
   Widget putIcon(index) {
     if ((std.current_topic - 1) < index) {
-      return const Icon(Icons.lock);
+      return const Icon(Icons.lock,color: Colors.orange,);
     } else {
-      return const Icon(Icons.lock_open);
+      return const Icon(Icons.lock_open,color: Colors.orange,);
     }
   }
 
@@ -46,13 +46,12 @@ class _topic_view extends State<topic_view> {
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Colors.white,
         body: Column(children: [
           Container(
             height: 100,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(50)),
-              color: Colors.blue,
+              color: Colors.blue[800],
             ),
             child: Stack(children: [
               Positioned(
@@ -74,7 +73,7 @@ class _topic_view extends State<topic_view> {
                 child: Row(children: [
                   IconButton(
                     icon: Icon(Icons.arrow_back_ios_outlined),
-                    color: Colors.blue,
+                    color: Colors.orange,
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -86,7 +85,7 @@ class _topic_view extends State<topic_view> {
                     level.name,
                     style: TextStyle(
                         fontSize: 20,
-                        color: Colors.blue,
+                        color: Colors.orange,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   )
@@ -108,8 +107,6 @@ class _topic_view extends State<topic_view> {
                               builder: (context) =>
                                   go_to_quiz(std, level.id, "Level")));
                         } else {
-                          //action on tap
-                          //Fluttertoast.showToast(msg:level.id.toString());
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => types(std, level,
                                   level.topics[index], std.collabretive)));
@@ -130,13 +127,13 @@ class _topic_view extends State<topic_view> {
                           putIcon(index),
                           Container(
                             margin: const EdgeInsets.only(bottom: 5, top: 5),
-                            height: 120,
+                            height: 110,
                             width: width * 0.9,
                             padding: const EdgeInsets.only(
                                 left: 10, right: 10, bottom: 10),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: Colors.blue[800],
                                 borderRadius: const BorderRadius.only(
                                     bottomLeft: Radius.circular(80.0)),
                                 boxShadow: [
@@ -156,7 +153,7 @@ class _topic_view extends State<topic_view> {
                                   Text(
                                     topicsPlusQuiz[index].topicID,
                                     style: TextStyle(
-                                        fontSize: 12, color: Colors.white),
+                                        fontSize: 15, color: Colors.orange),
                                   ),
                                   const SizedBox(
                                     height: 1,

@@ -553,7 +553,7 @@ class QuizController extends GetxController {
   Color getColor(int answerIndex) {
     if (_isPressed) {
       if (answerIndex == _pressedAnswer) {
-        return Color(0xFF252c4a);
+        return Colors.orange;
       }
     }
     return Colors.white;

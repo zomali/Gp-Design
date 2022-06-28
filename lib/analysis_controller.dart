@@ -147,9 +147,9 @@ class analysis_controller {
     }
     print("Cluster content");
     if(cluster11[0]>50)
-    typeOfCluster1 ="Fail";
+      typeOfCluster1 ="Fail";
     else if(cluster11[0]>65)
-       typeOfCluster1 ="Good";
+      typeOfCluster1 ="Good";
     else if(cluster11[0]>85)
       typeOfCluster1 ="Excellent";
     ////////////////////////////////////////////////
@@ -232,9 +232,9 @@ class analysis_controller {
     // 3dd kol el fe el cluster
     // typess kol el clusters
 
-      std.typeOfCluster1=typeOfCluster1;
-      std.typeOfCluster2 = typeOfCluster2;
-      std.typeOfCluster3 = typeOfCluster3;
+    std.typeOfCluster1=typeOfCluster1;
+    std.typeOfCluster2 = typeOfCluster2;
+    std.typeOfCluster3 = typeOfCluster3;
     return std;
   }
 
@@ -407,7 +407,33 @@ class analysis_controller {
     return new_centroids;
   }
 
-  Future<List<String>> cluster_students_by_behavior(int k, student std) async {
+  Map<String, List<String>> Label_Clusters(Map<String, List<String>> cluster_students, Map<String, String> student_VAR)
+  {
+    Map<String, List<String>> c_s = {};
+    for(var cluster in cluster_students.keys)
+    {
+      String VAR = student_VAR[cluster_students[cluster]!.first]!;
+      List<String> VAR_list = VAR.split(',');
+      if(int.parse(VAR_list[0]) > int.parse(VAR_list[1]) && int.parse(VAR_list[0]) > int.parse(VAR_list[2]))
+      {
+        //visual
+        c_s['visual'] = cluster_students[cluster]!;
+      }
+      else if(int.parse(VAR_list[1]) > int.parse(VAR_list[0]) && int.parse(VAR_list[1]) > int.parse(VAR_list[2]))
+      {
+        //auditory
+        c_s['auditory'] = cluster_students[cluster]!;
+      }
+      else
+      {
+        //reading
+        c_s['reading'] = cluster_students[cluster]!;
+      }
+    }
+    return c_s;
+  }
+
+  Future<Map<String, List<String>>> cluster_students_by_behavior(int k, student std) async {
     //get average time spent in each content type
     DatabaseManager db = DatabaseManager();
     List<student> students = await db.fetchStudents();
@@ -467,15 +493,21 @@ class analysis_controller {
           calculate_centroids(current_centroids, student_cluster, student_VAR);
     } while (compare_centroids(new_centroids, current_centroids));
 
-    List<String> similar_students = [];
-    String sCent = student_cluster[std.id]!;
+    Map<String, List<String>> cluster_students = {};
+
     for(var s in student_cluster.keys)
     {
-      if(student_cluster[s]! == sCent)
+      if(cluster_students.containsKey(student_cluster[s]!))
       {
-        similar_students.add(s);
+        cluster_students[student_cluster[s]!]!.add(s);
+      }
+      else
+      {
+        List<String> l= [];
+        l.add(s);
+        cluster_students[student_cluster[s]!] = l;
       }
     }
-    return similar_students;
+    return Label_Clusters(cluster_students, student_VAR);
   }
 }

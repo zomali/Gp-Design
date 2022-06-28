@@ -26,17 +26,17 @@ class QuizScreen extends StatelessWidget with NavigationStates {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height/3*2;
     return Scaffold(
+      backgroundColor: Color(0xFF273C5B),
       body: Stack(
         alignment: Alignment.center,
         children: [
           Container(
             decoration: const BoxDecoration(
-                color: Colors.white),
+                /*color:Colors.blue[800]*/ ),
           ),
           SafeArea(
             child: GetBuilder<QuizController>(
               init: QuizController(0,std,stat,weakness_topics,questions),
-
               builder: (controller) => Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -53,7 +53,7 @@ class QuizScreen extends StatelessWidget with NavigationStates {
                               style: Theme.of(context)
                                   .textTheme
                                   .headline4!
-                                  .copyWith(color: Colors.blue),
+                                  .copyWith(color: Colors.white),
                             ),
                             SizedBox(
                               height: 15,
@@ -64,31 +64,19 @@ class QuizScreen extends StatelessWidget with NavigationStates {
                                 RichText(
                                   text: TextSpan(
                                       text: 'Question ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline5!
-                                          .copyWith(color: Colors.blue),
+                                      style: TextStyle(fontSize: 30,color: Colors.orange,fontWeight: FontWeight.bold),
                                       children: [
                                         TextSpan(
                                             text: controller.numberOfQuestion
                                                 .round()
                                                 .toString(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(color: Colors.blue)),
+                                            style: TextStyle(fontSize: 30,color: Colors.orange,fontWeight: FontWeight.bold)),
                                         TextSpan(
-                                            text: '/',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline4!
-                                                .copyWith(color: Colors.blue)),
+                                            text: '  /',
+                                            style: TextStyle(fontSize: 25,color: Colors.white)),
                                         TextSpan(
                                             text: controller.countOfQuestion.toString(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline6!
-                                                .copyWith(color: Colors.blue)),
+                                            style: TextStyle(fontSize: 25,color: Colors.white)),
                                       ]),
                                 ),
                                 ProgressTimer(),

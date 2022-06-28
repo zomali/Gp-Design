@@ -60,9 +60,9 @@ class _levels_view extends State<levels_view> {
 
   Widget putIcon(index) {
     if ((std.level - 1) < index) {
-      return const Icon(Icons.lock);
+      return const Icon(Icons.lock,color: Colors.orange,);
     } else {
-      return const Icon(Icons.lock_open);
+      return const Icon(Icons.lock_open,color: Colors.orange,);
     }
   }
 
@@ -122,11 +122,11 @@ class _levels_view extends State<levels_view> {
               var levelsList = levelCubit.allLevels;
               return Column(children: [
                 Container(
-                  height: 100,
+                  height: 110,
                   decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.only(bottomRight: Radius.circular(50)),
-                    color: Colors.blue,
+                    color: Colors.blue[800],
                   ),
                   child: Stack(children: [
                     Positioned(
@@ -146,13 +146,13 @@ class _levels_view extends State<levels_view> {
                       top: 40,
                       left: 10,
                       child: Row(children: [
-                        Icon(Icons.keyboard_double_arrow_up,color: Colors.blue,),
+                        Icon(Icons.keyboard_double_arrow_up,color: Colors.orange,),
                         SizedBox(width: 10,),
                         Text(
                           course_name,
                           style: TextStyle(
                               fontSize: 20,
-                              color: Colors.blue,
+                              color: Colors.orange,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         )
@@ -187,13 +187,13 @@ class _levels_view extends State<levels_view> {
                                 Container(
                                   margin:
                                       const EdgeInsets.only(bottom: 5, top: 5),
-                                  height: 120,
+                                  height: 100,
                                   width: width * 0.9,
                                   padding: const EdgeInsets.only(
                                       left: 10, right: 10, bottom: 10),
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.blue,
+                                      color: Colors.blue[800],
                                       borderRadius: const BorderRadius.only(
                                           bottomRight: Radius.circular(80.0)),
                                       boxShadow: [
@@ -215,8 +215,8 @@ class _levels_view extends State<levels_view> {
                                           "Level " +
                                               levelsList[index].id.toString(),
                                           style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.white),
+                                              fontSize: 15,
+                                              color: Colors.orange),
                                         ),
                                         const SizedBox(
                                           height: 1,

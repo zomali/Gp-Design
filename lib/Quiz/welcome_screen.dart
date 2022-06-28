@@ -164,7 +164,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     _submit(context,id,stat,weakness_topic);
                   },
                   shape: const StadiumBorder(),
-                  fillColor: Colors.blue,
+                  fillColor: Colors.orange,
                   child: const Padding(
                     padding:
                     EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),

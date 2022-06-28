@@ -28,9 +28,7 @@ int id,total;
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: FloatingActionButton.extended(
-        backgroundColor: KPrimaryColor,
-        icon: Icon(Icons.arrow_forward_ios),
-        onPressed: onPressed,
+        backgroundColor: Colors.orange,
         label: Text(
           get_text(id, total),
           style: Theme.of(context)
@@ -38,6 +36,9 @@ int id,total;
               .headline6!
               .copyWith(color: Colors.white),
         ),
+        icon: Icon(Icons.arrow_forward_ios),
+        onPressed: onPressed,
+
       ),
     );
   }
@@ -67,7 +68,7 @@ class newLevelButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: FloatingActionButton.extended(
-        backgroundColor: KPrimaryColor,
+        backgroundColor: Colors.orange,
         icon: Icon(Icons.lock_open),
         onPressed: onPressed,
         label: Text(
@@ -83,7 +84,6 @@ class newLevelButton extends StatelessWidget {
 }
 class currentLevelButton extends StatelessWidget {
   String text;
-
    currentLevelButton({
     Key? key,
     required this.onPressed,
@@ -92,7 +92,6 @@ class currentLevelButton extends StatelessWidget {
   }) : super(key: key);
   final Function() onPressed;
   final double width;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -101,7 +100,7 @@ class currentLevelButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: FloatingActionButton.extended(
-        backgroundColor: KPrimaryColor,
+        backgroundColor: Colors.orange,
         icon: Icon(Icons.lock_open),
         onPressed: onPressed,
         label: Text(
@@ -123,7 +122,6 @@ class viewAnswersButton extends StatelessWidget {
   }) : super(key: key);
   final Function() onPressed;
   final double width;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -132,7 +130,7 @@ class viewAnswersButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: FloatingActionButton.extended(
-        backgroundColor: KPrimaryColor,
+        backgroundColor: Colors.orange,
         icon: Icon(Icons.android),
         onPressed: onPressed,
         label: Text(

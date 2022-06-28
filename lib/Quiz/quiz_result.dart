@@ -5,16 +5,8 @@ import 'package:get/get.dart';
 import 'package:gp/classes/classes.dart';
 import 'package:gp/classes/student.dart';
 import 'question__model.dart';
-import 'bindings_app.dart';
-import 'custom_button.dart';
-import 'answer_option.dart';
-import 'progress_timer.dart';
-import 'question_card.dart';
-import 'quiz__screen.dart';
 import 'quiz_controller.dart';
-import 'result_screen.dart';
-import 'backButton.dart';
-//import 'quiz_selected_controller.dart';
+
 class QuizResults extends StatelessWidget {
   final int id;
   final student std;
@@ -26,12 +18,13 @@ class QuizResults extends StatelessWidget {
   late int score;
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF252c4a),
       body: Stack(
         alignment: Alignment.center,
         children: [
           Container(
             decoration: const BoxDecoration(
-                color: Colors.white),
+                color: Color(0xFF252c4a)),
           ),
           SafeArea(
             child: GetBuilder<QuizController>(
@@ -47,11 +40,7 @@ class QuizResults extends StatelessWidget {
                               children: [
                                 Text(
                                   "  Results Of Quiz "+stat +": "+ id.toString(),
-                                  style: Theme
-                                      .of(context)
-                                      .textTheme
-                                      .headline5!
-                                      .copyWith(color: Colors.blue),
+                                  style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.orange),
                                 ),
                                 SizedBox(
                                   height: 0,
@@ -68,6 +57,7 @@ class QuizResults extends StatelessWidget {
                             itemCount: controller.quiz_question.length,
                             itemBuilder: (context, index) {
                               return Card(
+                                color: Color(0xFF252c4a),
                                 child: Row(
                                     children: <Widget>[
                                       Container(
@@ -75,7 +65,7 @@ class QuizResults extends StatelessWidget {
                                         margin: const EdgeInsets.only(
                                             top: 5.0, bottom: 5, left: 25),
                                         decoration: BoxDecoration(
-                                          color: Colors.blue,
+                                          color: Colors.blue[800],
                                           borderRadius: BorderRadius.circular(
                                               25.0),
                                         ),
@@ -96,7 +86,7 @@ class QuizResults extends StatelessWidget {
                                                         .textTheme
                                                         .headline5
                                                         ?.copyWith(
-                                                        color: Colors.white),
+                                                        color: Colors.orange),
                                                   ),
                                                   SizedBox(width: 50,),
                                                   get_score(controller
@@ -105,7 +95,6 @@ class QuizResults extends StatelessWidget {
                                                       student_answers[controller.quiz_question[index].id],controller.quiz_question[index].points)
                                                 ],
                                               ),
-
                                               SizedBox(height: 20,),
                                               Text(
                                                 controller.quiz_question[index]
@@ -118,9 +107,7 @@ class QuizResults extends StatelessWidget {
                                               SizedBox(
                                                 height: 20,
                                               ),
-
                                                   condition(controller.quiz_question[index],student_answers[controller.quiz_question[index].id]),
-
                                             ],
                                           ),
                                         ),)
@@ -779,7 +766,7 @@ Widget get_score(int right_answer, int? selected_answer,int points) {
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: Colors.orange,
         ),
       );
       break;
@@ -789,7 +776,7 @@ Widget get_score(int right_answer, int? selected_answer,int points) {
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: Colors.orange,
         ),
       );
       break;

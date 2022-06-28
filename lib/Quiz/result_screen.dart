@@ -47,8 +47,8 @@ class ResultScreen extends StatelessWidget {
                                 radius: 40,
                                 backgroundColor: Colors.transparent,
                                 child: Container(
-                                  width: 60,
-                                  height: 60,
+                                  width: 90,
+                                  height: 90,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -63,8 +63,8 @@ class ResultScreen extends StatelessWidget {
                                 radius: 40,
                                 backgroundColor: Colors.transparent,
                                 child: Container(
-                                  width: 60,
-                                  height: 60,
+                                  width: 90,
+                                  height: 90,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -90,7 +90,7 @@ class ResultScreen extends StatelessWidget {
                           Text(
                             '${controller.stat}' + ' : ' + '${controller.id}',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 25, color: Colors.white),
+                            style: TextStyle(fontSize: 30, color: Colors.white),
                           ),
                         ]),
                         /*ClipRRect(
@@ -114,7 +114,7 @@ class ResultScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style:
                               Theme.of(context).textTheme.headline5!.copyWith(
-                                    color: Colors.blue,
+                                    color: Colors.white,
                                   ),
                         ),
                         /*Container(
@@ -190,7 +190,6 @@ class ResultScreen extends StatelessWidget {
                                 continueButton,
                               ],
                             );
-
                             // show the dialog
                             showDialog(
                               context: context,
@@ -222,7 +221,6 @@ class ResultScreen extends StatelessWidget {
               ],
             )));
   }
-
   bool get_stat(QuizController controller) {
     if (controller.scoreResult.round() >
         controller.calculate_total_quiz_points() / 2) {
@@ -230,7 +228,6 @@ class ResultScreen extends StatelessWidget {
     } else
       return false;
   }
-
   Color Stat_Color() {
     if (controller.scoreResult.round() >
         controller.calculate_total_quiz_points() / 2) {

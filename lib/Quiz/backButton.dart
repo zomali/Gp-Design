@@ -25,7 +25,7 @@ class backButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: FloatingActionButton.extended(
-        backgroundColor: KPrimaryColor,
+        backgroundColor: Colors.orange,
         icon: Icon(Icons.arrow_back_ios),
         onPressed: onPressed,
         label: Text(

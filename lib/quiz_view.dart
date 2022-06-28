@@ -16,6 +16,7 @@ class QuizResults extends StatelessWidget {
   QuizResults(this.id, this.std,this.stat, this.quizQuestions, this.title);
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF252c4a),
       body: Builder(
         builder: (context) {
           QuestionCubit.get(context).get_list_of_questions(getIDs(quizQuestions));
@@ -35,7 +36,7 @@ class QuizResults extends StatelessWidget {
                 children: [
                   Container(
                     decoration: const BoxDecoration(
-                        color: Colors.white),
+                        color: Color(0xFF252c4a)),
                   ),
                   Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +54,7 @@ class QuizResults extends StatelessWidget {
                                               .of(context)
                                               .textTheme
                                               .headline5!
-                                              .copyWith(color: Colors.blue),
+                                              .copyWith(color: Colors.orange),
                                         ),
                                         ),
                                         SizedBox(
@@ -78,7 +79,7 @@ class QuizResults extends StatelessWidget {
                                                 margin: const EdgeInsets.only(
                                                     top: 5.0, bottom: 5, left: 25),
                                                 decoration: BoxDecoration(
-                                                  color: Colors.blue,
+                                                  color: Colors.orange,
                                                   borderRadius: BorderRadius.circular(
                                                       25.0),
                                                 ),
@@ -99,7 +100,7 @@ class QuizResults extends StatelessWidget {
                                                                 .textTheme
                                                                 .headline5
                                                                 ?.copyWith(
-                                                                color: Colors.white),
+                                                                color: Colors.orange),
                                                           ),
                                                           SizedBox(width: 50,),
                                                           get_score(questions[index]
@@ -784,7 +785,7 @@ Widget get_score(int right_answer, int? selected_answer,int points) {
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: Colors.orange,
         ),
       );
       break;
@@ -794,7 +795,7 @@ Widget get_score(int right_answer, int? selected_answer,int points) {
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: Colors.orange,
         ),
       );
       break;

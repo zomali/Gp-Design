@@ -41,11 +41,11 @@ class AnswerOption extends StatelessWidget {
                   RichText(
                     text: TextSpan(
                         text: '${chars[index]}. ',
-                        style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.white),
+                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.orange),
                         children: [
                           TextSpan(
                             text: text,
-                            style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.white),
+                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
                           ),
                         ]),
                   ),
