@@ -18,18 +18,15 @@ class lastQuizzes extends StatefulWidget{
   final student std;
   final String courseCode;
   lastQuizzes(this.std, this.courseCode);
-
   @override
   State<lastQuizzes> createState() => _lastQuizzesState(std, courseCode);
 }
-
 class _lastQuizzesState extends State<lastQuizzes> {
   student std;
   String courseCode;
   _lastQuizzesState(this.std, this.courseCode);
   int _selectedIndex = 2;
   static List<Widget> _pages = <Widget>[];
- 
   void addTOList() {
     _pages.add(Dashboard_screen(std));
     _pages.add(levels_view(std));
@@ -105,7 +102,7 @@ class _lastQuizzesState extends State<lastQuizzes> {
             itemBuilder: (context, index){
               return ListTile(
                 leading: Icon(Icons.quiz, color: children_color,),
-                title: Text('Attempt ' +(index+1).toString(), style: TextStyle(color: children_color,),),
+                title: Text('Attempt ' +(index+1).toString()+'\n Score : '+root.children[index].student_score.toString()+'/'+root.children[index].total_score.toString(), style: TextStyle(color: get_text_color(root.children[index].student_score, root.children[index].total_score),),),
                 onTap: (){
                   String title = root.title +" Attempt " + (index+1).toString() + " Quiz";
                    Navigator.of(context).push(MaterialPageRoute(
@@ -120,7 +117,15 @@ class _lastQuizzesState extends State<lastQuizzes> {
       ),
       
     );   
-   
+
+  }
+  Color get_text_color(int score,int total)
+  {
+    if(score>= total/2)
+      return Colors.green;
+    else
+      return Colors.red;
+
   }
   @override
   Widget build(BuildContext context) {
