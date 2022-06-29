@@ -72,6 +72,7 @@ class QuizResults extends StatelessWidget {
                                     itemCount: questions.length,
                                     itemBuilder: (context, index) {
                                       return Card(
+                                        color: Color(0xFF252c4a),
                                         child: Row(
                                             children: <Widget>[
                                               Container(
@@ -79,7 +80,7 @@ class QuizResults extends StatelessWidget {
                                                 margin: const EdgeInsets.only(
                                                     top: 5.0, bottom: 5, left: 25),
                                                 decoration: BoxDecoration(
-                                                  color: Colors.orange,
+                                                  color: Colors.blue[800],
                                                   borderRadius: BorderRadius.circular(
                                                       25.0),
                                                 ),

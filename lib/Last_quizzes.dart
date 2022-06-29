@@ -1,3 +1,6 @@
+import 'dart:ui';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Course_evaluation_screens/My_Evaluation_screen.dart';
@@ -196,7 +199,8 @@ class _lastQuizzesState extends State<lastQuizzes> {
                     ListView.builder(
                       itemCount: levelEntries.length,
                       itemBuilder: (context, index){
-                        return build_card(levelEntries[index], 'https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/6151529/3005/2000/m1/fpnw/wm0/quiz-1-.jpg?1553762089&s=9b9ad3d167a8d446dd625dabd9ef4ea0', Colors.amber[300]!);                      },
+                        return build_card(levelEntries[index], 
+                            'https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/6151529/3005/2000/m1/fpnw/wm0/quiz-1-.jpg?1553762089&s=9b9ad3d167a8d446dd625dabd9ef4ea0', Colors.amber[300]!);                      },
                       
                       ),
                     ListView.builder(

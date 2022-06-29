@@ -121,9 +121,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
-              child: Image.asset('proj_images/quiz.png',
-                width: 800,
-                height: 200,),
+              child: Image.asset('proj_images/QUIZ-3D.png',
+                width: 500,
+                height: 150,),
             ),
             SizedBox(
               height: 5,
@@ -169,7 +169,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     padding:
                     EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                     child: Text(
-                      "Start the Quizz",
+                      "Start the Quiz",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 26.0,
