@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 
 import '../../../DatabaseManager.dart';
+import '../../../analysis_controller.dart';
 import '../../../classes/student.dart';
 
 part 'student_behavior_state.dart';
@@ -29,10 +30,18 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   late List<int> gradesStudent;
   late List<int> gradesAllStudent;
   late List<double> weight;
+  late analysis_controller ac = analysis_controller();
+  late top6 top;
 
   Future<void> fetchAllStudentGrades(student std) async {
     emit(StudentBehaviorLoading());
     gradesAllStudent = await db.fetchAllStudentGrades(std);
+    emit(StudentBehaviorLoaded());
+  }
+
+  Future<void> fetchEachStudentGrades() async {
+    emit(StudentBehaviorLoading());
+    top = await ac.fetchEachStudentGrades();
     emit(StudentBehaviorLoaded());
   }
 
@@ -47,21 +56,25 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
     timesForStudents = await db.getTimeTokenForEachLevelForAllStudents(std);
     emit(StudentBehaviorLoaded());
   }
+
   Future<void> getTimeTokenInVideo(student std) async {
     emit(StudentBehaviorLoading());
     Video_time = await db.getTimeTokenInVideo(std);
     emit(StudentBehaviorLoaded());
   }
+
   Future<void> getTimeTokenInAudio(student std) async {
     emit(StudentBehaviorLoading());
     Audio_time = await db.getTimeTokenInAudio(std);
     emit(StudentBehaviorLoaded());
   }
+
   Future<void> getTimeTokenInText(student std) async {
     emit(StudentBehaviorLoading());
     Text_time = await db.getTimeTokenInText(std);
     emit(StudentBehaviorLoaded());
   }
+
   Future<void> getTimeTokenInImage(student std) async {
     emit(StudentBehaviorLoading());
     Image_time = await db.getTimeTokenInImage(std);

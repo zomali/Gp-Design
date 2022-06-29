@@ -4,6 +4,7 @@ import 'package:gp/Course_evaluation_screens/Courses_evaluations.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:gp/Dashboard_screen.dart';
 import 'package:gp/shared/cubits/cubit/student_behavior_cubit.dart';
+import '../analysis_controller.dart';
 import '../classes/student.dart';
 
 class Other_students_evaluation_screen extends StatefulWidget {
@@ -20,6 +21,7 @@ List<int> listForOneGrades = [];
 List<int> listForAllGrades = [];
 List<int> listForOneGradesForGraph = [];
 List<rank> listForRank = [];
+top6 top = top6();
 
 class _Other_students_evaluation_screenState
     extends State<Other_students_evaluation_screen> {
@@ -124,7 +126,8 @@ class _Other_students_evaluation_screenState
       );
     }
   }
-bool me=true;
+
+  bool me = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,6 +145,7 @@ bool me=true;
         StudentBehaviorCubit.get(context).fetchStudentGrades(std);
         StudentBehaviorCubit.get(context).fetchAllStudentGrades(std);
         StudentBehaviorCubit.get(context).getTimeTokenForEachLevel(std);
+        StudentBehaviorCubit.get(context).fetchEachStudentGrades();
         StudentBehaviorCubit.get(context)
             .getTimeTokenForEachLevelForAllStudents(std);
         return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
@@ -149,22 +153,18 @@ bool me=true;
             if (state is StudentBehaviorLoading)
               return Center(child: CircularProgressIndicator());
             else {
-              listForRank = [
-                rank(2018170134,"Hossam Abdelnaby", 250, std.profile_picture),
-                rank(2018170132,"Hossam Abdelnaby", 200, std.profile_picture),
-                rank(2018170134,"Hossam Abdelnaby", 190, std.profile_picture),
-                rank(2018170134,"Hazem Ali", 170, std.profile_picture),
-                rank(2018170134,"Adham Bekair", 150, std.profile_picture),
-                rank(2018170135,"Hazem Ali", 130, std.profile_picture),
-                rank(2018170134,"Hossam Abdelnaby", 120, std.profile_picture),
-                rank(2018170132,"Hazem Ali", 80, std.profile_picture),
-              ];
               var studentCubit = StudentBehaviorCubit.get(context);
+              for (int i = 0; i < 6; i++) {
+                top.names.add("Adham Bekair");
+                top.picture.add(std.profile_picture);
+                top.scores.add(50 + i);
+              }
               try {
                 listForAll = studentCubit.timesForStudents;
                 listForOne = studentCubit.times;
                 listForOneGrades = studentCubit.gradesStudent;
                 listForAllGrades = studentCubit.gradesAllStudent;
+                top = studentCubit.top;
               } catch (e) {
                 for (int i = 0; i < 5; i++) {
                   listForAll.add(1);
@@ -172,7 +172,20 @@ bool me=true;
                   listForOneGrades.add(1);
                   listForAllGrades.add(1);
                 }
+                for (int i = 0; i < 6; i++) {
+                  top.names.add("Adham Bekair");
+                  top.picture.add(std.profile_picture);
+                  top.scores.add(50 + i);
+                }
               }
+              listForRank = [
+                rank(top.names[0], top.scores[0], top.picture[0]),
+                rank(top.names[1], top.scores[1], top.picture[1]),
+                rank(top.names[2], top.scores[2], top.picture[2]),
+                rank(top.names[3], top.scores[3], top.picture[3]),
+                rank(top.names[4], top.scores[4], top.picture[4]),
+                rank(top.names[5], top.scores[5], top.picture[5])
+              ];
               listForOneGradesForGraph.add(0);
               listForOneGradesForGraph.add(0);
               listForOneGradesForGraph.add(0);
@@ -243,8 +256,9 @@ bool me=true;
                                 FittedBox(
                                   fit: BoxFit.cover,
                                   child: Text(
-                                    listForRank[2].id==int.parse(std.id.toString())?"Me":
-                                    listForRank[2].name,
+                                    listForRank[2].name == std.name
+                                        ? "Me"
+                                        : listForRank[2].name,
                                     style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold),
@@ -254,7 +268,8 @@ bool me=true;
                                   child: Row(
                                     children: [
                                       Text(
-                                        listForRank[2].score.toString()+" pts",
+                                        listForRank[2].score.toString() +
+                                            " pts",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400),
@@ -308,8 +323,9 @@ bool me=true;
                               FittedBox(
                                 // fit: BoxFit.fill,
                                 child: Text(
-                                  listForRank[0].id==int.parse(std.id.toString())?"Me":
-                                  listForRank[0].name,
+                                  listForRank[0].name == std.name
+                                      ? "Me"
+                                      : listForRank[0].name,
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
@@ -319,18 +335,18 @@ bool me=true;
                                 child: Row(
                                   children: [
                                     Text(
-                                      listForRank[0].score.toString()+" pts",
+                                      listForRank[0].score.toString() + " pts",
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                  //   CircleAvatar(
-                                  //     radius: 15,
-                                  //     backgroundColor: Colors.white,
-                                  //     backgroundImage:
-                                  //         AssetImage('proj_images/p.jfif'),
-                                  //   ), //
-                                   ],
+                                    //   CircleAvatar(
+                                    //     radius: 15,
+                                    //     backgroundColor: Colors.white,
+                                    //     backgroundImage:
+                                    //         AssetImage('proj_images/p.jfif'),
+                                    //   ), //
+                                  ],
                                 ),
                               ),
                             ],
@@ -371,8 +387,9 @@ bool me=true;
                                 FittedBox(
                                   fit: BoxFit.fill,
                                   child: Text(
-                                    listForRank[1].id==int.parse(std.id.toString())?"Me":
-                                    listForRank[1].name,
+                                    listForRank[1].name == std.name
+                                        ? "Me"
+                                        : listForRank[1].name,
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
@@ -382,8 +399,8 @@ bool me=true;
                                   child: Row(
                                     children: [
                                       Text(
-
-                                        listForRank[1].score.toString()+" pts",
+                                        listForRank[1].score.toString() +
+                                            " pts",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400),
@@ -417,9 +434,15 @@ bool me=true;
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 6.0),
                                 child: Container(
-                                  height:listForRank[index + 3].id==int.parse(std.id.toString())? 65:40,
+                                  height:
+                                      listForRank[index + 3].name == std.name
+                                          ? 65
+                                          : 40,
                                   decoration: BoxDecoration(
-                                    color:listForRank[index + 3].id==int.parse(std.id.toString())? Colors.cyan:Colors.white,
+                                    color:
+                                        listForRank[index + 3].name == std.name
+                                            ? Colors.cyan
+                                            : Colors.white,
                                   ),
                                   child: Row(
                                     children: [
@@ -442,8 +465,10 @@ bool me=true;
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          listForRank[index + 3].id==int.parse(std.id.toString())? "Me"
-                                          : listForRank[index + 3].name,
+                                          listForRank[index + 3].name ==
+                                                  std.name
+                                              ? "Me"
+                                              : listForRank[index + 3].name,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontStyle: FontStyle.italic,
@@ -454,7 +479,10 @@ bool me=true;
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          listForRank[index + 3].score.toString()+" pts",
+                                          listForRank[index + 3]
+                                                  .score
+                                                  .toString() +
+                                              " pts",
                                           style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontStyle: FontStyle.italic,
@@ -749,10 +777,9 @@ class compare_progress {
 }
 
 class rank {
-  int id;
   String name;
   int score;
   String pic;
 
-  rank(this.id,this.name, this.score, this.pic);
+  rank(this.name, this.score, this.pic);
 }

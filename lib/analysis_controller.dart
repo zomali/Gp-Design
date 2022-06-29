@@ -10,11 +10,17 @@ class Student_perf {
   double ValueOfPerformance = 0.0;
   List<String> UserIds = [];
   List<double> UsersGrades = [];
-  int lengthOfCluster =0;
+  int lengthOfCluster = 0;
   String typeOfStudentCluster = "";
   String typeOfCluster1 = "";
-  String typeOfCluster2="";
+  String typeOfCluster2 = "";
   String typeOfCluster3 = "";
+}
+
+class top6 {
+  List<String> names = [];
+  List<int> scores = [];
+  List<String> picture = [];
 }
 
 class analysis_controller {
@@ -82,9 +88,8 @@ class analysis_controller {
     List<double> cluster222 = [];
     List<double> cluster333 = [];
     String typeOfCluster1 = "";
-    String typeOfCluster2="";
+    String typeOfCluster2 = "";
     String typeOfCluster3 = "";
-
 
     bool x = true;
     while (x) {
@@ -146,27 +151,23 @@ class analysis_controller {
       }
     }
     print("Cluster content");
-    if(cluster11[0]>50)
-    typeOfCluster1 ="Fail";
-    else if(cluster11[0]>65)
-       typeOfCluster1 ="Good";
-    else if(cluster11[0]>85)
-      typeOfCluster1 ="Excellent";
+    if (cluster11[0] > 50)
+      typeOfCluster1 = "Fail";
+    else if (cluster11[0] > 65)
+      typeOfCluster1 = "Good";
+    else if (cluster11[0] > 85) typeOfCluster1 = "Excellent";
     ////////////////////////////////////////////////
-    if(cluster22[0]>50)
-      typeOfCluster1 ="Fail";
-    else if(cluster22[0]>65)
-      typeOfCluster1 ="Good";
-    else if(cluster22[0]>85)
-      typeOfCluster1 ="Excellent";
+    if (cluster22[0] > 50)
+      typeOfCluster1 = "Fail";
+    else if (cluster22[0] > 65)
+      typeOfCluster1 = "Good";
+    else if (cluster22[0] > 85) typeOfCluster1 = "Excellent";
     //////////////////////////////////////////////////
-    if(cluster33[0]>50)
-      typeOfCluster1 ="Fail";
-    else if(cluster33[0]>65)
-      typeOfCluster1 ="Good";
-    else if(cluster33[0]>85)
-      typeOfCluster1 ="Excellent";
-
+    if (cluster33[0] > 50)
+      typeOfCluster1 = "Fail";
+    else if (cluster33[0] > 65)
+      typeOfCluster1 = "Good";
+    else if (cluster33[0] > 85) typeOfCluster1 = "Excellent";
 
     print(cluster33);
     print(cluster3);
@@ -193,7 +194,7 @@ class analysis_controller {
       std.ValueOfPerformance = cluster11[ind];
       std.UserIds = cluster1;
       std.UsersGrades = cluster11;
-      std.typeOfStudentCluster =  typeOfCluster1;
+      std.typeOfStudentCluster = typeOfCluster1;
       std.lengthOfCluster = cluster11.length;
     }
 
@@ -206,7 +207,7 @@ class analysis_controller {
       std.ValueOfPerformance = cluster22[ind];
       std.UserIds = cluster2;
       std.UsersGrades = cluster22;
-      std.typeOfStudentCluster =  typeOfCluster2;
+      std.typeOfStudentCluster = typeOfCluster2;
       std.lengthOfCluster = cluster22.length;
     }
 
@@ -219,7 +220,7 @@ class analysis_controller {
       std.ValueOfPerformance = cluster33[ind];
       std.UserIds = cluster3;
       std.UsersGrades = cluster33;
-      std.typeOfStudentCluster =  typeOfCluster3;
+      std.typeOfStudentCluster = typeOfCluster3;
       std.lengthOfCluster = cluster33.length;
     }
     //return
@@ -232,9 +233,9 @@ class analysis_controller {
     // 3dd kol el fe el cluster
     // typess kol el clusters
 
-      std.typeOfCluster1=typeOfCluster1;
-      std.typeOfCluster2 = typeOfCluster2;
-      std.typeOfCluster3 = typeOfCluster3;
+    std.typeOfCluster1 = typeOfCluster1;
+    std.typeOfCluster2 = typeOfCluster2;
+    std.typeOfCluster3 = typeOfCluster3;
     return std;
   }
 
@@ -406,34 +407,32 @@ class analysis_controller {
     }
     return new_centroids;
   }
-  
-  Map<String, List<String>> Label_Clusters(Map<String, List<String>> cluster_students, Map<String, String> student_VAR)
-  {
+
+  Map<String, List<String>> Label_Clusters(
+      Map<String, List<String>> cluster_students,
+      Map<String, String> student_VAR) {
     Map<String, List<String>> c_s = {};
-    for(var cluster in cluster_students.keys)
-    {
-     String VAR = student_VAR[cluster_students[cluster]!.first]!; 
-     List<String> VAR_list = VAR.split(',');
-     if(int.parse(VAR_list[0]) > int.parse(VAR_list[1]) && int.parse(VAR_list[0]) > int.parse(VAR_list[2]))
-     {
-      //visual
-      c_s['visual'] = cluster_students[cluster]!;
-     }
-     else if(int.parse(VAR_list[1]) > int.parse(VAR_list[0]) && int.parse(VAR_list[1]) > int.parse(VAR_list[2]))
-     {
-      //auditory
-      c_s['auditory'] = cluster_students[cluster]!;
-     }
-     else
-     {
-      //reading
-      c_s['reading'] = cluster_students[cluster]!;
-     }
+    for (var cluster in cluster_students.keys) {
+      String VAR = student_VAR[cluster_students[cluster]!.first]!;
+      List<String> VAR_list = VAR.split(',');
+      if (int.parse(VAR_list[0]) > int.parse(VAR_list[1]) &&
+          int.parse(VAR_list[0]) > int.parse(VAR_list[2])) {
+        //visual
+        c_s['visual'] = cluster_students[cluster]!;
+      } else if (int.parse(VAR_list[1]) > int.parse(VAR_list[0]) &&
+          int.parse(VAR_list[1]) > int.parse(VAR_list[2])) {
+        //auditory
+        c_s['auditory'] = cluster_students[cluster]!;
+      } else {
+        //reading
+        c_s['reading'] = cluster_students[cluster]!;
+      }
     }
     return c_s;
   }
 
-  Future<Map<String, List<String>>> cluster_students_by_behavior(int k, student std) async {
+  Future<Map<String, List<String>>> cluster_students_by_behavior(
+      int k, student std) async {
     //get average time spent in each content type
     DatabaseManager db = DatabaseManager();
     List<student> students = await db.fetchStudents();
@@ -495,19 +494,238 @@ class analysis_controller {
 
     Map<String, List<String>> cluster_students = {};
 
-    for(var s in student_cluster.keys)
-    {
-      if(cluster_students.containsKey(student_cluster[s]!))
-      {
+    for (var s in student_cluster.keys) {
+      if (cluster_students.containsKey(student_cluster[s]!)) {
         cluster_students[student_cluster[s]!]!.add(s);
-      }
-      else
-      {
-        List<String> l= [];
+      } else {
+        List<String> l = [];
         l.add(s);
         cluster_students[student_cluster[s]!] = l;
       }
     }
     return Label_Clusters(cluster_students, student_VAR);
+  }
+
+  Future<top6> fetchEachStudentGrades() async {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase.child('quizzes').get();
+    var keys = response.value.keys;
+    var values = response.value;
+    var levels = [];
+    var Tobics = [];
+    double UserGrade = 0;
+    double UserTotalGrades = 0;
+    List<String> IDs = [];
+    List<double> Grades = [];
+    List<double> TotalGrades = [];
+    List<double> distence = [];
+    for (var key in keys) {
+      IDs.add(key);
+      levels.add(values[key]['Level']);
+      Tobics.add(values[key]['Topic']);
+      print(key);
+    }
+    double grade = 0;
+    double total = 0;
+    for (var lev in levels) {
+      if (lev != null) {
+        for (var k in lev.keys) {
+          grade += lev[k]["student_score"];
+          total += lev[k]["total_score"];
+        }
+      }
+      Grades.add(grade);
+      TotalGrades.add(total);
+      total = 0;
+      grade = 0;
+    }
+
+    int eachStudent = 0;
+    for (var tob in Tobics) {
+      if (tob != null) {
+        for (var k in tob.keys) {
+          grade += tob[k]["student_score"];
+          total += tob[k]["total_score"];
+        }
+      }
+      Grades[eachStudent] += grade;
+      TotalGrades[eachStudent] += total;
+      TotalGrades[eachStudent] =
+          (Grades[eachStudent] / TotalGrades[eachStudent]) * 100;
+      total = 0;
+      grade = 0;
+      eachStudent++;
+    }
+    print(TotalGrades[0]);
+    print(TotalGrades[1]);
+    print(TotalGrades[2]);
+    print(TotalGrades[3]);
+    print(TotalGrades[4]);
+    print(TotalGrades[5]);
+    double max = 0;
+    String id = "";
+    int index = 0;
+    List<double> rankingList = [];
+    List<String> rankingID = [];
+
+    //for 1st place
+    for (var k in TotalGrades) {
+      if (max < k) {
+        max = k;
+        id = IDs[index];
+      }
+      index++;
+    }
+    rankingList.add(max);
+    rankingID.add(id);
+
+    //for 2nd place
+    max = 0;
+    index = 0;
+    for (var k in TotalGrades) {
+      if (k == rankingList[0]) {
+        index++;
+        continue;
+      } else {
+        if (max < k) {
+          max = k;
+          id = IDs[index];
+        }
+      }
+      index++;
+    }
+    rankingList.add(max);
+    rankingID.add(id);
+    List<int> arr = [];
+
+    //for 3rd place
+    max = 0;
+    index = 0;
+    for (var k in TotalGrades) {
+      if (k == rankingList[0] || k == rankingList[1]) {
+        index++;
+        continue;
+      } else {
+        if (max < k) {
+          max = k;
+          id = IDs[index];
+        }
+      }
+      index++;
+    }
+    rankingList.add(max);
+    rankingID.add(id);
+
+    //for 4th place
+    max = 0;
+    index = 0;
+    for (var k in TotalGrades) {
+      if (k == rankingList[0] || k == rankingList[1] || k == rankingList[2]) {
+        index++;
+        continue;
+      } else {
+        if (max < k) {
+          max = k;
+          id = IDs[index];
+        }
+      }
+      index++;
+    }
+    rankingList.add(max);
+    rankingID.add(id);
+
+    //for 5th place
+    max = 0;
+    index = 0;
+    for (var k in TotalGrades) {
+      if (k == rankingList[0] ||
+          k == rankingList[1] ||
+          k == rankingList[2] ||
+          k == rankingList[3]) {
+        index++;
+        continue;
+      } else {
+        if (max < k) {
+          max = k;
+          id = IDs[index];
+        }
+      }
+      index++;
+    }
+    rankingList.add(max);
+    rankingID.add(id);
+
+    //for 6th place
+    max = 0;
+    index = 0;
+    for (var k in TotalGrades) {
+      if (k == rankingList[0] ||
+          k == rankingList[1] ||
+          k == rankingList[2] ||
+          k == rankingList[3] ||
+          k == rankingList[4]) {
+        index++;
+        continue;
+      } else {
+        if (max < k) {
+          max = k;
+          id = IDs[index];
+        }
+      }
+      index++;
+    }
+    rankingList.add(max);
+    rankingID.add(id);
+
+    String str;
+    for (int i = 0; i < 6; i++) {
+      arr.add(0);
+      str = rankingList[i].toString();
+      arr[i] = int.parse(str[0]);
+      if (str[1] != ".") {
+        arr[i] *= 10;
+        arr[i] += int.parse(str[1]);
+      }
+    }
+
+    final response1 = await firebaseDatabase.child('students').get();
+    var keys1 = response1.value.keys;
+    var values1 = response1.value;
+
+    top6 top = top6();
+    for (int i = 0; i < 6; i++) {
+      top.names.add("f");
+      top.scores.add(0);
+      top.picture.add("f");
+    }
+
+    for (var k in keys1) {
+      if (k == rankingID[0]) {
+        top.names[0] = values1[k]["name"];
+        top.picture[0] = values1[k]["profile_picture"];
+        top.scores[0] = arr[0];
+      } else if (k == rankingID[1]) {
+        top.names[1] = values1[k]["name"];
+        top.picture[1] = values1[k]["profile_picture"];
+        top.scores[1] = arr[1];
+      } else if (k == rankingID[2]) {
+        top.names[2] = values1[k]["name"];
+        top.picture[2] = values1[k]["profile_picture"];
+        top.scores[2] = arr[2];
+      } else if (k == rankingID[3]) {
+        top.names[3] = values1[k]['name'];
+        top.picture[3] = values1[k]["profile_picture"];
+        top.scores[3] = arr[3];
+      } else if (k == rankingID[4]) {
+        top.names[4] = values1[k]["name"];
+        top.picture[4] = values1[k]["profile_picture"];
+        top.scores[4] = arr[4];
+      } else if (k == rankingID[5]) {
+        top.names[5] = values1[k]["name"];
+        top.picture[5] = values1[k]["profile_picture"];
+        top.scores[5] = arr[5];
+      }
+    }
+    return top;
   }
 }
