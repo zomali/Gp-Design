@@ -52,9 +52,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   List<Question_>questions;
   _WelcomeScreenState(this.id,this.std,this.stat,this.weakness_topic,this.questions);
   final _nameController = TextEditingController();
-
   final GlobalKey<FormState> _formkey = GlobalKey();
-
   void _submit(context,id,stat,weakness_topics) {
     FocusScope.of(context).unfocus();
     if (!_formkey.currentState!.validate()) return;
@@ -63,13 +61,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Get.find<QuizController>().startTimer();
     Get.lazyPut(()=>QuizController(id,std, stat,weakness_topic,questions));
   }
-
   @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,8 +118,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.asset('proj_images/QUIZ-3D.png',
-                width: 500,
-                height: 150,),
+                width: 400,
+                height: 120,),
             ),
             SizedBox(
               height: 5,
@@ -140,10 +136,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 80,
                     ),
                     Text(
-                      "-The quiz consists of "+get_questions_len(stat, weakness_topic.length, id)+" questions. \n-Time of quiz is 15 minutes.\n-Read the question carefully before answering.\n-The quiz was created by Dr. Sally Saad and Dr. Salsabil Amin.",
+                      "-The quiz consists of "+get_questions_len(stat, weakness_topic.length, id)+" questions.\n-Time of quiz is "+get_time(stat, weakness_topic.length, id) +"\n-Read the question carefully before answering.",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22,
@@ -152,7 +148,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ],
                 )
-
             ),
             SizedBox(
               height: 30,
@@ -192,6 +187,62 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 }
+String get_time(String stat,int len, int level)
+{
+  int min=0,sec=0;
+  if(stat=="Topic")
+    {
+      min=2+3+6;
+      sec=0;
+      return "11 Minutes and 0 Seconds";
+    }
+  if(stat=="Level")
+    {
+      if(level==1 || level==2|| level ==4)
+      {
+        if(len==1)
+        {
+          return "11 Minutes and 30 Seconds";
+        }
+        else if(len==2)
+        {
+          return "12 Minutes and 30 Seconds";
+        }
+        else if(len==3)
+        {
+          return "13 Minutes and 30 Seconds";
+        }
+        if(len==0)
+        {
+          return "10 Minutes and 30 Seconds";
+        }
+      }
+      if(level==3 || level==5)
+      {
+        if(len==1)
+        {
+          return "15 Minutes and 0 Seconds";
+        }
+        else if(len==2)
+        {
+          return "16 Minutes and 0 Seconds";
+        }
+        else if(len==3)
+        {
+          return "17 Minutes and 0 Seconds";
+        }
+        else if(len==4)
+        {
+          return "18 Minutes and 0 Seconds";
+        }
+        if(len==0)
+        {
+          return "14 Minutes and 0 Seconds";
+        }
+      }
+    }
+  return " 14 Minutes and 0 Seconds";
+}
 String get_questions_len(String stat,int len,int level)
 {
   int count=0;
@@ -215,9 +266,17 @@ String get_questions_len(String stat,int len,int level)
           {
             count=3*4;
           }
+          if(len==0)
+            {
+              count=3*3;
+            }
         }
       else if(level==2)
         {
+          if(len==0)
+          {
+            count=3*3;
+          }
           if(len==1)
           {
             count=(2*3)+(4);
@@ -233,6 +292,10 @@ String get_questions_len(String stat,int len,int level)
         }
       else if(level==3)
       {
+        if(len==0)
+        {
+          count=3*4;
+        }
         if(len==1)
         {
           count=(2*3)+(4);
@@ -252,6 +315,10 @@ String get_questions_len(String stat,int len,int level)
       }
       else if(level==4)
       {
+        if(len==0)
+        {
+          count=3*3;
+        }
         if(len==1)
         {
           count=(2*3)+(4);
@@ -267,6 +334,10 @@ String get_questions_len(String stat,int len,int level)
       }
       else if(level==4)
       {
+        if(len==0)
+        {
+          count=3*4;
+        }
         if(len==1)
         {
           count=(2*3)+(4);

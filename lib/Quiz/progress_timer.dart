@@ -18,7 +18,7 @@ class ProgressTimer extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             CircularProgressIndicator(
-              value: 1 - (controller.min.value / 14),
+              value: 1 - (controller.min.value / controller.maxMin),
               color: get_color(controller.min.value),
               backgroundColor: Colors.white,
               strokeWidth: 8,
