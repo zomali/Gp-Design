@@ -54,7 +54,7 @@ class _MyLoginState extends State<MyLogin> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('proj_images/login.png'), fit: BoxFit.cover),
+            image: AssetImage('proj_images/login2.jpg'), fit: BoxFit.cover),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -86,7 +86,7 @@ class _MyLoginState extends State<MyLogin> {
                               padding: EdgeInsets.only(right: 20, top: 90),
                               child: CircleAvatar(
                                 radius: 35,
-                                backgroundColor: Colors.cyan[400],
+                                backgroundColor: Color(0xFF1565C0),
                                 child: Container(
                                   width: 100,
                                   height: 100,
@@ -128,14 +128,14 @@ class _MyLoginState extends State<MyLogin> {
                                           labelText: 'E-mail Address',
                                           prefixIcon: Icon(
                                             Icons.email_outlined,
-                                            color: Colors.blue[400],
+                                            color: Colors.blue[800],
                                           ),
                                           border: OutlineInputBorder(),
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(25.0),
                                             borderSide: BorderSide(
-                                              color: Colors.blue,
+                                              color: Colors.blue[800]!,
                                               width: 2.0,
                                             ),
                                           ),
@@ -167,14 +167,14 @@ class _MyLoginState extends State<MyLogin> {
                                           labelText: 'Password',
                                           prefixIcon: Icon(
                                             Icons.lock_outlined,
-                                            color: Colors.blue[400],
+                                            color: Colors.blue[800],
                                           ),
                                           suffixIcon: IconButton(
                                             icon: Icon(
                                               _passwordVisible
                                                   ? Icons.visibility
                                                   : Icons.visibility_off,
-                                              color: Colors.blue,
+                                              color: Colors.blue[800]!,
                                             ),
                                             onPressed: () {
                                               setState(() {
@@ -188,7 +188,7 @@ class _MyLoginState extends State<MyLogin> {
                                             borderRadius:
                                                 BorderRadius.circular(25.0),
                                             borderSide: BorderSide(
-                                              color: Colors.blue,
+                                              color: Colors.blue[800]!,
                                               width: 2.0,
                                             ),
                                           ),
@@ -210,7 +210,7 @@ class _MyLoginState extends State<MyLogin> {
                                           ),
                                           CircleAvatar(
                                             radius: 30,
-                                            backgroundColor: Colors.blue,
+                                            backgroundColor: Colors.blue[800]!,
                                             child: IconButton(
                                                 color: Colors.white,
                                                 onPressed: () {
@@ -289,7 +289,7 @@ class _MyLoginState extends State<MyLogin> {
                                               style: TextStyle(
                                                   decoration:
                                                       TextDecoration.underline,
-                                                  color: Colors.lightBlue,
+                                                  color: Colors.blue[800],
                                                   fontSize: 18),
                                             ),
                                             style: ButtonStyle(),
@@ -303,7 +303,7 @@ class _MyLoginState extends State<MyLogin> {
                                                 style: TextStyle(
                                                   decoration:
                                                       TextDecoration.underline,
-                                                  color: Colors.lightBlue,
+                                                  color: Colors.blue[800],
                                                   fontSize: 18,
                                                 ),
                                               )),
@@ -363,7 +363,7 @@ showDialogFunc(context) {
                       style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue),
+                          color: Colors.blue[800]),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
@@ -399,7 +399,7 @@ showDialogFunc(context) {
                               borderSide: BorderSide(
                                   width: 1,
                                   style: BorderStyle.solid,
-                                  color: Colors.blue),
+                                  color: Colors.blue[800]!),
                             ),
                             filled: true,
                             fillColor: Colors.grey[200],
@@ -438,12 +438,12 @@ showDialogFunc(context) {
                               horizontal: 26, vertical: 10),
                           decoration: BoxDecoration(
                               gradient: new LinearGradient(
-                                  colors: [Colors.blue, Colors.blue]),
+                                  colors: [Colors.blue[800]!, Colors.blue[800]!]),
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
                                     blurRadius: 4,
-                                    color: Colors.blue,
+                                    color: Colors.blue[800]!,
                                     offset: Offset(2, 2))
                               ]),
                           child: Text(
