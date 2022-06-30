@@ -42,6 +42,7 @@ class QuizController extends GetxController {
     final random = new Random();
     int count = 0;
     int easy_count = 0, meduim_count = 0, hard_count = 0;
+    set_quiz_time(4, 3, 3);
     //if stat=topic
     while (quiz_question.length != 10) {
       int index = random.nextInt(questionsList.length - 1);
@@ -74,6 +75,7 @@ class QuizController extends GetxController {
     final random = new Random();
     bool all_weakness = false;
     int topic_count = 1, i = -1;
+    int num_easy=0,num_meduim=0,num_hard=0;
     if (weakness_topics.length == levels[id - 1].topics_id.length) {
       all_weakness = true;
     }
@@ -92,6 +94,7 @@ class QuizController extends GetxController {
                   quiz_question.add(questionsList[index]);
                   easy_count++;
                   topic_count++;
+                  num_easy++;
                 }
               }
               if (questionsList[index].complexity == "medium") {
@@ -99,6 +102,7 @@ class QuizController extends GetxController {
                   quiz_question.add(questionsList[index]);
                   meduim_count++;
                   topic_count++;
+                  num_meduim++;
                 }
               }
               if (questionsList[index].complexity == "hard") {
@@ -106,6 +110,7 @@ class QuizController extends GetxController {
                   quiz_question.add(questionsList[index]);
                   hard_count++;
                   topic_count++;
+                  num_hard++;
                 }
               }
             }
@@ -120,6 +125,7 @@ class QuizController extends GetxController {
                   quiz_question.add(questionsList[index]);
                   easy_count++;
                   topic_count++;
+                  num_easy++;
                   continue;
                 }
               }
@@ -128,6 +134,7 @@ class QuizController extends GetxController {
                   quiz_question.add(questionsList[index]);
                   meduim_count++;
                   topic_count++;
+                  num_meduim++;
                   continue;
                 }
               }
@@ -136,6 +143,7 @@ class QuizController extends GetxController {
                   quiz_question.add(questionsList[index]);
                   hard_count++;
                   topic_count++;
+                  num_hard++;
                   continue;
                 }
               }
@@ -156,18 +164,21 @@ class QuizController extends GetxController {
               if (easy_count < 1) {
                 quiz_question.add(questionsList[index]);
                 easy_count++;
+                num_easy++;
               }
             }
             if (questionsList[index].complexity == "medium") {
               if (meduim_count < 2) {
                 quiz_question.add(questionsList[index]);
                 meduim_count++;
+                num_meduim++;
               }
             }
             if (questionsList[index].complexity == "hard") {
               if (hard_count < 1) {
                 quiz_question.add(questionsList[index]);
                 hard_count++;
+                num_hard++;
               }
             }
           }
@@ -175,6 +186,7 @@ class QuizController extends GetxController {
         weak_topics_count++;
       }
     }
+    set_quiz_time(num_easy, num_meduim, num_hard);
   }
 
   //question variables
@@ -200,11 +212,11 @@ class QuizController extends GetxController {
   //timer
   Timer? _timer;
   //min to display quiz to stident
-  final int maxMin = 14;
-  final int maxSec=60;
+   int maxMin = 14;
+   int maxSec=60;
   //time in progress time design must equal maxMin variable
-  final RxInt _min = 14.obs;
-  final RxInt _sec=60.obs;
+  RxInt _min = 14.obs;
+   RxInt _sec=60.obs;
   RxInt get min => _min;
   RxInt get sec=> _sec;
   int get correct=>number_of_correct_answer;
@@ -373,7 +385,23 @@ class QuizController extends GetxController {
       status = "Not bad, but you should study more";
     }
   }
+  void set_quiz_time(int num_of_easy,int num_of_meduim,int num_of_difficult)
+  {
 
+    int min=(num_of_meduim)+(num_of_difficult*2);
+    int secc=num_of_easy*30;
+    if(secc>60 )
+      {
+        double m=secc/60;
+        min+=m.toInt();
+        secc =secc%60;
+      }
+     maxMin = min;
+     maxSec=secc;
+    //time in progress time design must equal maxMin variable
+    _min = maxMin.obs;
+    _sec=secc.obs;
+  }
   void marked_answer(Question_ questionModel, int selectAnswer) {
     _isPressed = true;
     _pressedAnswer = selectAnswer;
@@ -566,6 +594,11 @@ class QuizController extends GetxController {
         _sec.value--;
       }
       else if(_sec.value==1 && _min.value>-1)
+        {
+          _sec.value=60;
+          _min.value--;
+        }
+      else if(_sec.value==0&& _min.value>-1)
         {
           _sec.value=60;
           _min.value--;
