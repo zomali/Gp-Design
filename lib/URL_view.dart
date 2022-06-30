@@ -71,7 +71,7 @@ class _url_view extends State<url_view> {
                               text: urls[index].title,
                               style: TextStyle(
                                   fontSize: 15,
-                                  color: Colors.blue,
+                                  color: Color(0xFF1565C0),
                                   fontWeight: FontWeight.bold),
                             ),
                           ]),

@@ -155,7 +155,7 @@ class _signup_screenState extends State<signup_screen> {
                   IconButton(
                     icon: const Icon(
                       Icons.camera_alt,
-                      color: Colors.blue,
+                      color: Color(0xFF1565C0),
                       size: 40,
                     ),
                     onPressed: () {

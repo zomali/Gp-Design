@@ -151,6 +151,7 @@ class _lastQuizzesState extends State<lastQuizzes> {
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
+                  backgroundColor: Color(0xFF1565C0),
                   leading: Icon(Icons.quiz),
                   title: Text('Quizzes'),
                   bottom: TabBar(
@@ -165,7 +166,7 @@ class _lastQuizzesState extends State<lastQuizzes> {
                 bottomNavigationBar: BottomNavigationBar(
                   showUnselectedLabels: true,
 
-                  selectedItemColor: Colors.blue,
+                  selectedItemColor: Color(0xFF1565C0),
                   selectedFontSize: 18,
 
                   unselectedItemColor: Colors.grey,

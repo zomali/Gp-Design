@@ -49,7 +49,7 @@ class _image_view extends State<image_view> {
           style: TextStyle(color: Colors.white),
         ),
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Color(0xFF1565C0),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
           color: Colors.white,
@@ -130,7 +130,7 @@ class _image_view extends State<image_view> {
                         image_[index].title,
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.blue,
+                          color: Color(0xFF1565C0),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -142,7 +142,7 @@ class _image_view extends State<image_view> {
                         child: Text(
                           image_[index].source,
                           maxLines: 3,
-                          style: TextStyle(fontSize: 15, color: Colors.blue),
+                          style: TextStyle(fontSize: 15, color: Color(0xFF1565C0)),
                         ),
                       ),
                     ],
@@ -192,7 +192,7 @@ showDialogFunc(context, img, title, desc) {
                   title,
                   style: TextStyle(
                     fontSize: 25,
-                    color: Colors.blue,
+                    color: Color(0xFF1565C0),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -206,7 +206,7 @@ showDialogFunc(context, img, title, desc) {
                     child: Text(
                       desc,
                       maxLines: 3,
-                      style: TextStyle(fontSize: 15, color: Colors.blue),
+                      style: TextStyle(fontSize: 15, color: Color(0xFF1565C0)),
                       textAlign: TextAlign.center,
                     ),
                   ),

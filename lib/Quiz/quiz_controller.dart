@@ -396,6 +396,11 @@ class QuizController extends GetxController {
         min+=m.toInt();
         secc =secc%60;
       }
+    if(secc==0)
+      {
+        min--;
+        secc=60;
+      }
      maxMin = min;
      maxSec=secc;
     //time in progress time design must equal maxMin variable
@@ -594,11 +599,6 @@ class QuizController extends GetxController {
         _sec.value--;
       }
       else if(_sec.value==1 && _min.value>-1)
-        {
-          _sec.value=60;
-          _min.value--;
-        }
-      else if(_sec.value==0&& _min.value>-1)
         {
           _sec.value=60;
           _min.value--;

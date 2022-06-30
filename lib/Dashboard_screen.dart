@@ -67,17 +67,17 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
     addTOList();
     final StoryController controller = StoryController();
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.blue[800],
       appBar: AppBar(
        // elevation: 0.0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue[800],
         title: Text("Dashboard"),
         leading: Icon(Icons.dashboard),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
 
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.blue[800],
         selectedFontSize: 18,
 
         unselectedItemColor: Colors.grey,
@@ -126,9 +126,6 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
              //mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.start,
              children: [
-
-
-
                Container(
                  margin: EdgeInsets.all(
                    30,
@@ -145,7 +142,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                            StoryItem.text(
                              title:
                              "Hi "+std.name.toString().split(" ").first+"\n we hope to find you will \n what about taking a journey in the system",
-                             backgroundColor: Colors.blueAccent,
+                             backgroundColor: Color(0xFF1565C0),
                              roundedTop: true,
                            ),
 
@@ -240,7 +237,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                      ),
                      ),
                      linearStrokeCap: LinearStrokeCap.roundAll,
-                     progressColor: Colors.blue,
+                     progressColor: Colors.blue[800],
                    ),
              ),
 
@@ -288,7 +285,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                              height: 70,
                              width: 150,
                              decoration: BoxDecoration(
-                                 color: Colors.blue,
+                                 color: Colors.blue[800],
                                  borderRadius: BorderRadius.circular(15.0)),
                              // padding: const EdgeInsets.only(
                              //     left: 10, top: 30.0, bottom: 30),
@@ -336,7 +333,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                              height: 70,
                              width: 150,
                              decoration: BoxDecoration(
-                                 color: Colors.blue,
+                                 color: Colors.blue[800],
                                  borderRadius: BorderRadius.circular(15.0)),
                              // padding: const EdgeInsets.only(
                              //     left: 10, top: 30.0, bottom: 30),
@@ -370,7 +367,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Colors.blue[800],
                       borderRadius: BorderRadius.circular(15.0)),
                   child: ExpansionTile(
                                title:Text("High Score Topics",style: TextStyle(color: Colors.white,fontSize: 25),),
@@ -402,7 +399,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                  child: Container(
                    width: double.infinity,
                    decoration: BoxDecoration(
-                       color: Colors.blue,
+                       color: Colors.blue[800],
                        borderRadius: BorderRadius.circular(15.0)),
                    child: ExpansionTile(
                      title:Text("Low Score Topics",style: TextStyle(color: Colors.white,fontSize: 25),),
@@ -461,7 +458,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                      height: 70,
                      width: double.infinity,
                      decoration: BoxDecoration(
-                         color: Colors.blue,
+                         color: Colors.blue[800],
                          borderRadius: BorderRadius.circular(15.0)),
                      // padding: const EdgeInsets.only(
                      //     left: 10, top: 30.0, bottom: 30),
@@ -494,7 +491,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                      height: 70,
                      width: double.infinity,
                      decoration: BoxDecoration(
-                         color: Colors.blue,
+                         color: Colors.blue[800],
                          borderRadius: BorderRadius.circular(15.0)),
                      // padding: const EdgeInsets.only(
                      //     left: 10, top: 30.0, bottom: 30),
@@ -526,7 +523,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                      height: 70,
                      width: double.infinity,
                      decoration: BoxDecoration(
-                         color: Colors.blue,
+                         color: Colors.blue[800],
                          borderRadius: BorderRadius.circular(15.0)),
                      // padding: const EdgeInsets.only(
                      //     left: 10, top: 30.0, bottom: 30),
@@ -589,7 +586,7 @@ class _MoreStoriesState extends State<MoreStories> {
         storyItems: [
           StoryItem.text(
             title: "I guess you'd love to see more of the system. That's great.",
-            backgroundColor: Colors.blue,
+            backgroundColor: Color(0xFF1565C0),
           ),
           StoryItem.text(
             title: "Nice!\n\nTap to continue.",

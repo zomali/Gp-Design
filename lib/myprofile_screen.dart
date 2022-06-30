@@ -79,7 +79,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
 
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Color(0xFF1565C0),
         selectedFontSize: 16,
 
         unselectedItemColor: Colors.grey,
@@ -154,7 +154,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       IconButton(
                         icon: const Icon(
                           Icons.edit_sharp,
-                          color: Colors.blue,
+                          color: Color(0xFF1565C0),
                           size: 40,
                         ),
                         //    alignment: Alignment.bottomRight,

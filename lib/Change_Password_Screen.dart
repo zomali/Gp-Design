@@ -52,13 +52,13 @@ class _Change_passwordState extends State<Change_password> {
                 labelText: 'Current Password',
                 prefixIcon: Icon(
                   Icons.lock_outlined,
-                  color: Colors.blue[400],
+                  color: Colors.blue[800],
                 ),
 
                 suffixIcon: IconButton(
                   icon: Icon(
                     _passwordVisible?Icons.visibility:Icons.visibility_off,
-                    color: Colors.blue,
+                    color: Colors.blue[800],
                   ),
                   onPressed: (){
                     setState(() {
@@ -71,7 +71,7 @@ class _Change_passwordState extends State<Change_password> {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
                   borderSide: BorderSide(
-                    color: Colors.blue,
+                    color: Colors.blue[800]!,
                     width: 2.0,
                   ),
                 ),
@@ -110,7 +110,7 @@ class _Change_passwordState extends State<Change_password> {
                 labelText: 'New Password',
                 prefixIcon: Icon(
                   Icons.lock_outlined,
-                  color: Colors.blue[400],
+                  color: Colors.blue[800],
                 ),
 
 
@@ -119,7 +119,7 @@ class _Change_passwordState extends State<Change_password> {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
                   borderSide: BorderSide(
-                    color: Colors.blue,
+                    color: Colors.blue[800]!,
                     width: 2.0,
                   ),
                 ),
@@ -158,7 +158,7 @@ class _Change_passwordState extends State<Change_password> {
                 labelText: 'Confirm New Password',
                 prefixIcon: Icon(
                   Icons.lock_outlined,
-                  color: Colors.blue[400],
+                  color: Colors.blue[800],
                 ),
 
 
@@ -167,7 +167,7 @@ class _Change_passwordState extends State<Change_password> {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
                   borderSide: BorderSide(
-                    color: Colors.blue,
+                    color:Color(0xFF1565C0),
                     width: 2.0,
                   ),
                 ),
@@ -194,7 +194,7 @@ class _Change_passwordState extends State<Change_password> {
                 ),
               ),
               decoration: BoxDecoration(
-                  color: Colors.blue[500],
+                  color: Colors.blue[800],
                   borderRadius: BorderRadius.all(Radius.circular(25.0))),
 
             ),

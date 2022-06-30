@@ -106,7 +106,7 @@ class _video_player_state extends State<video_player> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 3, 60, 126),
+        backgroundColor: Color(0xFF1565C0),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_outlined,

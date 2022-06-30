@@ -64,7 +64,7 @@ class _Courses_evaluations_ScreenState
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
 
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.blue[800],
         selectedFontSize: 16,
 
         unselectedItemColor: Colors.grey,
@@ -134,7 +134,7 @@ class _Courses_evaluations_ScreenState
               percent: 0.4,
               // backgroundColor: Colors.white,
               animationDuration: 3000,
-              progressColor: Colors.blue,
+              progressColor: Color(0xFF1565C0),
               center: Text(
                 "40%",
                 style: TextStyle(

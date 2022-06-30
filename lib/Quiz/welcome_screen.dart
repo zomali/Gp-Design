@@ -115,6 +115,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ), //image
                 ]
             ),
+            SizedBox(height: 20,),
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.asset('proj_images/QUIZ-3D.png',

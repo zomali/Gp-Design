@@ -34,6 +34,7 @@ class languageDialog extends StatelessWidget {
               children: [
                 Container(
                   width: 200,
+
                   child: ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop("Arabic");

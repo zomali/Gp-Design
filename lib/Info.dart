@@ -150,16 +150,16 @@ class _INFOState extends State<INFO> {
     addTOList();
 
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color(0xFF1565C0),
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Color(0xFF1565C0),
         title: Text('Structured Programming'),
         leading: const Icon(Icons.info),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
 
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Color(0xFF1565C0),
         selectedFontSize: 18,
 
         unselectedItemColor: Colors.grey,
@@ -221,9 +221,9 @@ class _INFOState extends State<INFO> {
 
                    //   padding: const EdgeInsets.only(top: 30),
                       child: ListView(
+                        scrollDirection: Axis.horizontal,
                   //  controller: scrollViewColtroller,
                       children: [
-
                         Container(
                           padding: EdgeInsets.symmetric( horizontal: 25, vertical: 10),
                           height: 120,
@@ -380,7 +380,7 @@ class _INFOState extends State<INFO> {
                                       elevation: 8.0,
                                       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
                                       child: Container(
-                                        decoration: BoxDecoration(color: Colors.blue),
+                                        decoration: BoxDecoration(color: Color(0xFF1565C0)),
                                         child: ListTile(
                                           contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                                           leading: Container(

@@ -84,7 +84,7 @@ class _levels_view extends State<levels_view> {
         bottomNavigationBar: BottomNavigationBar(
           showUnselectedLabels: true,
 
-          selectedItemColor: Colors.blue,
+          selectedItemColor: Color(0xFF1565C0),
           selectedFontSize: 18,
 
           unselectedItemColor: Colors.grey,

@@ -130,10 +130,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Material(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Color(0xFF1565C0),
         appBar: AppBar(
+
           elevation: 0.0,
-          backgroundColor: Theme.of(context).colorScheme.secondary,
+          backgroundColor:Color(0xFF1565C0),
           title: const Text("Personalized E-learning System"),
           leading: const Icon(Icons.home),
         ),
@@ -164,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                             "Hi, " + std.name.toString().split(" ").first,
                             style: TextStyle(
                               letterSpacing: 2,
-
+                              color: Colors.blue[800],
                               fontSize: 25,
                               //   color : Colors.blue[600],
                               fontWeight: FontWeight.bold,
@@ -192,6 +193,7 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 13,
                               //       color : Colors.blueGrey,
                               fontWeight: FontWeight.bold,
+                              color: Colors.blue[800],
                               fontStyle: FontStyle.italic,
                             ),
                           ),
@@ -226,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                     'Courses',
                     style: TextStyle(
                       fontSize: 30,
-                      color: Colors.black,
+                      color: Colors.blue[800],
                       fontWeight: FontWeight.w700,
                       fontStyle: FontStyle.italic,
                     ),
@@ -295,7 +297,7 @@ class _HomePageState extends State<HomePage> {
                                   'SP',
                                   style: TextStyle(
                                     fontSize: 30,
-                                    color: Colors.black,
+                                    color: Colors.blue[800],
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -366,7 +368,7 @@ class _HomePageState extends State<HomePage> {
                                   'Math 2',
                                   style: TextStyle(
                                     fontSize: 27,
-                                    color: Colors.black,
+                                    color: Colors.blue[800],
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -449,7 +451,7 @@ class _HomePageState extends State<HomePage> {
                                   'Physics 2',
                                   style: TextStyle(
                                     fontSize: 25,
-                                    color: Colors.black,
+                                    color: Colors.blue[800],
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -511,7 +513,7 @@ class _HomePageState extends State<HomePage> {
                                   'English 2',
                                   style: TextStyle(
                                     fontSize: 25,
-                                    color: Colors.black,
+                                    color: Colors.blue[800],
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -593,7 +595,7 @@ class _HomePageState extends State<HomePage> {
                                   'Electronics',
                                   style: TextStyle(
                                     fontSize: 23.8,
-                                    color: Colors.black,
+                                    color: Colors.blue[800],
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -655,7 +657,7 @@ class _HomePageState extends State<HomePage> {
                                   'Business M',
                                   style: TextStyle(
                                     fontSize: 22,
-                                    color: Colors.black,
+                                    color: Colors.blue[800],
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),

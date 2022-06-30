@@ -73,7 +73,7 @@ class _sidebarState extends State<sidebar>
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 0),
-                  color: Colors.blue[600]!,
+                  color: Color(0xFF1565C0),
                   child: Column(
                     
                     children: <Widget>[
@@ -151,7 +151,7 @@ class _sidebarState extends State<sidebar>
                         },
                         child: Menu_SideBar(
                           icon: Icons.home,
-                          iconColor: Colors.cyan,
+                          iconColor: Colors.blue[400],
                           title: "Home",
                           titleColor: Colors.white,
                         ),
@@ -166,7 +166,7 @@ class _sidebarState extends State<sidebar>
                         },
                         child: Menu_SideBar(
                           icon: Icons.insert_chart_outlined_sharp,
-                          iconColor: Colors.cyan,
+                          iconColor: Colors.blue[400],
                           title: "Analytics",
                           titleColor: Colors.white,
                         ),
@@ -179,7 +179,7 @@ class _sidebarState extends State<sidebar>
                         },
                         child: Menu_SideBar(
                           icon: Icons.person_rounded,
-                          iconColor: Colors.cyan,
+                          iconColor: Colors.blue[400],
                           title: "Profile",
                           titleColor: Colors.white,
                         ),
@@ -223,7 +223,7 @@ class _sidebarState extends State<sidebar>
                     child: Container(
                       width: 40,
                       height: 100,
-                      color: Colors.blue[700]!,
+                      color: Colors.blue[800]!,
                       alignment: Alignment.centerLeft,
                       child: AnimatedIcon(
                         progress: _animationController!.view,

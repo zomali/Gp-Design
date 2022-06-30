@@ -168,13 +168,13 @@ class _login_screenState extends State<Login_screen> {
                               labelText: 'E-mail Address',
                               prefixIcon: Icon(
                                 Icons.email_outlined,
-                                color: Colors.blue[400],
+                                color: Color(0xFF1565C0),
                               ),
                               border: OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide: BorderSide(
-                                  color: Colors.blue,
+                                  color: Color(0xFF1565C0),
                                   width: 2.0,
                                 ),
                               ),
@@ -213,14 +213,14 @@ class _login_screenState extends State<Login_screen> {
                               labelText: 'Password',
                               prefixIcon: Icon(
                                 Icons.lock_outlined,
-                                color: Colors.blue[400],
+                                color: Color(0xFF1565C0),
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   _passwordVisible
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Colors.blue,
+                                  color: Color(0xFF1565C0),
                                 ),
                                 onPressed: () {
                                   setState(() {
@@ -232,7 +232,7 @@ class _login_screenState extends State<Login_screen> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide: BorderSide(
-                                  color: Colors.blue,
+                                  color: Color(0xFF1565C0),
                                   width: 2.0,
                                 ),
                               ),
@@ -255,7 +255,7 @@ class _login_screenState extends State<Login_screen> {
                                     _remembercheck
                                         ? Icons.check_box
                                         : Icons.check_box_outline_blank,
-                                    color: Colors.blue,
+                                    color: Color(0xFF1565C0),
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -341,7 +341,7 @@ class _login_screenState extends State<Login_screen> {
                               ),
                             ),
                             decoration: BoxDecoration(
-                                color: Colors.blue[500],
+                                color: Colors.blue[800],
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0))),
                           ),
@@ -420,7 +420,7 @@ showDialogFunc(context) {
                       style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue),
+                          color: Color(0xFF1565C0)),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
@@ -456,7 +456,7 @@ showDialogFunc(context) {
                               borderSide: BorderSide(
                                   width: 1,
                                   style: BorderStyle.solid,
-                                  color: Colors.blue),
+                                  color: Color(0xFF1565C0)),
                             ),
                             filled: true,
                             fillColor: Colors.grey[200],
@@ -495,12 +495,12 @@ showDialogFunc(context) {
                               horizontal: 26, vertical: 10),
                           decoration: BoxDecoration(
                               gradient: new LinearGradient(
-                                  colors: [Colors.blue, Colors.blue]),
+                                  colors: [Color(0xFF1565C0), Color(0xFF1565C0)]),
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
                                     blurRadius: 4,
-                                    color: Colors.blue,
+                                    color: Color(0xFF1565C0),
                                     offset: Offset(2, 2))
                               ]),
                           child: Text(
