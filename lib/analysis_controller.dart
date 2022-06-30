@@ -151,26 +151,43 @@ class analysis_controller {
       }
     }
     print("Cluster content");
-    if (cluster11[0] > 50)
-      typeOfCluster1 = "Fail";
-    else if (cluster11[0] > 65)
-      typeOfCluster1 = "Good";
-    else if (cluster11[0] > 85) typeOfCluster1 = "Excellent";
+    if (!cluster11.isEmpty) {
+      if (cluster11[0] > 50 && cluster11[0] < 50)
+        typeOfCluster1 = "so bad";
+      else if (cluster11[0] > 65 && cluster11[0] < 85)
+        typeOfCluster1 = "Good";
+      else if (cluster11[0] > 85)
+        typeOfCluster1 = "Excellent";
+      else
+        typeOfCluster1 = "Fail";
+    } else {
+      typeOfCluster1 = "NA";
+    }
     ////////////////////////////////////////////////
-    if (cluster22[0] > 50)
-      typeOfCluster1 = "Fail";
-    else if (cluster22[0] > 65)
-      typeOfCluster1 = "Good";
-    else if (cluster22[0] > 85) typeOfCluster1 = "Excellent";
+    if (!cluster22.isEmpty) {
+      if (cluster22[0] > 50 && cluster22[0] < 50)
+        typeOfCluster2 = "so bad";
+      else if (cluster22[0] > 65 && cluster22[0] < 85)
+        typeOfCluster2 = "Good";
+      else if (cluster22[0] > 85)
+        typeOfCluster2 = "Excellent";
+      else
+        typeOfCluster2 = "Fail";
+    } else {
+      typeOfCluster2 = "NA";
+    }
     //////////////////////////////////////////////////
-    if (cluster33[0] > 50)
-      typeOfCluster1 = "Fail";
-    else if (cluster33[0] > 65)
-      typeOfCluster1 = "Good";
-    else if (cluster33[0] > 85) typeOfCluster1 = "Excellent";
-
-    print(cluster33);
-    print(cluster3);
+    if (!cluster33.isEmpty) {
+      if (cluster33[0] > 50 && cluster33[0] < 50)
+        typeOfCluster3 = "so bad";
+      else if (cluster33[0] > 65 && cluster33[0] < 85)
+        typeOfCluster3 = "Good";
+      else if (cluster33[0] > 85)
+        typeOfCluster3 = "Excellent";
+      else
+        typeOfCluster3 = "Fail";
+    } else
+      typeOfCluster2 = "NA";
     print("-------------------------------------------------------");
     String id = idd;
     int ind = 0;
@@ -186,9 +203,6 @@ class analysis_controller {
       noOfCluster = 3;
     }
     if (noOfCluster == 1) {
-      print(noOfCluster);
-      print(ind);
-      print(cluster11[ind]);
       std.NoOfCluster = noOfCluster;
       std.IndexInCluster = ind;
       std.ValueOfPerformance = cluster11[ind];
@@ -199,9 +213,6 @@ class analysis_controller {
     }
 
     if (noOfCluster == 2) {
-      print(noOfCluster);
-      print(ind);
-      print(cluster22[ind]);
       std.NoOfCluster = noOfCluster;
       std.IndexInCluster = ind;
       std.ValueOfPerformance = cluster22[ind];
@@ -212,9 +223,6 @@ class analysis_controller {
     }
 
     if (noOfCluster == 3) {
-      print(noOfCluster);
-      print(ind);
-      print(cluster33[ind]);
       std.NoOfCluster = noOfCluster;
       std.IndexInCluster = ind;
       std.ValueOfPerformance = cluster33[ind];
@@ -236,6 +244,17 @@ class analysis_controller {
     std.typeOfCluster1 = typeOfCluster1;
     std.typeOfCluster2 = typeOfCluster2;
     std.typeOfCluster3 = typeOfCluster3;
+    print(
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    print(std.lengthOfCluster);
+    print(std.typeOfCluster1);
+    print(std.typeOfCluster3);
+    print(std.typeOfCluster2);
+    print(std.typeOfStudentCluster);
+    print(std.UsersGrades);
+    print(std.UserIds);
+    print(std.IndexInCluster);
+    print(std.NoOfCluster);
     return std;
   }
 

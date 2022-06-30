@@ -28,7 +28,8 @@ class _MyLoginState extends State<MyLogin> {
   final _formKey = GlobalKey<FormState>();
   DatabaseManager db = DatabaseManager();
 
-  bool studentExist(var emailEntered, var passwordEnteres, List<student> listStudents) {
+  bool studentExist(
+      var emailEntered, var passwordEnteres, List<student> listStudents) {
     for (var std in listStudents) {
       // print(std.email + "====" + std.password);
       if (std.email == emailEntered.toString() &&
@@ -44,11 +45,12 @@ class _MyLoginState extends State<MyLogin> {
     }
     return std;
   }
-  analysis_controller ss = new analysis_controller();
 
+  analysis_controller ss = new analysis_controller();
 
   @override
   Widget build(BuildContext context) {
+    db.updateCurrentLevel("2018170064", 1);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -57,247 +59,270 @@ class _MyLoginState extends State<MyLogin> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Container(
-          child: Builder(builder: (context){
-            StudentCubit.get(context).getStudentData();
-            return BlocBuilder<StudentCubit, StudentState>(
-              builder: (context, state) {
-                if (state is StudentLoading)
-                  return Center(child: CircularProgressIndicator());
-                else {
-                  var studentCubit = StudentCubit.get(context);
-                  var list = studentCubit.list;
-                  return  Stack(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(left: 20, top: 90),
-                            child: Text(
-                              'Personalized\nE-learning System',
-                              style: TextStyle(color: Colors.white, fontSize: 30),
+          child: Builder(
+            builder: (context) {
+              StudentCubit.get(context).getStudentData();
+              return BlocBuilder<StudentCubit, StudentState>(
+                builder: (context, state) {
+                  if (state is StudentLoading)
+                    return Center(child: CircularProgressIndicator());
+                  else {
+                    var studentCubit = StudentCubit.get(context);
+                    var list = studentCubit.list;
+                    return Stack(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(left: 20, top: 90),
+                              child: Text(
+                                'Personalized\nE-learning System',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 30),
+                              ),
                             ),
-                          ),
-                          Spacer(),
-                          Container(
-                            padding: EdgeInsets.only(right: 20, top: 90),
-                            child: CircleAvatar(
-                              radius: 35,
-                              backgroundColor: Colors.cyan[400],
-                              child: Container(
-                                width: 100,
-                                height:100,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image:
-                                    AssetImage('proj_images/Ain_Shams_logo.png'),
-                                    fit: BoxFit.fill,
+                            Spacer(),
+                            Container(
+                              padding: EdgeInsets.only(right: 20, top: 90),
+                              child: CircleAvatar(
+                                radius: 35,
+                                backgroundColor: Colors.cyan[400],
+                                child: Container(
+                                  width: 100,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          'proj_images/Ain_Shams_logo.png'),
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SingleChildScrollView(
-
-                        child: Container(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * 0.5),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 35, right: 35),
-                                child: Column(
-                                  children: [
-                                    TextFormField(
-                                      //   controller: email,
-                                      keyboardType: TextInputType.emailAddress,
-                                      onChanged: (value) {
-                                        email = value;
-                                      },
-                                      onFieldSubmitted: (String email) {},
-                                      validator: EmailValidator(
-                                          errorText: 'enter a valid email address'),
-                                      decoration: InputDecoration(
-                                        labelText: 'E-mail Address',
-                                        prefixIcon: Icon(
-                                          Icons.email_outlined,
-                                          color: Colors.blue[400],
-                                        ),
-                                        border: OutlineInputBorder(),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(25.0),
-                                          borderSide: BorderSide(
-                                            color: Colors.blue,
-                                            width: 2.0,
+                          ],
+                        ),
+                        SingleChildScrollView(
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height * 0.5),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 35, right: 35),
+                                  child: Column(
+                                    children: [
+                                      TextFormField(
+                                        //   controller: email,
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                        onChanged: (value) {
+                                          email = value;
+                                        },
+                                        onFieldSubmitted: (String email) {},
+                                        validator: EmailValidator(
+                                            errorText:
+                                                'enter a valid email address'),
+                                        decoration: InputDecoration(
+                                          labelText: 'E-mail Address',
+                                          prefixIcon: Icon(
+                                            Icons.email_outlined,
+                                            color: Colors.blue[400],
+                                          ),
+                                          border: OutlineInputBorder(),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25.0),
+                                            borderSide: BorderSide(
+                                              color: Colors.blue,
+                                              width: 2.0,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    TextFormField(
-                                      //controller: password,
-                                      keyboardType: TextInputType.visiblePassword,
-                                      obscureText: !_passwordVisible,
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      TextFormField(
+                                        //controller: password,
+                                        keyboardType:
+                                            TextInputType.visiblePassword,
+                                        obscureText: !_passwordVisible,
 
-                                      onChanged: (value) {
-                                        password = value;
-                                      },
-                                      validator: (value) {
-                                        if (value == "" || value == null) {
-                                          return "Please Enter Valid Password ";
-                                        } else if (value.length < 6) {
-                                          return "The Password Length must Be 6 At Least";
-                                        }
-                                        return null;
-                                      },
+                                        onChanged: (value) {
+                                          password = value;
+                                        },
+                                        validator: (value) {
+                                          if (value == "" || value == null) {
+                                            return "Please Enter Valid Password ";
+                                          } else if (value.length < 6) {
+                                            return "The Password Length must Be 6 At Least";
+                                          }
+                                          return null;
+                                        },
 
-                                      onFieldSubmitted: (String pass) {},
-                                      decoration: InputDecoration(
-                                        labelText: 'Password',
-                                        prefixIcon: Icon(
-                                          Icons.lock_outlined,
-                                          color: Colors.blue[400],
-                                        ),
-                                        suffixIcon: IconButton(
-                                          icon: Icon(
-                                            _passwordVisible
-                                                ? Icons.visibility
-                                                : Icons.visibility_off,
-                                            color: Colors.blue,
+                                        onFieldSubmitted: (String pass) {},
+                                        decoration: InputDecoration(
+                                          labelText: 'Password',
+                                          prefixIcon: Icon(
+                                            Icons.lock_outlined,
+                                            color: Colors.blue[400],
                                           ),
-                                          onPressed: () {
-                                            setState(() {
-                                              _passwordVisible = !_passwordVisible;
-                                            });
-                                          },
-                                        ),
-                                        border: OutlineInputBorder(),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(25.0),
-                                          borderSide: BorderSide(
-                                            color: Colors.blue,
-                                            width: 2.0,
+                                          suffixIcon: IconButton(
+                                            icon: Icon(
+                                              _passwordVisible
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                              color: Colors.blue,
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                _passwordVisible =
+                                                    !_passwordVisible;
+                                              });
+                                            },
+                                          ),
+                                          border: OutlineInputBorder(),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25.0),
+                                            borderSide: BorderSide(
+                                              color: Colors.blue,
+                                              width: 2.0,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 40,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Sign in',
-                                          style: TextStyle(color: Colors.black54,
-                                              fontSize: 27, fontWeight: FontWeight.w700),
-                                        ),
-                                        CircleAvatar(
-                                          radius: 30,
-                                          backgroundColor: Colors.blue,
-                                          child: IconButton(
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Sign in',
+                                            style: TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 27,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                          CircleAvatar(
+                                            radius: 30,
+                                            backgroundColor: Colors.blue,
+                                            child: IconButton(
+                                                color: Colors.white,
+                                                onPressed: () {
+                                                  try {
+                                                    //  await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
-                                              color: Colors.white,
-                                              onPressed: () {
-                                                try {
-                                                  //  await _auth.createUserWithEmailAndPassword(email: email, password: password);
-
-                                                  if (studentExist(email, password, list)) {
-                                                    student std = studentLevel(email, list);
-                                                    Navigator.pushAndRemoveUntil(
-                                                      context,
-                                                      MaterialPageRoute(builder: (context) => side_layout(std)),
-                                                          (Route<dynamic> route) => false,
-                                                    );
-                                                  } else {
+                                                    if (studentExist(email,
+                                                        password, list)) {
+                                                      student std =
+                                                          studentLevel(
+                                                              email, list);
+                                                      Navigator
+                                                          .pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    side_layout(
+                                                                        std)),
+                                                        (Route<dynamic>
+                                                                route) =>
+                                                            false,
+                                                      );
+                                                    } else {
+                                                      Fluttertoast.showToast(
+                                                          msg: "not exist",
+                                                          toastLength:
+                                                              Toast.LENGTH_LONG,
+                                                          //    gravity: ToastGravity.CENTER,
+                                                          timeInSecForIosWeb: 1,
+                                                          backgroundColor:
+                                                              Colors.black87,
+                                                          textColor:
+                                                              Colors.white,
+                                                          fontSize: 16.0);
+                                                    }
+                                                  } on FirebaseAuthException catch (e) {
                                                     Fluttertoast.showToast(
-                                                        msg: "not exist",
-                                                        toastLength: Toast.LENGTH_LONG,
+                                                        msg:
+                                                            "Ops! Login Failed, ${e.message} ",
+                                                        toastLength:
+                                                            Toast.LENGTH_LONG,
                                                         //    gravity: ToastGravity.CENTER,
                                                         timeInSecForIosWeb: 1,
-                                                        backgroundColor: Colors.black87,
+                                                        backgroundColor:
+                                                            Colors.black87,
                                                         textColor: Colors.white,
                                                         fontSize: 16.0);
                                                   }
-                                                } on FirebaseAuthException catch (e) {
-                                                  Fluttertoast.showToast(
-                                                      msg: "Ops! Login Failed, ${e.message} ",
-                                                      toastLength: Toast.LENGTH_LONG,
-                                                      //    gravity: ToastGravity.CENTER,
-                                                      timeInSecForIosWeb: 1,
-                                                      backgroundColor: Colors.black87,
-                                                      textColor: Colors.white,
-                                                      fontSize: 16.0);
-                                                }
-                                              },
-                                              icon: Icon(
-                                                Icons.arrow_forward_rounded,
-                                                color: Colors.white,
-                                              )),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 40,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) => signup_screen()));
-                                          },
-                                          child: Text(
-                                            'Sign Up',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                decoration: TextDecoration.underline,
-                                                color: Colors.lightBlue,
-                                                fontSize: 18),
-                                          ),
-                                          style: ButtonStyle(),
-                                        ),
-                                        TextButton(
+                                                },
+                                                icon: Icon(
+                                                  Icons.arrow_forward_rounded,
+                                                  color: Colors.white,
+                                                )),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextButton(
                                             onPressed: () {
-                                              showDialogFunc(context);
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          signup_screen()));
                                             },
                                             child: Text(
-                                              'Forgot Password',
+                                              'Sign Up',
+                                              textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                decoration: TextDecoration.underline,
-                                                color: Colors.lightBlue,
-                                                fontSize: 18,
-                                              ),
-                                            )),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  color: Colors.lightBlue,
+                                                  fontSize: 18),
+                                            ),
+                                            style: ButtonStyle(),
+                                          ),
+                                          TextButton(
+                                              onPressed: () {
+                                                showDialogFunc(context);
+                                              },
+                                              child: Text(
+                                                'Forgot Password',
+                                                style: TextStyle(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  color: Colors.lightBlue,
+                                                  fontSize: 18,
+                                                ),
+                                              )),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                }
-
-              },
-            );
-
-
-
-
-
-
-          },),
+                      ],
+                    );
+                  }
+                },
+              );
+            },
+          ),
         ),
       ),
     );

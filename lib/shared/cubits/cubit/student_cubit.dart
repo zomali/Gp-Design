@@ -16,6 +16,7 @@ class StudentCubit extends Cubit<StudentState> {
 
   final DatabaseManager db = DatabaseManager();
   late List<student> list;
+
   Future<void> getStudentData() async {
     emit(StudentLoading());
     list = await db.fetchStudents();

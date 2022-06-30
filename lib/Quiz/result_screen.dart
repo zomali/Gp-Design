@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:gp/DatabaseManager.dart';
 import 'package:gp/Levels_View.dart';
 import 'package:gp/Quiz/quiz_result.dart';
 import 'package:gp/classes/student.dart';
@@ -21,6 +22,7 @@ class ResultScreen extends StatelessWidget {
   final controller = Get.find<QuizController>();
   //test
   bool isVisible = true;
+  DatabaseManager db = DatabaseManager();
 
   @override
   Widget build(BuildContext context) {
@@ -207,10 +209,14 @@ class ResultScreen extends StatelessWidget {
                         Visibility(
                           visible: get_stat(controller),
                           child: newLevelButton(
-                            onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => levels_view(std))),
+                            onPressed: () {
+                              db.updateCurrentLevel(std.id, std.level + 1);
+                              std.level++;
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => levels_view(std)));
+                            },
                             text: controller.stat,
                           ),
                         ),
@@ -221,6 +227,7 @@ class ResultScreen extends StatelessWidget {
               ],
             )));
   }
+
   bool get_stat(QuizController controller) {
     if (controller.scoreResult.round() >
         controller.calculate_total_quiz_points() / 2) {
@@ -228,6 +235,7 @@ class ResultScreen extends StatelessWidget {
     } else
       return false;
   }
+
   Color Stat_Color() {
     if (controller.scoreResult.round() >
         controller.calculate_total_quiz_points() / 2) {

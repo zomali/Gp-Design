@@ -32,6 +32,7 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   late List<double> weight;
   late analysis_controller ac = analysis_controller();
   late top6 top;
+  late Student_perf student_perf;
 
   Future<void> fetchAllStudentGrades(student std) async {
     emit(StudentBehaviorLoading());
@@ -42,6 +43,12 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   Future<void> fetchEachStudentGrades() async {
     emit(StudentBehaviorLoading());
     top = await ac.fetchEachStudentGrades();
+    emit(StudentBehaviorLoaded());
+  }
+
+  Future<void> cluster_performence(String id) async {
+    emit(StudentBehaviorLoading());
+    student_perf = await ac.cluster_performence(id);
     emit(StudentBehaviorLoaded());
   }
 

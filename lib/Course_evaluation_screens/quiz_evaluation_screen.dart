@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/Course_evaluation_screens/Courses_evaluations.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:gp/Dashboard_screen.dart';
+import 'package:gp/analysis_controller.dart';
 import '../classes/student.dart';
 import '../shared/cubits/cubit/student_behavior_cubit.dart';
 
@@ -16,6 +17,37 @@ class quiz_evaluation_screen extends StatefulWidget {
 }
 
 List<int> listForOneGrades = [];
+
+Text cluster(Student_perf student_perf) {
+  if (student_perf.typeOfStudentCluster == "Fail" ||
+      student_perf.typeOfStudentCluster == "so bad") {
+    return Text(
+      "  Yor performance need to be enhanced,your performance is so weak",
+      style: TextStyle(
+          fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.red),
+    );
+  } else if (student_perf.typeOfStudentCluster == "Good") {
+    return Text(
+      "Yor performance is good but need to be enhanced more",
+      style: TextStyle(
+          fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.blue),
+    );
+  } else if (student_perf.typeOfStudentCluster == "Excellent") {
+    return Text(
+      "Yor performance is awesome keep going, you with " +
+          student_perf.lengthOfCluster.toString() +
+          " students are in the top",
+      style: TextStyle(
+          fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.green),
+    );
+  } else {
+    return Text(
+      "",
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+    );
+  }
+}
+
 Text studentGradesView(List<int> listForOneGrades) {
   if (listForOneGrades[0] == 0) {
     return Text(
@@ -55,6 +87,8 @@ Text studentGradesView(List<int> listForOneGrades) {
   );
 }
 
+Student_perf student_perf = Student_perf();
+
 class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
   student std;
   _quiz_evaluation_screenState(this.std);
@@ -73,19 +107,24 @@ class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
       ),
       body: Builder(builder: (context) {
         StudentBehaviorCubit.get(context).fetchStudentGrades(std);
+        StudentBehaviorCubit.get(context).cluster_performence(std.id);
         return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
           builder: (context, state) {
             if (state is StudentBehaviorLoading)
               return Center(child: CircularProgressIndicator());
             else {
               var studentCubit = StudentBehaviorCubit.get(context);
+              student_perf.typeOfStudentCluster = "";
               try {
                 listForOneGrades = studentCubit.gradesStudent;
+                student_perf = studentCubit.student_perf;
               } catch (e) {
                 for (int i = 0; i < 5; i++) {
                   listForOneGrades.add(1);
                 }
+                student_perf.typeOfStudentCluster = "";
               }
+
               return SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -113,8 +152,19 @@ class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
                       ),
                       studentGradesView(listForOneGrades),
                       SizedBox(
-                        height: 70,
-                      ), //quiz chart
+                        height: 80,
+                      ),
+                      Text(
+                        "By analysis your grades with other studends",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: Colors.blue),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      cluster(student_perf), //quiz chart
                     ],
                   ),
                 ),

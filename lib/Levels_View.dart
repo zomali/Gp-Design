@@ -32,19 +32,20 @@ class _levels_view extends State<levels_view> {
     _pages.add(Dashboard_screen(std));
 
     _pages.add(levels_view(std));
-  //  _pages.add(Course_evual_categories(std, "CSW150"));
+    //  _pages.add(Course_evual_categories(std, "CSW150"));
     _pages.add(lastQuizzes(std, "CSW150"));
     _pages.add(INFO(std, "CSW150"));
-
   }
 
   void _onItemTapped(int index) {
     setState(
-          () {
+      () {
         _selectedIndex = index;
         //   print("index = ${widget.ind} ");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>moveToPage(_selectedIndex) ));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => moveToPage(_selectedIndex)));
       },
     );
   }
@@ -52,7 +53,7 @@ class _levels_view extends State<levels_view> {
   Widget moveToPage(int index) {
     //Widget page = _pages.elementAt(_selectedIndex);
     //page(std);
-    _selectedIndex%=4;
+    _selectedIndex %= 4;
     return _pages.elementAt(_selectedIndex);
   }
 
@@ -60,9 +61,15 @@ class _levels_view extends State<levels_view> {
 
   Widget putIcon(index) {
     if ((std.level - 1) < index) {
-      return const Icon(Icons.lock,color: Colors.orange,);
+      return const Icon(
+        Icons.lock,
+        color: Colors.orange,
+      );
     } else {
-      return const Icon(Icons.lock_open,color: Colors.orange,);
+      return const Icon(
+        Icons.lock_open,
+        color: Colors.orange,
+      );
     }
   }
 
@@ -146,8 +153,13 @@ class _levels_view extends State<levels_view> {
                       top: 40,
                       left: 10,
                       child: Row(children: [
-                        Icon(Icons.keyboard_double_arrow_up,color: Colors.orange,),
-                        SizedBox(width: 10,),
+                        Icon(
+                          Icons.keyboard_double_arrow_up,
+                          color: Colors.orange,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           course_name,
                           style: TextStyle(
@@ -170,8 +182,7 @@ class _levels_view extends State<levels_view> {
                         return GestureDetector(
                             onTap: () {
                               //action on tap
-                              if (levelsList[index].id <=
-                                  std.courses['CSW150']['current_level']) {
+                              if (levelsList[index].id <= std.level) {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>
                                         topic_view(std, levelsList[index])));

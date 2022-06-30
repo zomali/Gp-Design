@@ -76,6 +76,16 @@ class DatabaseManager {
     return list;
   }
 
+  Future<void> updateCurrentLevel(String id, int level) async {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('students')
+        .child(id)
+        .child("courses")
+        .child("CSW150")
+        .update({"current_level": level});
+  }
+
   void insertQuiz(String StudentId, String typeOfQuiz, int levelId, int TopicId,
       List<Q_Question_> List_ques, int student_score, int total_score) {
     DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
