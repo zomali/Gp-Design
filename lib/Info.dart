@@ -221,7 +221,6 @@ class _INFOState extends State<INFO> {
 
                    //   padding: const EdgeInsets.only(top: 30),
                       child: ListView(
-                        scrollDirection: Axis.horizontal,
                   //  controller: scrollViewColtroller,
                       children: [
                         Container(
