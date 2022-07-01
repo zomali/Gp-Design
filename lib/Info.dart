@@ -223,81 +223,81 @@ class _INFOState extends State<INFO> {
                       child: ListView(
                   //  controller: scrollViewColtroller,
                       children: [
-                        Container(
-                          padding: EdgeInsets.symmetric( horizontal: 25, vertical: 10),
-                          height: 120,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 20),
                           child: Row(
-                            children: [
-                              Spacer(),
-                              Column(
-                                children: [
-                                  Icon(Icons.keyboard_double_arrow_up, color: Colors.orange, size: 27,),
-                                  Text("Levels", style: TextStyle(color: Colors.orange, fontSize: 17, fontWeight: FontWeight.bold),),
-                                  Padding(padding: EdgeInsets.only(bottom: 3)),
-                                  Text("5", style: TextStyle(fontSize: 23),),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
-                                //height: 80,
-                                child: VerticalDivider(
-                                  color: Colors.grey[200],
-                                  width: 20,
-                                  thickness: 2,
-                                  indent: 10,
-                                  endIndent: 10,
+                              children: [
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    Icon(Icons.keyboard_double_arrow_up, color: Colors.orange, size: 27,),
+                                    Text("Levels", style: TextStyle(color: Colors.orange, fontSize: 17, fontWeight: FontWeight.bold),),
+                                    Padding(padding: EdgeInsets.only(bottom: 3)),
+                                    Text("5", style: TextStyle(fontSize: 23),),
+                                  ],
                                 ),
-                              ),
-                              Column(
-                                children: [
-                                  Icon(Icons.topic, color: Colors.indigo[800]!, size: 27,),
-                                  Text("Topics", style: TextStyle(color: Colors.indigo[800]!, fontSize: 17, fontWeight: FontWeight.bold),),
-                                  Padding(padding: EdgeInsets.only(bottom: 3)),
-                                  Text("17", style: TextStyle(fontSize: 23),),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
-                                //height: 80,
-                                child: VerticalDivider(
-                                  color: Colors.grey[200],
-                                  width: 20,
-                                  thickness: 2,
-                                  indent: 10,
-                                  endIndent: 10,
+                                Padding(
+                                  padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
+                                  //height: 80,
+                                  child: VerticalDivider(
+                                    color: Colors.grey[200],
+                                    width: 20,
+                                    thickness: 2,
+                                    indent: 10,
+                                    endIndent: 10,
+                                  ),
                                 ),
-                              ),
-                              Column(
-                                children: [
-                                  Icon(Icons.quiz, color: Colors.yellowAccent[700]! , size: 27,),
-                                  Text("Quizzes", style: TextStyle(color: Colors.yellowAccent[700]!, fontSize: 17, fontWeight: FontWeight.bold),),
-                                  Padding(padding: EdgeInsets.only(bottom: 3)),
-                                  Text("+20", style: TextStyle(fontSize: 23),),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
-                                //height: 80,
-                                child: VerticalDivider(
-                                  color: Colors.grey[200],
-                                  width: 20,
-                                  thickness: 2,
-                                  indent: 10,
-                                  endIndent: 10,
+                                Column(
+                                  children: [
+                                    Icon(Icons.topic, color: Colors.indigo[800]!, size: 27,),
+                                    Text("Topics", style: TextStyle(color: Colors.indigo[800]!, fontSize: 17, fontWeight: FontWeight.bold),),
+                                    Padding(padding: EdgeInsets.only(bottom: 3)),
+                                    Text("17", style: TextStyle(fontSize: 23),),
+                                  ],
                                 ),
-                              ),
-                              Column(
-                                children: [
-                                  Icon(Icons.document_scanner, color: Colors.green[600]!, size: 27,),
-                                  Text("Materials", style: TextStyle(color: Colors.green[600]!, fontSize: 17, fontWeight: FontWeight.bold),),
-                                  Padding(padding: EdgeInsets.only(bottom: 3)),
-                                  Text("+100", style: TextStyle(fontSize: 23),),
-                                ],
-                              ),
-                              Spacer(),
-                            ],
-                          ),//course info
-                        ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
+                                  //height: 80,
+                                  child: VerticalDivider(
+                                    color: Colors.grey[200],
+                                    width: 20,
+                                    thickness: 2,
+                                    indent: 10,
+                                    endIndent: 10,
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Icon(Icons.quiz, color: Colors.yellowAccent[700]! , size: 27,),
+                                    Text("Quizzes", style: TextStyle(color: Colors.yellowAccent[700]!, fontSize: 17, fontWeight: FontWeight.bold),),
+                                    Padding(padding: EdgeInsets.only(bottom: 3)),
+                                    Text("+20", style: TextStyle(fontSize: 23),),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
+                                  //height: 80,
+                                  child: VerticalDivider(
+                                    color: Colors.grey[200],
+                                    width: 20,
+                                    thickness: 2,
+                                    indent: 10,
+                                    endIndent: 10,
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Icon(Icons.document_scanner, color: Colors.green[600]!, size: 27,),
+                                    Text("Materials", style: TextStyle(color: Colors.green[600]!, fontSize: 17, fontWeight: FontWeight.bold),),
+                                    Padding(padding: EdgeInsets.only(bottom: 3)),
+                                    Text("+100", style: TextStyle(fontSize: 23),),
+                                  ],
+                                ),
+                                Spacer(),
+                              ],
+                            ),
+                        ),//course info
+
                         Padding(
                           padding: EdgeInsets.only(left:30,top:25,bottom: 10),
                         child: Text("Instructors",

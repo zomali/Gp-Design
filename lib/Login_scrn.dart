@@ -8,6 +8,7 @@ import 'package:gp/shared/cubits/cubit/student_cubit.dart';
 import 'package:gp/signup%20screen.dart';
 
 import 'DatabaseManager.dart';
+import 'Home.dart';
 import 'Sidebar/sidebar_layout.dart';
 import 'analysis_controller.dart';
 import 'classes/student.dart';
@@ -114,6 +115,7 @@ class _MyLoginState extends State<MyLogin> {
                                   child: Column(
                                     children: [
                                       TextFormField(
+                                         scrollPadding: EdgeInsets.only(bottom:100),
                                         //   controller: email,
                                         keyboardType:
                                             TextInputType.emailAddress,
@@ -145,6 +147,7 @@ class _MyLoginState extends State<MyLogin> {
                                         height: 30,
                                       ),
                                       TextFormField(
+                                        scrollPadding: EdgeInsets.only(bottom:100),
                                         //controller: password,
                                         keyboardType:
                                             TextInputType.visiblePassword,
@@ -204,8 +207,8 @@ class _MyLoginState extends State<MyLogin> {
                                           Text(
                                             'Sign in',
                                             style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 27,
+                                                color: Colors.black87,
+                                                fontSize: 35,
                                                 fontWeight: FontWeight.w700),
                                           ),
                                           CircleAvatar(
@@ -228,8 +231,7 @@ class _MyLoginState extends State<MyLogin> {
                                                         MaterialPageRoute(
                                                             builder:
                                                                 (context) =>
-                                                                    side_layout(
-                                                                        std)),
+                                                                    side_layout(std)),
                                                         (Route<dynamic>
                                                                 route) =>
                                                             false,
@@ -247,7 +249,8 @@ class _MyLoginState extends State<MyLogin> {
                                                               Colors.white,
                                                           fontSize: 16.0);
                                                     }
-                                                  } on FirebaseAuthException catch (e) {
+                                                  }
+                                                  on FirebaseAuthException catch (e) {
                                                     Fluttertoast.showToast(
                                                         msg:
                                                             "Ops! Login Failed, ${e.message} ",

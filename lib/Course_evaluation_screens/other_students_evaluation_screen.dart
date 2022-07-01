@@ -71,7 +71,7 @@ class _Other_students_evaluation_screenState
         "Your Progress is Normal",
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.blue,
+          color: Colors.blue[800],
           fontSize: 18.0,
         ),
       );
@@ -120,7 +120,7 @@ class _Other_students_evaluation_screenState
         "Your Grades is Normal",
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.blue,
+          color: Colors.blue[800],
           fontSize: 18.0,
         ),
       );
@@ -132,6 +132,7 @@ class _Other_students_evaluation_screenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[800],
         title: const Text("Courses Evaluation"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
@@ -235,7 +236,7 @@ class _Other_students_evaluation_screenState
                                   height: 20,
                                   width: 70,
                                   decoration: BoxDecoration(
-                                      color: Colors.blue,
+                                      color: Colors.blue[800],
                                       borderRadius:
                                           BorderRadius.circular(15.0)),
                                   child: FittedBox(
@@ -366,7 +367,7 @@ class _Other_students_evaluation_screenState
                                   height: 20,
                                   width: 70,
                                   decoration: BoxDecoration(
-                                      color: Colors.blue,
+                                      color: Colors.blue[800],
                                       borderRadius:
                                           BorderRadius.circular(15.0)),
                                   child: FittedBox(
@@ -555,7 +556,7 @@ class _Other_students_evaluation_screenState
                         "Other Student Progress is the Blue color",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue,
+                          color: Colors.blue[800],
                           fontSize: 16.0,
                         ),
                       ), // compare graph
@@ -611,7 +612,7 @@ class _Other_students_evaluation_screenState
                         "Other Student Grades is the Blue color",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue,
+                          color: Colors.blue[800],
                           fontSize: 16.0,
                         ),
                       ), // compare graph

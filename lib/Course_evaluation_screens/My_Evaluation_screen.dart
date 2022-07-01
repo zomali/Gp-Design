@@ -33,6 +33,7 @@ class _My_EvaluationState extends State<My_Evaluation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[800],
         title: const Text("Courses Evaluation"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
@@ -83,7 +84,7 @@ class _My_EvaluationState extends State<My_Evaluation> {
                         percent: percentInNmber,
                         // backgroundColor: Colors.white,
                         animationDuration: 3000,
-                        progressColor: Colors.blue,
+                        progressColor: Colors.blue[800],
                         center: Text(
                           percent + "%",
                           style: TextStyle(
@@ -122,7 +123,7 @@ class _My_EvaluationState extends State<My_Evaluation> {
                                   //    margin: EdgeInsets.only(left: 20),
 
                                   decoration: BoxDecoration(
-                                      color: Colors.blue,
+                                      color: Colors.blue[800],
                                       borderRadius:
                                           BorderRadius.circular(15.0)),
 

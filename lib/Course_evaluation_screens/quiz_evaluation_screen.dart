@@ -30,7 +30,7 @@ Text cluster(Student_perf student_perf) {
     return Text(
       "Yor performance is good but need to be enhanced more",
       style: TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.blue),
+          fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.blue[800]),
     );
   } else if (student_perf.typeOfStudentCluster == "Excellent") {
     return Text(
@@ -96,6 +96,7 @@ class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[800],
         title: const Text("Courses Evaluation"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined),
@@ -159,7 +160,7 @@ class _quiz_evaluation_screenState extends State<quiz_evaluation_screen> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17,
-                            color: Colors.blue),
+                            color: Colors.blue[800]),
                       ),
                       SizedBox(
                         height: 10,

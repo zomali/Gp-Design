@@ -19,6 +19,7 @@ import 'package:gp/Levels_View.dart';
 //import 'package:flutter_application_1/levels.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'Nav_Bar.dart';
 import 'Sidebar/sidebar_layout.dart';
 import 'classes/student.dart';
 
@@ -136,8 +137,9 @@ class _HomePageState extends State<HomePage> {
           elevation: 0.0,
           backgroundColor:Color(0xFF1565C0),
           title: const Text("Personalized E-learning System"),
-          leading: const Icon(Icons.home),
+
         ),
+        drawer: NavBar(std),
         body: SingleChildScrollView(
           child: Container(
             height: 800,

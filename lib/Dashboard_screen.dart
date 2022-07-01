@@ -58,7 +58,6 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
   }
 
   Widget moveToPage(int index) {
-
     return _pages.elementAt(_selectedIndex);
   }
 
@@ -230,9 +229,9 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                      animation: true,
                      lineHeight: 30,
                      animationDuration: 2000,
-                     percent: 0.9,
+                     percent: 0.058,
                      center: Text(
-                         "90.0%",style: TextStyle(
+                         "5.8%",style: TextStyle(
                        color: Colors.white
                      ),
                      ),
@@ -254,108 +253,113 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                //     ),
                //   ),
                // ), // word
-               Row(
-                 children: [
-                   Spacer(),
-                   Column(
-                     children: [
-                       Padding(
-                         padding: const EdgeInsets.only(bottom: 20, top: 30),
-                         child: Text(
-                           'Current Level',
-                           style: TextStyle(
+               Padding(
+                 padding: const EdgeInsets.symmetric(horizontal:10.0),
+                 child: Row(
+                   children: [
+                     Spacer(),
+                     Column(
+                       children: [
+                         Padding(
+                           padding: const EdgeInsets.only(bottom: 20, top: 30),
+                           child: Text(
+                             'Current Level',
+                             style: TextStyle(
 
-                             fontSize: 25,
-                             color: Colors.black,
-                             fontWeight: FontWeight.w700,
-                             fontStyle: FontStyle.italic,
-                           ),
-                         ),
-                       ), // word
-                       Padding(
-                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                         child: GestureDetector(
-                           onTap: () {
-                             // Navigator.push(
-                             //     context,
-                             //     MaterialPageRoute(
-                             //         builder: (context) => My_Evaluation(std)));
-                           },
-                           child: Container(
-                             height: 70,
-                             width: 150,
-                             decoration: BoxDecoration(
-                                 color: Colors.blue[800],
-                                 borderRadius: BorderRadius.circular(15.0)),
-                             // padding: const EdgeInsets.only(
-                             //     left: 10, top: 30.0, bottom: 30),
-                             child: Column(
-                               crossAxisAlignment: CrossAxisAlignment.center,
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 Text(
-                                   "Level 1 ",
-                                   style: TextStyle(fontSize: 16, color: Colors.white),
-                                 ),
-                               ],
+                               fontSize: 25,
+                               color: Colors.black,
+                               fontWeight: FontWeight.w700,
+                               fontStyle: FontStyle.italic,
                              ),
                            ),
-                         ),
-                       ),//My_Evaluation
-                     ],
-                   ),
-                   Spacer(),
-                   Column(
-                     children: [
-                       Padding(
-                         padding: const EdgeInsets.only(bottom: 20, top: 30),
-                         child: Text(
-                           'Current Topic',
-                           style: TextStyle(
-
-                             fontSize: 25,
-                             color: Colors.black,
-                             fontWeight: FontWeight.w700,
-                             fontStyle: FontStyle.italic,
-                           ),
-                         ),
-                       ), // word
-                       Padding(
-                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                         child: GestureDetector(
-                           onTap: () {
-                             // Navigator.push(
-                             //     context,
-                             //     MaterialPageRoute(
-                             //         builder: (context) => My_Evaluation(std)));
-                           },
-                           child: Container(
-                             height: 70,
-                             width: 150,
-                             decoration: BoxDecoration(
-                                 color: Colors.blue[800],
-                                 borderRadius: BorderRadius.circular(15.0)),
-                             // padding: const EdgeInsets.only(
-                             //     left: 10, top: 30.0, bottom: 30),
-                             child: Column(
-                               crossAxisAlignment: CrossAxisAlignment.center,
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 Text(
-                                   "Revision, Variables & Constants",
-                                   maxLines: 1,
-                                   overflow: TextOverflow.ellipsis,
-                                   style: TextStyle(fontSize: 16, color: Colors.white),
-                                 ),
-                               ],
+                         ), // word
+                         Padding(
+                           padding: const EdgeInsets.symmetric(horizontal: 0),
+                           child: GestureDetector(
+                             onTap: () {
+                               // Navigator.push(
+                               //     context,
+                               //     MaterialPageRoute(
+                               //         builder: (context) => My_Evaluation(std)));
+                             },
+                             child: Container(
+                               height: 70,
+                               width: MediaQuery.of(context).size.width/2.5,
+                               decoration: BoxDecoration(
+                                   color: Colors.blue[800],
+                                   borderRadius: BorderRadius.circular(15.0)),
+                               // padding: const EdgeInsets.only(
+                               //     left: 10, top: 30.0, bottom: 30),
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.center,
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                   Text(
+                                     "Level 1 ",
+                                     style: TextStyle(fontSize: 16, color: Colors.white),
+                                   ),
+                                 ],
+                               ),
                              ),
                            ),
-                         ),
-                       ),//My_Evaluation
-                     ],
-                   ),
-                   Spacer(),
-                 ],
+                         ),//My_Evaluation
+                       ],
+                     ),
+                     Spacer(flex: 3,),
+                     Column(
+                       children: [
+                         Padding(
+                           padding: const EdgeInsets.only(bottom: 20, top: 30),
+                           child: Text(
+                             'Current Topic',
+                             style: TextStyle(
+
+                               fontSize: 25,
+                               color: Colors.black,
+                               fontWeight: FontWeight.w700,
+                               fontStyle: FontStyle.italic,
+                             ),
+                           ),
+                         ), // word
+                         Padding(
+                           padding: const EdgeInsets.symmetric(horizontal: 0),
+                           child: GestureDetector(
+                             onTap: () {
+                               // Navigator.push(
+                               //     context,
+                               //     MaterialPageRoute(
+                               //         builder: (context) => My_Evaluation(std)));
+                             },
+
+                             child: Container(
+                               height: 70,
+                               width: MediaQuery.of(context).size.width/2.5,
+                               decoration: BoxDecoration(
+
+                                   color: Colors.blue[800],
+                                   borderRadius: BorderRadius.circular(15.0)),
+                               // padding: const EdgeInsets.only(
+                               //     left: 10, top: 30.0, bottom: 30),
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.center,
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                   Text(
+                                     "Revision, Variables & Constants",
+                                     maxLines: 1,
+                                     overflow: TextOverflow.ellipsis,
+                                     style: TextStyle(fontSize: 16, color: Colors.white),
+                                   ),
+                                 ],
+                               ),
+                             ),
+                           ),
+                         ),//My_Evaluation
+                       ],
+                     ),
+                     Spacer(),
+                   ],
+                 ),
                ),
 
 
