@@ -51,7 +51,7 @@ class _MyLoginState extends State<MyLogin> {
 
   @override
   Widget build(BuildContext context) {
-    db.updateCurrentLevel("2018170064", 1);
+    db..MinTwoScoreTopics(2018170064);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -115,7 +115,8 @@ class _MyLoginState extends State<MyLogin> {
                                   child: Column(
                                     children: [
                                       TextFormField(
-                                         scrollPadding: EdgeInsets.only(bottom:100),
+                                        scrollPadding:
+                                            EdgeInsets.only(bottom: 100),
                                         //   controller: email,
                                         keyboardType:
                                             TextInputType.emailAddress,
@@ -147,7 +148,8 @@ class _MyLoginState extends State<MyLogin> {
                                         height: 30,
                                       ),
                                       TextFormField(
-                                        scrollPadding: EdgeInsets.only(bottom:100),
+                                        scrollPadding:
+                                            EdgeInsets.only(bottom: 100),
                                         //controller: password,
                                         keyboardType:
                                             TextInputType.visiblePassword,
@@ -231,7 +233,8 @@ class _MyLoginState extends State<MyLogin> {
                                                         MaterialPageRoute(
                                                             builder:
                                                                 (context) =>
-                                                                    side_layout(std)),
+                                                                    side_layout(
+                                                                        std)),
                                                         (Route<dynamic>
                                                                 route) =>
                                                             false,
@@ -249,8 +252,7 @@ class _MyLoginState extends State<MyLogin> {
                                                               Colors.white,
                                                           fontSize: 16.0);
                                                     }
-                                                  }
-                                                  on FirebaseAuthException catch (e) {
+                                                  } on FirebaseAuthException catch (e) {
                                                     Fluttertoast.showToast(
                                                         msg:
                                                             "Ops! Login Failed, ${e.message} ",
@@ -440,8 +442,10 @@ showDialogFunc(context) {
                           padding: EdgeInsets.symmetric(
                               horizontal: 26, vertical: 10),
                           decoration: BoxDecoration(
-                              gradient: new LinearGradient(
-                                  colors: [Colors.blue[800]!, Colors.blue[800]!]),
+                              gradient: new LinearGradient(colors: [
+                                Colors.blue[800]!,
+                                Colors.blue[800]!
+                              ]),
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(

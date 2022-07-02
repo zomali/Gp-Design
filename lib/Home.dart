@@ -19,7 +19,7 @@ import 'package:gp/Levels_View.dart';
 //import 'package:flutter_application_1/levels.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'Nav_Bar.dart';
+//import 'Nav_Bar.dart';
 import 'Sidebar/sidebar_layout.dart';
 import 'classes/student.dart';
 
@@ -133,13 +133,11 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Color(0xFF1565C0),
         appBar: AppBar(
-
           elevation: 0.0,
-          backgroundColor:Color(0xFF1565C0),
+          backgroundColor: Color(0xFF1565C0),
           title: const Text("Personalized E-learning System"),
-
         ),
-        drawer: NavBar(std),
+        //    drawer: NavBar(std),
         body: SingleChildScrollView(
           child: Container(
             height: 800,
@@ -247,8 +245,9 @@ class _HomePageState extends State<HomePage> {
                         onTap: () => {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Dashboard_screen( std))),
-                              //    builder: (context) => INFO(std, "CSW150"))),
+                              MaterialPageRoute(
+                                  builder: (context) => Dashboard_screen(std))),
+                          //    builder: (context) => INFO(std, "CSW150"))),
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 25),

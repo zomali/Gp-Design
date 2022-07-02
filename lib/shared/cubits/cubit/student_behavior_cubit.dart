@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp/classes/studentBehavior.dart';
+import 'package:gp/signup%20screen.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 
@@ -33,6 +34,7 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   late analysis_controller ac = analysis_controller();
   late top6 top;
   late Student_perf student_perf;
+  late Map<String, List<String>> clusterLearninigTypes;
 
   Future<void> fetchAllStudentGrades(student std) async {
     emit(StudentBehaviorLoading());
@@ -43,6 +45,12 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
   Future<void> fetchEachStudentGrades() async {
     emit(StudentBehaviorLoading());
     top = await ac.fetchEachStudentGrades();
+    emit(StudentBehaviorLoaded());
+  }
+
+  Future<void> cluster_students_by_behavior(int k, student std) async {
+    emit(StudentBehaviorLoading());
+    clusterLearninigTypes = await ac.cluster_students_by_behavior(k, std);
     emit(StudentBehaviorLoaded());
   }
 

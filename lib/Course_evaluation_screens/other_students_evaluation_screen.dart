@@ -22,6 +22,7 @@ List<int> listForAllGrades = [];
 List<int> listForOneGradesForGraph = [];
 List<rank> listForRank = [];
 top6 top = top6();
+Map<String, List<String>> clusterLearninigTypes = {};
 
 class _Other_students_evaluation_screenState
     extends State<Other_students_evaluation_screen> {
@@ -149,6 +150,7 @@ class _Other_students_evaluation_screenState
         StudentBehaviorCubit.get(context).fetchEachStudentGrades();
         StudentBehaviorCubit.get(context)
             .getTimeTokenForEachLevelForAllStudents(std);
+        //StudentBehaviorCubit.get(context).cluster_students_by_behavior(3, std);
         return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
           builder: (context, state) {
             if (state is StudentBehaviorLoading)
@@ -160,12 +162,17 @@ class _Other_students_evaluation_screenState
                 top.picture.add(std.profile_picture);
                 top.scores.add(50 + i);
               }
+              // List<String> list = [];
+              // clusterLearninigTypes["visual"] = list;
+              // clusterLearninigTypes["auditory"] = list;
+              // clusterLearninigTypes["reading"] = list;
               try {
                 listForAll = studentCubit.timesForStudents;
                 listForOne = studentCubit.times;
                 listForOneGrades = studentCubit.gradesStudent;
                 listForAllGrades = studentCubit.gradesAllStudent;
                 top = studentCubit.top;
+                //clusterLearninigTypes = studentCubit.clusterLearninigTypes;
               } catch (e) {
                 for (int i = 0; i < 5; i++) {
                   listForAll.add(1);
@@ -178,6 +185,10 @@ class _Other_students_evaluation_screenState
                   top.picture.add(std.profile_picture);
                   top.scores.add(50 + i);
                 }
+                // List<String> list = [];
+                // clusterLearninigTypes["visual"] = list;
+                // clusterLearninigTypes["auditory"] = list;
+                // clusterLearninigTypes["reading"] = list;
               }
               listForRank = [
                 rank(top.names[0], top.scores[0], top.picture[0]),

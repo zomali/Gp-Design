@@ -146,6 +146,232 @@ class DatabaseManager {
     }
   }
 
+  Future<List<String>> MinTwoScoreTopics(int id) async {
+    List<String> TopicsName = [];
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('quizzes')
+        .child(id.toString())
+        .child("Topic")
+        .get();
+    var keys = response.value.keys;
+    var values = response.value;
+    if (values == null) {
+      return TopicsName;
+    } else {
+      int min = 1000;
+      int levelID = 0;
+      int TopicID = 0;
+      int index = 0;
+      List<int> levels = [];
+      List<int> Topics = [];
+      var k;
+      for (var key in keys) {
+        if (values[key]["student_score"] < min) {
+          min = values[key]["student_score"];
+          levelID = values[key]["level_id"];
+          TopicID = values[key]["topic_id"];
+          k = key;
+        }
+        index++;
+      }
+      min = 1000;
+      levels.add(levelID);
+      Topics.add(TopicID);
+      if (index == 1) {
+        if (levelID == 1) {
+          TopicID = TopicID;
+        } else if (levelID == 2) {
+          TopicID = TopicID + 3;
+        } else if (levelID == 3) {
+          TopicID = TopicID + 6;
+        } else if (levelID == 4) {
+          TopicID = TopicID + 10;
+        } else {
+          TopicID = TopicID + 13;
+        }
+        final response1 = await firebaseDatabase
+            .child('topics')
+            .child(TopicID.toString())
+            .child("name")
+            .get();
+        TopicsName.add(response1.value);
+        return TopicsName;
+      } else {
+        for (var key in keys) {
+          if (k == key &&
+              levelID == values[key]["level_id"] &&
+              TopicID == values[key]["topic_id"]) {
+            continue;
+          } else {
+            if (values[key]["student_score"] < min) {
+              min = values[key]["student_score"];
+              levelID = values[key]["level_id"];
+              TopicID = values[key]["topic_id"];
+            }
+          }
+        }
+        levels.add(levelID);
+        Topics.add(TopicID);
+      }
+      for (int i = 0; i < 2; i++) {
+        if (levels[i] == 1) {
+          Topics[i] = Topics[i];
+        } else if (levels[i] == 2) {
+          Topics[i] = Topics[i] + 3;
+        } else if (levels[i] == 3) {
+          Topics[i] = Topics[i] + 6;
+        } else if (levels[i] == 4) {
+          Topics[i] = Topics[i] + 10;
+        } else {
+          Topics[i] = Topics[i] + 13;
+        }
+      }
+      final response2 = await firebaseDatabase
+          .child('topics')
+          .child(Topics[0].toString())
+          .child("name")
+          .get();
+      TopicsName.add(response2.value);
+
+      if (levels[0] == levels[1] && Topics[0] == Topics[1]) {
+        return TopicsName;
+      }
+      final response3 = await firebaseDatabase
+          .child('topics')
+          .child(Topics[1].toString())
+          .child("name")
+          .get();
+      TopicsName.add(response3.value);
+
+      return TopicsName;
+    }
+  }
+
+  Future<List<String>> MaxTwoScoreTopics(int id) async {
+    List<String> TopicsName = [];
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('quizzes')
+        .child(id.toString())
+        .child("Topic")
+        .get();
+    var keys = response.value.keys;
+    var values = response.value;
+    if (values == null) {
+      return TopicsName;
+    } else {
+      int max = 0;
+      int levelID = 0;
+      int TopicID = 0;
+      int index = 0;
+      List<int> levels = [];
+      List<int> Topics = [];
+      var k;
+      for (var key in keys) {
+        if (values[key]["student_score"] > max) {
+          max = values[key]["student_score"];
+          levelID = values[key]["level_id"];
+          TopicID = values[key]["topic_id"];
+          k = key;
+        }
+        index++;
+      }
+      max = 0;
+      levels.add(levelID);
+      Topics.add(TopicID);
+      if (index == 1) {
+        if (levelID == 1) {
+          TopicID = TopicID;
+        } else if (levelID == 2) {
+          TopicID = TopicID + 3;
+        } else if (levelID == 3) {
+          TopicID = TopicID + 6;
+        } else if (levelID == 4) {
+          TopicID = TopicID + 10;
+        } else {
+          TopicID = TopicID + 13;
+        }
+        final response1 = await firebaseDatabase
+            .child('topics')
+            .child(TopicID.toString())
+            .child("name")
+            .get();
+        TopicsName.add(response1.value);
+        return TopicsName;
+      } else {
+        for (var key in keys) {
+          if (k == key &&
+              levelID == values[key]["level_id"] &&
+              TopicID == values[key]["topic_id"]) {
+            continue;
+          } else {
+            if (values[key]["student_score"] > max) {
+              max = values[key]["student_score"];
+              levelID = values[key]["level_id"];
+              TopicID = values[key]["topic_id"];
+            }
+          }
+        }
+        levels.add(levelID);
+        Topics.add(TopicID);
+      }
+      for (int i = 0; i < 2; i++) {
+        if (levels[i] == 1) {
+          Topics[i] = Topics[i];
+        } else if (levels[i] == 2) {
+          Topics[i] = Topics[i] + 3;
+        } else if (levels[i] == 3) {
+          Topics[i] = Topics[i] + 6;
+        } else if (levels[i] == 4) {
+          Topics[i] = Topics[i] + 10;
+        } else {
+          Topics[i] = Topics[i] + 13;
+        }
+      }
+      final response2 = await firebaseDatabase
+          .child('topics')
+          .child(Topics[0].toString())
+          .child("name")
+          .get();
+      TopicsName.add(response2.value);
+
+      if (levels[0] == levels[1] && Topics[0] == Topics[1]) {
+        return TopicsName;
+      }
+      final response3 = await firebaseDatabase
+          .child('topics')
+          .child(Topics[1].toString())
+          .child("name")
+          .get();
+      TopicsName.add(response3.value);
+
+      return TopicsName;
+    }
+  }
+
+  Future<String> retriveTopicName(int level, int topic) async {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    int topicID;
+    if (level == 1) {
+      topicID = topic;
+    } else if (level == 2) {
+      topicID = topic + 3;
+    } else if (level == 3) {
+      topicID = topic + 6;
+    } else if (level == 4) {
+      topicID = topic + 10;
+    } else {
+      topicID = topic + 13;
+    }
+    final response = await firebaseDatabase
+        .child('topics')
+        .child(topicID.toString())
+        .child("name")
+        .get();
+    return response.value;
+  }
+
   Future<List<double>> getTimeTokenForEachContentType(
       student std, studentBehavior stdBehavior) async {
     // List<int> arr = [];
@@ -187,7 +413,7 @@ class DatabaseManager {
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
       var time = 0;
-      if (Level > std.level) {
+      if (Level > std.level - 1) {
         arr.add(0);
 
         //return timeInMinetes;
@@ -245,7 +471,7 @@ class DatabaseManager {
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
       var time = 0;
-      if (Level > std.level) {
+      if (Level > std.level - 1) {
         //return timeInMinetes;
         arr.add(0);
       } else {
@@ -301,7 +527,7 @@ class DatabaseManager {
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
       var time = 0;
-      if (Level > std.level) {
+      if (Level > std.level - 1) {
         //return timeInMinetes;
         arr.add(0);
       } else {
@@ -357,7 +583,7 @@ class DatabaseManager {
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
       var time = 0;
-      if (Level > std.level) {
+      if (Level > std.level - 1) {
         arr.add(0);
         // return timeInMinetes;
       } else {
@@ -380,6 +606,7 @@ class DatabaseManager {
         //print(values[1][1]['audio']['time_spent']);
         for (int t = startTopic; t <= topic; t++) {
           time += values[Level][t]['image']['time_spent'] as int;
+          print(t);
         }
         //print(time);
         //time = time / 60 as int;
@@ -395,6 +622,10 @@ class DatabaseManager {
         arr.add(timeInMinetes);
         //  print(timeInMinetes);
       }
+      if (Level.toString() == std.level.toString()) {
+        break;
+      }
+      print(std.level);
     }
     return timeInMinetes;
   }
