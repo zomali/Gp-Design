@@ -210,12 +210,24 @@ class ResultScreen extends StatelessWidget {
                           visible: get_stat(controller),
                           child: newLevelButton(
                             onPressed: () {
-                              db.updateCurrentLevel(std.id, std.level + 1);
-                              std.level++;
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => levels_view(std)));
+                              if (stat == "Level") {
+                                db.updateCurrentLevel(std.id, std.level + 1);
+                                std.level++;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            levels_view(std)));
+                              } else {
+                                db.updateCurrentTopic(
+                                    std.id, std.current_topic + 1);
+                                std.current_topic++;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            levels_view(std)));
+                              }
                             },
                             text: controller.stat,
                           ),
