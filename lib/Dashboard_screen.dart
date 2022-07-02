@@ -144,7 +144,7 @@ class _Dashboard_screenState extends State<Dashboard_screen> {
                 }
                 LowTopics = studentCubit.MinTopicScore;
                 if (LowTopics.length == 1) {
-                  LowTopics.add("Not yet");
+                  LowTopics.add("");
                 } else if (LowTopics.length == 0) {
                   LowTopics.add("Not yet");
                   LowTopics.add("");

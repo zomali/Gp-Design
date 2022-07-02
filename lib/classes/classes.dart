@@ -39,7 +39,7 @@ class URL_ {
 
 class Topic_ {
   late int id;
-  late String name;
+  String name = "";
   late List<Audio_> audios;
   late List<Video_> videos;
   late List<Image_> images;
@@ -82,6 +82,7 @@ class Q_Question_ extends Question_ {
   late int? student_answer_id;
   late double time_to_answer;
 }
+
 class Quiz_ {
   late List<Q_Question_> questions;
   late String quiz_id;

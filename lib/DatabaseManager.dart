@@ -83,7 +83,17 @@ class DatabaseManager {
         .child(id)
         .child("courses")
         .child("CSW150")
-        .update({"current_level": level});
+        .update({"current_level": level, "current_topic": 1});
+  }
+
+  Future<void> updateCurrentTopic(String id, int topic) async {
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('students')
+        .child(id)
+        .child("courses")
+        .child("CSW150")
+        .update({"current_topic": topic});
   }
 
   void insertQuiz(String StudentId, String typeOfQuiz, int levelId, int TopicId,
@@ -374,11 +384,106 @@ class DatabaseManager {
 
   Future<List<double>> getTimeTokenForEachContentType(
       student std, studentBehavior stdBehavior) async {
-    // List<int> arr = [];
-    int timeInMinetesVideo = getTimeTokenInVideo(std) as int;
-    int timeInMinetesAudio = getTimeTokenInAudio(std) as int;
-    int timeInMinetesText = getTimeTokenInText(std) as int;
-    int timeInMinetesImage = getTimeTokenInImage(std) as int;
+    int timeInMinetesOfVideo = 0;
+    int timeInMinetesOfAudio = 0;
+    int timeInMinetesOfText = 0;
+    int timeInMinetesOfImage = 0;
+
+    DatabaseReference firebaseDatabase = FirebaseDatabase.instance.reference();
+    final response = await firebaseDatabase
+        .child('student_behavior_model')
+        .child(std.id)
+        .get();
+    var values = response.value;
+    int topic = 3;
+    for (int Level = 1; Level < 6; Level++) {
+      var timevideo = 0;
+      var timeAudio = 0;
+      var timeImage = 0;
+      var timeText = 0;
+      if (Level > std.level) {
+        //return timeInMinetes;
+      } else {
+        int startTopic = 0;
+        if (Level == 1) {
+          startTopic = 1;
+        } else if (Level == 2) {
+          startTopic = 4;
+          topic += 3;
+        } else if (Level == 3) {
+          startTopic = 7;
+          topic += 4;
+        } else if (Level == 4) {
+          startTopic = 11;
+          topic += 3;
+        } else if (Level == 5) {
+          startTopic = 14;
+          topic += 4;
+        }
+        //print(values[1][1]['audio']['time_spent']);
+        for (int t = startTopic; t <= topic; t++) {
+          if (Level == 2 || Level == 3 || Level == 4 || Level == 5) {
+            timevideo +=
+                values[Level][t.toString()]['video']['time_spent'] as int;
+            timeAudio +=
+                values[Level][t.toString()]['audio']['time_spent'] as int;
+            timeImage +=
+                values[Level][t.toString()]['image']['time_spent'] as int;
+            timeText +=
+                values[Level][t.toString()]['text']['time_spent'] as int;
+          } else {
+            timevideo += values[Level][t]['video']['time_spent'] as int;
+            timeAudio += values[Level][t]['audio']['time_spent'] as int;
+            timeImage += values[Level][t]['image']['time_spent'] as int;
+            timeText += values[Level][t]['text']['time_spent'] as int;
+          }
+        }
+        //print(time);
+        //time = time / 60 as int;
+
+        if (timevideo < 60) {
+          timeInMinetesOfVideo = 1;
+        } else {
+          while (timevideo >= 60) {
+            timeInMinetesOfVideo++;
+            timevideo -= 60;
+          }
+        }
+        if (timeAudio < 60) {
+          timeInMinetesOfAudio = 1;
+        } else {
+          while (timeAudio >= 60) {
+            timeInMinetesOfAudio++;
+            timeAudio -= 60;
+          }
+        }
+        if (timeText < 60) {
+          timeInMinetesOfText = 1;
+        } else {
+          while (timeText >= 60) {
+            timeInMinetesOfText++;
+            timeText -= 60;
+          }
+        }
+        if (timeImage < 60) {
+          timeInMinetesOfImage = 1;
+        } else {
+          while (timeImage >= 60) {
+            timeInMinetesOfImage++;
+            timeImage -= 60;
+          }
+        }
+      }
+    }
+
+    int timeInMinetesVideo = timeInMinetesOfVideo;
+    int timeInMinetesAudio = timeInMinetesOfAudio;
+    int timeInMinetesText = timeInMinetesOfText;
+    int timeInMinetesImage = timeInMinetesOfImage;
+    // int timeInMinetesVideo = getTimeTokenInVideo(std) as int;
+    // int timeInMinetesAudio = getTimeTokenInAudio(std) as int;
+    // int timeInMinetesText = getTimeTokenInText(std) as int;
+    // int timeInMinetesImage = getTimeTokenInImage(std) as int;
 
     List<double> arrDouble = [];
     var video_time_weight = timeInMinetesVideo * 0.6;
@@ -413,7 +518,7 @@ class DatabaseManager {
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
       var time = 0;
-      if (Level > std.level - 1) {
+      if (Level > std.level) {
         arr.add(0);
 
         //return timeInMinetes;
@@ -436,7 +541,11 @@ class DatabaseManager {
         }
         //print(values[1][1]['audio']['time_spent']);
         for (int t = startTopic; t <= topic; t++) {
-          time += values[Level][t]['video']['time_spent'] as int;
+          if (Level == 2 || Level == 3 || Level == 4 || Level == 5) {
+            time += values[Level][t.toString()]['video']['time_spent'] as int;
+          } else {
+            time += values[Level][t]['video']['time_spent'] as int;
+          }
         }
         //print(time);
         //time = time / 60 as int;
@@ -451,7 +560,6 @@ class DatabaseManager {
         }
         arr.add(timeInMinetes);
         // print(timeInMinetes);
-        return timeInMinetes;
       }
     }
     return timeInMinetes;
@@ -471,7 +579,7 @@ class DatabaseManager {
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
       var time = 0;
-      if (Level > std.level - 1) {
+      if (Level > std.level) {
         //return timeInMinetes;
         arr.add(0);
       } else {
@@ -493,7 +601,11 @@ class DatabaseManager {
         }
         //print(values[1][1]['audio']['time_spent']);
         for (int t = startTopic; t <= topic; t++) {
-          time += values[Level][t]['audio']['time_spent'] as int;
+          if (Level == 2 || Level == 3 || Level == 4 || Level == 5) {
+            time += values[Level][t.toString()]['audio']['time_spent'] as int;
+          } else {
+            time += values[Level][t]['audio']['time_spent'] as int;
+          }
         }
         //print(time);
         //time = time / 60 as int;
@@ -527,7 +639,7 @@ class DatabaseManager {
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
       var time = 0;
-      if (Level > std.level - 1) {
+      if (Level > std.level) {
         //return timeInMinetes;
         arr.add(0);
       } else {
@@ -549,7 +661,11 @@ class DatabaseManager {
         }
         //print(values[1][1]['audio']['time_spent']);
         for (int t = startTopic; t <= topic; t++) {
-          time += values[Level][t]['text']['time_spent'] as int;
+          if (Level == 2 || Level == 3 || Level == 4 || Level == 5) {
+            time += values[Level][t.toString()]['text']['time_spent'] as int;
+          } else {
+            time += values[Level][t]['text']['time_spent'] as int;
+          }
         }
         //print(time);
         //time = time / 60 as int;
@@ -583,7 +699,7 @@ class DatabaseManager {
     int topic = 3;
     for (int Level = 1; Level < 6; Level++) {
       var time = 0;
-      if (Level > std.level - 1) {
+      if (Level > std.level) {
         arr.add(0);
         // return timeInMinetes;
       } else {
@@ -605,7 +721,11 @@ class DatabaseManager {
         }
         //print(values[1][1]['audio']['time_spent']);
         for (int t = startTopic; t <= topic; t++) {
-          time += values[Level][t]['image']['time_spent'] as int;
+          if (Level == 2 || Level == 3 || Level == 4 || Level == 5) {
+            time += values[Level][t.toString()]['image']['time_spent'] as int;
+          } else {
+            time += values[Level][t]['image']['time_spent'] as int;
+          }
           print(t);
         }
         //print(time);
@@ -622,10 +742,6 @@ class DatabaseManager {
         arr.add(timeInMinetes);
         //  print(timeInMinetes);
       }
-      if (Level.toString() == std.level.toString()) {
-        break;
-      }
-      print(std.level);
     }
     return timeInMinetes;
   }
@@ -641,6 +757,7 @@ class DatabaseManager {
     var values = response.value;
     int type = 1;
     int topic = 3;
+    print(std.level);
     for (int Level = 1; Level < 6; Level++) {
       var time = 0;
       if (Level > std.level) {
@@ -663,11 +780,20 @@ class DatabaseManager {
           topic += 4;
         }
         //print(values[1][1]['audio']['time_spent']);
+        print(startTopic);
+        print(values[4]["11"]);
         for (int t = startTopic; t <= topic; t++) {
-          time += values[Level][t]['audio']['time_spent'] as int;
-          time += values[Level][t]['text']['time_spent'] as int;
-          time += values[Level][t]['video']['time_spent'] as int;
-          time += values[Level][t]['image']['time_spent'] as int;
+          if (Level == 2 || Level == 3 || Level == 4 || Level == 5) {
+            time += values[Level][t.toString()]['audio']['time_spent'] as int;
+            time += values[Level][t.toString()]['text']['time_spent'] as int;
+            time += values[Level][t.toString()]['video']['time_spent'] as int;
+            time += values[Level][t.toString()]['image']['time_spent'] as int;
+          } else {
+            time += values[Level][t]['audio']['time_spent'] as int;
+            time += values[Level][t]['text']['time_spent'] as int;
+            time += values[Level][t]['video']['time_spent'] as int;
+            time += values[Level][t]['image']['time_spent'] as int;
+          }
         }
         //print(time);
         //time = time / 60 as int;

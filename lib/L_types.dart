@@ -100,9 +100,15 @@ class _typesState extends State<types> {
         appBar: AppBar(
           backgroundColor: Colors.blue[800],
           elevation: 30,
-          title: Text("Personalized E-learning System",style:TextStyle(color: Colors.white),),
+          title: Text(
+            "Personalized E-learning System",
+            style: TextStyle(color: Colors.white),
+          ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_outlined,color: Colors.white,),
+            icon: Icon(
+              Icons.arrow_back_ios_outlined,
+              color: Colors.white,
+            ),
             onPressed: () {
               Navigator.push(
                   context,
@@ -137,12 +143,13 @@ class _typesState extends State<types> {
                   else {
                     var topicCubit = TopicCubit.get(context);
                     Topic_ topic = Topic_();
-                    topic.name = "";
+                    //topic.name = "";
                     try {
                       topic = topicCubit.topic;
                       weight = topicCubit.weight;
                       setContentType(weight);
                     } catch (e) {
+                      //topic.name = "Loading..";
                       topic = topicCubit.topic;
                     }
                     //stdBehavior = behaviorCubit.std;
@@ -248,7 +255,7 @@ class _typesState extends State<types> {
                                       context: context,
                                       builder: (BuildContext context) =>
                                           languageDialog()).then((value) {
-                                //    print("////" + value + "////");
+                                    //    print("////" + value + "////");
                                     if (value == "Arabic") {
                                       audio_ = topic.audios[1];
                                       video_ = topic.videos[1];
@@ -766,36 +773,36 @@ class _typesState extends State<types> {
                                 padding: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 30),
                                 child: Container(
-                                  width:200,
-                                  child: MaterialButton(
-                                    onPressed: () async {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              //builder: (context) => Levels(1, std))),
-                                              builder: (context) => go_to_quiz(
-                                                  std, topic.id, "Topic")));
-                                    },
-                                    child: Text(
-                                      "Quiz for Topic",
-                                      style: TextStyle(
-                                        color: Colors.white,
+                                    width: 200,
+                                    child: MaterialButton(
+                                      onPressed: () async {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                //builder: (context) => Levels(1, std))),
+                                                builder: (context) =>
+                                                    go_to_quiz(std, topic.id,
+                                                        "Topic")));
+                                      },
+                                      child: Text(
+                                        "Quiz for Topic",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                      color: Colors.orange,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0)),boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.orange,
-                                              spreadRadius: 1,
-                                              blurRadius: 1,
-                                              offset: Offset(-4,-4),
-                                            ),
-
-                                  ])
-                                ),
+                                    decoration: BoxDecoration(
+                                        color: Colors.orange,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(25.0)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.orange,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            offset: Offset(-4, -4),
+                                          ),
+                                        ])),
                               ), //
 
                               //),
