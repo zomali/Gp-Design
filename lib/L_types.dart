@@ -143,13 +143,11 @@ class _typesState extends State<types> {
                   else {
                     var topicCubit = TopicCubit.get(context);
                     Topic_ topic = Topic_();
-                    //topic.name = "";
                     try {
                       topic = topicCubit.topic;
                       weight = topicCubit.weight;
                       setContentType(weight);
                     } catch (e) {
-                      //topic.name = "Loading..";
                       topic = topicCubit.topic;
                     }
                     //stdBehavior = behaviorCubit.std;

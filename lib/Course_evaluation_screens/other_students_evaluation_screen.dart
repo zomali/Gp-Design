@@ -23,6 +23,7 @@ List<int> listForOneGradesForGraph = [];
 List<rank> listForRank = [];
 top6 top = top6();
 Map<String, List<String>> clusterLearninigTypes = {};
+List<int?> clustersLength = [];
 
 class _Other_students_evaluation_screenState
     extends State<Other_students_evaluation_screen> {
@@ -150,7 +151,7 @@ class _Other_students_evaluation_screenState
         StudentBehaviorCubit.get(context).fetchEachStudentGrades();
         StudentBehaviorCubit.get(context)
             .getTimeTokenForEachLevelForAllStudents(std);
-        //StudentBehaviorCubit.get(context).cluster_students_by_behavior(3, std);
+        StudentBehaviorCubit.get(context).cluster_students_by_behavior(3);
         return BlocBuilder<StudentBehaviorCubit, StudentBehaviorState>(
           builder: (context, state) {
             if (state is StudentBehaviorLoading)
@@ -162,17 +163,31 @@ class _Other_students_evaluation_screenState
                 top.picture.add(std.profile_picture);
                 top.scores.add(50 + i);
               }
-              // List<String> list = [];
-              // clusterLearninigTypes["visual"] = list;
-              // clusterLearninigTypes["auditory"] = list;
-              // clusterLearninigTypes["reading"] = list;
+              // clusterLearninigTypes = studentCubit.clusterLearninigTypes;
+              // clustersLength.add(clusterLearninigTypes["visual"]?.length);
+              // clustersLength.add(clusterLearninigTypes["auditory"]?.length);
+              // clustersLength.add(clusterLearninigTypes["reading"]?.length);
+              List<String> list = [];
+              clusterLearninigTypes["visual"] = list;
+              clusterLearninigTypes["auditory"] = list;
+              clusterLearninigTypes["reading"] = list;
+              clustersLength.add(0);
+              clustersLength.add(0);
+              clustersLength.add(0);
               try {
                 listForAll = studentCubit.timesForStudents;
                 listForOne = studentCubit.times;
                 listForOneGrades = studentCubit.gradesStudent;
                 listForAllGrades = studentCubit.gradesAllStudent;
                 top = studentCubit.top;
-                //clusterLearninigTypes = studentCubit.clusterLearninigTypes;
+                clusterLearninigTypes = studentCubit.clusterLearninigTypes;
+                clustersLength[0] = clusterLearninigTypes["visual"]?.length;
+                clustersLength[1] = clusterLearninigTypes["auditory"]?.length;
+                clustersLength[2] = clusterLearninigTypes["reading"]?.length;
+                //   print("/////////////");
+                //   print(clusterLearninigTypes["visual"]?.length);
+                //   print(clusterLearninigTypes["auditory"]?.length);
+                //   print(clusterLearninigTypes["reading"]?.length);
               } catch (e) {
                 for (int i = 0; i < 5; i++) {
                   listForAll.add(1);
@@ -185,10 +200,13 @@ class _Other_students_evaluation_screenState
                   top.picture.add(std.profile_picture);
                   top.scores.add(50 + i);
                 }
-                // List<String> list = [];
-                // clusterLearninigTypes["visual"] = list;
-                // clusterLearninigTypes["auditory"] = list;
-                // clusterLearninigTypes["reading"] = list;
+                List<String> list = [];
+                clusterLearninigTypes["visual"] = list;
+                clusterLearninigTypes["auditory"] = list;
+                clusterLearninigTypes["reading"] = list;
+                clustersLength.add(0);
+                clustersLength.add(0);
+                clustersLength.add(0);
               }
               listForRank = [
                 rank(top.names[0], top.scores[0], top.picture[0]),
@@ -207,6 +225,10 @@ class _Other_students_evaluation_screenState
                 listForOneGradesForGraph[i] = listForOneGrades[i];
                 listForOneGradesForGraph[i] -= listForAllGrades[i];
               }
+              print("/////////////");
+              print(clustersLength[0]);
+              print(clustersLength[1]);
+              print(clustersLength[2]);
               return SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -627,8 +649,29 @@ class _Other_students_evaluation_screenState
                           fontSize: 16.0,
                         ),
                       ), // compare graph
+                      // SizedBox(
+                      //   height: 50,
+                      // ),
                       SizedBox(
-                        height: 50,
+                        height: 80,
+                      ),
+
+                      Text(
+                        "Number of student in each learning style cluster",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: Container(
+                            height: 300,
+                            width: double.infinity,
+                            child: SimpleBarChart.withSampleData()),
+                      ),
+                      SizedBox(
+                        height: 70,
                       ),
                     ],
                   ),
@@ -772,6 +815,55 @@ class StackedAreaLineChart1 extends StatelessWidget {
       ),
     ];
   }
+}
+
+class SimpleBarChart extends StatelessWidget {
+  final List<charts.Series> seriesList;
+  final bool animate;
+
+  SimpleBarChart(this.seriesList, {required this.animate});
+
+  /// Creates a [BarChart] with sample data and no transition.
+  factory SimpleBarChart.withSampleData() {
+    return new SimpleBarChart(
+      _createSampleData(),
+      // Disable animations for image tests.
+      animate: false,
+    );
+  }
+  static List<charts.Series<dynamic, String>> _createSampleData() {
+    final data = [
+      new quiz_grades('Visual', clustersLength[0]!),
+      new quiz_grades('Auditory', clustersLength[1]!),
+      new quiz_grades('Reading', clustersLength[2]!),
+    ];
+
+    return [
+      new charts.Series<quiz_grades, String>(
+        id: 'Cluster',
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        domainFn: (quiz_grades quiz, _) => quiz.quiz,
+        measureFn: (quiz_grades quiz, _) => quiz.precent,
+        data: data,
+        // labelAccessorFn: (add_quiz quiz, _) => quiz.precent.toString(),
+        //  overlaySeries: true
+      )
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new charts.BarChart(
+      _createSampleData(),
+    );
+  }
+}
+
+class quiz_grades {
+  final String quiz;
+  final int precent;
+
+  quiz_grades(this.quiz, this.precent);
 }
 
 class compare_progress1 {

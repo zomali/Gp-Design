@@ -48,9 +48,9 @@ class StudentBehaviorCubit extends Cubit<StudentBehaviorState> {
     emit(StudentBehaviorLoaded());
   }
 
-  Future<void> cluster_students_by_behavior(int k, student std) async {
+  Future<void> cluster_students_by_behavior(int k) async {
     emit(StudentBehaviorLoading());
-    clusterLearninigTypes = await ac.cluster_students_by_behavior(k, std);
+    clusterLearninigTypes = await ac.cluster_students_by_behavior(k);
     emit(StudentBehaviorLoaded());
   }
 

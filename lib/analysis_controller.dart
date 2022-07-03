@@ -152,11 +152,11 @@ class analysis_controller {
     }
     print("Cluster content");
     if (!cluster11.isEmpty) {
-      if (cluster11[0] > 50 && cluster11[0] < 50)
+      if (cluster11[0] > 20 && cluster11[0] < 20)
         typeOfCluster1 = "so bad";
-      else if (cluster11[0] > 65 && cluster11[0] < 85)
+      else if (cluster11[0] > 20 && cluster11[0] < 30)
         typeOfCluster1 = "Good";
-      else if (cluster11[0] > 85)
+      else if (cluster11[0] > 30)
         typeOfCluster1 = "Excellent";
       else
         typeOfCluster1 = "Fail";
@@ -165,11 +165,11 @@ class analysis_controller {
     }
     ////////////////////////////////////////////////
     if (!cluster22.isEmpty) {
-      if (cluster22[0] > 50 && cluster22[0] < 50)
+      if (cluster22[0] > 20 && cluster22[0] < 20)
         typeOfCluster2 = "so bad";
-      else if (cluster22[0] > 65 && cluster22[0] < 85)
+      else if (cluster22[0] > 20 && cluster22[0] < 30)
         typeOfCluster2 = "Good";
-      else if (cluster22[0] > 85)
+      else if (cluster22[0] > 30)
         typeOfCluster2 = "Excellent";
       else
         typeOfCluster2 = "Fail";
@@ -178,11 +178,11 @@ class analysis_controller {
     }
     //////////////////////////////////////////////////
     if (!cluster33.isEmpty) {
-      if (cluster33[0] > 50 && cluster33[0] < 50)
+      if (cluster33[0] > 20 && cluster33[0] < 20)
         typeOfCluster3 = "so bad";
-      else if (cluster33[0] > 65 && cluster33[0] < 85)
+      else if (cluster33[0] > 20 && cluster33[0] < 30)
         typeOfCluster3 = "Good";
-      else if (cluster33[0] > 85)
+      else if (cluster33[0] > 30)
         typeOfCluster3 = "Excellent";
       else
         typeOfCluster3 = "Fail";
@@ -427,31 +427,32 @@ class analysis_controller {
     return new_centroids;
   }
 
-  Map<String, List<String>> Label_Clusters(
-      Map<String, List<String>> cluster_students,
-      Map<String, String> student_VAR) {
+  Map<String, List<String>> Label_Clusters(Map<String, String> student_VAR) {
     Map<String, List<String>> c_s = {};
-    for (var cluster in cluster_students.keys) {
-      String VAR = student_VAR[cluster_students[cluster]!.first]!;
+    c_s['visual'] = [];
+    c_s['auditory'] = [];
+    c_s['reading'] = [];
+    for (var std in student_VAR.keys) {
+      String VAR = student_VAR[std]!;
       List<String> VAR_list = VAR.split(',');
-      if (int.parse(VAR_list[0]) > int.parse(VAR_list[1]) &&
-          int.parse(VAR_list[0]) > int.parse(VAR_list[2])) {
+
+      if (double.parse(VAR_list[0]) > double.parse(VAR_list[1]) &&
+          double.parse(VAR_list[0]) > double.parse(VAR_list[2])) {
         //visual
-        c_s['visual'] = cluster_students[cluster]!;
-      } else if (int.parse(VAR_list[1]) > int.parse(VAR_list[0]) &&
-          int.parse(VAR_list[1]) > int.parse(VAR_list[2])) {
+        c_s['visual']?.add(std);
+      } else if (double.parse(VAR_list[1]) > double.parse(VAR_list[0]) &&
+          double.parse(VAR_list[1]) > double.parse(VAR_list[2])) {
         //auditory
-        c_s['auditory'] = cluster_students[cluster]!;
+        c_s['auditory']?.add(std);
       } else {
         //reading
-        c_s['reading'] = cluster_students[cluster]!;
+        c_s['reading']?.add(std);
       }
     }
     return c_s;
   }
 
-  Future<Map<String, List<String>>> cluster_students_by_behavior(
-      int k, student std) async {
+  Future<Map<String, List<String>>> cluster_students_by_behavior(int k) async {
     //get average time spent in each content type
     DatabaseManager db = DatabaseManager();
     List<student> students = await db.fetchStudents();
@@ -492,9 +493,9 @@ class analysis_controller {
           List<String> V_A_Rc = current_centroids[centroid]!.split(',');
           //sqr((Vc-Vs)^2+(Ac-As)^2+(Rc-Rs)^2)
           distance[centroid] = sqrt(
-              pow(int.parse(V_A_Rc[0]) - int.parse(V_A_Rs[0]), 2) +
-                  pow(int.parse(V_A_Rc[1]) - int.parse(V_A_Rs[1]), 2) +
-                  pow(int.parse(V_A_Rc[2]) - int.parse(V_A_Rs[2]), 2));
+              pow(double.parse(V_A_Rc[0]) - double.parse(V_A_Rs[0]), 2) +
+                  pow(double.parse(V_A_Rc[1]) - double.parse(V_A_Rs[1]), 2) +
+                  pow(double.parse(V_A_Rc[2]) - double.parse(V_A_Rs[2]), 2));
         }
         double min_dist = -1;
         String min_cent = "";
@@ -522,7 +523,7 @@ class analysis_controller {
         cluster_students[student_cluster[s]!] = l;
       }
     }
-    return Label_Clusters(cluster_students, student_VAR);
+    return Label_Clusters(student_VAR);
   }
 
   Future<top6> fetchEachStudentGrades() async {
