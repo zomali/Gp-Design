@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gp/Login_scrn.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
-class splash_screen extends StatelessWidget {
-  const splash_screen({Key? key}) : super(key: key);
+import 'analysis_controller.dart';
 
+class splash_screen extends StatelessWidget {
+  analysis_controller ss = new analysis_controller();
   @override
   Widget build(BuildContext context) {
+    ss.cluster_performence('2017170132');
    return new  AnimatedSplashScreen(
 
 

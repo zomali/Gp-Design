@@ -152,7 +152,7 @@ class analysis_controller {
     }
     print("Cluster content");
     if (!cluster11.isEmpty) {
-      if (cluster11[0] > 20 && cluster11[0] < 20)
+      if (cluster11[0] > 10 && cluster11[0] < 20)
         typeOfCluster1 = "so bad";
       else if (cluster11[0] > 20 && cluster11[0] < 30)
         typeOfCluster1 = "Good";
@@ -165,7 +165,7 @@ class analysis_controller {
     }
     ////////////////////////////////////////////////
     if (!cluster22.isEmpty) {
-      if (cluster22[0] > 20 && cluster22[0] < 20)
+      if (cluster22[0] > 10 && cluster22[0] < 20)
         typeOfCluster2 = "so bad";
       else if (cluster22[0] > 20 && cluster22[0] < 30)
         typeOfCluster2 = "Good";
@@ -178,7 +178,7 @@ class analysis_controller {
     }
     //////////////////////////////////////////////////
     if (!cluster33.isEmpty) {
-      if (cluster33[0] > 20 && cluster33[0] < 20)
+      if (cluster33[0] > 10 && cluster33[0] < 20)
         typeOfCluster3 = "so bad";
       else if (cluster33[0] > 20 && cluster33[0] < 30)
         typeOfCluster3 = "Good";
